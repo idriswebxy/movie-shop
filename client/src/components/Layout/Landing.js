@@ -15,11 +15,11 @@ import { Redirect } from "react-router-dom";
 
 const Landing = () => {
   
-  const { user, getTokenSilently, authenticated } = useAuth0();
+  const { user, getTokenSilently, isAuthenticated } = useAuth0();
 
-  if (authenticated) {
-    return <Redirect to="/products" />;
-  }
+  // if (authenticated) {
+  //   return <Redirect to="/movies" />;
+  // }
 
   return (
     <div className="">
