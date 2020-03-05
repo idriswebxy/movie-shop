@@ -73,7 +73,7 @@ const Login = ({ login, authenticated }) => {
               <MDBNavLink to="/products">
                 <MDBCol>
                   <Button
-                    classNames="primary"
+                    className="primary"
                     onClick={() => loginWithRedirect({})}
                   >
                     Sign in With Google

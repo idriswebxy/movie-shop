@@ -13,7 +13,6 @@ const cors = require("cors");
 
 // Routes
 const users = require("./routes/api/users");
-const profile = require("./routes/api/profile");
 const cart = require("./routes/api/cart");
 const auth = require("./routes/api/auth");
 
@@ -21,6 +20,7 @@ const app = express();
   
 const uri = process.env.MONGO_URI;
 
+console.log(uri)
 mongoose
   .connect(uri, {
     useNewUrlParser: true,
@@ -76,8 +76,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Use Routes
-app.use("/api/users", users);
-app.use("/api/profile", profile);
+app.use("/api/users", users);;
 app.use("/api/cart", cart);
 app.use("/api/auth", auth);
 
