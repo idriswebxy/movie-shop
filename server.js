@@ -21,11 +21,11 @@ const app = express();
 const uri = process.env.MONGO_URI;
 
 
-mongoose
-  .connect(uri, {
+mongoose  
+  .connect("mongodb://heroku_4pgpjnlr:c795j93cpc6n0cgbt1lqvim9pp@ds231228.mlab.com:31228/heroku_4pgpjnlr", {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
     useFindAndModify: false,
   })
   .then(console.log("Database connected...✅"))
