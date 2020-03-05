@@ -4,12 +4,15 @@ const path = require("path");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 var session = require("express-session");
+const config = require("./config/config");
 var passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const User = require("./models/User");
 // const googleStrategy = require("./config/config");
 var GoogleStrategy = require("passport-google-oauth20").Strategy;
 const cors = require("cors");
+const connectDB = require("./config/database")
+
 
 // Routes
 const users = require("./routes/api/users");
@@ -20,8 +23,10 @@ const app = express();
 
 const uri = process.env.MONGO_URI;
 
+// connectDB();
+
 mongoose
-  .connect(uri, {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
