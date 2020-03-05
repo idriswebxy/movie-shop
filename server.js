@@ -17,16 +17,15 @@ const cart = require("./routes/api/cart");
 const auth = require("./routes/api/auth");
 
 const app = express();
-  
+
 const uri = process.env.MONGO_URI;
 
-
-mongoose  
-  .connect("mongodb://heroku_4pgpjnlr:c795j93cpc6n0cgbt1lqvim9pp@ds231228.mlab.com:31228/heroku_4pgpjnlr", {
+mongoose
+  .connect(uri, {
     useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-    useFindAndModify: false,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
   })
   .then(console.log("Database connected...✅"))
   .catch(err => console.error(err));
@@ -40,7 +39,6 @@ mongoose
 // );
 
 app.use(cors());
-
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -64,7 +62,7 @@ app.use(passport.session());
 //       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
 //     },
 //     function(accessToken, refreshToken, profile, cb) {
-     
+
 //       User.findOrCreate({ googleId: profile.id }, function(err, user) {
 //         return cb(err, user);
 //       });
@@ -77,7 +75,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Use Routes
-app.use("/api/users", users);;
+app.use("/api/users", users);
 app.use("/api/cart", cart);
 app.use("/api/auth", auth);
 
