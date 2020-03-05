@@ -3,15 +3,11 @@ const mongoose = require("mongoose");
 const path = require("path");
 const bodyParser = require("body-parser");
 require("dotenv").config();
-var session = require("express-session");
-const config = require("./config/config");
 var passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const User = require("./models/User");
-// const googleStrategy = require("./config/config");
-var GoogleStrategy = require("passport-google-oauth20").Strategy;
 const cors = require("cors");
-const connectDB = require("./config/database")
+
 
 
 // Routes
@@ -21,9 +17,8 @@ const auth = require("./routes/api/auth");
 
 const app = express();
 
-const uri = process.env.MONGO_URI;
 
-// connectDB();
+
 
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -35,45 +30,13 @@ mongoose
   .then(console.log("Database connected...✅"))
   .catch(err => console.error(err));
 
-// app.use(
-//   session({
-//     secret: "secret key",
-//     resave: false,
-//     saveUninitialized: false
-//   })
-// );
+
 
 app.use(cors());
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-// passport.serializeUser(function(user, done) {
-//   done(null, user.id);
-// });
-
-// passport.deserializeUser(function(id, done) {
-//   User.findById(id, function(err, user) {
-//     done(err, user);
-//   });
-// });
-
-// passport.use(
-//   new GoogleStrategy(
-//     {
-//       clientID: process.env.CLIENT_ID,
-//       clientSecret: process.env.CLIENT_SECRET,
-//       callbackURL: "http://localhost:3000/products",
-//       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
-//     },
-//     function(accessToken, refreshToken, profile, cb) {
-
-//       User.findOrCreate({ googleId: profile.id }, function(err, user) {
-//         return cb(err, user);
-//       });
-//     }
-//   )
-// );
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
