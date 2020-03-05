@@ -44,9 +44,9 @@ const Register = ({ setAlert, register, authenticated }) => {
     }
   };
 
-  // if (authenticated) {
-  //   return <Redirect to="/movies" />;
-  // }
+  if (authenticated) {
+    return <Redirect to="/movies" />;
+  }
 
   return (
     <MDBContainer>
