@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
-import { API_KEY } from "../../config/config";
+import { API_KEY } from "../../config";
 import PropTypes from "prop-types";
 import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart, loadCart, getCart } from "../../actions/cart";

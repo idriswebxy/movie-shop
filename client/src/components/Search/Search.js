@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import SearchResults from "./SearchResults";
 import SearchBar from "./SearchBar";
 import { setSearchedMovies } from "../../actions/movie";
-import { API_KEY } from "../../config/config";
+import { API_KEY } from "../../config";
 
 
 

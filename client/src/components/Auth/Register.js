@@ -17,11 +17,9 @@ import {
 import axios from "axios";
 import { useGoogleLogin } from "react-google-login";
 import { useAuth0 } from "../../react-auth0-spa";
-import { Button } from 'reactstrap';
-
+import { Button } from "reactstrap";
 
 const Register = ({ setAlert, register, authenticated }) => {
-
   const { loading, user, loginWithRedirect } = useAuth0();
 
   const [formData, setFormData] = useState({
@@ -29,22 +27,20 @@ const Register = ({ setAlert, register, authenticated }) => {
     email: "",
     password: "",
     password2: ""
-  })
+  });
 
-  const onChange = (e) => {
+  const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
-  
-  const { name, email, password, password2 } = formData;
+  };
 
+  const { name, email, password, password2 } = formData;
 
   const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
-       setAlert("Passwords do not match!", "danger");
-    } 
-    else {
-      register({ name, email, password })      
+      setAlert("Passwords do not match!", "danger");
+    } else {
+      register({ name, email, password });
     }
   };
 
@@ -52,15 +48,13 @@ const Register = ({ setAlert, register, authenticated }) => {
   //   return <Redirect to="/movies" />;
   // }
 
-  
-
   return (
     <MDBContainer>
       <MDBRow>
-        <MDBCol style={{ marginTop: '100px'}} md="6">
+        <MDBCol style={{ marginTop: "50px" }} md="6">
           <form onSubmit={e => onSubmit(e)}>
-            <p className="h5 text-center mb-4">Sign up</p>
-            <div className="grey-text">
+            <h4>Sign up</h4>
+            <div className="">
               <MDBInput
                 label="Your name"
                 icon="user"
@@ -112,10 +106,17 @@ const Register = ({ setAlert, register, authenticated }) => {
             <div className="text-center">
               <MDBRow>
                 <MDBCol>
-                  <MDBBtn type="submit" color="primary">Register</MDBBtn>
+                  <MDBBtn type="submit" color="primary">
+                    Register
+                  </MDBBtn>
                 </MDBCol>
                 <MDBCol>
-                  <Button className="danger" onClick={() => loginWithRedirect({})}>Sign in With Google</Button>
+                  <Button
+                    className="danger"
+                    onClick={() => loginWithRedirect({})}
+                  >
+                    Sign in With Google
+                  </Button>
                 </MDBCol>
               </MDBRow>
             </div>
@@ -125,7 +126,6 @@ const Register = ({ setAlert, register, authenticated }) => {
     </MDBContainer>
   );
 };
-
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
@@ -137,7 +137,4 @@ const mapStateToProps = state => ({
   authenticated: state.auth.authenticated
 });
 
-export default connect(
-  mapStateToProps,
-  { setAlert, register }
-)(Register);
+export default connect(mapStateToProps, { setAlert, register })(Register);

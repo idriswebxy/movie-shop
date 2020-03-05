@@ -49,9 +49,9 @@ const Login = ({ login, authenticated }) => {
   return (
     <MDBContainer>
       
-        <MDBCol style={{ marginTop: '100px'}} md="6">
+        <MDBCol style={{ marginTop: '50px'}} md="6">
           <form onSubmit={(e) => onSubmit(e)}>
-            <p className="h5 text-center mb-4">Sign in</p>
+            <h4>Sign in</h4>
             <div className="grey-text">
               <MDBInput
                 label="Type your email"
