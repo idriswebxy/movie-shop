@@ -20,7 +20,7 @@ const app = express();
   
 const uri = process.env.MONGO_URI;
 
-console.log(uri)
+
 mongoose
   .connect(uri, {
     useNewUrlParser: true,
