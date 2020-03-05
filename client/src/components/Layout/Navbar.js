@@ -25,14 +25,14 @@ const Navbar = ({ auth: { authenticated, loading, user: { name } }, logout, cart
   
   const authLinks = (
     <MDBNav className="justify-content-center" color="cyan">
-    <MDBNavItem style={{ marginTop: "7px", marginRight: "50px"}} className="justify-content-left">Welcome {name}!</MDBNavItem>
+    <MDBNavItem style={{ marginTop: "7px", marginRight: "10px"}} className="justify-content-left">Welcome {name}!</MDBNavItem>
       <MDBNavItem>
         <MDBNavLink className="white-text" to="/movies">
           Home
         </MDBNavLink>
       </MDBNavItem>
       <MDBNavItem>
-        <MDBNavLink style={{ }} onClick={logout} className="white-text" to="/login">
+        <MDBNavLink onClick={logout} className="white-text" to="/login">
           Logout
         </MDBNavLink>
       </MDBNavItem>
