@@ -29,7 +29,7 @@ const Movie = ({ id, image, getMovie, isLoading }) => {
     <Link to="/movie_details" onClick={() => getMovie(id)}>
       <img
         className="movie-container"
-        src={`http://image.tmdb.org/t/p/w200${image}`}
+        src={`http://image.tmdb.org/t/p/w342${image}`}
       />
     </Link>
   );

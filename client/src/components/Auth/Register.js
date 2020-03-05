@@ -51,7 +51,7 @@ const Register = ({ setAlert, register, authenticated }) => {
   return (
     <MDBContainer>
       <MDBRow>
-        <MDBCol style={{ marginTop: "50px" }} md="6">
+        <MDBCol style={{ marginTop: "80px" }} md="6">
           <form onSubmit={e => onSubmit(e)}>
             <h4>Sign up</h4>
             <div className="">

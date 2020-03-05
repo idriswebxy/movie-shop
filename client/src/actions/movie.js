@@ -86,9 +86,9 @@ export const setMovie = (movies) => async dispatch => {
 
 
 
-export const loadMovieDetails = (movie) => async dispatch => {
+
+export const loadMovieDetails = () => async dispatch => {
   dispatch({
     type: LOAD_MOVIE_DETAILS,
-    payload: movie
   })
 }

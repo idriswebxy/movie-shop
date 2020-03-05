@@ -52,8 +52,8 @@
  }
 
  .movie-container {
-   padding: 10px;
-   border-radius: 25px;
+   padding: 5px;
+   border-radius: 10px;
  }
 
 
@@ -70,8 +70,7 @@
  }
 
  .movie-border {
-   margin: 50px;
+   margin: 30px;
    margin-right: 50px;
-   padding: 30px;
+   padding: 10px;
  }
-

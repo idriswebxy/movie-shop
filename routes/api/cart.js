@@ -1,16 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
-const passport = require("passport");
-const findOrCreate = require("mongoose-findorcreate");
-const passportLocalMongoose = require("passport-local-mongoose");
-const keys = require("../../config/keys");
-const { check, validationResult } = require("express-validator");
+// const mongoose = require("mongoose");
+// const passport = require("passport");
+// const findOrCreate = require("mongoose-findorcreate");
+// const passportLocalMongoose = require("passport-local-mongoose");
+// const keys = require("../../config/keys");
+// const { check, validationResult } = require("express-validator");
 // Load Product Model
 
 // Load Profile model
-const Profile = require("../../models/Profile");
-const User = require("../../models/User");
+
+
 const Cart = require("../../models/Cart");
 
 

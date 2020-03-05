@@ -13,7 +13,8 @@ import {
 const initialState = {
   isLoading: true,
   movies: [],
-  searchedMovie: [],
+  searchedMovie: null,
+  currentMovie: null
 };
 
 
@@ -58,7 +59,9 @@ export default function(state = initialState, action) {
     case LOAD_MOVIE_DETAILS:
       return {
         ...state,
-        searchedMovie: payload
+        searchedMovie: payload,
+        isLoading: false,
+        currentMovie: payload
       }  
 
     default:

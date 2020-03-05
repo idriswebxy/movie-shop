@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -8,7 +8,12 @@ import {
   MDBView,
   MDBMask,
   MDBContainer,
-  MDBIcon
+  MDBIcon,
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBCollapse,
+  MDBNavbarToggler,
+  MDBNavbarNav
 } from "mdbreact";
 import { useAuth0 } from "../../react-auth0-spa";
 import { register } from "../../actions/auth";
@@ -18,53 +23,80 @@ import { loadCart } from "../../actions/cart";
 import Cart from "../Cart/Cart";
 import "../../App.css";
 
-const Navbar = ({ auth: { authenticated, loading, user: { name } }, logout, cart }) => {
-  
+const Navbar = ({
+  auth: {
+    authenticated,
+    loading,
+    user: { name }
+  },
+  logout,
+  cart
+}) => {
   // const { isAuthenticated, user, loading, logout } = useAuth0();
 
-  
+  const [collapse, setCollapse] = useState(false);
+
+  const navColor = { backgroundColor: "#00CED1" };
+  const container = { height: 1300 };
+
+  const onClick = () => {
+    setCollapse(true);
+    if (collapse == true) {
+      setCollapse(false);
+    }
+  };
+
   const authLinks = (
-    <MDBNav className="justify-content-center" color="cyan">
-    <MDBNavItem style={{ marginTop: "7px", marginRight: "10px"}} className="justify-content-left">Welcome {name}!</MDBNavItem>
-      <MDBNavItem>
-        <MDBNavLink className="white-text" to="/movies">
-          Home
-        </MDBNavLink>
-      </MDBNavItem>
-      <MDBNavItem>
-        <MDBNavLink onClick={logout} className="white-text" to="/login">
-          Logout
-        </MDBNavLink>
-      </MDBNavItem>
-      <MDBNavItem>
-        <MDBNavLink className="white-text" to="/cart">
-          <div className="align-cart">
-            <MDBIcon icon="cart-arrow-down" />
-            <div className="lblCartCount">{cart.length}</div>
-          </div>
-        </MDBNavLink>
-      </MDBNavItem>
-    </MDBNav>
+    <MDBNavbar style={navColor} dark expand="md" scrolling fixed="top">
+      <MDBNavbarBrand>
+        <strong>Movie Shop</strong>
+      </MDBNavbarBrand>
+      <MDBNavbarToggler onClick={onClick} />
+      <MDBCollapse isOpen={collapse} navbar>
+        <MDBNavbarNav right>
+          <MDBNavItem active>
+            <MDBNavLink to="/movies">Movies</MDBNavLink>
+          </MDBNavItem>
+
+          <MDBNavItem>
+            <MDBNavLink onClick={logout} to="/login">
+              Logout
+            </MDBNavLink>
+          </MDBNavItem>
+
+          <MDBNavItem>
+            <MDBNavLink to="/cart">
+              <div className="align-cart">
+                <MDBIcon icon="shopping-cart" />
+                <div className="lblCartCount">{cart.length}</div>
+              </div>
+            </MDBNavLink>
+          </MDBNavItem>
+        </MDBNavbarNav>
+      </MDBCollapse>
+    </MDBNavbar>
   );
 
   const guestLinks = (
-    <MDBNav className="justify-content-center" color="cyan">
-      <MDBNavItem>
-        <MDBNavLink className="white-text" active to="/">
-          Home
-        </MDBNavLink>
-      </MDBNavItem>
-      <MDBNavItem>
-        <MDBNavLink className="white-text" to="/register">
-          Sign up
-        </MDBNavLink>
-      </MDBNavItem>
-      <MDBNavItem>
-        <MDBNavLink className="white-text" to="/login">
-          Login
-        </MDBNavLink>
-      </MDBNavItem>
-    </MDBNav>
+    <MDBNavbar style={navColor} dark expand="md" scrolling fixed="top">
+      <MDBNavbarBrand href="/">
+        <strong>Movie Shop</strong>
+      </MDBNavbarBrand>
+      <MDBNavbarToggler onClick={onClick} />
+      <MDBCollapse isOpen={collapse} navbar>
+        <MDBNavbarNav left>
+          <MDBNavItem active>
+            <MDBNavLink to="/">Home</MDBNavLink>
+          </MDBNavItem>
+          <MDBNavItem>
+            <MDBNavLink to="/login">Login</MDBNavLink>
+          </MDBNavItem>
+          <MDBNavItem>
+            <MDBNavLink to="/register">Sign up</MDBNavLink>
+          </MDBNavItem>
+        </MDBNavbarNav>
+      </MDBCollapse>
+    </MDBNavbar>
   );
 
   return <div>{authenticated ? authLinks : guestLinks}</div>;
