@@ -30,6 +30,7 @@ router.get("/", async (req, res) => {
 
 // Add to cart
 router.post("/", (req, res) => {
+  
   const { id, title, poster_path, overview, release_date } = req.body;
 
   // Create new Product

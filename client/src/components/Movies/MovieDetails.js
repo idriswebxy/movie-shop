@@ -18,7 +18,7 @@ import {
   Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button
 } from 'reactstrap';
-import { loadMovieDetails } from "../../actions/movie";
+import { loadMovieDetails ,setMovie } from "../../actions/movie";
 import SpinnerPage from "../Layout/SpinnerPage";
 
 
@@ -26,8 +26,9 @@ const MovieDetails = ({ movie, addToCart, isLoading, loadMovieDetails, getMovie,
   useEffect(() => {
     loadMovieDetails();
     loadCart();
+    // setMovie()
 
-  }, [movie]);
+  }, []);
 
   if (isLoading) {
     return <SpinnerPage />;

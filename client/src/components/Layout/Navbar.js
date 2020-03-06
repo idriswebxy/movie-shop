@@ -49,7 +49,9 @@ const Navbar = ({
   const authLinks = (
     <MDBNavbar style={navColor} dark expand="md" scrolling fixed="top">
       <MDBNavbarBrand>
-        <strong>Movie Shop</strong>
+        <MDBNavLink style={{ color: "white" }} to="/movies">
+          Movie Shop <MDBIcon icon="home" />
+        </MDBNavLink>
       </MDBNavbarBrand>
       <MDBNavbarToggler onClick={onClick} />
       <MDBCollapse isOpen={collapse} navbar>

@@ -72,11 +72,27 @@ export const getMovie = id => async dispatch => {
 
 
 export const setMovie = (movies) => async dispatch => {
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  const body = JSON.stringify(movies);
+
+
   try {
+
+    const res = await axios.post("/api/movie", body, config);
+    
+    console.log(res.data)
+
     dispatch({
       type: SET_MOVIES,
-      payload: movies
+      payload: res.data
     });
+
   } catch (e) {
     dispatch({
       type: SET_MOVIE_ERR

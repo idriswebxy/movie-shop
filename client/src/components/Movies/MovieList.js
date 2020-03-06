@@ -27,31 +27,17 @@ const MovieList = ({
   getCart,
   userId,
   setMovie,
-  isLoading
+  isLoading,
+  movies
 }) => {
-  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    // fetchMovies().then(data => {
-    //   setMovies(...movies, data.results);
-    //   setMovie(data.results);
-    //   loadCart();
-    // });
-
-    // var config = {
-    //   headers: {'Access-Control-Allow-Origin': '*'}
-    // };
-    // var proxy = {
-    //   host: '104.236.174.88',
-    //   port: 3128
-    // }
     fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&page=1`
     )
       .then(res => res.json())
       .then(data => {
         setMovie(data.results);
-        setMovies(...movies, data.results);
         loadCart();
       });
   }, []);
@@ -96,7 +82,8 @@ MovieList.propTypes = {
 const mapStateToProps = state => ({
   userId: state.auth.user._id,
   isLoading: state.movie.isLoading,
-  authenticated: state.auth.authenticated
+  authenticated: state.auth.authenticated,
+  movies: state.movie.movies
 });
 
 export default connect(mapStateToProps, {
