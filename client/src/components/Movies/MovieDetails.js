@@ -24,7 +24,7 @@ import SpinnerPage from "../Layout/SpinnerPage";
 
 const MovieDetails = ({ movie, addToCart, isLoading, loadMovieDetails, getMovie, loadCart }) => {
   useEffect(() => {
-    loadMovieDetails();
+    // loadMovieDetails();
     loadCart();
     // setMovie()
 
@@ -48,8 +48,8 @@ const MovieDetails = ({ movie, addToCart, isLoading, loadMovieDetails, getMovie,
       >
         <div>
           <img
-            style={{ width: "22rem", borderRadius: "10px" }}
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            style={{ width: "20rem", borderRadius: "10px" }}
+            src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
           />
 
           <h3>{movie.title}</h3>

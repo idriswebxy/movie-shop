@@ -18,7 +18,7 @@ const SearchBar = ({ onSearch, hideResults }) => {
     
 
   return (
-    <MDBCol md="6">
+    <MDBCol style={{ marginTop: '100px'}} md="6">
       <form className="form-inline mt-4 mb-4">
         <MDBIcon icon="search" />
         <input
