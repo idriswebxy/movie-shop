@@ -40,7 +40,6 @@ const Navbar = ({
   const container = { height: 1300 };
 
   const onClick = () => {
-
     setCollapse(true);
 
     if (collapse == true) {
@@ -48,7 +47,7 @@ const Navbar = ({
     }
 
     setTimeout(() => {
-      setCollapse(false)
+      setCollapse(false);
     }, 3000);
   };
 
@@ -63,21 +62,22 @@ const Navbar = ({
       <MDBCollapse isOpen={collapse} navbar>
         <MDBNavbarNav right>
           <MDBNavItem active>
-            <MDBNavLink to="/movies">Movies {' '}<MDBIcon icon="film" /></MDBNavLink>
-          </MDBNavItem>
-
-          <MDBNavItem>
-            <MDBNavLink onClick={logout} to="/login">
-              Logout{' '}<MDBIcon icon="sign-out-alt" />
+            <MDBNavLink to="/movies">
+              Movies <MDBIcon icon="film" />
             </MDBNavLink>
           </MDBNavItem>
 
           <MDBNavItem>
             <MDBNavLink to="/cart">
               <div className="align-cart">
-                Cart{' '}<MDBIcon icon="shopping-cart" />
+                Cart <MDBIcon icon="shopping-cart" />
                 <div className="lblCartCount">{cart.length}</div>
               </div>
+            </MDBNavLink>
+          </MDBNavItem>
+          <MDBNavItem>
+            <MDBNavLink onClick={logout} to="/login">
+              Logout <MDBIcon icon="sign-out-alt" />
             </MDBNavLink>
           </MDBNavItem>
         </MDBNavbarNav>
