@@ -57,19 +57,19 @@ const Navbar = ({
       <MDBCollapse isOpen={collapse} navbar>
         <MDBNavbarNav right>
           <MDBNavItem active>
-            <MDBNavLink to="/movies">Movies</MDBNavLink>
+            <MDBNavLink to="/movies">Movies {' '}<MDBIcon icon="film" /></MDBNavLink>
           </MDBNavItem>
 
           <MDBNavItem>
             <MDBNavLink onClick={logout} to="/login">
-              Logout
+              Logout{' '}<MDBIcon icon="sign-out-alt" />
             </MDBNavLink>
           </MDBNavItem>
 
           <MDBNavItem>
             <MDBNavLink to="/cart">
               <div className="align-cart">
-                <MDBIcon icon="shopping-cart" />
+                Cart{' '}<MDBIcon icon="shopping-cart" />
                 <div className="lblCartCount">{cart.length}</div>
               </div>
             </MDBNavLink>

@@ -37,11 +37,11 @@ const SearchResults = ({ results, getMovie, isLoading, getSearchedMovie }) => {
                 <MDBListGroupItem>
                   <div
                     key={result.id}
-                    style={{ color: "black", display: "flex" }}
+                    style={{ color: "black", display: "block" }}
                   >
                     <MDBCardImage
-                      style={{ width: "3rem" }}
-                      src={`https://image.tmdb.org/t/p/w92${[
+                      style={{ width: "5rem" }}
+                      src={`https://image.tmdb.org/t/p/w154${[
                         result.poster_path
                       ]}`}
                     />
