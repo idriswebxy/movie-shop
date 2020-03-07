@@ -40,10 +40,16 @@ const Navbar = ({
   const container = { height: 1300 };
 
   const onClick = () => {
+
     setCollapse(true);
+
     if (collapse == true) {
       setCollapse(false);
     }
+
+    setTimeout(() => {
+      setCollapse(false)
+    }, 3000);
   };
 
   const authLinks = (

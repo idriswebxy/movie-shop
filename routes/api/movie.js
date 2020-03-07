@@ -4,8 +4,11 @@ var validator = require("validator");
 
 const Movie = require("../../models/Movie");
 
-// Set the movies from api
+
+
+// Set movies from api
 router.post("/", async (req, res) => {
+
   // const errors = validationResult(req);
   //   if (!errors.isEmpty()) {
   //     return res.status(400).json({ errors: errors.array() });
@@ -24,9 +27,13 @@ router.post("/", async (req, res) => {
 
     for (let i = 0; i < req.body.length; i++) {
       movie.movies[i] = req.body[i];
+      
     }
+
+
     
     await movie.save();
+
     res.json(movie.movies);
 
   } catch (error) {
