@@ -25,12 +25,16 @@ router.post("/", async (req, res) => {
       releaseDate: movie.release_date
     };
 
-    for (let i = 0; i < req.body.length; i++) {
-      movie.movies[i] = req.body[i];
+    for (let i = 0; i <= req.body.length; i++) {
+
+      if (req.body.length <= 0) {
+         continue;
+      }
+     movie.movies[i] = req.body[i];
       
     }
 
-
+    
     
     await movie.save();
 
