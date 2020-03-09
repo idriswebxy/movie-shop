@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
-import Img from "react-image";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getMovie } from "../../actions/movie";
-import {  } from "../../actions/movie";
+
 import {
   MDBBtn,
   MDBCard,
