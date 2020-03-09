@@ -2,18 +2,6 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getMovie } from "../../actions/movie";
-
-import {
-  MDBBtn,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCol,
-  MDBIcon,
-  MDBView
-} from "mdbreact";
 import SpinnerPage from "../Layout/SpinnerPage";
 
 

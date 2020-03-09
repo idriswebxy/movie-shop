@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
-import { API_KEY } from "../../config";
+import { API_KEY } from "../../config.js";
 import PropTypes from "prop-types";
 import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart, loadCart, getCart } from "../../actions/cart";
@@ -13,9 +13,6 @@ import {
   MDBContainer,
   MDBRow,
   MDBCol,
-  MDBBtn,
-  MDBIcon,
-  MDBNavLink
 } from "mdbreact";
 import "../../App.css";
 import axios from "axios";

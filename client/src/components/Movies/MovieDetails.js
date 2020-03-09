@@ -2,27 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getMovie, loadMovieDetail } from "../../actions/movie";
 import { addToCart, loadCart } from "../../actions/cart";
-import {
-  MDBBtn,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCol,
-  MDBIcon,
-  MDBView,
-  MDBContainer
-} from "mdbreact";
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button
-} from "reactstrap";
+import { MDBBtn, MDBIcon, MDBContainer } from "mdbreact";
 import { loadMovieDetails, setMovie } from "../../actions/movie";
 import SpinnerPage from "../Layout/SpinnerPage";
 
