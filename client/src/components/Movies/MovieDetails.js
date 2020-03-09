@@ -15,19 +15,29 @@ import {
   MDBContainer
 } from "mdbreact";
 import {
-  Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button
-} from 'reactstrap';
-import { loadMovieDetails ,setMovie } from "../../actions/movie";
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Button
+} from "reactstrap";
+import { loadMovieDetails, setMovie } from "../../actions/movie";
 import SpinnerPage from "../Layout/SpinnerPage";
 
-
-const MovieDetails = ({ movie, addToCart, isLoading, loadMovieDetails, getMovie, loadCart }) => {
+const MovieDetails = ({
+  movie,
+  addToCart,
+  isLoading,
+  loadMovieDetails,
+  getMovie,
+  loadCart
+}) => {
   useEffect(() => {
     // loadMovieDetails();
     loadCart();
-    // setMovie()
-
+    // setMovie();
   }, []);
 
   if (isLoading) {
@@ -60,29 +70,17 @@ const MovieDetails = ({ movie, addToCart, isLoading, loadMovieDetails, getMovie,
         </div>
       </div>
     </MDBContainer>
-    // <MDBContainer>
-    
-    // <Card>
-    //     <CardImg top width="100%" src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Card image cap" />
-    //     <CardBody>
-    //       <CardTitle>Card title</CardTitle>
-    //       <CardSubtitle>Card subtitle</CardSubtitle>
-    //       <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-    //       <Button onClick={() => addToCart(movie)}>Add To Cart</Button>
-    //     </CardBody>
-    //   </Card>
-    
-    // </MDBContainer>
-
-
   );
 };
 
 const mapStateToProps = state => ({
   movie: state.movie.searchedMovie,
-  isLoading: state.movie.isLoading,
+  isLoading: state.movie.isLoading
 });
 
-export default connect(mapStateToProps, { addToCart, loadMovieDetails, getMovie, loadCart })(
-  MovieDetails
-);
+export default connect(mapStateToProps, {
+  addToCart,
+  loadMovieDetails,
+  getMovie,
+  loadCart
+})(MovieDetails);

@@ -30,6 +30,8 @@ const MovieList = ({
   isLoading,
   movies
 }) => {
+  
+  const [movie, setMovies] = useState([]);
 
   useEffect(() => {
     fetch(
@@ -38,6 +40,7 @@ const MovieList = ({
       .then(res => res.json())
       .then(data => {
         setMovie(data.results);
+        setMovies([...movie, data.results]);
         loadCart();
       });
   }, []);
@@ -45,7 +48,6 @@ const MovieList = ({
   // if (isLoading) {
   //   return <SpinnerPage />;
   // }
-  
 
   return (
     <div>

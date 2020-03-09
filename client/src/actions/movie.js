@@ -10,10 +10,8 @@ import {
 // import { API_KEY } from "../config/config";
 import axios from "axios";
 
-
-
 // export function fetchMovies() {
-  
+
 //   try {
 //     const url = `https://api.themoviedb.org/3/movie/popular/?api_key=${API_KEY}&language=en-US&page=1`;
 
@@ -26,43 +24,45 @@ import axios from "axios";
 //     console.log(error);
 //   }
 
-
 // };
 
+// export const loadMovieList = () => async dispatch => {
+
+//   try {
+//     const res = await axios.get("/api/movie");
+
+//     console.log(res.data)
+
+//   } catch (error) {
+//     console.error(error)
+//   }
+
+// }
 
 export const setSearchedMovies = movie => async dispatch => {
-
   try {
     dispatch({
       type: SET_SEARCHED_MOVIE,
       payload: movie
-    })
-
+    });
   } catch (e) {
     return;
   }
+};
 
-}
-
-
-
-export const getSearchedMovie = (id) => async dispatch => {
+export const getSearchedMovie = id => async dispatch => {
   dispatch({
     type: GET_SEARCHED_MOVIE,
     payload: id
-  })
-}
-
-
+  });
+};
 
 export const getMovie = id => async dispatch => {
-
   try {
     dispatch({
       type: GET_MOVIES,
       payload: id
     });
-
   } catch (e) {
     dispatch({
       type: GET_MOVIE_ERR
@@ -70,29 +70,18 @@ export const getMovie = id => async dispatch => {
   }
 };
 
-
-export const setMovie = (movies) => async dispatch => {
-
+export const setMovie = movies => async dispatch => {
   const config = {
     headers: {
       "Content-Type": "application/json"
     }
   };
 
-  const body = JSON.stringify(movies);
-
-
   try {
-
-    const res = await axios.post("/api/movie", body, config);
-    
-    console.log(res.data)
-
     dispatch({
       type: SET_MOVIES,
-      payload: res.data
+      payload: movies
     });
-
   } catch (e) {
     dispatch({
       type: SET_MOVIE_ERR
@@ -100,11 +89,8 @@ export const setMovie = (movies) => async dispatch => {
   }
 };
 
-
-
-
 export const loadMovieDetails = () => async dispatch => {
   dispatch({
-    type: LOAD_MOVIE_DETAILS,
-  })
-}
+    type: LOAD_MOVIE_DETAILS
+  });
+};

@@ -16,6 +16,7 @@ import PropTypes from "prop-types";
 import { Button } from "reactstrap";
 
 const Login = ({ login, authenticated }) => {
+  
   const { loading, user, loginWithRedirect } = useAuth0();
 
   const [formData, setFormData] = useState({
@@ -69,7 +70,6 @@ const Login = ({ login, authenticated }) => {
               <MDBCol>
                 <MDBBtn type="submit">Login</MDBBtn>
               </MDBCol>
-
               <MDBNavLink to="/products">
                 <MDBCol>
                   <Button

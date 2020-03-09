@@ -23,7 +23,7 @@ const CartSchema = new Schema({
     type: String
   },
   releaseDate: {
-    type: Date,
+    type: Date
   },
   date: {
     type: Date,

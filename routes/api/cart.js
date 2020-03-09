@@ -24,6 +24,7 @@ router.get("/", async (req, res) => {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
+
 });
 
 
@@ -83,7 +84,9 @@ router.delete("/:id", async (req, res) => {
     await item.remove();
 
     res.json({ msg: "Item removed" });
-  } catch (error) {
+
+  } 
+  catch (error) {
     if (error.kind === "ObjectId") {
       return res.status(404).json({ msg: "Item not found" });
     }
