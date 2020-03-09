@@ -7,37 +7,7 @@ import {
   GET_SEARCHED_MOVIE,
   LOAD_MOVIE_DETAILS
 } from "../actions/types";
-// import { API_KEY } from "../config/config";
 import axios from "axios";
-
-// export function fetchMovies() {
-
-//   try {
-//     const url = `https://api.themoviedb.org/3/movie/popular/?api_key=${API_KEY}&language=en-US&page=1`;
-
-//     axios.get(url)
-//       .then(res => {
-//           return res.data
-//       })
-
-//   } catch (error) {
-//     console.log(error);
-//   }
-
-// };
-
-// export const loadMovieList = () => async dispatch => {
-
-//   try {
-//     const res = await axios.get("/api/movie");
-
-//     console.log(res.data)
-
-//   } catch (error) {
-//     console.error(error)
-//   }
-
-// }
 
 export const setSearchedMovies = movie => async dispatch => {
   try {
