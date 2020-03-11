@@ -16,8 +16,7 @@ import PropTypes from "prop-types";
 import { Button } from "reactstrap";
 
 const Login = ({ login, authenticated }) => {
-  
-  const { loading, user, loginWithRedirect } = useAuth0();
+  const { loading, user, loginWithRedirect, isAuthenticated } = useAuth0();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -70,7 +69,7 @@ const Login = ({ login, authenticated }) => {
               <MDBCol>
                 <MDBBtn type="submit">Login</MDBBtn>
               </MDBCol>
-              <MDBNavLink to="/products">
+              <MDBNavLink to="/movies">
                 <MDBCol>
                   <Button
                     className="primary"

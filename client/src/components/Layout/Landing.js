@@ -17,9 +17,9 @@ const Landing = () => {
   
   const { user, getTokenSilently, isAuthenticated } = useAuth0();
 
-  // if (authenticated) {
-  //   return <Redirect to="/movies" />;
-  // }
+  if (isAuthenticated) {
+    return <Redirect to="/movies" />;
+  }
 
   return (
     <div className="">

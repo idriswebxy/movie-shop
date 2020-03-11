@@ -12,11 +12,8 @@ import {
   LOGIN_SUCCESS
 } from "./types";
 
-
-
 // Load user
 export const loadUser = () => async dispatch => {
-
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
@@ -28,7 +25,6 @@ export const loadUser = () => async dispatch => {
       type: USER_LOADED,
       payload: res.data
     });
-
   } catch (error) {
     dispatch({
       type: AUTH_ERROR
@@ -36,12 +32,8 @@ export const loadUser = () => async dispatch => {
   }
 };
 
-
-
 // Register User
 export const register = ({ name, email, password }) => async dispatch => {
-
-
   const config = {
     headers: {
       "Content-Type": "application/json"
@@ -51,7 +43,6 @@ export const register = ({ name, email, password }) => async dispatch => {
   const body = JSON.stringify({ name, email, password });
 
   try {
-
     const res = await axios.post("/api/user", body, config);
 
     dispatch({
@@ -60,9 +51,7 @@ export const register = ({ name, email, password }) => async dispatch => {
     });
 
     dispatch(loadUser());
-
   } catch (err) {
-
     const errors = err.response.data.errors;
 
     if (errors) {
@@ -75,14 +64,8 @@ export const register = ({ name, email, password }) => async dispatch => {
   }
 };
 
-
-
-
 // Login User
 export const login = (email, password) => async dispatch => {
-
-  
-  console.log("Login actions called!")
 
   const config = {
     headers: {
@@ -91,10 +74,8 @@ export const login = (email, password) => async dispatch => {
   };
 
   const body = JSON.stringify({ email, password });
-  
-  
+
   try {
-    
     const res = await axios.post("/api/auth", body, config, { timeout: 10 });
 
     dispatch({
@@ -105,7 +86,6 @@ export const login = (email, password) => async dispatch => {
     dispatch(loadUser());
 
   } catch (err) {
-
     const errors = err.response.data.errors;
 
     if (errors) {
@@ -114,15 +94,12 @@ export const login = (email, password) => async dispatch => {
 
     dispatch({
       type: LOGIN_FAIL
-    })
-
+    });
   }
-
 };
 
-
 // Logout
-export const logout = () => dispatch => {
+export const logOut = () => dispatch => {
   dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });
-}
+};

@@ -30,14 +30,15 @@ if (localStorage.token) {
 
 const App = () => {
 
-  // const { loading, user } = useAuth0();
+  // const { isAuthenticated } = useAuth0();
+
 
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
 
-  // if (loading) {
-  //   return <SpinnerPage />;
+  // if (isAuthenticated) {
+  //   return <Redirect to="/movies" />;
   // }
 
   return (

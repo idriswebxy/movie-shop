@@ -2,7 +2,7 @@
    background-color: rgb(9, 28, 37);
  }
 
- 
+
  .remove-btn {
    margin-right: 0.5rem;
  }
@@ -73,4 +73,11 @@
    margin: 30px;
    margin-right: 50px;
    padding: 10px;
+ }
+
+
+ .hover-movie:hover {
+   transition-duration: 0.5s;
+   transform: scale(1.1);
+  
  }

@@ -13,8 +13,8 @@ import {
 const initialState = {
   token: localStorage.getItem("token"),
   authenticated: null,
-  loading: true,
-  user: {},
+  isLoading: true,
+  userName: {},
 };
 
 export default function(state = initialState, action) {
@@ -26,8 +26,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         authenticated: true,
-        loading: false,
-        user: payload,
+        isLoading: false,
+        userName: payload,
       };
 
     case REGISTER_SUCCESS:
@@ -37,7 +37,7 @@ export default function(state = initialState, action) {
         ...state,
         ...payload,
         authenticated: true,
-        loading: false
+        isLoading: false
       };
 
     case REGISTER_FAIL:
@@ -50,7 +50,7 @@ export default function(state = initialState, action) {
         ...state,
         token: null,
         authenticated: false,
-        loading: false
+        isLoading: false
       };
 
     default:

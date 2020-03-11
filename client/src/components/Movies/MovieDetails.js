@@ -25,7 +25,7 @@ const MovieDetails = ({
   }
 
   return (
-    <MDBContainer>
+    <MDBContainer >
       <div
         style={{
           backgroundImage: `linear-gradient(to right,

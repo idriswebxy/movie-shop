@@ -9,14 +9,12 @@ import { fetchMovies } from "../../actions/movie";
 import { connect } from "react-redux";
 import Movie from "./Movie";
 import SearchPage from "../Search/Search";
-import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-} from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol, MDBView } from "mdbreact";
 import "../../App.css";
 import axios from "axios";
 import { SET_MOVIES } from "../../actions/types";
+
+
 
 const MovieList = ({
   addToCart,
@@ -27,8 +25,8 @@ const MovieList = ({
   isLoading,
   movies
 }) => {
-  
   const [movie, setMovies] = useState([]);
+  const { isAuthenticated, user } = useAuth0();
 
   useEffect(() => {
     fetch(
@@ -42,9 +40,11 @@ const MovieList = ({
       });
   }, []);
 
-  // if (isLoading) {
-  //   return <SpinnerPage />;
-  // }
+  
+
+  if (isLoading) {
+    return <SpinnerPage />;
+  }
 
   return (
     <div>
@@ -53,8 +53,8 @@ const MovieList = ({
         <MDBRow>
           {movies.map((movie, key) => {
             return (
-              <MDBCol sm="3">
-                <div key={key}>
+              <MDBCol key={key} size="6">
+                <div className="hover-movie">
                   <Movie
                     id={movie.id}
                     addToCart={addToCart}
@@ -79,7 +79,7 @@ MovieList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userId: state.auth.user._id,
+  userId: state.auth.userName._id,
   isLoading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
   movies: state.movie.movies
