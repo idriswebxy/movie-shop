@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useAuth0 } from "../../react-auth0-spa";
-import ExternalApi from "./ExternalApi";
 import axios from "axios";
 import {
   MDBNav,
@@ -12,15 +10,7 @@ import {
 } from "mdbreact";
 import { Redirect } from "react-router-dom";
 
-
 const Landing = () => {
-  
-  const { user, getTokenSilently, isAuthenticated } = useAuth0();
-
-  if (isAuthenticated) {
-    return <Redirect to="/movies" />;
-  }
-
   return (
     <div className="">
       <MDBView src="https://mdbootstrap.com/img/Photos/Others/img%20(51).jpg"></MDBView>

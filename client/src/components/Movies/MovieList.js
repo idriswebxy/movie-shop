@@ -1,10 +1,9 @@
 import React, { Component, useEffect, useState } from "react";
-import { API_KEY } from "../../config.js";
+import config from "../../config.json";
 import PropTypes from "prop-types";
 import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart, loadCart, getCart } from "../../actions/cart";
 import { getMovie, setMovie, clearCache } from "../../actions/movie";
-import { useAuth0 } from "../../react-auth0-spa";
 import { fetchMovies } from "../../actions/movie";
 import { connect } from "react-redux";
 import Movie from "./Movie";
@@ -25,12 +24,13 @@ const MovieList = ({
   isLoading,
   movies
 }) => {
+
   const [movie, setMovies] = useState([]);
-  const { isAuthenticated, user } = useAuth0();
+
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${config.API_KEY}&language=en-US&page=1`
     )
       .then(res => res.json())
       .then(data => {
@@ -79,7 +79,7 @@ MovieList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userId: state.auth.userName._id,
+  userId: state.auth.userInfo._id,
   isLoading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
   movies: state.movie.movies

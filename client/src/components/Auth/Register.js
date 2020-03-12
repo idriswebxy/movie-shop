@@ -16,12 +16,9 @@ import {
 } from "mdbreact";
 import axios from "axios";
 import { useGoogleLogin } from "react-google-login";
-import { useAuth0 } from "../../react-auth0-spa";
 import { Button } from "reactstrap";
 
 const Register = ({ setAlert, register, authenticated }) => {
-  const { loading, user, loginWithRedirect } = useAuth0();
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -111,12 +108,7 @@ const Register = ({ setAlert, register, authenticated }) => {
                   </MDBBtn>
                 </MDBCol>
                 <MDBCol>
-                  <Button
-                    className="danger"
-                    onClick={() => loginWithRedirect({})}
-                  >
-                    Sign in With Google
-                  </Button>
+                  <Button className="danger">Sign in With Google</Button>
                 </MDBCol>
               </MDBRow>
             </div>

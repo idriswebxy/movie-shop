@@ -15,24 +15,18 @@ import {
   MDBNavbarToggler,
   MDBNavbarNav
 } from "mdbreact";
-import { useAuth0 } from "../../react-auth0-spa";
 import { register } from "../../actions/auth";
 import PropTypes from "prop-types";
 import { logOut } from "../../actions/auth";
 import { loadCart } from "../../actions/cart";
-import Cart from "../Cart/Cart";
 import "../../App.css";
 
 const Navbar = ({
-  auth: {
-    authenticated,
-    isloading,
-    userName,
-  },
+  auth: { authenticated, isLoading, userInfo },
   logOut,
   cart
 }) => {
-  const { isAuthenticated, user, logout } = useAuth0();
+
 
   const [collapse, setCollapse] = useState(false);
 
@@ -51,21 +45,11 @@ const Navbar = ({
     }, 3000);
   };
 
-
-
-  useEffect(() => {
-    console.log()
-  }, [])
-
-  
   const authLinks = (
-
-
-
     <MDBNavbar style={navColor} dark expand="md" scrolling fixed="top">
       <MDBNavbarBrand>
         <MDBNavLink style={{ color: "white" }} to="/movies">
-          Movie Shop <MDBIcon icon="home" /> Welcome {user ? user.name : userName.name + "!"}
+          Movie Shop <MDBIcon icon="home" /> Welcome {userInfo.name + "!"}
         </MDBNavLink>
       </MDBNavbarBrand>
       <MDBNavbarToggler onClick={onClick} />
@@ -86,7 +70,7 @@ const Navbar = ({
             </MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
-            <MDBNavLink onClick={user ? logout : logOut} to="/login">
+            <MDBNavLink onClick={logOut} to="/login">
               Logout <MDBIcon icon="sign-out-alt" />
             </MDBNavLink>
           </MDBNavItem>
@@ -117,11 +101,11 @@ const Navbar = ({
     </MDBNavbar>
   );
 
-  return <div>{authenticated || isAuthenticated ? authLinks : guestLinks}</div>;
+  return <div>{authenticated ? authLinks : guestLinks}</div>;
 };
 
 Navbar.propTypes = {
-  logout: PropTypes.func.isRequired,
+  logOut: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 

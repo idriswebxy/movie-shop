@@ -5,9 +5,75 @@ const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
-
+const auth = require("../../middleware/auth");
 
 const jwtSecret = "mysecrettoken";
+
+
+router.get("/", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+
+// google login route
+router.post("/google_login", async (req, res) => {
+  const { name, email, token } = req.body;
+
+
+  console.log(req.body)
+  try {
+    let user = await User.findOne({
+      email
+    });
+
+    if (user) {
+      res.status(400).json({
+        errors: [
+          {
+            msg: "User already exist!"
+          }
+        ]
+      });
+    }
+
+    user = new User({
+      name,
+      email
+    });
+
+    await user.save();
+
+    const payload = {
+      user: {
+        id: user.id
+      }
+    };
+
+    jwt.sign(
+      payload,
+      token,
+      {
+        expiresIn: 360000
+      },
+      (err, token) => {
+        if (err) throw err;
+        res.json({
+          token
+        });
+      }
+    );
+  } catch (error) {
+    console.log(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 
 
 
@@ -19,26 +85,36 @@ router.post(
     check(
       "password",
       "Please enter a password with 6 or more characters!"
-    ).isLength({ min: 6 })
-  ], 
+    ).isLength({
+      min: 6
+    })
+  ],
   async (req, res) => {
-
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({
+        errors: errors.array()
+      });
     }
 
     const { name, email, password } = req.body;
 
     try {
-      let user = await User.findOne({ email });
+      let user = await User.findOne({
+        email
+      });
 
       if (user) {
-        res.status(400).json({ errors: [{ msg: "User already exits!" }] });
+        res.status(400).json({
+          errors: [
+            {
+              msg: "User already exits!"
+            }
+          ]
+        });
       }
 
-    
       user = new User({
         name,
         email,
@@ -59,15 +135,18 @@ router.post(
 
       jwt.sign(
         payload,
-       jwtSecret,
-        { expiresIn: 360000 },
+        jwtSecret,
+        {
+          expiresIn: 360000
+        },
         (err, token) => {
-          if (err) throw err; 
-          res.json({ token });
+          if (err) throw err;
+          res.json({
+            token
+          });
         }
       );
-    } 
-    catch (err) {
+    } catch (err) {
       console.log(err.message);
       res.status(500).send("Server error");
     }

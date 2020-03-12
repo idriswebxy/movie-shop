@@ -5,7 +5,7 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
-
+import { connect } from "react-redux";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import Cart from "./components/Cart/Cart";
@@ -14,13 +14,11 @@ import Register from "./components/Auth/Register";
 import Login from "./components/Auth/Login";
 import PrivateRoute from "./components/Routing/PrivateRoute";
 import MovieList from "./components/Movies/MovieList";
-import { useAuth0 } from "./react-auth0-spa";
 import Landing from "./components/Layout/Landing";
 import { loadUser } from "./actions/auth";
 import { Provider } from "react-redux";
 import store from "./store";
 import SpinnerPage from "./components/Layout/SpinnerPage";
-import history from "./utils/history";
 import Alert from "./components/Layout/Alert";
 import MovieDetails from "./components/Movies/MovieDetails";
 
@@ -28,22 +26,18 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-const App = () => {
-
-  // const { isAuthenticated } = useAuth0();
-
-
+const App = ({ isLoading }) => {
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
 
-  // if (isAuthenticated) {
-  //   return <Redirect to="/movies" />;
-  // }
+
+  if (isLoading) {
+    return <SpinnerPage />
+  }
 
   return (
-    <Provider store={store}>
-      <Router history={history}>
+      <Router>
         <Alert />
         <div
           style={{
@@ -69,8 +63,12 @@ const App = () => {
           {/* <Footer /> */}
         </div>
       </Router>
-    </Provider>
   );
 };
 
-export default App;
+const mapStateToProps = state => ({
+  isLoading: state.auth.isLoading
+})
+
+
+export default connect(mapStateToProps)(App);

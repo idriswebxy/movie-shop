@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import GoogleLogin from "react-google-login";
 import { Link, Redirect } from "react-router-dom";
 import {
   MDBContainer,
@@ -9,14 +8,19 @@ import {
   MDBBtn,
   MDBNavLink
 } from "mdbreact";
-import { useAuth0 } from "../../react-auth0-spa";
 import { connect } from "react-redux";
-import { login } from "../../actions/auth";
+import { login, googleLogin } from "../../actions/auth";
 import PropTypes from "prop-types";
 import { Button } from "reactstrap";
+import GoogleLogin from "react-google-login";
+import { useGoogleLogin } from "react-google-login";
+import config from "../../config.json";
 
-const Login = ({ login, authenticated }) => {
-  const { loading, user, loginWithRedirect, isAuthenticated } = useAuth0();
+const Login = ({ login, authenticated, googleLogin }) => {
+
+  useState(() => {
+    // responseGoogle()
+  }, []);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -25,6 +29,14 @@ const Login = ({ login, authenticated }) => {
 
   const { email, password } = formData;
 
+
+  const responseGoogle = async res => {
+    googleLogin(res.profileObj.name, res.profileObj.email, res.uc.access_token);
+  };
+
+
+
+
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -32,6 +44,7 @@ const Login = ({ login, authenticated }) => {
     e.preventDefault();
     login(email, password);
   };
+
 
   if (authenticated) {
     return <Redirect to="/movies" />;
@@ -69,16 +82,13 @@ const Login = ({ login, authenticated }) => {
               <MDBCol>
                 <MDBBtn type="submit">Login</MDBBtn>
               </MDBCol>
-              <MDBNavLink to="/movies">
-                <MDBCol>
-                  <Button
-                    className="primary"
-                    onClick={() => loginWithRedirect({})}
-                  >
-                    Sign in With Google
-                  </Button>
-                </MDBCol>
-              </MDBNavLink>
+              <GoogleLogin
+                clientId={config.GOOGLE_CLIENT_ID}
+                buttonText="Sign in with Google"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={"single_host_origin"}
+              />
             </MDBRow>
           </form>
         </MDBCol>
@@ -96,4 +106,4 @@ const mapStateToProps = state => ({
   authenticated: state.auth.authenticated
 });
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { login, googleLogin })(Login);

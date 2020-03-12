@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import SearchResults from "./SearchResults";
 import SearchBar from "./SearchBar";
 import { setSearchedMovies } from "../../actions/movie";
-import { API_KEY } from "../../config";
+import config from "../../config.json";
 
 
 
@@ -28,7 +28,7 @@ const Search = ({ setSearchedMovies }) => {
     try {
       if (!query || query.length <= 1) return;
 
-      const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`;
+      const url = `https://api.themoviedb.org/3/search/movie?api_key=${config.API_KEY}&query=${query}`;
 
       let res = await fetch(url);
 

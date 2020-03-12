@@ -48,30 +48,6 @@ router.post("/", (req, res) => {
 
 
 
-// Get items by :id
-// router.get("/:id", async (req, res) => {
-
-//   console.log(req.params.id)
-
-//   try {
-//     const items = await Cart.findById(req.params.id);
-
-//     if (!items) {
-//       return res.status(404).json({ msg: "Items not found" });
-//     }
-
-//     res.json(items);
-//   } catch (err) {
-//     console.error(err.message);
-//     if (err.kind === "ObjectId") {
-//       return res.status(404).json({ msg: "Items not found" });
-//     }
-//     res.status(500).send("Server Error...");
-//   }
-// });
-
-
-
 // Delete item
 router.delete("/:id", async (req, res) => {
   try {

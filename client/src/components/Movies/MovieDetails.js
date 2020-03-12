@@ -15,9 +15,7 @@ const MovieDetails = ({
   loadCart
 }) => {
   useEffect(() => {
-    // loadMovieDetails();
     loadCart();
-    // setMovie();
   }, []);
 
   if (isLoading) {
@@ -25,7 +23,7 @@ const MovieDetails = ({
   }
 
   return (
-    <MDBContainer >
+    <MDBContainer>
       <div
         style={{
           backgroundImage: `linear-gradient(to right,
