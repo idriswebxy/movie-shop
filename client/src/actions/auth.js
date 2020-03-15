@@ -43,7 +43,6 @@ export const googleLogin = (name, email, token) => async dispatch => {
     
   }
 
-
 };
 
 

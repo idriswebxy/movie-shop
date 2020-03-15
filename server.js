@@ -26,14 +26,6 @@ mongoose
 
 app.use(cors());
 
-// app.use(
-//   session({
-//     secret: "magnet",
-//     resave: false,
-//     saveUninitialized: true
-//   })
-// );
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -46,53 +38,6 @@ app.use("/api/user", user);
 app.use("/api/cart", cart);
 app.use("/api/auth", auth);
 
-passport.use(User.createStrategy());
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
-
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/google/movies",
-      userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
-    },
-    function(accessToken, refreshToken, profile, cb) {
-      console.log(profile);
-      User.findOrCreate({ googleId: profile.id }, function(err, user) {
-        return cb(err, user);
-      });
-    }
-  )
-);
-
-
-app.get(
-  "/auth/google",
-  passport.authenticate("google", { scope: ["profile"] })
-);
-
-app.get(
-  "/auth/google/movies",
-  passport.authenticate("google", { failureRedirect: "/login" }),
-  function(req, res) {
-    // Successful authentication, redirect to secrets.
-    res.redirect("/movies");
-  }
-);
-
-
-
 
 //Serve static assets if in productions
 if (process.env.NODE_ENV === "production") {
@@ -104,6 +49,6 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 
 app.listen(port, () => console.log(`Server running on port ${port}... 🚀`));
