@@ -9,7 +9,6 @@ const auth = require("../../middleware/auth");
 
 const jwtSecret = "mysecrettoken";
 
-
 router.get("/", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
@@ -19,63 +18,6 @@ router.get("/", auth, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-
-
-// google login route
-router.post("/google_login", async (req, res) => {
-  const { name, email, token } = req.body;
-
-
-  console.log(req.body)
-  try {
-    let user = await User.findOne({
-      email
-    });
-
-    if (user) {
-      res.status(400).json({
-        errors: [
-          {
-            msg: "User already exist!"
-          }
-        ]
-      });
-    }
-
-    user = new User({
-      name,
-      email
-    });
-
-    await user.save();
-
-    const payload = {
-      user: {
-        id: user.id
-      }
-    };
-
-    jwt.sign(
-      payload,
-      token,
-      {
-        expiresIn: 360000
-      },
-      (err, token) => {
-        if (err) throw err;
-        res.json({
-          token
-        });
-      }
-    );
-  } catch (error) {
-    console.log(err.message);
-    res.status(500).send("Server error");
-  }
-});
-
-
-
 
 // register user
 router.post(

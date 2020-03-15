@@ -17,7 +17,6 @@ import { useGoogleLogin } from "react-google-login";
 import config from "../../config.json";
 
 const Login = ({ login, authenticated, googleLogin }) => {
-
   useState(() => {
     // responseGoogle()
   }, []);
@@ -29,13 +28,9 @@ const Login = ({ login, authenticated, googleLogin }) => {
 
   const { email, password } = formData;
 
-
   const responseGoogle = async res => {
     googleLogin(res.profileObj.name, res.profileObj.email, res.uc.access_token);
   };
-
-
-
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -44,7 +39,6 @@ const Login = ({ login, authenticated, googleLogin }) => {
     e.preventDefault();
     login(email, password);
   };
-
 
   if (authenticated) {
     return <Redirect to="/movies" />;
@@ -82,17 +76,21 @@ const Login = ({ login, authenticated, googleLogin }) => {
               <MDBCol>
                 <MDBBtn type="submit">Login</MDBBtn>
               </MDBCol>
-              <GoogleLogin
-                clientId={config.GOOGLE_CLIENT_ID}
-                buttonText="Sign in with Google"
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
-                cookiePolicy={"single_host_origin"}
-              />
             </MDBRow>
           </form>
         </MDBCol>
       </MDBRow>
+
+      <div class="col-sm-4">
+        <a
+          class="btn btn-block btn-social btn-google"
+          href="/auth/google"
+          role="button"
+        >
+          <i class="fab fa-google"></i>
+          Sign In with Google
+        </a>
+      </div>
     </MDBContainer>
   );
 };
