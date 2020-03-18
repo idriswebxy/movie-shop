@@ -49,11 +49,12 @@ const Navbar = ({
     <MDBNavbar style={navColor} dark expand="md" scrolling fixed="top">
       <MDBNavbarBrand>
         <MDBNavLink style={{ color: "white" }} to="/movies">
-          Movie Shop <MDBIcon icon="home" /> Welcome {userInfo.name + "!"}
+          Movie Shop <MDBIcon icon="home" /> 
         </MDBNavLink>
       </MDBNavbarBrand>
       <MDBNavbarToggler onClick={onClick} />
       <MDBCollapse isOpen={collapse} navbar>
+      Welcome {userInfo.name + "!"}
         <MDBNavbarNav right>
           <MDBNavItem active>
             <MDBNavLink to="/movies">

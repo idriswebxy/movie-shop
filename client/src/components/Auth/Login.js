@@ -9,17 +9,12 @@ import {
   MDBNavLink
 } from "mdbreact";
 import { connect } from "react-redux";
-import { login, googleLogin } from "../../actions/auth";
+import { login } from "../../actions/auth";
 import PropTypes from "prop-types";
-import { Button } from "reactstrap";
-import GoogleLogin from "react-google-login";
-import { useGoogleLogin } from "react-google-login";
-import config from "../../config.json";
 
-const Login = ({ login, authenticated, googleLogin }) => {
-  useState(() => {
-    // responseGoogle()
-  }, []);
+
+const Login = ({ login, authenticated }) => {
+
 
   const [formData, setFormData] = useState({
     email: "",
@@ -27,10 +22,6 @@ const Login = ({ login, authenticated, googleLogin }) => {
   });
 
   const { email, password } = formData;
-
-  const responseGoogle = async res => {
-    googleLogin(res.profileObj.name, res.profileObj.email, res.uc.access_token);
-  };
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -81,16 +72,6 @@ const Login = ({ login, authenticated, googleLogin }) => {
         </MDBCol>
       </MDBRow>
 
-      <div class="col-sm-4">
-        <a
-          class="btn btn-block btn-social btn-google"
-          href="/auth/google"
-          role="button"
-        >
-          <i class="fab fa-google"></i>
-          Sign In with Google
-        </a>
-      </div>
     </MDBContainer>
   );
 };
@@ -104,4 +85,4 @@ const mapStateToProps = state => ({
   authenticated: state.auth.authenticated
 });
 
-export default connect(mapStateToProps, { login, googleLogin })(Login);
+export default connect(mapStateToProps, { login })(Login);
