@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 var passport = require("passport");
-const config = require("../../config/config.json")
+// const config = require("../../config/config.json")
 require("dotenv").config();
 const { check, validationResult } = require("express-validator");
 
