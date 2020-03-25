@@ -108,7 +108,7 @@ const Register = ({ setAlert, register, authenticated }) => {
                   </MDBBtn>
                 </MDBCol>
                 <MDBCol>
-                  <Button className="danger">Sign in With Google</Button>
+
                 </MDBCol>
               </MDBRow>
             </div>
