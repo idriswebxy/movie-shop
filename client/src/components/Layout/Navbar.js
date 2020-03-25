@@ -42,7 +42,7 @@ const Navbar = ({
 
     setTimeout(() => {
       setCollapse(false);
-    }, 3000);
+    }, 3000); 
   };
 
   const authLinks = (
@@ -54,7 +54,7 @@ const Navbar = ({
       </MDBNavbarBrand>
       <MDBNavbarToggler onClick={onClick} />
       <MDBCollapse isOpen={collapse} navbar>
-      Welcome {userInfo.name + "!"}
+      <MDBIcon icon="user-alt" /> Welcome {userInfo.name + "!"}
         <MDBNavbarNav right>
           <MDBNavItem active>
             <MDBNavLink to="/movies">
