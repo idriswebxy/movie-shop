@@ -13,7 +13,7 @@ const CartItem = ({ movieImg, movieDesc, movieName, movieId, deleteItem }) => {
           src={`https://image.tmdb.org/t/p/w200${movieImg}`}
         />
         <MDBBtn onClick={() => deleteItem(movieId)} color="red">
-          <MDBIcon far icon="times-circle" />
+            Remove
         </MDBBtn>
         <h3>{movieName}</h3>
       </div>

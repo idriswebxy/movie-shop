@@ -21,6 +21,8 @@ import store from "./store";
 import SpinnerPage from "./components/Layout/SpinnerPage";
 import Alert from "./components/Layout/Alert";
 import MovieDetails from "./components/Movies/MovieDetails";
+import Checkout from "./components/Cart/Checkout";
+
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -58,9 +60,8 @@ const App = ({ isLoading }) => {
               component={MovieDetails}
             />
             <PrivateRoute exact path="/cart" component={Cart} />
+            <PrivateRoute path="/checkout" component={Checkout} />
           </Switch>
-
-          {/* <Footer /> */}
         </div>
       </Router>
   );
