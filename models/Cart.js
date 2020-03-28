@@ -22,6 +22,9 @@ const CartSchema = new Schema({
   image: {
     type: String
   },
+  price: {
+    type: Number
+  },
   releaseDate: {
     type: Date
   },

@@ -42,7 +42,7 @@ const Navbar = ({
 
     setTimeout(() => {
       setCollapse(false);
-    }, 3000); 
+    }, 2500); 
   };
 
   const authLinks = (

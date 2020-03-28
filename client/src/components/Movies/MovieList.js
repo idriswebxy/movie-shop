@@ -62,6 +62,7 @@ const MovieList = ({
                     image={movie.poster_path}
                     overview={movie.overview}
                     movieObj={movie}
+                    price={2.99}
                   />
                 </div>
               </MDBCol>

@@ -6,7 +6,7 @@ import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart } from "../../actions/cart";
 import { MDBView, MDBContainer, MDBBtn, MDBIcon } from "mdbreact";
 
-const Movie = ({ id, image, getMovie, isLoading, addToCart, movie, movieObj }) => {
+const Movie = ({ id, image, getMovie, isLoading, addToCart, movie, movieObj, price }) => {
   // useEffect(() => {
 
   // }, [])
@@ -23,7 +23,7 @@ const Movie = ({ id, image, getMovie, isLoading, addToCart, movie, movieObj }) =
       </div>
 
       <div className="float-left">
-        <h5>$2.99</h5>
+        <h5>${price}</h5>
         <MDBBtn onClick={() => addToCart(movieObj)}>
           Add To Cart <MDBIcon icon="cart-plus" />
         </MDBBtn>

@@ -16,6 +16,9 @@ const MovieSchema = new mongoose.Schema({
   image: {
     type: String
   },
+  price: {
+    type: Number
+  },
   releaseDate: {
     type: Date
   },

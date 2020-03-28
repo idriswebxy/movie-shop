@@ -35,6 +35,8 @@ const Cart = ({ cart, loadCart }) => {
             </div>
           );
         })}
+
+        <h2>Total: {}</h2>
         <MDBNavLink to="/checkout">
           <MDBBtn>Check Out</MDBBtn>
         </MDBNavLink>
