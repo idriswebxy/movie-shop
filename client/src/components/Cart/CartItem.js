@@ -6,9 +6,9 @@ import { deleteItem } from "../../actions/cart";
 
 
 
-const CartItem = ({ movieImg, movieDesc, movieName, movieId, deleteItem }) => {
+const CartItem = ({ movieImg, movieDesc, movieName, movieId, deleteItem, price }) => {
   return (
-    <div style={{ textAlign: "left" }}>
+    <div>
       <div>
         <Img
           className="movie-container"
@@ -18,6 +18,7 @@ const CartItem = ({ movieImg, movieDesc, movieName, movieId, deleteItem }) => {
             Remove
         </MDBBtn>
         <h3>{movieName}</h3>
+        <div>${price}</div>
       </div>
     </div>
   );

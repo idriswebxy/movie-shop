@@ -2,11 +2,13 @@ import {
   ADD_TO_CART,
   LOAD_CART,
   CART_ERROR,
-  DELETE_ITEM
+  DELETE_ITEM,
+  PRICE_TOTAL
 } from "../actions/types";
 
 const initialState = {
-  cart: []
+  cart: [],
+  price: null
 };
 
 export default function(state = initialState, action) {
@@ -24,6 +26,11 @@ export default function(state = initialState, action) {
         ...state,
         cart: payload
       };
+    case PRICE_TOTAL:
+      return {
+        ...state,
+        price: payload
+      }  
     case DELETE_ITEM:
       return {
         ...state,

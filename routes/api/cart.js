@@ -34,13 +34,15 @@ router.post("/", (req, res) => {
   
   const { id, title, poster_path, overview, release_date } = req.body;
 
+  const price = 2.99;
+
   // Create new Product
   const newItem = new Cart({
     id: id,
     name: title,
     image: poster_path,
     description: overview,
-   
+    price: price,
     releaseDate: release_date
   });
 

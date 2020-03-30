@@ -4,14 +4,18 @@ import Img from "react-image";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBNavLink } from "mdbreact";
-import { deleteItem, loadCart } from "../../actions/cart";
+import { deleteItem, loadCart, getPriceTotal } from "../../actions/cart";
 import CartItem from "./CartItem";
 
 
-const Cart = ({ cart, loadCart }) => {
+const Cart = ({ cart, loadCart, getPriceTotal, price }) => {
   useEffect(() => {
     loadCart();
+    getPriceTotal(cart);
   }, []);
+
+
+  
 
   return (
     <div>
@@ -28,6 +32,7 @@ const Cart = ({ cart, loadCart }) => {
                       movieDesc={movie.description}
                       movieName={movie.name}
                       movieId={movie._id}
+                      price={movie.price}
                     />
                   </MDBCol>
                 </MDBRow>
@@ -36,10 +41,12 @@ const Cart = ({ cart, loadCart }) => {
           );
         })}
 
-        <h2>Total: {}</h2>
+        <div style={{ marginLeft: '40px'}}>
+         <h2>Total: ${price}</h2>
         <MDBNavLink to="/checkout">
           <MDBBtn>Check Out</MDBBtn>
         </MDBNavLink>
+        </div>
       </div>
     </div>
   );
@@ -50,7 +57,8 @@ Cart.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  cart: state.cart.cart
+  cart: state.cart.cart,
+  price: state.cart.price
 });
 
-export default connect(mapStateToProps, { deleteItem, loadCart })(Cart);
+export default connect(mapStateToProps, { deleteItem, loadCart, getPriceTotal })(Cart);
