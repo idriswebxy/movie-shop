@@ -41,6 +41,7 @@ export const getMovie = id => async dispatch => {
 };
 
 export const setMovie = movies => async dispatch => {
+  
   const config = {
     headers: {
       "Content-Type": "application/json"
@@ -64,3 +65,21 @@ export const loadMovieDetails = () => async dispatch => {
     type: LOAD_MOVIE_DETAILS
   });
 };
+
+
+export const getRelatedMovies = () => async dispatch => {
+
+  try {
+    const res = await axios.get("/api/cart");
+    
+
+
+
+  } catch (error) {
+    
+  }
+ 
+
+  
+
+}

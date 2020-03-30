@@ -4,13 +4,15 @@ import { connect } from "react-redux";
 import { MDBBtn, MDBIcon } from "mdbreact";
 import { deleteItem } from "../../actions/cart";
 
+
+
 const CartItem = ({ movieImg, movieDesc, movieName, movieId, deleteItem }) => {
   return (
     <div style={{ textAlign: "left" }}>
       <div>
         <Img
           className="movie-container"
-          src={`https://image.tmdb.org/t/p/w200${movieImg}`}
+          src={`https://image.tmdb.org/t/p/w154${movieImg}`}
         />
         <MDBBtn onClick={() => deleteItem(movieId)} color="red">
             Remove

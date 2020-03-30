@@ -40,6 +40,7 @@ router.post("/", (req, res) => {
     name: title,
     image: poster_path,
     description: overview,
+   
     releaseDate: release_date
   });
 

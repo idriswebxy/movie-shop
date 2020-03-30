@@ -3,7 +3,7 @@ import config from "../../config.json";
 import PropTypes from "prop-types";
 import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart, loadCart, getCart } from "../../actions/cart";
-import { getMovie, setMovie, clearCache } from "../../actions/movie";
+import { getMovie, setMovie, clearCache, getRelatedMovies } from "../../actions/movie";
 import { fetchMovies } from "../../actions/movie";
 import { connect } from "react-redux";
 import Movie from "./Movie";
@@ -22,7 +22,8 @@ const MovieList = ({
   userId,
   setMovie,
   isLoading,
-  movies
+  movies,
+  getRelatedMovies
 }) => {
 
   const [movie, setMovies] = useState([]);
@@ -34,6 +35,7 @@ const MovieList = ({
     )
       .then(res => res.json())
       .then(data => {
+        getRelatedMovies()
         setMovie(data.results);
         setMovies([...movie, data.results]);
         loadCart();
@@ -70,6 +72,8 @@ const MovieList = ({
           })}
         </MDBRow>
       </MDBContainer>
+
+      <div style={{ padding: '100px' }}>New Comp</div>
     </div>
   );
 };
@@ -83,12 +87,13 @@ const mapStateToProps = state => ({
   userId: state.auth.userInfo._id,
   isLoading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
-  movies: state.movie.movies
+  movies: state.movie.movies,
 });
 
 export default connect(mapStateToProps, {
   addToCart,
   loadCart,
   getCart,
-  setMovie
+  setMovie,
+  getRelatedMovies
 })(MovieList);
