@@ -1,4 +1,10 @@
-import { ADD_TO_CART, CART_ERROR, LOAD_CART, DELETE_ITEM, PRICE_TOTAL } from "./types";
+import {
+  ADD_TO_CART,
+  CART_ERROR,
+  LOAD_CART,
+  DELETE_ITEM,
+  PRICE_TOTAL
+} from "./types";
 import axios from "axios";
 import { setAlert } from "./alert";
 
@@ -75,14 +81,13 @@ export const deleteItem = id => async dispatch => {
 };
 
 export const getPriceTotal = array => async dispatch => {
-  let sum;
+  try {
 
-  for (let i = 0; i < array.length; i++) {
-    sum = array[i].price + array[i].price;
-  }
+    const res = await axios.post('/api/cart/total', array);
 
-  dispatch({
-    type: PRICE_TOTAL,
-    payload: sum
-  })
+    dispatch({
+      type: PRICE_TOTAL,
+      payload: res.data
+    });
+  } catch (error) {}
 };

@@ -8,7 +8,8 @@ import {
 
 const initialState = {
   cart: [],
-  price: null
+  price: null,
+  loading: true
 };
 
 export default function(state = initialState, action) {
@@ -24,12 +25,14 @@ export default function(state = initialState, action) {
     case LOAD_CART:
       return {
         ...state,
-        cart: payload
+        cart: payload,
+        loading: false
       };
     case PRICE_TOTAL:
       return {
         ...state,
-        price: payload
+        price: payload,
+
       }  
     case DELETE_ITEM:
       return {

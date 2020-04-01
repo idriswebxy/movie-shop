@@ -10,10 +10,25 @@ const router = express.Router();
 
 // Load Profile model
 
-
 const Cart = require("../../models/Cart");
 
+router.post("/total", async (req, res) => {
+  try {
+    let array = req.body;
 
+    let sum = 0.0;
+
+    for (let i = 0; i < array.length; i++) {
+      sum = array[i].price + sum;
+    }
+
+    res.json(sum);
+    
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error...");
+  }
+});
 
 // Get all items
 router.get("/", async (req, res) => {
@@ -24,14 +39,10 @@ router.get("/", async (req, res) => {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
-
 });
-
-
 
 // Add to cart
 router.post("/", (req, res) => {
-  
   const { id, title, poster_path, overview, release_date } = req.body;
 
   const price = 2.99;
@@ -49,8 +60,6 @@ router.post("/", (req, res) => {
   newItem.save().then(product => res.json(product));
 });
 
-
-
 // Delete item
 router.delete("/:id", async (req, res) => {
   try {
@@ -63,9 +72,7 @@ router.delete("/:id", async (req, res) => {
     await item.remove();
 
     res.json({ msg: "Item removed" });
-
-  } 
-  catch (error) {
+  } catch (error) {
     if (error.kind === "ObjectId") {
       return res.status(404).json({ msg: "Item not found" });
     }

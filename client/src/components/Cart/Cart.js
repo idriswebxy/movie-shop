@@ -6,15 +6,21 @@ import PropTypes from "prop-types";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBNavLink } from "mdbreact";
 import { deleteItem, loadCart, getPriceTotal } from "../../actions/cart";
 import CartItem from "./CartItem";
+import SpinnerPage from "../Layout/SpinnerPage";
 
 
-const Cart = ({ cart, loadCart, getPriceTotal, price }) => {
+const Cart = ({ cart, loadCart, getPriceTotal, price, loading }) => {
+
   useEffect(() => {
     loadCart();
     getPriceTotal(cart);
-  }, []);
+  }, [loading]);
 
+  
 
+  if (loading) {
+    return <SpinnerPage />
+  }
   
 
   return (
@@ -41,7 +47,7 @@ const Cart = ({ cart, loadCart, getPriceTotal, price }) => {
           );
         })}
 
-        <div style={{ marginLeft: '40px'}}>
+        <div style={{ marginLeft: '10px'}}>
          <h2>Total: ${price}</h2>
         <MDBNavLink to="/checkout">
           <MDBBtn>Check Out</MDBBtn>
@@ -58,7 +64,8 @@ Cart.propTypes = {
 
 const mapStateToProps = state => ({
   cart: state.cart.cart,
-  price: state.cart.price
+  price: state.cart.price,
+  loading: state.cart.loading
 });
 
 export default connect(mapStateToProps, { deleteItem, loadCart, getPriceTotal })(Cart);

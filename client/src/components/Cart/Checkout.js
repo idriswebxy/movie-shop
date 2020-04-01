@@ -5,24 +5,12 @@ import Img from "react-image";
 
 
 
-const Checkout = ({ cart }) => {
-  useEffect(() => {
-    console.log(cart);
-  }, [cart]);
+const Checkout = () => {
+  
 
   return (
     <MDBContainer>
-      {cart.map(movie => (
-        <div style={{ textAlign: "left" }}>
-          <div>
-            <Img
-              className="movie-container"
-              src={`https://image.tmdb.org/t/p/w92${movie.image}`}
-            />
-            <h3>{movie.name}</h3>
-          </div>
-        </div>
-      ))}
+      <h1 style={{ paddingTop: '20%', margin: 'auto', display: 'flex'}}>Your order is complete! </h1>
     </MDBContainer>
   );
 };
