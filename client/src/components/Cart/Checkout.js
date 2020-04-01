@@ -3,14 +3,12 @@ import { connect } from "react-redux";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon } from "mdbreact";
 import Img from "react-image";
 
-
-
 const Checkout = () => {
-  
-
   return (
     <MDBContainer>
-      <h1 style={{ paddingTop: '20%', margin: 'auto', display: 'flex'}}>Your order is complete! </h1>
+      <h1 style={{ paddingTop: "20%", margin: "auto", display: "flex" }}>
+        Your order is complete!{" "}
+      </h1>
     </MDBContainer>
   );
 };
