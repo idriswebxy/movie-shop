@@ -39,6 +39,7 @@ const MovieList = ({
         setMovie(data.results);
         setMovies([...movie, data.results]);
         loadCart();
+        console.log(config.API_KEY)
       });
   }, []);
 
