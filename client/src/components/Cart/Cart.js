@@ -25,7 +25,7 @@ const Cart = ({ cart, loadCart, getPriceTotal, price, loading }) => {
 
   return (
     <div>
-      <p>Cart: {cart.length} item(s)</p>
+      <h3>Cart: {cart.length} item(s)</h3>
       <div>
         {cart.map((movie, key) => {
           return (

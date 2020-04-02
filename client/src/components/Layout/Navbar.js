@@ -56,6 +56,11 @@ const Navbar = ({
       <MDBCollapse isOpen={collapse} navbar>
       <MDBIcon icon="user-alt" /> Welcome {userInfo.name + "!"}
         <MDBNavbarNav right>
+        <MDBNavItem active>
+            <MDBNavLink to="/tv_shows">
+              TvShows <MDBIcon icon="film" />
+            </MDBNavLink>
+          </MDBNavItem>
           <MDBNavItem active>
             <MDBNavLink to="/movies">
               Movies <MDBIcon icon="film" />

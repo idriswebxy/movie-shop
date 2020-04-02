@@ -3,17 +3,19 @@ import config from "../../config.json";
 import PropTypes from "prop-types";
 import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart, loadCart, getCart } from "../../actions/cart";
-import { getMovie, setMovie, clearCache, getRelatedMovies } from "../../actions/movie";
-import { fetchMovies } from "../../actions/movie";
+import {
+  getMovie,
+  setMovie,
+  clearCache,
+  getRelatedMovies
+} from "../../actions/movie";
 import { connect } from "react-redux";
 import Movie from "./Movie";
 import SearchPage from "../Search/Search";
 import { MDBContainer, MDBRow, MDBCol, MDBView } from "mdbreact";
 import "../../App.css";
-import axios from "axios";
 import { SET_MOVIES } from "../../actions/types";
-
-
+import RelatedMovies from "./RelatedMovies";
 
 const MovieList = ({
   addToCart,
@@ -25,9 +27,7 @@ const MovieList = ({
   movies,
   getRelatedMovies
 }) => {
-
   const [movie, setMovies] = useState([]);
-
 
   useEffect(() => {
     fetch(
@@ -35,14 +35,12 @@ const MovieList = ({
     )
       .then(res => res.json())
       .then(data => {
-        getRelatedMovies()
+        getRelatedMovies();
         setMovie(data.results);
         setMovies([...movie, data.results]);
         loadCart();
       });
   }, []);
-
-  
 
   if (isLoading) {
     return <SpinnerPage />;
@@ -73,7 +71,7 @@ const MovieList = ({
         </MDBRow>
       </MDBContainer>
 
-      <div style={{ padding: '100px' }}>New Comp</div>
+      <RelatedMovies />
     </div>
   );
 };
@@ -87,7 +85,7 @@ const mapStateToProps = state => ({
   userId: state.auth.userInfo._id,
   isLoading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
-  movies: state.movie.movies,
+  movies: state.movie.movies
 });
 
 export default connect(mapStateToProps, {

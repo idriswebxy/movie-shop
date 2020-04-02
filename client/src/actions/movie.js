@@ -5,7 +5,9 @@ import {
   SET_MOVIE_ERR,
   SET_SEARCHED_MOVIE,
   GET_SEARCHED_MOVIE,
-  LOAD_MOVIE_DETAILS
+  LOAD_MOVIE_DETAILS,
+  SET_TVSHOWS_ERR,
+  SET_TVSHOWS
 } from "../actions/types";
 import axios from "axios";
 
@@ -42,12 +44,6 @@ export const getMovie = id => async dispatch => {
 
 export const setMovie = movies => async dispatch => {
   
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
-
   try {
     dispatch({
       type: SET_MOVIES,
@@ -59,6 +55,22 @@ export const setMovie = movies => async dispatch => {
     });
   }
 };
+
+
+export const setTvShowsReducer = tvShows => async dispatch => {
+  
+  try {
+    dispatch({
+      type: SET_TVSHOWS,
+      payload: tvShows
+    });
+  } catch (e) {
+    dispatch({
+      type: SET_TVSHOWS_ERR
+    });
+  }
+};
+
 
 export const loadMovieDetails = () => async dispatch => {
   dispatch({

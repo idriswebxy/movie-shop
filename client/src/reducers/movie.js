@@ -6,13 +6,16 @@ import {
   SET_SEARCHED_MOVIE,
   CLEAR_MOVIE,
   GET_SEARCHED_MOVIE,
-  LOAD_MOVIE_DETAILS
+  LOAD_MOVIE_DETAILS,
+  SET_TVSHOWS_ERR,
+  SET_TVSHOWS
 } from "../actions/types";
 
 
 const initialState = {
   isLoading: true,
   movies: [],
+  tvShows: [],
   searchedMovie: null,
   currentMovie: null
 };
@@ -39,7 +42,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         searchedMovie: null
-      };  
+      }; 
+    case SET_TVSHOWS_ERR:   
     case GET_MOVIE_ERR:
       return;
     case SET_SEARCHED_MOVIE:
@@ -47,6 +51,12 @@ export default function(state = initialState, action) {
         ...state,
         searchedMovie: payload
       };
+    case SET_TVSHOWS:
+      return {
+        ...state,
+        tvShows: payload,
+        isLoading: false
+      }  
     case SET_MOVIES:
       return {
         ...state,

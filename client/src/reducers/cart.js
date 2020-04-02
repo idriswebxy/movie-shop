@@ -32,7 +32,6 @@ export default function(state = initialState, action) {
       return {
         ...state,
         price: payload,
-
       }  
     case DELETE_ITEM:
       return {

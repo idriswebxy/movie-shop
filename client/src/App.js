@@ -22,6 +22,7 @@ import SpinnerPage from "./components/Layout/SpinnerPage";
 import Alert from "./components/Layout/Alert";
 import MovieDetails from "./components/Movies/MovieDetails";
 import Checkout from "./components/Cart/Checkout";
+import TvShows from "./components/Movies/TvShows";
 
 
 if (localStorage.token) {
@@ -54,6 +55,7 @@ const App = ({ isLoading }) => {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <PrivateRoute exact path="/movies" component={MovieList} />
+            <PrivateRoute exact path="/tv_shows" component={TvShows} />
             <PrivateRoute
               exact
               path="/movie_details"
