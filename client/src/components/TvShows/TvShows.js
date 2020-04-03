@@ -2,21 +2,22 @@ import React, { useEffect, useState } from "react";
 import config from "../../config.json";
 import { setTvShowsReducer } from "../../actions/movie";
 import { connect } from "react-redux";
-import SpinnerPage from "../../components/Layout/SpinnerPage";
+import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart, loadCart, getCart } from "../../actions/cart";
 import SearchPage from "../Search/Search";
-import Show from "../Movies/Show";
-import RelatedMovies from "./RelatedMovies";
+import Show from "./Show";
+import RelatedMovies from "../Movies/RelatedMovies";
 import { MDBContainer, MDBRow, MDBCol, MDBView } from "mdbreact";
 
 const TvShows = ({
-  setTvShowReducer,
+  setTvShowsReducer,
   addToCart,
   loadCart,
   isLoading,
-  getRelatedMovies
+  getRelatedMovies,
+  tvShows
 }) => {
-  const [tvShows, setTvShows] = useState([]);
+
 
   useEffect(() => {
     fetch(
@@ -25,10 +26,8 @@ const TvShows = ({
       .then(res => res.json())
       .then(data => {
         setTvShowsReducer(data.results);
-        setTvShows([...tvShows, data.results]);
         loadCart();
-      })
-      .then(data => console.log(data))
+      });
   }, []);
 
   if (isLoading) {
@@ -47,7 +46,7 @@ const TvShows = ({
                   <Show
                     id={tvShow.id}
                     addToCart={addToCart}
-                    title={tvShow.title}
+                    title={tvShow.name}
                     image={tvShow.poster_path}
                     overview={tvShow.overview}
                     tvShowObj={tvShow}
@@ -72,4 +71,8 @@ const mapStateToProps = state => ({
   tvShows: state.movie.tvShows
 });
 
-export default connect(mapStateToProps, { setTvShowsReducer, loadCart, addToCart })(TvShows);
+export default connect(mapStateToProps, {
+  setTvShowsReducer,
+  loadCart,
+  addToCart
+})(TvShows);

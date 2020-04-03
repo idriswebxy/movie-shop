@@ -1,29 +1,29 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getMovie } from "../../actions/movie";
+import { getShow } from "../../actions/movie";
 import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart } from "../../actions/cart";
 import { MDBView, MDBContainer, MDBBtn, MDBIcon } from "mdbreact";
 
 
 
-const TvShow = ({ id, image, getMovie, isLoading, addToCart, movie, tvShowObj, price }) => {
+const Show = ({ id, image, getShow, isLoading, addToCart, movie, tvShowObj, price }) => {
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  // }, [])
+  }, [])
 
   return (
     <div style={{ textAlign: 'center'}}>
       <div>
-        <Link to="/movie_details" onClick={() => getMovie(id)}>
+        <Link to="/show_details" onClick={() => getShow(id)}>
           <img
             className="movie-container"
             src={`http://image.tmdb.org/t/p/w185${image}`}
           />
         </Link>
-        <h5>{tvShowObj.original_title}</h5>
+        <h5>{tvShowObj.name}</h5>
       </div>
 
       <div>
@@ -40,4 +40,4 @@ const mapStateToProps = state => ({
   isLoading: state.movie.isLoading,
 });
 
-export default connect(mapStateToProps, { getMovie, addToCart })(TvShow);
+export default connect(mapStateToProps, { getShow, addToCart })(Show);

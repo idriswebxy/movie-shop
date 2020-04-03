@@ -7,7 +7,9 @@ import {
   GET_SEARCHED_MOVIE,
   LOAD_MOVIE_DETAILS,
   SET_TVSHOWS_ERR,
-  SET_TVSHOWS
+  SET_TVSHOWS,
+  GET_SHOW,
+  GET_SHOW_ERR
 } from "../actions/types";
 import axios from "axios";
 
@@ -70,6 +72,22 @@ export const setTvShowsReducer = tvShows => async dispatch => {
     });
   }
 };
+
+
+export const getShow = id => async dispatch => {
+  console.log(id)
+  try {
+    dispatch({
+      type: GET_SHOW,
+      payload: id
+    });
+  } catch (e) {
+    dispatch({
+      type: GET_SHOW_ERR
+    });
+  }
+};
+
 
 
 export const loadMovieDetails = () => async dispatch => {

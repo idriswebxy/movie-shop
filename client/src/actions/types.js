@@ -36,3 +36,5 @@ export const LOAD_MOVIE_DETAILS = "LOAD_MOVIE_DETAILS";
 export const PRICE_TOTAL = "PRICE_TOTAL";
 export const SET_TVSHOWS = "SET_TVSHOWS";
 export const SET_TVSHOWS_ERR = "SET_TVSHOWS_ERR";
+export const GET_SHOW = "GET_SHOW";
+export const GET_SHOW_ERR = "GET_SHOW_ERR";

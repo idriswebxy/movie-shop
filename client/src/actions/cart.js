@@ -8,14 +8,15 @@ import {
 import axios from "axios";
 import { setAlert } from "./alert";
 
-export const addToCart = movieObj => async dispatch => {
+
+export const addToCart = item => async dispatch => {
   const config = {
     headers: {
       "Content-Type": "application/json"
     }
   };
 
-  const body = JSON.stringify(movieObj);
+  const body = JSON.stringify(item);
 
   try {
     const res = await axios.post("/api/cart", body, config);

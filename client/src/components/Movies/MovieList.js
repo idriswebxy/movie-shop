@@ -35,9 +35,8 @@ const MovieList = ({
     )
       .then(res => res.json())
       .then(data => {
-        getRelatedMovies();
+        // getRelatedMovies();
         setMovie(data.results);
-        setMovies([...movie, data.results]);
         loadCart();
       });
   }, []);

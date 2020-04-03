@@ -37,7 +37,6 @@ const Movie = ({ id, image, getMovie, isLoading, addToCart, movie, movieObj, pri
 
 const mapStateToProps = state => ({
   isLoading: state.movie.isLoading,
-  movie: state.movie.searchedMovie
 });
 
 export default connect(mapStateToProps, { getMovie, addToCart })(Movie);

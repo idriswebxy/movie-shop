@@ -8,7 +8,8 @@ import {
   GET_SEARCHED_MOVIE,
   LOAD_MOVIE_DETAILS,
   SET_TVSHOWS_ERR,
-  SET_TVSHOWS
+  SET_TVSHOWS,
+  GET_SHOW
 } from "../actions/types";
 
 
@@ -17,6 +18,7 @@ const initialState = {
   movies: [],
   tvShows: [],
   searchedMovie: null,
+  searchedShow: null,
   currentMovie: null
 };
 
@@ -33,6 +35,12 @@ export default function(state = initialState, action) {
         searchedMovie: state.movies.find(movie => movie.id === payload),
         isLoading: false
       };
+    case GET_SHOW:
+      return {
+        ...state,
+        searchedShow: state.tvShows.find(show => show.id === payload),
+        isLoading: false
+      }; 
     case GET_SEARCHED_MOVIE:
       return {
         ...state,

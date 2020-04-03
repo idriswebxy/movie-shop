@@ -22,7 +22,8 @@ import SpinnerPage from "./components/Layout/SpinnerPage";
 import Alert from "./components/Layout/Alert";
 import MovieDetails from "./components/Movies/MovieDetails";
 import Checkout from "./components/Cart/Checkout";
-import TvShows from "./components/Movies/TvShows";
+import TvShows from "./components/TvShows/TvShows";
+import TvShowDetails from "./components/TvShows/TvShowDetails";
 
 
 if (localStorage.token) {
@@ -61,6 +62,7 @@ const App = ({ isLoading }) => {
               path="/movie_details"
               component={MovieDetails}
             />
+            <PrivateRoute exact path="/show_details" component={TvShowDetails} />
             <PrivateRoute exact path="/cart" component={Cart} />
             <PrivateRoute path="/checkout" component={Checkout} />
           </Switch>
