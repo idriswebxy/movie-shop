@@ -75,7 +75,7 @@ export const setTvShowsReducer = tvShows => async dispatch => {
 
 
 export const getShow = id => async dispatch => {
-  console.log(id)
+
   try {
     dispatch({
       type: GET_SHOW,

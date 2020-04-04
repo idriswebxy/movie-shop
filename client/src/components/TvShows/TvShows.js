@@ -11,7 +11,6 @@ import { MDBContainer, MDBRow, MDBCol, MDBView } from "mdbreact";
 
 const TvShows = ({
   setTvShowsReducer,
-  addToCart,
   loadCart,
   isLoading,
   getRelatedMovies,
@@ -30,6 +29,8 @@ const TvShows = ({
       });
   }, []);
 
+
+
   if (isLoading) {
     return <SpinnerPage />;
   }
@@ -45,7 +46,6 @@ const TvShows = ({
                 <div className="hover-movie">
                   <Show
                     id={tvShow.id}
-                    addToCart={addToCart}
                     title={tvShow.name}
                     image={tvShow.poster_path}
                     overview={tvShow.overview}
@@ -74,5 +74,4 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   setTvShowsReducer,
   loadCart,
-  addToCart
 })(TvShows);

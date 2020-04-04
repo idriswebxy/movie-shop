@@ -14,7 +14,7 @@ const Cart = ({ cart, loadCart, getPriceTotal, price, loading }) => {
   useEffect(() => {
     loadCart();
     getPriceTotal(cart);
-  }, [loading]);
+  }, []);
 
   
 
@@ -64,7 +64,7 @@ Cart.propTypes = {
 
 const mapStateToProps = state => ({
   cart: state.cart.cart,
-  price: state.cart.price,
+  price: state.cart.totalPrice,
   loading: state.cart.loading
 });
 

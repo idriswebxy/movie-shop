@@ -12,6 +12,7 @@ const router = express.Router();
 
 const Cart = require("../../models/Cart");
 
+
 router.post("/total", async (req, res) => {
   try {
     let array = req.body;
@@ -45,6 +46,7 @@ router.get("/", async (req, res) => {
 router.post("/", (req, res) => {
   const { id, title, poster_path, overview, release_date } = req.body;
 
+
   const price = 2.99;
 
   // Create new Product
@@ -59,6 +61,30 @@ router.post("/", (req, res) => {
 
   newItem.save().then(product => res.json(product));
 });
+
+
+// Add to cart for TvShows
+router.post("/tv_show", (req, res) => {
+  
+  const { id, name, poster_path, overview, first_air_date } = req.body;
+
+  const price = 2.99;
+
+  // Create new Product
+  const newItem = new Cart({
+    id: id,
+    name: name,
+    image: poster_path,
+    description: overview,
+    price: price,
+    releaseDate: first_air_date
+  });
+
+  newItem.save().then(product => res.json(product));
+});
+
+
+
 
 // Delete item
 router.delete("/:id", async (req, res) => {

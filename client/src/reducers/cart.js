@@ -5,10 +5,11 @@ import {
   DELETE_ITEM,
   PRICE_TOTAL
 } from "../actions/types";
+import { getPriceTotal } from "../actions/cart";
 
 const initialState = {
   cart: [],
-  price: null,
+  totalPrice: 0.00,
   loading: true
 };
 
@@ -26,17 +27,19 @@ export default function(state = initialState, action) {
       return {
         ...state,
         cart: payload,
-        loading: false
+        loading: false,
       };
     case PRICE_TOTAL:
       return {
         ...state,
-        price: payload,
+        totalPrice: payload
       }  
     case DELETE_ITEM:
       return {
         ...state,
-        cart: state.cart.filter(item => item._id !== payload)
+        cart: state.cart.filter(item => item._id !== payload.id),
+        totalPrice: state.totalPrice - payload.price
+        
       };
     case CART_ERROR:
       // return {

@@ -3,19 +3,20 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getShow } from "../../actions/movie";
 import SpinnerPage from "../Layout/SpinnerPage";
-import { addToCart } from "../../actions/cart";
+import { addToCartTvShow } from "../../actions/cart";
 import { MDBView, MDBContainer, MDBBtn, MDBIcon } from "mdbreact";
 
-
-
-const Show = ({ id, image, getShow, isLoading, addToCart, movie, tvShowObj, price }) => {
-
-  useEffect(() => {
-
-  }, [])
-
+const Show = ({
+  id,
+  image,
+  getShow,
+  isLoading,
+  tvShowObj,
+  price,
+  addToCartTvShow
+}) => {
   return (
-    <div style={{ textAlign: 'center'}}>
+    <div style={{ textAlign: "center" }}>
       <div>
         <Link to="/show_details" onClick={() => getShow(id)}>
           <img
@@ -28,7 +29,7 @@ const Show = ({ id, image, getShow, isLoading, addToCart, movie, tvShowObj, pric
 
       <div>
         <h5>${price}</h5>
-        <MDBBtn onClick={() => addToCart(tvShowObj)}>
+        <MDBBtn onClick={() => addToCartTvShow(tvShowObj)}>
           Add To Cart <MDBIcon icon="cart-plus" />
         </MDBBtn>
       </div>
@@ -37,7 +38,7 @@ const Show = ({ id, image, getShow, isLoading, addToCart, movie, tvShowObj, pric
 };
 
 const mapStateToProps = state => ({
-  isLoading: state.movie.isLoading,
+  isLoading: state.movie.isLoading
 });
 
-export default connect(mapStateToProps, { getShow, addToCart })(Show);
+export default connect(mapStateToProps, { getShow, addToCartTvShow })(Show);
