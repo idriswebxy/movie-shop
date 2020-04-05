@@ -119,10 +119,11 @@ export const deleteItem = (id, price) => async dispatch => {
 
 
 export const getPriceTotal = array => async dispatch => {
+
   try {
 
     const res = await axios.post('/api/cart/total', array);
-
+    
     dispatch({
       type: PRICE_TOTAL,
       payload: res.data

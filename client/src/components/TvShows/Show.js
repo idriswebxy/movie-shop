@@ -25,6 +25,7 @@ const Show = ({
           />
         </Link>
         <h5>{tvShowObj.name}</h5>
+        <h6>({tvShowObj.first_air_date.slice(0, 4)})</h6>
       </div>
 
       <div>

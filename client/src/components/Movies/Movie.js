@@ -23,6 +23,7 @@ const Movie = ({ id, image, getMovie, isLoading, addToCart, movie, movieObj, pri
           />
         </Link>
         <h5>{movieObj.original_title}</h5>
+        <h6>({movieObj.release_date.slice(0, 4)})</h6>
       </div>
 
       <div>

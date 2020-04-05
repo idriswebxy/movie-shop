@@ -70,7 +70,9 @@ const MovieList = ({
         </MDBRow>
       </MDBContainer>
 
-      <RelatedMovies />
+      // <div style={{ display: 'flex', borderColor: 'white' }}>
+      //   <RelatedMovies />
+      // </div>
     </div>
   );
 };

@@ -25,7 +25,6 @@ import Checkout from "./components/Cart/Checkout";
 import TvShows from "./components/TvShows/TvShows";
 import TvShowDetails from "./components/TvShows/TvShowDetails";
 
-
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -35,45 +34,39 @@ const App = ({ isLoading }) => {
     store.dispatch(loadUser());
   }, []);
 
-
   if (isLoading) {
-    return <SpinnerPage />
+    return <SpinnerPage />;
   }
 
   return (
-      <Router>
-        <Alert />
-        <div
-          style={{
-            boxSizing: "border-box",
-            background: "rgb(9, 28, 37)",
-            color: "white"
-          }}
-        >
-          <Navbar />
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-            <PrivateRoute exact path="/movies" component={MovieList} />
-            <PrivateRoute exact path="/tv_shows" component={TvShows} />
-            <PrivateRoute
-              exact
-              path="/movie_details"
-              component={MovieDetails}
-            />
-            <PrivateRoute exact path="/show_details" component={TvShowDetails} />
-            <PrivateRoute exact path="/cart" component={Cart} />
-            <PrivateRoute path="/checkout" component={Checkout} />
-          </Switch>
-        </div>
-      </Router>
+    <Router>
+      <Alert />
+      <div
+        style={{
+          boxSizing: "border-box",
+          background: "rgb(9, 28, 37)",
+          color: "white"
+        }}
+      >
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <PrivateRoute exact path="/movies" component={MovieList} />
+          <PrivateRoute exact path="/tv_shows" component={TvShows} />
+          <PrivateRoute exact path="/movie_details" component={MovieDetails} />
+          <PrivateRoute exact path="/show_details" component={TvShowDetails} />
+          <PrivateRoute exact path="/cart" component={Cart} />
+          <PrivateRoute path="/checkout" component={Checkout} />
+        </Switch>
+      </div>
+    </Router>
   );
 };
 
 const mapStateToProps = state => ({
   isLoading: state.auth.isLoading
-})
-
+});
 
 export default connect(mapStateToProps)(App);

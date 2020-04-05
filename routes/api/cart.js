@@ -17,7 +17,9 @@ router.post("/total", async (req, res) => {
   try {
     let array = req.body;
 
-    let sum = 0.0;
+    console.log(req.body)
+
+    let sum = 0.00;
 
     for (let i = 0; i < array.length; i++) {
       sum = array[i].price + sum;
@@ -30,6 +32,7 @@ router.post("/total", async (req, res) => {
     res.status(500).send("Server Error...");
   }
 });
+
 
 // Get all items
 router.get("/", async (req, res) => {
