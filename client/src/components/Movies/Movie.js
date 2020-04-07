@@ -6,15 +6,22 @@ import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart } from "../../actions/cart";
 import { MDBView, MDBContainer, MDBBtn, MDBIcon } from "mdbreact";
 
-
-
-const Movie = ({ id, image, getMovie, isLoading, addToCart, movie, movieObj, price }) => {
+const Movie = ({
+  id,
+  image,
+  getMovie,
+  isLoading,
+  addToCart,
+  movie,
+  movieObj,
+  price,
+}) => {
   // useEffect(() => {
 
   // }, [])
 
   return (
-    <div style={{ textAlign: 'center'}}>
+    <div style={{ textAlign: "center" }}>
       <div>
         <Link to="/movie_details" onClick={() => getMovie(id)}>
           <img
@@ -36,7 +43,7 @@ const Movie = ({ id, image, getMovie, isLoading, addToCart, movie, movieObj, pri
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isLoading: state.movie.isLoading,
 });
 

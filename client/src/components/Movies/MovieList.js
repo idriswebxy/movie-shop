@@ -3,12 +3,7 @@ import config from "../../config.json";
 import PropTypes from "prop-types";
 import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart, loadCart, getCart } from "../../actions/cart";
-import {
-  getMovie,
-  setMovie,
-  clearCache,
-  getRelatedMovies
-} from "../../actions/movie";
+import { getMovie, setMovies, clearCache, getRelatedId } from "../../actions/movie";
 import { connect } from "react-redux";
 import Movie from "./Movie";
 import SearchPage from "../Search/Search";
@@ -22,21 +17,19 @@ const MovieList = ({
   loadCart,
   getCart,
   userId,
-  setMovie,
+  setMovies,
   isLoading,
   movies,
-  getRelatedMovies
+  relatedMovies,
 }) => {
-  const [movie, setMovies] = useState([]);
 
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${config.API_KEY}&language=en-US&page=1`
     )
-      .then(res => res.json())
-      .then(data => {
-        // getRelatedMovies();
-        setMovie(data.results);
+      .then((res) => res.json())
+      .then((data) => {
+        setMovies(data.results);
         loadCart();
       });
   }, []);
@@ -69,30 +62,26 @@ const MovieList = ({
           })}
         </MDBRow>
       </MDBContainer>
-
-      // <div style={{ display: 'flex', borderColor: 'white' }}>
-      //   <RelatedMovies />
-      // </div>
+      <RelatedMovies />
     </div>
   );
 };
 
 MovieList.propTypes = {
   addToCart: PropTypes.func.isRequired,
-  loadCart: PropTypes.func.isRequired
+  loadCart: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   userId: state.auth.userInfo._id,
   isLoading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
-  movies: state.movie.movies
+  movies: state.movie.movies,
 });
 
 export default connect(mapStateToProps, {
   addToCart,
   loadCart,
   getCart,
-  setMovie,
-  getRelatedMovies
+  setMovies,
 })(MovieList);

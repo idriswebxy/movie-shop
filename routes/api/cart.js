@@ -17,8 +17,6 @@ router.post("/total", async (req, res) => {
   try {
     let array = req.body;
 
-    console.log(req.body)
-
     let sum = 0.00;
 
     for (let i = 0; i < array.length; i++) {
@@ -47,7 +45,7 @@ router.get("/", async (req, res) => {
 
 // Add to cart
 router.post("/", (req, res) => {
-  const { id, title, poster_path, overview, release_date } = req.body;
+  const { id, title, poster_path, overview, release_date, genre_ids } = req.body;
 
 
   const price = 2.99;
@@ -59,6 +57,7 @@ router.post("/", (req, res) => {
     image: poster_path,
     description: overview,
     price: price,
+    genreId: genre_ids,
     releaseDate: release_date
   });
 

@@ -12,7 +12,7 @@ const MovieDetails = ({
   isLoading,
   loadMovieDetails,
   getMovie,
-  loadCart
+  loadCart,
 }) => {
   useEffect(() => {
     loadCart();
@@ -31,7 +31,7 @@ const MovieDetails = ({
             rgba(9, 28, 37, 0.925) 100%), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          marginTop: "40px"
+          marginTop: "40px",
         }}
       >
         <div>
@@ -51,14 +51,14 @@ const MovieDetails = ({
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   movie: state.movie.searchedMovie,
-  isLoading: state.movie.isLoading
+  isLoading: state.movie.isLoading,
 });
 
 export default connect(mapStateToProps, {
   addToCart,
   loadMovieDetails,
   getMovie,
-  loadCart
+  loadCart,
 })(MovieDetails);

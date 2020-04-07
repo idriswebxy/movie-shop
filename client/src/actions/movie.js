@@ -9,9 +9,13 @@ import {
   SET_TVSHOWS_ERR,
   SET_TVSHOWS,
   GET_SHOW,
-  GET_SHOW_ERR
+  GET_SHOW_ERR,
+  SET_RELATED_MOVIES,
+  GET_RELATED_MOVIES,
+  SET_GENRE_ID
 } from "../actions/types";
 import axios from "axios";
+
 
 export const setSearchedMovies = movie => async dispatch => {
   try {
@@ -44,8 +48,7 @@ export const getMovie = id => async dispatch => {
   }
 };
 
-export const setMovie = movies => async dispatch => {
-  
+export const setMovies = movies => async dispatch => {
   try {
     dispatch({
       type: SET_MOVIES,
@@ -58,9 +61,7 @@ export const setMovie = movies => async dispatch => {
   }
 };
 
-
 export const setTvShowsReducer = tvShows => async dispatch => {
-  
   try {
     dispatch({
       type: SET_TVSHOWS,
@@ -73,9 +74,7 @@ export const setTvShowsReducer = tvShows => async dispatch => {
   }
 };
 
-
 export const getShow = id => async dispatch => {
-
   try {
     dispatch({
       type: GET_SHOW,
@@ -88,28 +87,37 @@ export const getShow = id => async dispatch => {
   }
 };
 
-
-
 export const loadMovieDetails = () => async dispatch => {
   dispatch({
     type: LOAD_MOVIE_DETAILS
   });
 };
 
+export const setRelatedMovies = movies => async dispatch => {
+  try {
+    const res = await axios.post("/api/movie", movies);
 
-export const getRelatedMovies = () => async dispatch => {
+    dispatch({
+      type: SET_RELATED_MOVIES,
+      payload: res.data
+    });
+  } catch (error) {}
+};
+
+export const getRelatedId = () => async dispatch => {
+
+  console.log("get id called")
 
   try {
-    const res = await axios.get("/api/cart");
+    const res = await axios.get("/api/movie/genre_id");
     
+    console.log(res.data)
+
+    dispatch({
+      type: SET_GENRE_ID,
+      payload: res.data
+    })
 
 
-
-  } catch (error) {
-    
-  }
- 
-
-  
-
-}
+  } catch (error) {}
+};

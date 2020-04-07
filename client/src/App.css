@@ -75,9 +75,20 @@
    padding: 10px;
  }
 
-/* 
+ /* 
  .hover-movie:hover {
    transition-duration: 0.5s;
    transform: scale(1.1);
   
  } */
+
+ .related-movies-outerLayer {
+   display: flex;
+   margin: 5%;
+   padding-left: 3%;
+
+ }
+
+ .related-movies-inner-elements {
+   margin-right: 30px;
+ }

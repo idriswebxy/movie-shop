@@ -19,6 +19,9 @@ const CartSchema = new Schema({
     type: String,
     required: true
   },
+  genreId: {
+    type: Array
+  },
   image: {
     type: String
   },

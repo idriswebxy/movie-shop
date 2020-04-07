@@ -5,7 +5,7 @@ import {
   DELETE_ITEM,
   PRICE_TOTAL
 } from "../actions/types";
-import { getPriceTotal } from "../actions/cart";
+
 
 const initialState = {
   cart: [],

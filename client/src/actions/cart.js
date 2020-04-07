@@ -97,7 +97,6 @@ export const getCart = id => async dispatch => {
 
 export const deleteItem = (id, price) => async dispatch => {
 
-  console.log(price);
 
   try {
     await axios.delete(`api/cart/${id}`);

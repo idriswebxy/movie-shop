@@ -11,6 +11,7 @@ var session = require("express-session");
 const user = require("./routes/api/user");
 const cart = require("./routes/api/cart");
 const auth = require("./routes/api/auth");
+const movie = require("./routes/api/movie");
 
 const app = express();
 
@@ -37,7 +38,7 @@ app.use(bodyParser.json());
 app.use("/api/user", user);
 app.use("/api/cart", cart);
 app.use("/api/auth", auth);
-
+app.use("/api/movie", movie);
 
 //Serve static assets if in productions
 if (process.env.NODE_ENV === "production") {

@@ -14,7 +14,7 @@ import {
   MDBIcon,
   MDBContainer,
   MDBListGroup,
-  MDBListGroupItem
+  MDBListGroupItem,
 } from "mdbreact";
 
 const SearchResults = ({ results, getMovie, isLoading, getSearchedMovie }) => {
@@ -24,11 +24,11 @@ const SearchResults = ({ results, getMovie, isLoading, getSearchedMovie }) => {
 
   results = results.slice(0, 10);
 
-  return ( 
+  return (
     <div>
       <MDBContainer>
         {results && results.length !== 0 ? (
-          results.map(result => (
+          results.map((result) => (
             <MDBListGroup style={{ width: "30rem" }}>
               <Link
                 to="/movie_details"
@@ -42,7 +42,7 @@ const SearchResults = ({ results, getMovie, isLoading, getSearchedMovie }) => {
                     <MDBCardImage
                       style={{ width: "5rem" }}
                       src={`https://image.tmdb.org/t/p/w154${[
-                        result.poster_path
+                        result.poster_path,
                       ]}`}
                     />
 
@@ -67,8 +67,8 @@ const SearchResults = ({ results, getMovie, isLoading, getSearchedMovie }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  isLoading: state.movie.isLoading
+const mapStateToProps = (state) => ({
+  isLoading: state.movie.isLoading,
 });
 
 export default connect(mapStateToProps, { getMovie, getSearchedMovie })(

@@ -7,24 +7,18 @@ import SearchBar from "./SearchBar";
 import { setSearchedMovies } from "../../actions/movie";
 import config from "../../config.json";
 
-
-
 const Search = ({ setSearchedMovies }) => {
-
-
-  const [results, setResults] = useState([]);  
+  const [results, setResults] = useState([]);
   const [movieResults, showMovieResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-
-  const hideResults = term => {
+  const hideResults = (term) => {
     if (term.length === 0) {
       showMovieResults(false);
     }
   };
 
-  
-  const searchMovies = async query => {
+  const searchMovies = async (query) => {
     try {
       if (!query || query.length <= 1) return;
 

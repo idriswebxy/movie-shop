@@ -38,3 +38,6 @@ export const SET_TVSHOWS = "SET_TVSHOWS";
 export const SET_TVSHOWS_ERR = "SET_TVSHOWS_ERR";
 export const GET_SHOW = "GET_SHOW";
 export const GET_SHOW_ERR = "GET_SHOW_ERR";
+export const SET_RELATED_MOVIES = "SET_RELATED_MOVIES";
+export const GET_RELATED_MOVIES = "GET_RELATED_MOVIES";
+export const SET_GENRE_ID = "SET_GENRE_ID";

@@ -9,9 +9,10 @@ import {
   LOAD_MOVIE_DETAILS,
   SET_TVSHOWS_ERR,
   SET_TVSHOWS,
-  GET_SHOW
+  GET_SHOW,
+  SET_RELATED_MOVIES,
+  SET_GENRE_ID,
 } from "../actions/types";
-
 
 const initialState = {
   isLoading: true,
@@ -19,57 +20,68 @@ const initialState = {
   tvShows: [],
   searchedMovie: null,
   searchedShow: null,
-  currentMovie: null
+  currentMovie: null,
+  relatedMovies: [],
+  relatedId: null,
 };
 
-
-export default function(state = initialState, action) {
-  
+export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-
-    case GET_MOVIES: 
+    case GET_MOVIES:
       return {
         ...state,
-        searchedMovie: state.movies.find(movie => movie.id === payload),
-        isLoading: false
+        searchedMovie: state.movies.find((movie) => movie.id === payload),
+        isLoading: false,
       };
     case GET_SHOW:
       return {
         ...state,
-        searchedShow: state.tvShows.find(show => show.id === payload),
-        isLoading: false
-      }; 
+        searchedShow: state.tvShows.find((show) => show.id === payload),
+        isLoading: false,
+      };
     case GET_SEARCHED_MOVIE:
       return {
         ...state,
-        searchedMovie: state.searchedMovie.find(movie => movie.id === payload),
-      };  
+        searchedMovie: state.searchedMovie.find(
+          (movie) => movie.id === payload
+        ),
+      };
     case CLEAR_MOVIE:
       return {
         ...state,
-        searchedMovie: null
-      }; 
-    case SET_TVSHOWS_ERR:   
+        searchedMovie: null,
+      };
+    case SET_RELATED_MOVIES:
+      return {
+        ...state,
+        relatedMovies: payload,
+      };
+    case SET_TVSHOWS_ERR:
     case GET_MOVIE_ERR:
       return;
     case SET_SEARCHED_MOVIE:
       return {
         ...state,
-        searchedMovie: payload
+        searchedMovie: payload,
       };
     case SET_TVSHOWS:
       return {
         ...state,
         tvShows: payload,
-        isLoading: false
-      }  
+        isLoading: false,
+      };
+    case SET_GENRE_ID:
+      return {
+        ...state,
+        relatedId: payload,
+      };
     case SET_MOVIES:
       return {
         ...state,
         movies: payload,
-        isLoading: false
+        isLoading: false,
       };
 
     case SET_MOVIE_ERR:
@@ -79,8 +91,8 @@ export default function(state = initialState, action) {
         ...state,
         searchedMovie: payload,
         isLoading: false,
-        currentMovie: payload
-      }  
+        currentMovie: payload,
+      };
 
     default:
       return state;
