@@ -3,9 +3,12 @@ import config from "../../config.json";
 import { connect } from "react-redux";
 import { setRelatedMovies, getRelatedId } from "../../actions/movie";
 
-
-
-const RelatedMovies = ({ movieId, setRelatedMovies, relatedMovies, getRelatedId }) => {
+const RelatedMovies = ({
+  movieId,
+  setRelatedMovies,
+  relatedMovies,
+  getRelatedId,
+}) => {
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/movie/${19}/recommendations?api_key=${
@@ -14,7 +17,7 @@ const RelatedMovies = ({ movieId, setRelatedMovies, relatedMovies, getRelatedId 
     )
       .then((res) => res.json())
       .then((data) => setRelatedMovies(data.results));
-      getRelatedId();
+    getRelatedId();
   }, []);
 
   var list = (
@@ -32,21 +35,24 @@ const RelatedMovies = ({ movieId, setRelatedMovies, relatedMovies, getRelatedId 
   );
 
   return (
-    <div className="related-movies-outerLayer">
-      <div className="related-movies-inner-elements">
-        {list.props.children[0]}
-      </div>
-      <div className="related-movies-inner-elements">
-        {list.props.children[1]}
-      </div>
-      <div className="related-movies-inner-elements">
-        {list.props.children[2]}
-      </div>
-      <div className="related-movies-inner-elements">
-        {list.props.children[3]}
-      </div>
-      <div className="related-movies-inner-elements">
-        {list.props.children[4]}
+    <div>
+      <h2>Related Movies</h2>
+      <div className="related-movies-outerLayer">
+        <div className="related-movies-inner-elements">
+          {list.props.children[0]}
+        </div>
+        <div className="related-movies-inner-elements">
+          {list.props.children[1]}
+        </div>
+        <div className="related-movies-inner-elements">
+          {list.props.children[2]}
+        </div>
+        <div className="related-movies-inner-elements">
+          {list.props.children[3]}
+        </div>
+        <div className="related-movies-inner-elements">
+          {list.props.children[4]}
+        </div>
       </div>
     </div>
   );
@@ -57,4 +63,6 @@ const mapStateToProps = (state) => ({
   relatedMovies: state.movie.relatedMovies,
 });
 
-export default connect(mapStateToProps, { setRelatedMovies, getRelatedId })(RelatedMovies);
+export default connect(mapStateToProps, { setRelatedMovies, getRelatedId })(
+  RelatedMovies
+);

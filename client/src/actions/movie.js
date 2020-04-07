@@ -12,7 +12,8 @@ import {
   GET_SHOW_ERR,
   SET_RELATED_MOVIES,
   GET_RELATED_MOVIES,
-  SET_GENRE_ID
+  SET_GENRE_ID,
+  CHANGE_PAGE
 } from "../actions/types";
 import axios from "axios";
 
@@ -106,12 +107,8 @@ export const setRelatedMovies = movies => async dispatch => {
 
 export const getRelatedId = () => async dispatch => {
 
-  console.log("get id called")
-
   try {
     const res = await axios.get("/api/movie/genre_id");
-    
-    console.log(res.data)
 
     dispatch({
       type: SET_GENRE_ID,
@@ -121,3 +118,19 @@ export const getRelatedId = () => async dispatch => {
 
   } catch (error) {}
 };
+
+
+export const changePage = () => async dispatch => {
+
+  try {
+    
+    dispatch({
+      type: CHANGE_PAGE 
+    })
+
+
+  } catch (err) {
+    
+  }
+
+}

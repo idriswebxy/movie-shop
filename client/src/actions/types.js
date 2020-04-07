@@ -41,3 +41,4 @@ export const GET_SHOW_ERR = "GET_SHOW_ERR";
 export const SET_RELATED_MOVIES = "SET_RELATED_MOVIES";
 export const GET_RELATED_MOVIES = "GET_RELATED_MOVIES";
 export const SET_GENRE_ID = "SET_GENRE_ID";
+export const CHANGE_PAGE = "CHANGE_PAGE";

@@ -3,10 +3,16 @@ import config from "../../config.json";
 import PropTypes from "prop-types";
 import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart, loadCart, getCart } from "../../actions/cart";
-import { getMovie, setMovies, clearCache, getRelatedId } from "../../actions/movie";
+import {
+  getMovie,
+  setMovies,
+  clearCache,
+  getRelatedId,
+} from "../../actions/movie";
 import { connect } from "react-redux";
 import Movie from "./Movie";
 import SearchPage from "../Search/Search";
+import Pages from "../Layout/Pages";
 import { MDBContainer, MDBRow, MDBCol, MDBView } from "mdbreact";
 import "../../App.css";
 import { SET_MOVIES } from "../../actions/types";
@@ -22,7 +28,6 @@ const MovieList = ({
   movies,
   relatedMovies,
 }) => {
-
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${config.API_KEY}&language=en-US&page=1`
@@ -62,6 +67,7 @@ const MovieList = ({
           })}
         </MDBRow>
       </MDBContainer>
+      <Pages />
       <RelatedMovies />
     </div>
   );

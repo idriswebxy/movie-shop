@@ -37,14 +37,17 @@ router.get("/", async (req, res) => {
   try {
     const items = await Cart.find().sort({ date: -1 });
     res.json(items);
+
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
 });
 
+
 // Add to cart
 router.post("/", (req, res) => {
+
   const { id, title, poster_path, overview, release_date, genre_ids } = req.body;
 
 
