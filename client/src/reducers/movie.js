@@ -24,7 +24,6 @@ const initialState = {
   currentMovie: null,
   relatedMovies: [],
   relatedId: null,
-  page: 1
 };
 
 export default function (state = initialState, action) {
@@ -88,6 +87,7 @@ export default function (state = initialState, action) {
     case CHANGE_PAGE:
       return {
         ...state, 
+        pageNum: state.pageNum + payload,
         page: state.page + 1
       }  
     case SET_MOVIE_ERR:

@@ -29,12 +29,16 @@ export const setSearchedMovies = movie => async dispatch => {
   }
 };
 
+
+
 export const getSearchedMovie = id => async dispatch => {
   dispatch({
     type: GET_SEARCHED_MOVIE,
     payload: id
   });
 };
+
+
 
 export const getMovie = id => async dispatch => {
   try {
@@ -49,6 +53,8 @@ export const getMovie = id => async dispatch => {
   }
 };
 
+
+
 export const setMovies = movies => async dispatch => {
   try {
     dispatch({
@@ -61,6 +67,8 @@ export const setMovies = movies => async dispatch => {
     });
   }
 };
+
+
 
 export const setTvShowsReducer = tvShows => async dispatch => {
   try {
@@ -75,6 +83,8 @@ export const setTvShowsReducer = tvShows => async dispatch => {
   }
 };
 
+
+
 export const getShow = id => async dispatch => {
   try {
     dispatch({
@@ -88,22 +98,33 @@ export const getShow = id => async dispatch => {
   }
 };
 
+
+
 export const loadMovieDetails = () => async dispatch => {
   dispatch({
     type: LOAD_MOVIE_DETAILS
   });
 };
 
+
+
 export const setRelatedMovies = movies => async dispatch => {
   try {
+
     const res = await axios.post("/api/movie", movies);
 
+    console.log(res.data)
+    
     dispatch({
       type: SET_RELATED_MOVIES,
       payload: res.data
     });
-  } catch (error) {}
+  } catch (error) {
+    // console.log(error.response.data.errors)
+  }
 };
+
+
 
 export const getRelatedId = () => async dispatch => {
 
@@ -120,12 +141,13 @@ export const getRelatedId = () => async dispatch => {
 };
 
 
-export const changePage = () => async dispatch => {
+export const changePage = (pageNum) => async dispatch => {
 
   try {
     
     dispatch({
-      type: CHANGE_PAGE 
+      type: CHANGE_PAGE,
+      payload: pageNum 
     })
 
 

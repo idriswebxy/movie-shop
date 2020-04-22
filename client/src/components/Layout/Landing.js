@@ -6,7 +6,7 @@ import {
   MDBNavLink,
   MDBView,
   MDBMask,
-  MDBContainer
+  MDBContainer,
 } from "mdbreact";
 import { Redirect } from "react-router-dom";
 

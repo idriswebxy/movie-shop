@@ -6,40 +6,38 @@ import {
   MDBCol,
   MDBInput,
   MDBBtn,
-  MDBNavLink
+  MDBNavLink,
 } from "mdbreact";
 import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 import PropTypes from "prop-types";
 
-
-const Login = ({ login, authenticated }) => {
-
-
+const Login = ({ login, authenticated, pageNum }) => {
+  
   const [formData, setFormData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
   const { email, password } = formData;
 
-  const onChange = e =>
+  const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     login(email, password);
   };
 
   if (authenticated) {
-    return <Redirect to="/movies" />;
+    return <Redirect to={"/movies"} />;
   }
 
   return (
     <MDBContainer>
       <MDBRow>
         <MDBCol style={{ marginTop: "80px" }} md="6">
-          <form onSubmit={e => onSubmit(e)}>
+          <form onSubmit={(e) => onSubmit(e)}>
             <h4>Sign in</h4>
             <div className="grey-text">
               <MDBInput
@@ -51,7 +49,7 @@ const Login = ({ login, authenticated }) => {
                 error="wrong"
                 success="right"
                 name="email"
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
               />
               <MDBInput
                 label="Type your password"
@@ -60,7 +58,7 @@ const Login = ({ login, authenticated }) => {
                 type="password"
                 validate
                 name="password"
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
               />
             </div>
             <MDBRow>
@@ -71,18 +69,18 @@ const Login = ({ login, authenticated }) => {
           </form>
         </MDBCol>
       </MDBRow>
-
     </MDBContainer>
   );
 };
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
-  authenticated: PropTypes.bool
+  authenticated: PropTypes.bool,
 };
 
-const mapStateToProps = state => ({
-  authenticated: state.auth.authenticated
+const mapStateToProps = (state) => ({
+  authenticated: state.auth.authenticated,
+  pageNum: state.movie.pageNum,
 });
 
 export default connect(mapStateToProps, { login })(Login);

@@ -31,7 +31,7 @@ const MovieDetails = ({
             rgba(9, 28, 37, 0.925) 100%), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          marginTop: "40px",
+          marginTop: "100px",
         }}
       >
         <div>

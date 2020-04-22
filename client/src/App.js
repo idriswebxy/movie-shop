@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 import { connect } from "react-redux";
 import jwt_decode from "jwt-decode";
@@ -29,7 +29,7 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-const App = ({ isLoading }) => {
+const App = ({ isLoading, pageNum }) => {
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
@@ -38,6 +38,8 @@ const App = ({ isLoading }) => {
     return <SpinnerPage />;
   }
 
+
+
   return (
     <Router>
       <Alert />
@@ -45,7 +47,7 @@ const App = ({ isLoading }) => {
         style={{
           boxSizing: "border-box",
           background: "rgb(9, 28, 37)",
-          color: "white"
+          color: "white",
         }}
       >
         <Navbar />
@@ -65,8 +67,9 @@ const App = ({ isLoading }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  isLoading: state.auth.isLoading
+const mapStateToProps = (state) => ({
+  isLoading: state.auth.isLoading,
+  pageNum: state.movie.pageNum,
 });
 
 export default connect(mapStateToProps)(App);

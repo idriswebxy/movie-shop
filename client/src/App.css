@@ -1,6 +1,6 @@
- html {
+ /* html {
    background-color: rgb(9, 28, 37);
- }
+ } */
 
 
  .remove-btn {
@@ -94,7 +94,13 @@
  }
 
 
- .page-pagination a {
+ .page-pagination ul a {
+   border: 2px solid white;
    color: white;
-  
+ }
+
+ .page-pagination-inner {
+   display: flexbox;
+
+
  }

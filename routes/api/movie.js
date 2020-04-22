@@ -4,37 +4,30 @@ const router = express.Router();
 const Cart = require("../../models/Cart");
 
 
-
 router.post("/", async (req, res) => {
+  let movieList = req.body;
 
-  const movieList = req.body;
+  let shuffled = movieList.sort(() => 0.5 - Math.random());
 
-  const shuffled = movieList.sort(() => 0.5 - Math.random());
+  let selected = shuffled.slice(0, 6);
 
-  let selected = shuffled.slice(0, 5);
-
-  res.json(selected)
-
+  res.json(selected);
 });
 
 
 
 router.get("/genre_id", async (req, res) => {
-
   try {
-
     let relatedId = await Cart.findOne({ name });
 
-    
+    // res.json(relatedId);s
 
-    res.json(relatedId)
+    console.log(relatedId)
 
   } catch (err) {
     return res.status(404).json({ msg: "Item id not found" });
   }
 
-console.log(relatedId)
-
-})
+});
 
 module.exports = router;

@@ -24,7 +24,8 @@ import "../../App.css";
 const Navbar = ({
   auth: { authenticated, isLoading, userInfo },
   logOut,
-  cart
+  cart,
+  pageNum
 }) => {
 
 
@@ -62,7 +63,7 @@ const Navbar = ({
             </MDBNavLink>
           </MDBNavItem>
           <MDBNavItem active>
-            <MDBNavLink to="/movies">
+            <MDBNavLink to={"/movies"}>
               Movies <MDBIcon icon="film" />
             </MDBNavLink>
           </MDBNavItem>
@@ -117,7 +118,8 @@ Navbar.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  cart: state.cart.cart
+  cart: state.cart.cart,
+  pageNum: state.movie.pageNum
 });
 
 export default connect(mapStateToProps, { logOut })(Navbar);

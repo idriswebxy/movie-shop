@@ -8,11 +8,11 @@ import {
   setMovies,
   clearCache,
   getRelatedId,
+  changePage,
 } from "../../actions/movie";
 import { connect } from "react-redux";
 import Movie from "./Movie";
 import SearchPage from "../Search/Search";
-import Pages from "../Layout/Pages";
 import { MDBContainer, MDBRow, MDBCol, MDBView } from "mdbreact";
 import "../../App.css";
 import { SET_MOVIES } from "../../actions/types";
@@ -27,10 +27,16 @@ const MovieList = ({
   isLoading,
   movies,
   relatedMovies,
+  pageNum,
+  change
 }) => {
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${config.API_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${
+        config.API_KEY
+      }&language=en-US&page=${pageNum}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -67,7 +73,6 @@ const MovieList = ({
           })}
         </MDBRow>
       </MDBContainer>
-      <Pages />
       <RelatedMovies />
     </div>
   );
