@@ -23,31 +23,36 @@ const MovieDetails = ({
   }
 
   return (
-    <MDBContainer>
-      <div
-        style={{
-          backgroundImage: `linear-gradient(to right,
-            rgba(19, 38, 47, 0.925) 0%,
-            rgba(9, 28, 37, 0.925) 100%), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          marginTop: "100px",
-        }}
-      >
+    <div
+      style={{
+        backgroundImage: `linear-gradient(to right,
+        rgba(19, 38, 47, 0.925) 0%,
+        rgba(9, 28, 37, 0.925) 100%), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        marginTop: "100px",
+      }}
+    >
+      <MDBContainer>
         <div>
-          <img
-            style={{ width: "20rem", borderRadius: "10px" }}
-            src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
-          />
+          <div>
+            <img
+              style={{
+                width: "20rem",
+                borderRadius: "10px",
+              }}
+              src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
+            />
 
-          <h3>{movie.title}</h3>
-          <h6>{movie.overview}</h6>
-          <MDBBtn onClick={() => addToCart(movie)}>
-            Add To Cart <MDBIcon icon="cart-plus" />
-          </MDBBtn>
+            <h3>{movie.title}</h3>
+            <h6>{movie.overview}</h6>
+            <MDBBtn onClick={() => addToCart(movie)}>
+              Add To Cart <MDBIcon icon="cart-plus" />
+            </MDBBtn>
+          </div>
         </div>
-      </div>
-    </MDBContainer>
+      </MDBContainer>
+    </div>
   );
 };
 
