@@ -27,22 +27,19 @@ const MovieList = ({
   isLoading,
   movies,
   relatedMovies,
-  pageNum,
-  change
+  getRelatedId,
 }) => {
-  const [page, setPage] = useState(1);
-
+  
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${
-        config.API_KEY
-      }&language=en-US&page=${pageNum}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${config.API_KEY}&language=en-US&page=1`
     )
       .then((res) => res.json())
       .then((data) => {
         setMovies(data.results);
         loadCart();
       });
+    getRelatedId();
   }, []);
 
   if (isLoading) {
@@ -95,4 +92,5 @@ export default connect(mapStateToProps, {
   loadCart,
   getCart,
   setMovies,
+  getRelatedId,
 })(MovieList);

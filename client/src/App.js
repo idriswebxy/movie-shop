@@ -30,6 +30,7 @@ if (localStorage.token) {
 }
 
 const App = ({ isLoading, pageNum }) => {
+  
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);

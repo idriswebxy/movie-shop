@@ -128,8 +128,12 @@ export const setRelatedMovies = movies => async dispatch => {
 
 export const getRelatedId = () => async dispatch => {
 
+  console.log("Get related ID....")
+
   try {
     const res = await axios.get("/api/movie/genre_id");
+
+    console.log(res.data)
 
     dispatch({
       type: SET_GENRE_ID,
@@ -139,20 +143,3 @@ export const getRelatedId = () => async dispatch => {
 
   } catch (error) {}
 };
-
-
-export const changePage = (pageNum) => async dispatch => {
-
-  try {
-    
-    dispatch({
-      type: CHANGE_PAGE,
-      payload: pageNum 
-    })
-
-
-  } catch (err) {
-    
-  }
-
-}

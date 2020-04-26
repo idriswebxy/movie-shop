@@ -18,11 +18,12 @@ router.post("/", async (req, res) => {
 
 router.get("/genre_id", async (req, res) => {
   try {
-    let relatedId = await Cart.findOne({ name });
+    let relatedId = await Cart.findOne({ genreId });
 
-    // res.json(relatedId);s
+    // res.json(relatedId);
 
     console.log(relatedId)
+    console.log("Heyy")
 
   } catch (err) {
     return res.status(404).json({ msg: "Item id not found" });
