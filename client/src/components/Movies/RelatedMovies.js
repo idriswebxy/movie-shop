@@ -11,7 +11,7 @@ const RelatedMovies = ({
 }) => {
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${12}/recommendations?api_key=${
+      `https://api.themoviedb.org/3/movie/${38}/recommendations?api_key=${
         config.API_KEY
       }&language=en-US&page=1`
     )
@@ -62,7 +62,7 @@ const RelatedMovies = ({
 };
 
 const mapStateToProps = (state) => ({
-  movieId: state.cart.cart.genreId,
+  movieId: state.cart.cart.relatedId,
   relatedMovies: state.movie.relatedMovies,
 });
 

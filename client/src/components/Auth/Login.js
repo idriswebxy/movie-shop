@@ -13,7 +13,6 @@ import { login } from "../../actions/auth";
 import PropTypes from "prop-types";
 
 const Login = ({ login, authenticated, pageNum }) => {
-  
   const [formData, setFormData] = useState({
     email: "",
     password: "",

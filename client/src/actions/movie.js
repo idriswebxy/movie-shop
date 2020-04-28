@@ -128,8 +128,6 @@ export const setRelatedMovies = movies => async dispatch => {
 
 export const getRelatedId = () => async dispatch => {
 
-  console.log("Get related ID....")
-
   try {
     const res = await axios.get("/api/movie/genre_id");
 
@@ -143,3 +141,15 @@ export const getRelatedId = () => async dispatch => {
 
   } catch (error) {}
 };
+
+
+export const getMovieVideo = () => async dispatch => {
+
+  try {
+    
+
+  } catch (error) {
+    
+  }
+
+}

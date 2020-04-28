@@ -4,6 +4,7 @@ const router = express.Router();
 const Cart = require("../../models/Cart");
 
 
+
 router.post("/", async (req, res) => {
   let movieList = req.body;
 
@@ -16,19 +17,26 @@ router.post("/", async (req, res) => {
 
 
 
+
 router.get("/genre_id", async (req, res) => {
+  console.log("api ran....");
+
   try {
-    let relatedId = await Cart.findOne({ genreId });
+    await Cart.find({}, (err, id) => {
+      id.map(movie => {
+        if (movie.genreId.length > 0) {
+          console.log(movie)
+          res.json(movie.genreId[0])
+        }
+        else {
+          res.json("NONE")
+        }
+      })
 
-    // res.json(relatedId);
-
-    console.log(relatedId)
-    console.log("Heyy")
-
+    });
   } catch (err) {
     return res.status(404).json({ msg: "Item id not found" });
   }
-
 });
 
 module.exports = router;
