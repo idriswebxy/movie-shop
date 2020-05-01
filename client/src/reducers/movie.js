@@ -91,7 +91,7 @@ export default function (state = initialState, action) {
         page: state.page + 1
       }  
     case SET_MOVIE_ERR:
-      return;
+      return null;
     case LOAD_MOVIE_DETAILS:
       return {
         ...state,

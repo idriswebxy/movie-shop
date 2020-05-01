@@ -9,8 +9,8 @@ import axios from "axios";
 import { setAlert } from "./alert";
 
 
-export const addToCart = item => async dispatch => {
 
+export const addToCart = item => async dispatch => {
 
   const config = {
     headers: {
@@ -37,7 +37,6 @@ export const addToCart = item => async dispatch => {
 
 
 export const addToCartTvShow = item => async dispatch => {
-
 
   const config = {
     headers: {
@@ -78,6 +77,7 @@ export const loadCart = () => async dispatch => {
   }
 };
 
+
 export const getCart = id => async dispatch => {
 
   try {
@@ -95,8 +95,8 @@ export const getCart = id => async dispatch => {
   }
 };
 
-export const deleteItem = (id, price) => async dispatch => {
 
+export const deleteItem = (id, price) => async dispatch => {
 
   try {
     await axios.delete(`api/cart/${id}`);

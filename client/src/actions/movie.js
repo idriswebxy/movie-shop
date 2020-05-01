@@ -63,7 +63,8 @@ export const setMovies = movies => async dispatch => {
     });
   } catch (e) {
     dispatch({
-      type: SET_MOVIE_ERR
+      type: SET_MOVIE_ERR,
+      payload: e
     });
   }
 };

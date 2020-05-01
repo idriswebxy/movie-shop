@@ -9,7 +9,7 @@ import {
   clearCache,
   getRelatedId,
   changePage,
-  getMovieVideo
+  getMovieVideo,
 } from "../../actions/movie";
 import { connect } from "react-redux";
 import Movie from "./Movie";
@@ -31,30 +31,43 @@ const MovieList = ({
   getRelatedId,
   getMovieVideo,
 }) => {
+  const [vids, setVids] = useState(null);
+  const [page, changePage] = useState(1);
 
-  const [vids, setVids] = useState(null)
-  
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${config.API_KEY}&language=en-US&sort_by=popularity.desc&include_video=true&page=1`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${config.API_KEY}&language=en-US&sort_by=popularity.desc&include_video=true&page=${page}`
     )
       .then((res) => res.json())
       .then((data) => {
         setMovies(data.results);
         loadCart();
-        getRelatedId();
+        // getRelatedId();
         // getVid()
       });
-     
-  }, []);
-
+  }, [page]);
 
   const getVid = async () => {
-   await fetch("https://api.themoviedb.org/3/movie/38/videos?api_key=8fb61d9f021e57975ac7a2ef25b640a7&language=en-US")
-    .then(res => res.json())
-    .then(data => setVids(data.results))
-  }
+    await fetch(
+      "https://api.themoviedb.org/3/movie/38/videos?api_key=8fb61d9f021e57975ac7a2ef25b640a7&language=en-US"
+    )
+      .then((res) => res.json())
+      .then((data) => setVids(data.results));
+  };
 
+  const nextPage = (e) => {
+
+    switch (page) {
+      case value: 7
+        changePage(page + 2)
+
+        
+        break;
+    
+      default:
+        break;
+    }
+  };
 
   if (isLoading) {
     return <SpinnerPage />;
@@ -62,28 +75,28 @@ const MovieList = ({
 
   const movieList = (
     <MDBContainer>
-        <MDBRow>
-          {movies.map((movie, key) => {
-            return (
-              <MDBCol key={key} size="6">
-                <div className="hover-movie">
-                  <Movie
-                    id={movie.id}
-                    addToCart={addToCart}
-                    title={movie.title}
-                    image={movie.poster_path}
-                    overview={movie.overview}
-                    movieObj={movie}
-                    price={2.99}
-                  />
-                </div>
-              </MDBCol>
-            );
-          })}
-        </MDBRow>
-      </MDBContainer>
-  )
-
+      <MDBRow>
+        {movies.map((movie, key) => {
+          return (
+            <MDBCol key={key} size="6">
+              <div className="hover-movie">
+                <Movie
+                  id={movie.id}
+                  addToCart={addToCart}
+                  title={movie.title}
+                  image={movie.poster_path}
+                  overview={movie.overview}
+                  movieObj={movie}
+                  price={2.99}
+                />
+              </div>
+            </MDBCol>
+          );
+        })}
+      </MDBRow>
+      <button onClick={(e) => nextPage(e)}>Next Page</button>
+    </MDBContainer>
+  );
 
   return (
     <div>
@@ -112,5 +125,5 @@ export default connect(mapStateToProps, {
   getCart,
   setMovies,
   getRelatedId,
-  getMovieVideo
+  getMovieVideo,
 })(MovieList);
