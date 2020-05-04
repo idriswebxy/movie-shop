@@ -83,13 +83,7 @@ export default function (state = initialState, action) {
         ...state,
         movies: payload,
         isLoading: false,
-      };
-    case CHANGE_PAGE:
-      return {
-        ...state, 
-        pageNum: state.pageNum + payload,
-        page: state.page + 1
-      }  
+      }; 
     case SET_MOVIE_ERR:
       return null;
     case LOAD_MOVIE_DETAILS:

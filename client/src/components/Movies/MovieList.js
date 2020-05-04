@@ -36,7 +36,7 @@ const MovieList = ({
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${config.API_KEY}&language=en-US&sort_by=popularity.desc&include_video=true&page=${page}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${config.API_KEY}&language=en-US&page=${page}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -76,7 +76,7 @@ const MovieList = ({
       <MDBRow>
         {movies.map((movie, key) => {
           return (
-            <MDBCol key={key} size="6">
+            <MDBCol key={key} size="3">
               <div className="hover-movie">
                 <Movie
                   id={movie.id}
