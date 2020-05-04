@@ -32,7 +32,7 @@ const MovieList = ({
   getMovieVideo,
 }) => {
   const [vids, setVids] = useState(null);
-  const [page, changePage] = useState(1);
+  let [page, changePage] = useState(1);
 
   useEffect(() => {
     fetch(
@@ -57,16 +57,14 @@ const MovieList = ({
 
   const nextPage = (e) => {
 
-    switch (page) {
-      case value: 7
-        changePage(page + 2)
-
-        
-        break;
-    
-      default:
-        break;
+    if (page === 7) {
+      page = 9
     }
+    else {
+      changePage(page + 1)
+    }
+
+    
   };
 
   if (isLoading) {

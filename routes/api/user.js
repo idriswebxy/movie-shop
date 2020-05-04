@@ -9,7 +9,6 @@ const auth = require("../../middleware/auth");
 require("dotenv").config();
 
 
-const jwtSecret = "mysecrettoken";
 
 router.get("/", auth, async (req, res) => {
   try {

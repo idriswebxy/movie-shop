@@ -35,10 +35,10 @@ const App = ({ isLoading, pageNum }) => {
     store.dispatch(loadUser());
   }, []);
 
+
   if (isLoading) {
     return <SpinnerPage />;
   }
-
 
 
   return (

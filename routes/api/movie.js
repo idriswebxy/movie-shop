@@ -18,25 +18,25 @@ router.post("/", async (req, res) => {
 
 
 
-router.get("/genre_id", async (req, res) => {
-  console.log("api ran....");
+// router.get("/genre_id", async (req, res) => {
+//   console.log("api ran....");
 
-  try {
-    await Cart.find({}, (err, id) => {
-      id.map(movie => {
-        if (movie.genreId.length > 0) {
-          console.log(movie)
-          res.json(movie.genreId[0])
-        }
-        else {
-          res.json("NONE")
-        }
-      })
+//   try {
+//     await Cart.find({}, (err, id) => {
+//       id.map(movie => {
+//         if (movie.genreId.length > 0) {
+//           console.log(movie)
+//           res.json(movie.genreId[0])
+//         }
+//         else {
+//           res.json("NONE")
+//         }
+//       })
 
-    });
-  } catch (err) {
-    return res.status(404).json({ msg: "Item id not found" });
-  }
-});
+//     });
+//   } catch (err) {
+//     return res.status(404).json({ msg: "Item id not found" });
+//   }
+// });
 
 module.exports = router;
