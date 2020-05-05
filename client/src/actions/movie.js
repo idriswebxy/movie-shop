@@ -13,144 +13,147 @@ import {
   SET_RELATED_MOVIES,
   GET_RELATED_MOVIES,
   SET_GENRE_ID,
-  CHANGE_PAGE
+  CHANGE_PAGE,
+  NEXT_PAGE,
+  PREV_PAGE
 } from "../actions/types";
 import axios from "axios";
+import config from "../config.json";
 
 
-export const setSearchedMovies = movie => async dispatch => {
+export const setSearchedMovies = (movie) => async (dispatch) => {
   try {
     dispatch({
       type: SET_SEARCHED_MOVIE,
-      payload: movie
+      payload: movie,
     });
   } catch (e) {
     return;
   }
 };
 
-
-
-export const getSearchedMovie = id => async dispatch => {
+export const getSearchedMovie = (id) => async (dispatch) => {
   dispatch({
     type: GET_SEARCHED_MOVIE,
-    payload: id
+    payload: id,
   });
 };
 
-
-
-export const getMovie = id => async dispatch => {
+export const getMovie = (id) => async (dispatch) => {
   try {
     dispatch({
       type: GET_MOVIES,
-      payload: id
+      payload: id,
     });
   } catch (e) {
     dispatch({
-      type: GET_MOVIE_ERR
+      type: GET_MOVIE_ERR,
     });
   }
 };
 
-
-
-export const setMovies = movies => async dispatch => {
+export const setMovies = (movies) => async (dispatch) => {
   try {
     dispatch({
       type: SET_MOVIES,
-      payload: movies
+      payload: movies,
     });
   } catch (e) {
     dispatch({
       type: SET_MOVIE_ERR,
-      payload: e
+      payload: e,
     });
   }
 };
 
-
-
-export const setTvShowsReducer = tvShows => async dispatch => {
+export const setTvShowsReducer = (tvShows) => async (dispatch) => {
   try {
     dispatch({
       type: SET_TVSHOWS,
-      payload: tvShows
+      payload: tvShows,
     });
   } catch (e) {
     dispatch({
-      type: SET_TVSHOWS_ERR
+      type: SET_TVSHOWS_ERR,
     });
   }
 };
 
-
-
-export const getShow = id => async dispatch => {
+export const getShow = (id) => async (dispatch) => {
   try {
     dispatch({
       type: GET_SHOW,
-      payload: id
+      payload: id,
     });
   } catch (e) {
     dispatch({
-      type: GET_SHOW_ERR
+      type: GET_SHOW_ERR,
     });
   }
 };
 
-
-
-export const loadMovieDetails = () => async dispatch => {
+export const loadMovieDetails = () => async (dispatch) => {
   dispatch({
-    type: LOAD_MOVIE_DETAILS
+    type: LOAD_MOVIE_DETAILS,
   });
 };
 
-
-
-export const setRelatedMovies = movies => async dispatch => {
+export const setRelatedMovies = (movies) => async (dispatch) => {
   try {
-
     const res = await axios.post("/api/movie", movies);
 
-    console.log(res.data)
-    
+    console.log(res.data);
+
     dispatch({
       type: SET_RELATED_MOVIES,
-      payload: res.data
+      payload: res.data,
     });
   } catch (error) {
-    // console.log(error.response.data.errors)
+    console.log(error.response.data.errors);
   }
 };
 
-
-
-export const getRelatedId = () => async dispatch => {
-
+export const getRelatedId = () => async (dispatch) => {
   try {
     const res = await axios.get("/api/movie/genre_id");
 
-    console.log(res.data)
+    console.log(res.data);
 
     dispatch({
       type: SET_GENRE_ID,
-      payload: res.data
-    })
-
-
+      payload: res.data,
+    });
   } catch (error) {}
 };
 
+export const fetchApi = (key, page) => async (dispatch) => {
+  fetch(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&page=${page}`
+  )
+    .then((res) => res.json())
+    .then((data) =>
+      dispatch({
+        type: SET_MOVIES,
+        payload: data.results,
+      })
+    );
+};
 
-export const getMovieVideo = () => async dispatch => {
+export const nextPage = (page) => async (dispatch) => {
+  dispatch({
+    type: NEXT_PAGE,
+    payload: page,
+  });
+};
 
+export const prevPage = (page) => async (dispatch) => {
+  dispatch({
+    type: PREV_PAGE,
+    payload: page,
+  });
+};
+
+export const getMovieVideo = () => async (dispatch) => {
   try {
-    
-
-  } catch (error) {
-    
-  }
-
-}
+  } catch (error) {}
+};

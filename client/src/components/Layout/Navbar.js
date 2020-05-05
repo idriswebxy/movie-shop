@@ -13,7 +13,7 @@ import {
   MDBNavbarBrand,
   MDBCollapse,
   MDBNavbarToggler,
-  MDBNavbarNav
+  MDBNavbarNav,
 } from "mdbreact";
 import { register } from "../../actions/auth";
 import PropTypes from "prop-types";
@@ -25,10 +25,7 @@ const Navbar = ({
   auth: { authenticated, isLoading, userInfo },
   logOut,
   cart,
-  pageNum
 }) => {
-
-
   const [collapse, setCollapse] = useState(false);
 
   const navColor = { backgroundColor: "#00CED1" };
@@ -43,27 +40,27 @@ const Navbar = ({
 
     setTimeout(() => {
       setCollapse(false);
-    }, 2500); 
+    }, 2500);
   };
 
   const authLinks = (
     <MDBNavbar style={navColor} dark expand="md" scrolling fixed="top">
       <MDBNavbarBrand>
         <MDBNavLink style={{ color: "white" }} to="/movies">
-          Movie Shop <MDBIcon icon="home" /> 
+          Movie Shop <MDBIcon icon="home" />
         </MDBNavLink>
       </MDBNavbarBrand>
       <MDBNavbarToggler onClick={onClick} />
       <MDBCollapse isOpen={collapse} navbar>
-      <MDBIcon icon="user-alt" /> Welcome {userInfo.name + "!"}
+        <MDBIcon icon="user-alt" /> Welcome {userInfo.name + "!"}
         <MDBNavbarNav right>
-        <MDBNavItem active>
+          <MDBNavItem active>
             <MDBNavLink to="/tv_shows">
               TvShows <MDBIcon icon="film" />
             </MDBNavLink>
           </MDBNavItem>
           <MDBNavItem active>
-            <MDBNavLink to={"/movies"}>
+            <MDBNavLink to="/movies">
               Movies <MDBIcon icon="film" />
             </MDBNavLink>
           </MDBNavItem>
@@ -113,13 +110,12 @@ const Navbar = ({
 
 Navbar.propTypes = {
   logOut: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
   cart: state.cart.cart,
-  pageNum: state.movie.pageNum
 });
 
 export default connect(mapStateToProps, { logOut })(Navbar);

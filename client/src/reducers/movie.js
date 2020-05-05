@@ -12,7 +12,8 @@ import {
   GET_SHOW,
   SET_RELATED_MOVIES,
   SET_GENRE_ID,
-  CHANGE_PAGE
+  PREV_PAGE,
+  NEXT_PAGE
 } from "../actions/types";
 
 const initialState = {
@@ -24,6 +25,7 @@ const initialState = {
   currentMovie: null,
   relatedMovies: [],
   relatedId: null,
+  page: 1,
 };
 
 export default function (state = initialState, action) {
@@ -83,7 +85,7 @@ export default function (state = initialState, action) {
         ...state,
         movies: payload,
         isLoading: false,
-      }; 
+      };
     case SET_MOVIE_ERR:
       return null;
     case LOAD_MOVIE_DETAILS:
@@ -93,7 +95,16 @@ export default function (state = initialState, action) {
         isLoading: false,
         currentMovie: payload,
       };
-
+    case NEXT_PAGE:
+      return {
+        ...state,
+        page: payload + 1,
+      };
+    case PREV_PAGE:
+      return {
+        ...state,
+        page: payload - 1,
+      };
     default:
       return state;
   }

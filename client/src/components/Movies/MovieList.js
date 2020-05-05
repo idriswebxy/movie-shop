@@ -8,8 +8,10 @@ import {
   setMovies,
   clearCache,
   getRelatedId,
-  changePage,
   getMovieVideo,
+  fetchApi,
+  nextPage,
+  prevPage,
 } from "../../actions/movie";
 import { connect } from "react-redux";
 import Movie from "./Movie";
@@ -18,6 +20,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBView } from "mdbreact";
 import "../../App.css";
 import { SET_MOVIES } from "../../actions/types";
 import RelatedMovies from "./RelatedMovies";
+import axios from "axios";
 
 const MovieList = ({
   addToCart,
@@ -30,46 +33,57 @@ const MovieList = ({
   relatedMovies,
   getRelatedId,
   getMovieVideo,
+  fetchApi,
+  page,
+  nextPage,
+  prevPage,
 }) => {
-  const [vids, setVids] = useState(null);
-  let [page, changePage] = useState(1);
-
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${config.API_KEY}&language=en-US&page=${page}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setMovies(data.results);
-        loadCart();
-        // getRelatedId();
-        // getVid()
-      });
+    fetchApi(config.API_KEY, page);
+    loadCart();
   }, [page]);
 
-  const getVid = async () => {
-    await fetch(
-      "https://api.themoviedb.org/3/movie/38/videos?api_key=8fb61d9f021e57975ac7a2ef25b640a7&language=en-US"
-    )
-      .then((res) => res.json())
-      .then((data) => setVids(data.results));
-  };
-
-  const nextPage = (e) => {
-
-    if (page === 7) {
-      page = 9
-    }
-    else {
-      changePage(page + 1)
-    }
-
-    
-  };
+  // const getVid = async () => {
+  //   await fetch(
+  //     "https://api.themoviedb.org/3/movie/38/videos?api_key=8fb61d9f021e57975ac7a2ef25b640a7&language=en-US"
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => setVids(data.results));
+  // };
 
   if (isLoading) {
     return <SpinnerPage />;
   }
+
+  let pages = (
+    <nav aria-label="Page navigation example">
+      <ul className="pagination">
+        <li onClick={(e) => prevPage(page)} className="page-item">
+          <a className="page-link" href="#">
+            Previous
+          </a>
+        </li>
+        <li className="page-item">
+          <a className="page-link" href="#">
+            1
+          </a>
+        </li>
+        <li className="page-item">
+          <a className="page-link" href="#">
+            2
+          </a>
+        </li>
+        <li className="page-item">
+          <a className="page-link" href="#">
+            3
+          </a>
+        </li>
+        <li onClick={(e) => nextPage(page)} className="page-item">
+          <a className="page-link">Next</a>
+        </li>
+      </ul>
+    </nav>
+  );
 
   const movieList = (
     <MDBContainer>
@@ -84,7 +98,7 @@ const MovieList = ({
                   title={movie.title}
                   image={movie.poster_path}
                   overview={movie.overview}
-                  movieObj={movie}
+                  releaseDate={movie.release_date}
                   price={2.99}
                 />
               </div>
@@ -92,15 +106,14 @@ const MovieList = ({
           );
         })}
       </MDBRow>
-      <button onClick={(e) => nextPage(e)}>Next Page</button>
     </MDBContainer>
   );
 
   return (
-    <div>
+    <div className="movie-list">
       <SearchPage />
       {movieList}
-      <RelatedMovies />
+      <div className="pagination">{pages}</div>
     </div>
   );
 };
@@ -115,6 +128,7 @@ const mapStateToProps = (state) => ({
   isLoading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
   movies: state.movie.movies,
+  page: state.movie.page,
 });
 
 export default connect(mapStateToProps, {
@@ -124,4 +138,7 @@ export default connect(mapStateToProps, {
   setMovies,
   getRelatedId,
   getMovieVideo,
+  fetchApi,
+  nextPage,
+  prevPage,
 })(MovieList);

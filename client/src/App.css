@@ -1,7 +1,16 @@
- html {
+ /* html {
    background-color: rgb(9, 28, 37);
+ } */
+
+ .app-main {
+   /* box-sizing: border-box;
+   background-color: rgb(9, 28, 37); */
+   color: white;
  }
 
+ .movie-details {
+   background-image:
+ }
 
  .remove-btn {
    margin-right: 0.5rem;
@@ -56,6 +65,9 @@
    border-radius: 40px;
  }
 
+ .movie-list {
+   color: black
+ }
 
  .lblCartCount {
    font-size: 15px;
@@ -63,6 +75,11 @@
    color: black;
    padding: 0 4px;
    vertical-align: top;
+ }
+
+ .pagination nav ul {
+   margin: 30px;
+   position: absolute;
  }
 
  .align-cart {

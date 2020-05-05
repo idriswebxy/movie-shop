@@ -29,28 +29,20 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-const App = ({ isLoading, pageNum }) => {
-  
+const App = ({ isLoading, page }) => {
+
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
-
 
   if (isLoading) {
     return <SpinnerPage />;
   }
 
-
   return (
     <Router>
       <Alert />
-      <div
-        style={{
-          boxSizing: "border-box",
-          background: "rgb(9, 28, 37)",
-          color: "white",
-        }}
-      >
+      <div className="app-main">
         <Navbar />
         <Switch>
           <Route exact path="/" component={Landing} />
@@ -70,7 +62,7 @@ const App = ({ isLoading, pageNum }) => {
 
 const mapStateToProps = (state) => ({
   isLoading: state.auth.isLoading,
-  pageNum: state.movie.pageNum,
+  page: state.movie.page,
 });
 
 export default connect(mapStateToProps)(App);

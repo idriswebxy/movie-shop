@@ -15,6 +15,8 @@ const Movie = ({
   movie,
   movieObj,
   price,
+  releaseDate,
+  title
 }) => {
   // useEffect(() => {
 
@@ -29,8 +31,8 @@ const Movie = ({
             src={`http://image.tmdb.org/t/p/w185${image}`}
           />
         </Link>
-        <h5>{movieObj.original_title}</h5>
-        <h6>({movieObj.release_date.slice(0, 4)})</h6>
+        <h5>{title}</h5>
+        <h6>{releaseDate}</h6>
       </div>
 
       <div>
