@@ -16,11 +16,8 @@ import {
 import { connect } from "react-redux";
 import Movie from "./Movie";
 import SearchPage from "../Search/Search";
-import { MDBContainer, MDBRow, MDBCol, MDBView } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol, MDBView, MDBIcon } from "mdbreact";
 import "../../App.css";
-import { SET_MOVIES } from "../../actions/types";
-import RelatedMovies from "./RelatedMovies";
-import axios from "axios";
 
 const MovieList = ({
   addToCart,
@@ -37,6 +34,7 @@ const MovieList = ({
   page,
   nextPage,
   prevPage,
+  authenticated,
 }) => {
   useEffect(() => {
     fetchApi(config.API_KEY, page);
@@ -58,28 +56,17 @@ const MovieList = ({
   let pages = (
     <nav aria-label="Page navigation example">
       <ul className="pagination">
-        <li onClick={(e) => prevPage(page)} className="page-item">
-          <a className="page-link" href="#">
-            Previous
-          </a>
+        <li onClick={() => prevPage(page)} className="page-item">
+          <MDBIcon className="highlight-hover" size="2x" icon="angle-double-left" />
         </li>
-        <li className="page-item">
-          <a className="page-link" href="#">
-            1
-          </a>
-        </li>
-        <li className="page-item">
-          <a className="page-link" href="#">
-            2
-          </a>
-        </li>
-        <li className="page-item">
-          <a className="page-link" href="#">
-            3
-          </a>
-        </li>
-        <li onClick={(e) => nextPage(page)} className="page-item">
-          <a className="page-link">Next</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <li onClick={() => nextPage(page)} className="page-item">
+          <MDBIcon className="highlight-hover" size="2x" icon="angle-double-right" />
         </li>
       </ul>
     </nav>
@@ -112,7 +99,9 @@ const MovieList = ({
   return (
     <div className="movie-list">
       <SearchPage />
+      <div className="pagination">{pages}</div>
       {movieList}
+
       <div className="pagination">{pages}</div>
     </div>
   );

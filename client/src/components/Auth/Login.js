@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 import PropTypes from "prop-types";
 
-const Login = ({ login, authenticated, pageNum }) => {
+const Login = ({ login, authenticated, page }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -79,7 +79,7 @@ Login.propTypes = {
 
 const mapStateToProps = (state) => ({
   authenticated: state.auth.authenticated,
-  pageNum: state.movie.pageNum,
+  page: state.movie.page
 });
 
 export default connect(mapStateToProps, { login })(Login);

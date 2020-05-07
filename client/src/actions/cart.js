@@ -3,7 +3,8 @@ import {
   CART_ERROR,
   LOAD_CART,
   DELETE_ITEM,
-  PRICE_TOTAL
+  PRICE_TOTAL,
+  CHANGE_LOAD
 } from "./types";
 import axios from "axios";
 import { setAlert } from "./alert";
@@ -70,6 +71,7 @@ export const loadCart = () => async dispatch => {
       type: LOAD_CART,
       payload: res.data
     });
+
   } catch (error) {
     dispatch({
       type: CART_ERROR
@@ -87,6 +89,10 @@ export const getCart = id => async dispatch => {
       type: LOAD_CART,
       payload: res.data
     });
+    // dispatch({
+    //   type:CHANGE_LOAD,
+    //   payload: 
+    // })
   } catch (err) {
     dispatch({
       type: CART_ERROR,

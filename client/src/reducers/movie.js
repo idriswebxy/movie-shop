@@ -2,6 +2,7 @@ import {
   GET_MOVIES,
   GET_MOVIE_ERR,
   SET_MOVIES,
+  CHANGE_LOAD,
   SET_MOVIE_ERR,
   SET_SEARCHED_MOVIE,
   CLEAR_MOVIE,
@@ -105,6 +106,11 @@ export default function (state = initialState, action) {
         ...state,
         page: payload - 1,
       };
+    case CHANGE_LOAD:
+    return {
+      ...state,
+      isLoading: false
+    }
     default:
       return state;
   }

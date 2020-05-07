@@ -44,4 +44,4 @@ export const SET_GENRE_ID = "SET_GENRE_ID";
 export const CHANGE_PAGE = "CHANGE_PAGE";
 export const NEXT_PAGE = "NEXT_PAGE";
 export const PREV_PAGE ="PREV_PAGE";
-  
+export const CHANGE_LOAD = "CHANGE_LOAD";  

@@ -34,7 +34,7 @@ const MovieDetails = ({
       // }}
     >
       <MDBContainer>
-        <div>
+        <div className="movie-details">
           <div>
             <img
               style={{
@@ -42,10 +42,10 @@ const MovieDetails = ({
                 borderRadius: "10px",
               }}
               src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
-            />
+            /> <h6>{movie.overview}</h6>
 
             <h3>{movie.title}</h3>
-            <h6>{movie.overview}</h6>
+           
             <MDBBtn onClick={() => addToCart(movie)}>
               Add To Cart <MDBIcon icon="cart-plus" />
             </MDBBtn>

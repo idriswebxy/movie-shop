@@ -15,11 +15,11 @@ import {
   SET_GENRE_ID,
   CHANGE_PAGE,
   NEXT_PAGE,
-  PREV_PAGE
+  PREV_PAGE,
+  CHANGE_LOAD
 } from "../actions/types";
 import axios from "axios";
 import config from "../config.json";
-
 
 export const setSearchedMovies = (movie) => async (dispatch) => {
   try {
@@ -58,6 +58,9 @@ export const setMovies = (movies) => async (dispatch) => {
       type: SET_MOVIES,
       payload: movies,
     });
+    dispatch({
+      type: CHANGE_LOAD
+    });
   } catch (e) {
     dispatch({
       type: SET_MOVIE_ERR,
@@ -80,11 +83,11 @@ export const setTvShowsReducer = (tvShows) => async (dispatch) => {
 };
 
 export const getShow = (id) => async (dispatch) => {
+  dispatch({
+    type: GET_SHOW,
+    payload: id,
+  });
   try {
-    dispatch({
-      type: GET_SHOW,
-      payload: id,
-    });
   } catch (e) {
     dispatch({
       type: GET_SHOW_ERR,
@@ -116,8 +119,6 @@ export const setRelatedMovies = (movies) => async (dispatch) => {
 export const getRelatedId = () => async (dispatch) => {
   try {
     const res = await axios.get("/api/movie/genre_id");
-
-    console.log(res.data);
 
     dispatch({
       type: SET_GENRE_ID,
