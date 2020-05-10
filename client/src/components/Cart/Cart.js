@@ -45,7 +45,7 @@ const Cart = ({ cart, loadCart, getPriceTotal, total, loading }) => {
           );
         })}
 
-        <div style={{ marginLeft: "10px" }}>
+        <div style={{ marginLeft: "10px", color: 'black' }}>
           <h2>Total: ${total}</h2>
           <MDBNavLink to="/checkout">
             <MDBBtn>Check Out</MDBBtn>

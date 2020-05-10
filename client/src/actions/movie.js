@@ -148,6 +148,11 @@ export const nextPage = (page) => async (dispatch) => {
 };
 
 export const prevPage = (page) => async (dispatch) => {
+
+  console.log(page)
+
+  page = page === 1 ? page = 2 : page
+
   dispatch({
     type: PREV_PAGE,
     payload: page,

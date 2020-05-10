@@ -68,7 +68,6 @@ const App = ({ isLoading }) => {
 
 const mapStateToProps = (state) => ({
   isLoading: state.auth.isLoading,
-  page: state.movie.page,
 });
 
 export default connect(mapStateToProps)(App);

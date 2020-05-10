@@ -104,7 +104,7 @@ export default function (state = initialState, action) {
     case PREV_PAGE:
       return {
         ...state,
-        page: payload - 1,
+        page: payload - 1
       };
     case CHANGE_LOAD:
     return {

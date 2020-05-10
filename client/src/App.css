@@ -1,6 +1,6 @@
- /* html {
+ html {
    background-color: rgb(9, 28, 37);
- } */
+ }
 
  .app-main {
    /* box-sizing: border-box;
@@ -8,8 +8,8 @@
    color: white;
  }
 
- .movie-details {
-   background-image:
+ .movie-details img, h6, h3 {
+    display: inline-block
  }
 
  .remove-btn {
@@ -100,6 +100,7 @@
    margin: 30px;
    margin-right: 50px;
    padding: 10px;
+   color: black;
  }
 
  /* 

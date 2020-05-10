@@ -53,18 +53,19 @@ const MovieList = ({
     return <SpinnerPage />;
   }
 
+
   let pages = (
     <nav aria-label="Page navigation example">
       <ul className="pagination">
-        <li onClick={() => prevPage(page)} className="page-item">
-          <MDBIcon className="highlight-hover" size="2x" icon="angle-double-left" />
-        </li>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
+      <li onClick={() => prevPage(page)} className="page-item">
+        <MDBIcon className="highlight-hover" size="2x" icon="angle-double-left" />
+      </li>
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
         <li onClick={() => nextPage(page)} className="page-item">
           <MDBIcon className="highlight-hover" size="2x" icon="angle-double-right" />
         </li>
@@ -87,6 +88,7 @@ const MovieList = ({
                   overview={movie.overview}
                   releaseDate={movie.release_date}
                   price={2.99}
+                  movieObj={movie}
                 />
               </div>
             </MDBCol>

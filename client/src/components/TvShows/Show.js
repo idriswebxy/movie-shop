@@ -16,7 +16,7 @@ const Show = ({
   addToCartTvShow
 }) => {
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign: "center", color: 'black' }}>
       <div>
         <Link to="/show_details" onClick={() => getShow(id)}>
           <img

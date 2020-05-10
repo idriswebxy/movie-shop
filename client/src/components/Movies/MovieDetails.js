@@ -23,7 +23,8 @@ const MovieDetails = ({
   }
 
   return (
-    <div className="movie-details"
+    <div
+      className=""
       // style={{
       //   backgroundImage: `linear-gradient(to right,
       //   rgba(19, 38, 47, 0.925) 0%,
@@ -36,16 +37,9 @@ const MovieDetails = ({
       <MDBContainer>
         <div className="movie-details">
           <div>
-            <img
-              style={{
-                width: "20rem",
-                borderRadius: "10px",
-              }}
-              src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
-            /> <h6>{movie.overview}</h6>
-
+            <img src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`} />{" "}
+            <h6>{movie.overview}</h6>
             <h3>{movie.title}</h3>
-           
             <MDBBtn onClick={() => addToCart(movie)}>
               Add To Cart <MDBIcon icon="cart-plus" />
             </MDBBtn>

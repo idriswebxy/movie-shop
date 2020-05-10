@@ -11,7 +11,7 @@ import { setAlert } from "./alert";
 
 
 
-export const addToCart = item => async dispatch => {
+export const addToCart = movie => async dispatch => {
 
   const config = {
     headers: {
@@ -19,7 +19,7 @@ export const addToCart = item => async dispatch => {
     }
   };
 
-  const body = JSON.stringify(item);
+  const body = JSON.stringify(movie);
 
   try {
     const res = await axios.post("/api/cart", body, config);
@@ -96,7 +96,7 @@ export const getCart = id => async dispatch => {
   } catch (err) {
     dispatch({
       type: CART_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      // payload: { msg: err.response.statusText, status: err.response.status }
     });
   }
 };

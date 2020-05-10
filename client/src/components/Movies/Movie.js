@@ -5,6 +5,8 @@ import { getMovie } from "../../actions/movie";
 import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart } from "../../actions/cart";
 import { MDBView, MDBContainer, MDBBtn, MDBIcon } from "mdbreact";
+import moment from "moment";
+
 
 const Movie = ({
   id,
@@ -18,9 +20,8 @@ const Movie = ({
   releaseDate,
   title
 }) => {
-  // useEffect(() => {
-
-  // }, [])
+  useEffect(() => {
+  }, [])
 
   return (
     <div style={{ textAlign: "center" }}>
@@ -32,7 +33,7 @@ const Movie = ({
           />
         </Link>
         <h5>{title}</h5>
-        <h6>{releaseDate}</h6>
+        <h6>{moment(releaseDate).format("LL")}</h6>
       </div>
 
       <div>
