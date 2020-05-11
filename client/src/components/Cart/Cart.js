@@ -8,20 +8,18 @@ import { deleteItem, loadCart, getPriceTotal } from "../../actions/cart";
 import CartItem from "./CartItem";
 import SpinnerPage from "../Layout/SpinnerPage";
 
-
 const Cart = ({ cart, loadCart, getPriceTotal, total, loading }) => {
-
   useEffect(() => {
     loadCart();
     getPriceTotal(cart);
-    console.log(cart)
+    console.log(cart);
   }, []);
 
   if (loading) {
     return <SpinnerPage />;
   }
 
-  return (
+  let cartItems = (
     <div>
       <h3>Cart: {cart.length} item(s)</h3>
       <div>
@@ -45,7 +43,7 @@ const Cart = ({ cart, loadCart, getPriceTotal, total, loading }) => {
           );
         })}
 
-        <div style={{ marginLeft: "10px", color: 'black' }}>
+        <div style={{ marginLeft: "10px", color: "white" }}>
           <h2>Total: ${total}</h2>
           <MDBNavLink to="/checkout">
             <MDBBtn>Check Out</MDBBtn>
@@ -54,20 +52,22 @@ const Cart = ({ cart, loadCart, getPriceTotal, total, loading }) => {
       </div>
     </div>
   );
+
+  return <div>{cartItems}</div>;
 };
 
 Cart.propTypes = {
-  loadCart: PropTypes.func.isRequired
+  loadCart: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   cart: state.cart.cart,
   total: state.cart.totalPrice,
-  loading: state.cart.loading
+  loading: state.cart.loading,
 });
 
 export default connect(mapStateToProps, {
   deleteItem,
   loadCart,
-  getPriceTotal
+  getPriceTotal,
 })(Cart);

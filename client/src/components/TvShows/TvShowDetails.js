@@ -13,7 +13,7 @@ const TvShowDetails = ({
   loadMovieDetails,
   getMovie,
   loadCart,
-  tvShow
+  tvShow,
 }) => {
   useEffect(() => {
     loadCart();
@@ -23,7 +23,7 @@ const TvShowDetails = ({
     return <SpinnerPage />;
   }
 
-  return (
+  let tvShowDetails = (
     <MDBContainer>
       <div
         style={{
@@ -32,12 +32,12 @@ const TvShowDetails = ({
             rgba(9, 28, 37, 0.925) 100%), url(https://image.tmdb.org/t/p/w1280${tvShow.backdrop_path})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          marginTop: "40px"
+          marginTop: "100px",
         }}
       >
         <div>
           <img
-            style={{ width: "20rem", borderRadius: "10px" }}
+            style={{ width: "20rem" }}
             src={`https://image.tmdb.org/t/p/w342${tvShow.poster_path}`}
           />
 
@@ -50,16 +50,18 @@ const TvShowDetails = ({
       </div>
     </MDBContainer>
   );
+
+  return <div>{tvShowDetails}</div>;
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   tvShow: state.movie.searchedShow,
-  isLoading: state.movie.isLoading
+  isLoading: state.movie.isLoading,
 });
 
 export default connect(mapStateToProps, {
   addToCart,
   loadMovieDetails,
   getMovie,
-  loadCart
+  loadCart,
 })(TvShowDetails);

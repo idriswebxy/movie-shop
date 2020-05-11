@@ -13,10 +13,10 @@ const Show = ({
   isLoading,
   tvShowObj,
   price,
-  addToCartTvShow
+  addToCartTvShow,
 }) => {
-  return (
-    <div style={{ textAlign: "center", color: 'black' }}>
+  let showList = (
+    <div style={{ textAlign: "center" }}>
       <div>
         <Link to="/show_details" onClick={() => getShow(id)}>
           <img
@@ -36,10 +36,12 @@ const Show = ({
       </div>
     </div>
   );
+
+  return <div>{showList}</div>;
 };
 
-const mapStateToProps = state => ({
-  isLoading: state.movie.isLoading
+const mapStateToProps = (state) => ({
+  isLoading: state.movie.isLoading,
 });
 
 export default connect(mapStateToProps, { getShow, addToCartTvShow })(Show);

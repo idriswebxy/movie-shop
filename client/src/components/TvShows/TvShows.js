@@ -55,9 +55,7 @@ const TvShows = ({
   return (
     <div>
       <SearchPage />
-      <MDBContainer>
-       {shows}
-      </MDBContainer>
+      <MDBContainer>{shows}</MDBContainer>
 
       <RelatedMovies />
     </div>

@@ -53,21 +53,23 @@ const MovieList = ({
     return <SpinnerPage />;
   }
 
-
   let pages = (
     <nav aria-label="Page navigation example">
       <ul className="pagination">
-      <li onClick={() => prevPage(page)} className="page-item">
-        <MDBIcon className="highlight-hover" size="2x" icon="angle-double-left" />
-      </li>
-      &nbsp;
-      &nbsp;
-      &nbsp;
-      &nbsp;
-      &nbsp;
-      &nbsp;
+        <li onClick={() => prevPage(page)} className="page-item">
+          <MDBIcon
+            className="white-text pr-3"
+            size="2x"
+            icon="angle-double-left"
+          />
+        </li>
+        &nbsp; &nbsp; &nbsp; Page: {page} &nbsp; &nbsp; &nbsp; &nbsp;
         <li onClick={() => nextPage(page)} className="page-item">
-          <MDBIcon className="highlight-hover" size="2x" icon="angle-double-right" />
+          <MDBIcon
+            className="white-text pr-3"
+            size="2x"
+            icon="angle-double-right"
+          />
         </li>
       </ul>
     </nav>
@@ -103,7 +105,6 @@ const MovieList = ({
       <SearchPage />
       <div className="pagination">{pages}</div>
       {movieList}
-
       <div className="pagination">{pages}</div>
     </div>
   );

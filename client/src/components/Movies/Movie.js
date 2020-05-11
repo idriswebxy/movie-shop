@@ -24,7 +24,7 @@ const Movie = ({
   }, [])
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign: "center", color: 'white' }}>
       <div>
         <Link to="/movie_details" onClick={() => getMovie(id)}>
           <img

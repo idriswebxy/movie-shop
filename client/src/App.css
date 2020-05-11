@@ -3,13 +3,13 @@
  }
 
  .app-main {
-   /* box-sizing: border-box;
-   background-color: rgb(9, 28, 37); */
+   box-sizing: border-box;
+   background-color: rgb(9, 28, 37);
    color: white;
  }
 
  .movie-details img, h6, h3 {
-    display: inline-block
+    
  }
 
  .remove-btn {
@@ -65,13 +65,12 @@
    border-radius: 40px;
  }
 
- .movie-list {
-   color: black;
- }
+ /* .movie-list {
+   color: white;
+ } */
 
 
  .movie-details {
-  color: black;
   margin-top: 85px;
   display: flexbox;
  }
@@ -90,6 +89,7 @@
    display: flex;
    margin-bottom: 20px;
    margin-top: 20px;
+   cursor: pointer;
  }
 
  .align-cart {
@@ -122,16 +122,16 @@
  }
 
 
- .page-pagination ul a {
+ /* .page-pagination ul a {
    border: 2px solid white;
-   color: white;
- }
+
+ } */
 
  .page-pagination-inner {
    display: flexbox;
  }
 
  .highlight-hover:hover {
-  background-color: turquoise;
+  background-color: red;
   cursor: pointer;
  }

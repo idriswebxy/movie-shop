@@ -22,17 +22,17 @@ const MovieDetails = ({
     return <SpinnerPage />;
   }
 
-  return (
+  let movieDetails = (
     <div
-      className=""
-      // style={{
-      //   backgroundImage: `linear-gradient(to right,
-      //   rgba(19, 38, 47, 0.925) 0%,
-      //   rgba(9, 28, 37, 0.925) 100%), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
-      //   backgroundRepeat: "no-repeat",
-      //   backgroundSize: "cover",
-      //   marginTop: "100px",
-      // }}
+      className="movie-details"
+      style={{
+        backgroundImage: `linear-gradient(to right,
+      rgba(19, 38, 47, 0.925) 0%,
+      rgba(9, 28, 37, 0.925) 100%), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        marginTop: "100px",
+      }}
     >
       <MDBContainer>
         <div className="movie-details">
@@ -48,6 +48,8 @@ const MovieDetails = ({
       </MDBContainer>
     </div>
   );
+
+  return <div>{movieDetails}</div>;
 };
 
 const mapStateToProps = (state) => ({
