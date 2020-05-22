@@ -36,10 +36,7 @@ const TvShowDetails = ({
         }}
       >
         <div>
-          <img
-            style={{ width: "20rem" }}
-            src={`https://image.tmdb.org/t/p/w342${tvShow.poster_path}`}
-          />
+          <img src={`https://image.tmdb.org/t/p/w342${tvShow.poster_path}`} />
 
           <h3>{tvShow.name}</h3>
           <h6>{tvShow.overview}</h6>

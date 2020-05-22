@@ -17,7 +17,9 @@ import { connect } from "react-redux";
 import Movie from "./Movie";
 import SearchPage from "../Search/Search";
 import { MDBContainer, MDBRow, MDBCol, MDBView, MDBIcon } from "mdbreact";
+import RelatedMovies from "./RelatedMovies";
 import "../../App.css";
+
 
 const MovieList = ({
   addToCart,
@@ -106,6 +108,7 @@ const MovieList = ({
       <div className="pagination">{pages}</div>
       {movieList}
       <div className="pagination">{pages}</div>
+      <RelatedMovies />
     </div>
   );
 };

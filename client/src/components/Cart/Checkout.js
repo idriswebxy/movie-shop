@@ -11,7 +11,7 @@ const Checkout = () => {
           paddingTop: "20%",
           margin: "auto",
           display: "flex",
-          color: "black",
+          color: "white",
         }}
       >
         Your order is complete!{" "}
