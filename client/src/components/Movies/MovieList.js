@@ -37,10 +37,12 @@ const MovieList = ({
   nextPage,
   prevPage,
   authenticated,
+  searchedMovie
 }) => {
   useEffect(() => {
     fetchApi(config.API_KEY, page);
     loadCart();
+    getRelatedId();
   }, [page]);
 
   // const getVid = async () => {
@@ -124,6 +126,7 @@ const mapStateToProps = (state) => ({
   authenticated: state.auth.authenticated,
   movies: state.movie.movies,
   page: state.movie.page,
+  searchedMovie: state.movie.searchedMovie
 });
 
 export default connect(mapStateToProps, {

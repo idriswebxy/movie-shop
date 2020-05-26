@@ -1,5 +1,5 @@
 import {
-  GET_MOVIES,
+  GET_MOVIE,
   GET_MOVIE_ERR,
   SET_MOVIES,
   SET_MOVIE_ERR,
@@ -42,7 +42,7 @@ export const getSearchedMovie = (id) => async (dispatch) => {
 export const getMovie = (id) => async (dispatch) => {
   try {
     dispatch({
-      type: GET_MOVIES,
+      type: GET_MOVIE,
       payload: id,
     });
   } catch (e) {
@@ -112,13 +112,18 @@ export const setRelatedMovies = (movies) => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
-    console.log(error.response.data.errors);
+    // console.error(error.response.data.errors);
+    console.log(error)
   }
 };
 
+
 export const getRelatedId = () => async (dispatch) => {
   try {
+
     const res = await axios.get("/api/movie/genre_id");
+
+    console.log(res.data)
 
     dispatch({
       type: SET_GENRE_ID,

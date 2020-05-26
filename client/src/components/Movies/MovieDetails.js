@@ -13,6 +13,7 @@ const MovieDetails = ({
   loadMovieDetails,
   getMovie,
   loadCart,
+  isLoading_app,
 }) => {
   useEffect(() => {
     loadCart();
@@ -35,11 +36,17 @@ const MovieDetails = ({
       }}
     >
       <MDBContainer>
-        <div className="movie-details">
-          <div>
+        <div className="row">
+          <div className="">
             <img src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`} />{" "}
-            <h6>{movie.overview}</h6>
+          </div>
+          <div className="col">
             <h3>{movie.title}</h3>
+          </div>
+          <div className="col">
+            <div>{movie.overview}</div>
+          </div>
+          <div>
             <MDBBtn onClick={() => addToCart(movie)}>
               Add To Cart <MDBIcon icon="cart-plus" />
             </MDBBtn>
@@ -55,6 +62,7 @@ const MovieDetails = ({
 const mapStateToProps = (state) => ({
   movie: state.movie.searchedMovie,
   isLoading: state.movie.isLoading,
+  isLoading_app: state.auth.isLoading,
 });
 
 export default connect(mapStateToProps, {

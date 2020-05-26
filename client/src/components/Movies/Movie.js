@@ -21,6 +21,7 @@ const Movie = ({
   title
 }) => {
   useEffect(() => {
+
   }, [])
 
   return (

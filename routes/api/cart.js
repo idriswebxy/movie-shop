@@ -48,8 +48,6 @@ router.get("/", async (req, res) => {
 // Add to cart
 router.post("/", (req, res) => {
 
-  console.log("====>" + req.body)
-
   const { id, title, poster_path, overview, release_date, genre_ids } = req.body;
 
 

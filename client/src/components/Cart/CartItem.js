@@ -26,7 +26,7 @@ const CartItem = ({
         <h3>{movieName}</h3>
         <div>${price}</div>
       </div>
-    </div>
+    </div>  
   );
 };
 

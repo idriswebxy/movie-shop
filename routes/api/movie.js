@@ -4,7 +4,7 @@ const router = express.Router();
 const Cart = require("../../models/Cart");
 
 
-
+// return 5 related movies
 router.post("/", async (req, res) => {
   let movieList = req.body;
 
@@ -17,26 +17,31 @@ router.post("/", async (req, res) => {
 
 
 
+// return related id
+router.get("/genre_id", async (req, res) => {   
 
-// router.get("/genre_id", async (req, res) => {
-//   console.log("api ran....");
+  try {
 
-//   try {
-//     await Cart.find({}, (err, id) => {
-//       id.map(movie => {
-//         if (movie.genreId.length > 0) {
-//           console.log(movie)
-//           res.json(movie.genreId[0])
-//         }
-//         else {
-//           res.json("NONE")
-//         }
-//       })
+    await Cart.find({}, (err, movie) => {
+      
+      let relatedIds = []
 
-//     });
-//   } catch (err) {
-//     return res.status(404).json({ msg: "Item id not found" });
-//   }
-// });
+      movie.map(id => {
+        if (id.genreId === " ") {
+          res.json(null)
+        }
+        relatedIds.push(id.genreId)
+      })
+      var items = relatedIds[Math.floor(Math.random() * relatedIds.length)];
+      var id = items[Math.floor(Math.random() * items.length)];
+      res.json(id)
+    })
+
+
+
+  } catch (err) {
+    return res.status(404).json({ msg: "Item id not found" });
+  }
+});
 
 module.exports = router;

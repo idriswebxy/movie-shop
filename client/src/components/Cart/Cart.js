@@ -12,7 +12,6 @@ const Cart = ({ cart, loadCart, getPriceTotal, total, loading }) => {
   useEffect(() => {
     loadCart();
     getPriceTotal(cart);
-    console.log(cart);
   }, []);
 
   if (loading) {

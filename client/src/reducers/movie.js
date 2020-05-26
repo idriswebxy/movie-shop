@@ -1,5 +1,5 @@
 import {
-  GET_MOVIES,
+  GET_MOVIE,
   GET_MOVIE_ERR,
   SET_MOVIES,
   CHANGE_LOAD,
@@ -33,7 +33,7 @@ export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_MOVIES:
+    case GET_MOVIE:
       return {
         ...state,
         searchedMovie: state.movies.find((movie) => movie.id === payload),

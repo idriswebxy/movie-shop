@@ -11,6 +11,7 @@ const initialState = {
   cart: [],
   totalPrice: 0.00,
   loading: true
+  
 };
 
 export default function(state = initialState, action) {
