@@ -5,7 +5,7 @@ import { addToCart, loadCart } from "../../actions/cart";
 import { MDBBtn, MDBIcon, MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { loadMovieDetails, setMovie } from "../../actions/movie";
 import SpinnerPage from "../Layout/SpinnerPage";
-import Rating from "react-rating";
+import StarRatings from "react-star-ratings";
 
 const MovieDetails = ({
   movie,
@@ -50,8 +50,13 @@ const MovieDetails = ({
             </MDBCol>
           </MDBCol>
           <MDBCol>
-            <Rating readonly initialRating={movie.vote_average / 2} /> (
-            {movie.vote_count}) <div>{movie.overview}</div>
+            <StarRatings
+              isSelectable
+              starRatedColor="yellow"
+              numberOfStars={5}
+              rating={movie.vote_average / 2}
+            />{" "}
+            ({movie.vote_count}) <div>{movie.overview}</div>
           </MDBCol>
         </MDBRow>
       </MDBContainer>

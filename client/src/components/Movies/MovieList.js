@@ -32,7 +32,7 @@ const MovieList = ({
   getRelatedId,
   getMovieVideo,
   fetchApi,
-  page,
+  page, 
   nextPage,
   prevPage,
   authenticated,
