@@ -5,6 +5,7 @@ import { addToCart, loadCart } from "../../actions/cart";
 import { MDBBtn, MDBIcon, MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { loadMovieDetails, setMovie } from "../../actions/movie";
 import SpinnerPage from "../Layout/SpinnerPage";
+import Rating from "react-rating";
 
 const MovieDetails = ({
   movie,
@@ -14,6 +15,7 @@ const MovieDetails = ({
   getMovie,
   loadCart,
   isLoading_app,
+  voteAverage,
 }) => {
   useEffect(() => {
     loadCart();
@@ -31,8 +33,7 @@ const MovieDetails = ({
         rgba(9, 28, 37, 0.925) 100%), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-    
-        padding: "120px"
+        padding: "165px",
       }}
     >
       <MDBContainer>
@@ -49,7 +50,8 @@ const MovieDetails = ({
             </MDBCol>
           </MDBCol>
           <MDBCol>
-            <div>{movie.overview}</div>
+            <Rating readonly initialRating={movie.vote_average / 2} /> (
+            {movie.vote_count}) <div>{movie.overview}</div>
           </MDBCol>
         </MDBRow>
       </MDBContainer>

@@ -20,7 +20,6 @@ import { MDBContainer, MDBRow, MDBCol, MDBView, MDBIcon } from "mdbreact";
 import RelatedMovies from "./RelatedMovies";
 import "../../App.css";
 
-
 const MovieList = ({
   addToCart,
   loadCart,
@@ -37,7 +36,7 @@ const MovieList = ({
   nextPage,
   prevPage,
   authenticated,
-  searchedMovie
+  searchedMovie,
 }) => {
   useEffect(() => {
     fetchApi(config.API_KEY, page);
@@ -126,7 +125,7 @@ const mapStateToProps = (state) => ({
   authenticated: state.auth.authenticated,
   movies: state.movie.movies,
   page: state.movie.page,
-  searchedMovie: state.movie.searchedMovie
+  searchedMovie: state.movie.searchedMovie,
 });
 
 export default connect(mapStateToProps, {

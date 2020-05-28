@@ -12,7 +12,7 @@ const RelatedMovies = ({
 }) => {
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${
+      `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${
         config.API_KEY
       }&language=en-US&page=1`
     )
@@ -36,7 +36,7 @@ const RelatedMovies = ({
 
   return (
     <div>
-      <h2>Related Movies</h2>
+      <h2 style={{ textAlign: "center", margin: "50px" }}>Related Movies</h2>
       <div className="related-movies-outerLayer">
         <div className="related-movies-inner-elements">
           {list.props.children[0]}
