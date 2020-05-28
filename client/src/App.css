@@ -8,8 +8,8 @@
    color: white;
  }
 
- .movie-details img, h6, h3 {
-    
+ .movie-details-spacing {
+    padding: 30px;
  }
 
  .remove-btn {

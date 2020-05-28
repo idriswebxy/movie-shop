@@ -33,30 +33,36 @@ const MovieDetails = ({
         rgba(9, 28, 37, 0.925) 100%), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        padding: "165px",
+        padding: "186px",
       }}
     >
       <MDBContainer>
         <MDBRow>
           <MDBCol size="4">
             <img src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`} />{" "}
-            <MDBCol>
-              <h3>{movie.title}</h3>
-            </MDBCol>
-            <MDBCol className="">
+            <MDBCol className="movie-details-spacing">
               <MDBBtn onClick={() => addToCart(movie)}>
                 Add To Cart <MDBIcon icon="cart-plus" />
               </MDBBtn>
             </MDBCol>
           </MDBCol>
           <MDBCol>
-            <StarRatings
-              isSelectable
-              starRatedColor="yellow"
-              numberOfStars={5}
-              rating={movie.vote_average / 2}
-            />{" "}
-            ({movie.vote_count}) <div>{movie.overview}</div>
+            <MDBCol className="movie-details-spacing">
+              <h3>{movie.title}</h3>
+            </MDBCol>
+            <MDBCol>
+              <StarRatings
+                isSelectable
+                starRatedColor="yellow"
+                starDimension="30px"
+                numberOfStars={5}
+                rating={movie.vote_average / 2}
+              />{" "}
+              ({movie.vote_count}){" "}
+              <MDBCol className="movie-details-spacing">
+                {movie.overview}
+              </MDBCol>
+            </MDBCol>
           </MDBCol>
         </MDBRow>
       </MDBContainer>
