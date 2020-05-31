@@ -9,7 +9,7 @@
  }
 
  .movie-details-spacing {
-    padding: 30px;
+   padding: 30px;
  }
 
  .remove-btn {
@@ -73,9 +73,9 @@
  } */
 
 
- .movie-details > {
-  margin-top: 85px;
-  display: flex;
+ .movie-details> {
+   margin-top: 85px;
+   display: flex;
 
  }
 
@@ -114,12 +114,6 @@
   
  } */
 
- .related-movies-outerLayer {
-   display: flex;
-   margin: 5%;
-   padding-left: 3%;
-
- }
 
  .related-movies-inner-elements {
    margin-right: 30px;
@@ -136,6 +130,6 @@
  }
 
  .highlight-hover:hover {
-  background-color: red;
-  cursor: pointer;
+   background-color: red;
+   cursor: pointer;
  }

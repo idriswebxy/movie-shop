@@ -49,6 +49,7 @@ const Movie = ({
 
 const mapStateToProps = (state) => ({
   isLoading: state.movie.isLoading,
+  
 });
 
 export default connect(mapStateToProps, { getMovie, addToCart })(Movie);

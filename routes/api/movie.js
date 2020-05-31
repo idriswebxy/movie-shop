@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
 
   let shuffled = movieList.sort(() => 0.5 - Math.random());
 
-  let selected = shuffled.slice(0, 6);
+  let selected = shuffled.slice(0, 7);
 
   res.json(selected);
 });
