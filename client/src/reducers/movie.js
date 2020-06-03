@@ -14,7 +14,8 @@ import {
   SET_RELATED_MOVIES,
   SET_GENRE_ID,
   PREV_PAGE,
-  NEXT_PAGE
+  NEXT_PAGE,
+  GET_RELATED_MOVIE_ID,
 } from "../actions/types";
 
 const initialState = {
@@ -23,7 +24,7 @@ const initialState = {
   tvShows: [],
   searchedMovie: null,
   searchedShow: null,
-  currentMovie: null,
+  relatedMovie: null,
   relatedMovies: [],
   relatedId: null,
   page: 1,
@@ -49,6 +50,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         searchedMovie: state.searchedMovie.find(
+          (movie) => movie.id === payload
+        ),
+      };
+    case GET_RELATED_MOVIE_ID:
+      return {
+        ...state,
+        relatedMovies: state.relatedMovies.find(
           (movie) => movie.id === payload
         ),
       };
@@ -104,13 +112,13 @@ export default function (state = initialState, action) {
     case PREV_PAGE:
       return {
         ...state,
-        page: payload - 1
+        page: payload - 1,
       };
     case CHANGE_LOAD:
-    return {
-      ...state,
-      isLoading: false
-    }
+      return {
+        ...state,
+        isLoading: false,
+      };
     default:
       return state;
   }

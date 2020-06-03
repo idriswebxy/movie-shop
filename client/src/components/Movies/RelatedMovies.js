@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import config from "../../config.json";
 import { connect } from "react-redux";
-import { setRelatedMovies, getRelatedId, getMovie } from "../../actions/movie";
+import { setRelatedMovies, getRelatedId, getRelatedMovie } from "../../actions/movie";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { Link } from "react-router-dom";
 
@@ -19,13 +19,15 @@ const RelatedMovies = ({
     )
       .then((res) => res.json())
       .then((data) => setRelatedMovies(data.results));
-  }, [page]);
+      console.log()
+  }, [page, movieId]);
+
 
   var list = (
     <div>
       {relatedMovies.map((movie, id) => (
         <div key={id}>
-          <Link to="/movie_details" onClick={() => getMovie(movie.id)}>
+          <Link to="/movie_details" onClick={() => getRelatedMovie(movie.id)}>
             <img
               className="d-block w-5"
               alt="First slide"

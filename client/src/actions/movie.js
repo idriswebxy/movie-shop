@@ -16,10 +16,14 @@ import {
   CHANGE_PAGE,
   NEXT_PAGE,
   PREV_PAGE,
-  CHANGE_LOAD
+  CHANGE_LOAD,
+  GET_RELATED_MOVIE_ID
 } from "../actions/types";
 import axios from "axios";
 import config from "../config.json";
+import { LOCATION_CHANGE } from "connected-react-router";
+
+
 
 export const setSearchedMovies = (movie) => async (dispatch) => {
   try {
@@ -31,6 +35,13 @@ export const setSearchedMovies = (movie) => async (dispatch) => {
     return;
   }
 };
+
+export const getRelatedMovie = (id) => async (dispatch) => {
+  dispatch({
+    type: GET_RELATED_MOVIE_ID,
+    payload: id
+  })
+}
 
 export const getSearchedMovie = (id) => async (dispatch) => {
   dispatch({
@@ -44,7 +55,7 @@ export const getMovie = (id) => async (dispatch) => {
     dispatch({
       type: GET_MOVIE,
       payload: id,
-    });
+    }); 
   } catch (e) {
     dispatch({
       type: GET_MOVIE_ERR,

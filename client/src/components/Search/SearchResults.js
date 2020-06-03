@@ -24,47 +24,47 @@ const SearchResults = ({ results, getMovie, isLoading, getSearchedMovie }) => {
 
   results = results.slice(0, 10);
 
-  return (
-    <div>
-      <MDBContainer>
-        {results && results.length !== 0 ? (
-          results.map((result) => (
-            <MDBListGroup style={{ width: "30rem" }}>
-              <Link
-                to="/movie_details"
-                onClick={() => getSearchedMovie(result.id)}
-              >
-                <MDBListGroupItem>
-                  <div
-                    key={result.id}
-                    style={{ color: "black", display: "block" }}
-                  >
-                    <MDBCardImage
-                      style={{ width: "5rem" }}
-                      src={`https://image.tmdb.org/t/p/w154${[
-                        result.poster_path,
-                      ]}`}
-                    />
+  let searchResults = (
+    <MDBContainer>
+      {results && results.length !== 0 ? (
+        results.map((result) => (
+          <MDBListGroup style={{ width: "30rem" }}>
+            <Link
+              to="/movie_details"
+              onClick={() => getSearchedMovie(result.id)}
+            >
+              <MDBListGroupItem>
+                <div
+                  key={result.id}
+                  style={{ color: "black", display: "block" }}
+                >
+                  <MDBCardImage
+                    style={{ width: "5rem" }}
+                    src={`https://image.tmdb.org/t/p/w154${[
+                      result.poster_path,
+                    ]}`}
+                  />
 
-                    {result.title}
-                    {` (${
-                      result.release_date
-                        ? moment(result.release_date).format("YYYY")
-                        : "N/A"
-                    })`}
-                  </div>
-                </MDBListGroupItem>
-              </Link>
-            </MDBListGroup>
-          ))
-        ) : (
-          <div>
-            <div>No results found...</div>
-          </div>
-        )}
-      </MDBContainer>
-    </div>
+                  {result.title}
+                  {` (${
+                    result.release_date
+                      ? moment(result.release_date).format("YYYY")
+                      : "N/A"
+                  })`}
+                </div>
+              </MDBListGroupItem>
+            </Link>
+          </MDBListGroup>
+        ))
+      ) : (
+        <div>
+          <div>No results found...</div>
+        </div>
+      )}
+    </MDBContainer>
   );
+
+  return <div>{searchResults}</div>;
 };
 
 const mapStateToProps = (state) => ({
