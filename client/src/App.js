@@ -26,13 +26,11 @@ import TvShows from "./components/TvShows/TvShows";
 import TvShowDetails from "./components/TvShows/TvShowDetails";
 import { fetchApi } from "./actions/movie";
 
-
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
 const App = ({ isLoading }) => {
-
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
@@ -50,11 +48,7 @@ const App = ({ isLoading }) => {
           <Route exact path="/" component={Landing} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
-          <PrivateRoute
-            exact
-            path={"/movies"}
-            component={MovieList}
-          />
+          <PrivateRoute exact path={"/movies"} component={MovieList} />
           <PrivateRoute exact path="/tv_shows" component={TvShows} />
           <PrivateRoute exact path="/movie_details" component={MovieDetails} />
           <PrivateRoute exact path="/show_details" component={TvShowDetails} />

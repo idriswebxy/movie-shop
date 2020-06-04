@@ -19,7 +19,6 @@ const RelatedMovies = ({
     )
       .then((res) => res.json())
       .then((data) => setRelatedMovies(data.results));
-      console.log()
   }, [page, movieId]);
 
 
@@ -42,7 +41,7 @@ const RelatedMovies = ({
   return (
     <MDBContainer>
       <div style={{ paddingBottom: "40px" }}>
-        <h2 style={{ textAlign: "center", margin: "50px" }}>Recomendations</h2>
+        <h2 style={{ textAlign: "center", margin: "50px" }}>Recommendations</h2>
         <MDBRow>
           <MDBCol>{list.props.children[0]}</MDBCol>
           <MDBCol>{list.props.children[1]}</MDBCol>

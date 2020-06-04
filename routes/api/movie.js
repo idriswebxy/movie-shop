@@ -33,8 +33,8 @@ router.get("/genre_id", async (req, res) => {
         relatedIds.push(id.genreId)
       })
       var items = relatedIds[Math.floor(Math.random() * relatedIds.length)];
-      var id = items[Math.floor(Math.random() * items.length)];
-      res.json(id)
+      // var id = items[Math.floor(Math.random() * items.length)];
+      res.json(items)
     })
 
 
