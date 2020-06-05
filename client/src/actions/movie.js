@@ -116,7 +116,6 @@ export const setRelatedMovies = (movies) => async (dispatch) => {
   try {
     const res = await axios.post("/api/movie", movies);
 
-    console.log(res.data);
 
     dispatch({
       type: SET_RELATED_MOVIES,
@@ -133,8 +132,6 @@ export const getRelatedId = () => async (dispatch) => {
   try {
 
     const res = await axios.get("/api/movie/genre_id");
-
-    console.log(res.data)
 
     dispatch({
       type: SET_GENRE_ID,

@@ -3,7 +3,6 @@ const router = express.Router();
 
 const Cart = require("../../models/Cart");
 
-
 // return 5 related movies
 router.post("/", async (req, res) => {
   let movieList = req.body;
@@ -17,28 +16,23 @@ router.post("/", async (req, res) => {
 
 
 
-// return related id
-router.get("/genre_id", async (req, res) => {   
-
+// return related movies
+router.get("/genre_id", async (req, res) => {
   try {
-
     await Cart.find({}, (err, movie) => {
-      
-      let relatedIds = []
+      let relatedIds = [];
 
-      movie.map(id => {
+      movie.map((id) => {
         if (id.genreId === " ") {
-          res.json(null)
+          res.json(null);
         }
-        relatedIds.push(id.genreId)
-      })
+        relatedIds.push(id.genreId);
+      });
+      console.log(relatedIds)
       var items = relatedIds[Math.floor(Math.random() * relatedIds.length)];
-      // var id = items[Math.floor(Math.random() * items.length)];
-      res.json(items)
-    })
-
-
-
+      console.log(items[Math.floor(Math.random() * items.length)])
+      res.json(items);
+    });
   } catch (err) {
     return res.status(404).json({ msg: "Item id not found" });
   }
