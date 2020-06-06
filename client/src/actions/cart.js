@@ -22,6 +22,8 @@ export const addToCart = movie => async dispatch => {
 
   const body = JSON.stringify(movie);
 
+
+
   try {
     const res = await axios.post("/api/cart", body, config);
 

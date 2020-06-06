@@ -12,65 +12,71 @@ const router = express.Router();
 
 const Cart = require("../../models/Cart");
 
-
 router.post("/total", async (req, res) => {
   try {
     let array = req.body;
 
-    let sum = 0.00;
+    let sum = 0.0;
 
     for (let i = 0; i < array.length; i++) {
       sum = array[i].price + sum;
     }
 
     res.json(sum);
-    
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server Error...");
   }
 });
 
-
 // Get all items
 router.get("/", async (req, res) => {
   try {
     const items = await Cart.find().sort({ date: -1 });
     res.json(items);
-
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
 });
 
-
 // Add to cart
 router.post("/", (req, res) => {
+  try {
+    const {
+      id,
+      title,
+      poster_path,
+      overview,
+      release_date,
+      genre_ids,
+    } = req.body;
 
-  const { id, title, poster_path, overview, release_date, genre_ids } = req.body;
+    const price = 2.99;
 
+    // Create new Product
+    const newItem = new Cart({
+      id: id,
+      name: title,
+      image: poster_path,
+      description: overview,
+      price: price,
+      genreId: genre_ids,
+      releaseDate: release_date,
+    });
 
-  const price = 2.99;
+    newItem.save().then((product) => res.json(product));
+  } catch (error) {
+    res.status(500).json()
+  }
 
-  // Create new Product
-  const newItem = new Cart({
-    id: id,
-    name: title,
-    image: poster_path,
-    description: overview,
-    price: price,
-    genreId: genre_ids,
-    releaseDate: release_date
-  });
-
-  newItem.save().then(product => res.json(product));
+  console.log(req.body);
 });
+
 
 
 // Add to cart for TvShows
 router.post("/tv_show", (req, res) => {
-  
   const { id, name, poster_path, overview, first_air_date } = req.body;
 
   const price = 2.99;
@@ -82,14 +88,11 @@ router.post("/tv_show", (req, res) => {
     image: poster_path,
     description: overview,
     price: price,
-    releaseDate: first_air_date
+    releaseDate: first_air_date,
   });
 
-  newItem.save().then(product => res.json(product));
+  newItem.save().then((product) => res.json(product));
 });
-
-
-
 
 // Delete item
 router.delete("/:id", async (req, res) => {

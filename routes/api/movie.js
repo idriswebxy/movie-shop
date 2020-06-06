@@ -28,10 +28,16 @@ router.get("/genre_id", async (req, res) => {
         }
         relatedIds.push(id.genreId);
       });
-      console.log(relatedIds)
+
       var items = relatedIds[Math.floor(Math.random() * relatedIds.length)];
-      console.log(items[Math.floor(Math.random() * items.length)])
-      res.json(items);
+
+      console.log("===> " + items)
+
+      if (items === undefined) {
+        res.json(null)
+      }
+
+      res.json(items[Math.floor(Math.random() * items.length)]);
     });
   } catch (err) {
     return res.status(404).json({ msg: "Item id not found" });
