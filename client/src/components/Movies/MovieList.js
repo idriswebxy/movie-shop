@@ -41,7 +41,7 @@ const MovieList = ({
   useEffect(() => {
     fetchApi(config.API_KEY, page);
     loadCart();
-    // getRelatedId(); // TODO: fix the related id return 
+    getRelatedId(); 
   }, [page]);
 
   // const getVid = async () => {

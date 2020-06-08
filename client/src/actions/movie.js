@@ -123,14 +123,13 @@ export const setRelatedMovies = (movies) => async (dispatch) => {
     });
   } catch (error) {
     // console.error(error.response.data.errors);
-    console.log(error)
   }
 };
 
 
 export const getRelatedId = () => async (dispatch) => {
   try {
-
+    
     const res = await axios.get("/api/movie/genre_id");
 
     dispatch({
