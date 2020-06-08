@@ -38,7 +38,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         searchedMovie: state.movies.find((movie) => movie.id === payload),
-        isLoading: false,
       };
     case GET_SHOW:
       return {
@@ -56,7 +55,7 @@ export default function (state = initialState, action) {
     case GET_RELATED_MOVIE_ID:
       return {
         ...state,
-        relatedMovies: state.relatedMovies.find(
+        searchedMovie: state.relatedMovies.find(
           (movie) => movie.id === payload
         ),
       };

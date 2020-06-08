@@ -7,16 +7,23 @@ import {
   getMovie,
   setMovies,
   clearCache,
-  getRelatedId,
   getMovieVideo,
   fetchApi,
   nextPage,
   prevPage,
+  setRelatedMovies,
 } from "../../actions/movie";
 import { connect } from "react-redux";
 import Movie from "./Movie";
 import SearchPage from "../Search/Search";
-import { MDBContainer, MDBRow, MDBCol, MDBView, MDBIcon } from "mdbreact";
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBView,
+  MDBIcon,
+  MDBAnimation,
+} from "mdbreact";
 import RelatedMovies from "./RelatedMovies";
 import "../../App.css";
 
@@ -29,10 +36,9 @@ const MovieList = ({
   isLoading,
   movies,
   relatedMovies,
-  getRelatedId,
   getMovieVideo,
   fetchApi,
-  page, 
+  page,
   nextPage,
   prevPage,
   authenticated,
@@ -41,7 +47,6 @@ const MovieList = ({
   useEffect(() => {
     fetchApi(config.API_KEY, page);
     loadCart();
-    getRelatedId(); 
   }, [page]);
 
   // const getVid = async () => {
@@ -56,6 +61,7 @@ const MovieList = ({
     return <SpinnerPage />;
   }
 
+  // page transition
   let pages = (
     <nav aria-label="Page navigation example">
       <ul className="pagination">
@@ -80,26 +86,28 @@ const MovieList = ({
 
   const movieList = (
     <MDBContainer>
-      <MDBRow>
-        {movies.map((movie, key) => {
-          return (
-            <MDBCol key={key} size="3">
-              <div className="hover-movie">
-                <Movie
-                  id={movie.id}
-                  addToCart={addToCart}
-                  title={movie.title}
-                  image={movie.poster_path}
-                  overview={movie.overview}
-                  releaseDate={movie.release_date}
-                  price={2.99}
-                  movieObj={movie}
-                />
-              </div>
-            </MDBCol>
-          );
-        })}
-      </MDBRow>
+      <MDBAnimation type="zoomIn" duration="1s">
+        <MDBRow>
+          {movies.map((movie, key) => {
+            return (
+              <MDBCol key={key} size="3">
+                <div className="hover-movie">
+                  <Movie
+                    id={movie.id}
+                    addToCart={addToCart}
+                    title={movie.title}
+                    image={movie.poster_path}
+                    overview={movie.overview}
+                    releaseDate={movie.release_date}
+                    price={2.99}
+                    movieObj={movie}
+                  />
+                </div>
+              </MDBCol>
+            );
+          })}
+        </MDBRow>
+      </MDBAnimation>
     </MDBContainer>
   );
 
@@ -133,7 +141,6 @@ export default connect(mapStateToProps, {
   loadCart,
   getCart,
   setMovies,
-  getRelatedId,
   getMovieVideo,
   fetchApi,
   nextPage,

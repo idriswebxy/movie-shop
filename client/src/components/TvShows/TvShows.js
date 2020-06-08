@@ -7,7 +7,7 @@ import { addToCart, loadCart, getCart } from "../../actions/cart";
 import SearchPage from "../Search/Search";
 import Show from "./Show";
 import RelatedMovies from "../Movies/RelatedMovies";
-import { MDBContainer, MDBRow, MDBCol, MDBView } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol, MDBView, MDBAnimation } from "mdbreact";
 
 const TvShows = ({
   setTvShowsReducer,
@@ -32,32 +32,35 @@ const TvShows = ({
   }
 
   let shows = (
-    <MDBRow>
-      {tvShows.map((tvShow, key) => {
-        return (
-          <MDBCol key={key} size="3">
-            <div className="hover-movie">
-              <Show
-                id={tvShow.id}
-                title={tvShow.name}
-                image={tvShow.poster_path}
-                overview={tvShow.overview}
-                tvShowObj={tvShow}
-                price={2.99}
-              />
-            </div>
-          </MDBCol>
-        );
-      })}
-    </MDBRow>
+    <MDBAnimation type="zoomIn" duration="1s">
+      <MDBRow>
+        {tvShows.map((tvShow, key) => {
+          return (
+            <MDBCol key={key} size="3">
+              <div className="hover-movie">
+                <Show
+                  id={tvShow.id}
+                  title={tvShow.name}
+                  image={tvShow.poster_path}
+                  overview={tvShow.overview}
+                  tvShowObj={tvShow}
+                  price={2.99}
+                />
+              </div>
+            </MDBCol>
+          );
+        })}
+      </MDBRow>
+    </MDBAnimation>
   );
 
   return (
     <div>
       <SearchPage />
       <MDBContainer>{shows}</MDBContainer>
-
-      <RelatedMovies />
+      <MDBAnimation type="zoomIn" duration="1s">
+        <RelatedMovies />
+      </MDBAnimation>
     </div>
   );
 };

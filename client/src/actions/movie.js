@@ -17,13 +17,11 @@ import {
   NEXT_PAGE,
   PREV_PAGE,
   CHANGE_LOAD,
-  GET_RELATED_MOVIE_ID
+  GET_RELATED_MOVIE_ID,
 } from "../actions/types";
 import axios from "axios";
 import config from "../config.json";
 import { LOCATION_CHANGE } from "connected-react-router";
-
-
 
 export const setSearchedMovies = (movie) => async (dispatch) => {
   try {
@@ -37,11 +35,13 @@ export const setSearchedMovies = (movie) => async (dispatch) => {
 };
 
 export const getRelatedMovie = (id) => async (dispatch) => {
+  console.log(id);
+
   dispatch({
     type: GET_RELATED_MOVIE_ID,
-    payload: id
-  })
-}
+    payload: id,
+  });
+};
 
 export const getSearchedMovie = (id) => async (dispatch) => {
   dispatch({
@@ -55,7 +55,7 @@ export const getMovie = (id) => async (dispatch) => {
     dispatch({
       type: GET_MOVIE,
       payload: id,
-    }); 
+    });
   } catch (e) {
     dispatch({
       type: GET_MOVIE_ERR,
@@ -70,7 +70,7 @@ export const setMovies = (movies) => async (dispatch) => {
       payload: movies,
     });
     dispatch({
-      type: CHANGE_LOAD
+      type: CHANGE_LOAD,
     });
   } catch (e) {
     dispatch({
@@ -112,32 +112,32 @@ export const loadMovieDetails = () => async (dispatch) => {
   });
 };
 
-export const setRelatedMovies = (movies) => async (dispatch) => {
+
+export const setRelatedMovies = () => async (dispatch) => {
   try {
-    const res = await axios.post("/api/movie", movies);
+    const resId = await axios.get("/api/movie/genre_id");
+   
+    fetch(
+      `https://api.themoviedb.org/3/movie/${resId.data}/similar?api_key=${config.API_KEY}&language=en-US&page=1`
+    )
+      .then((res) => res.json())
+      .then((data) => {
 
+        let shuffled = data.results.sort(() => 0.5 - Math.random());
 
-    dispatch({
-      type: SET_RELATED_MOVIES,
-      payload: res.data,
-    });
+        let selected = shuffled.slice(0, 6);
+
+        dispatch({
+          type: SET_RELATED_MOVIES,
+          payload: selected,
+        });
+
+      });
   } catch (error) {
     // console.error(error.response.data.errors);
   }
 };
 
-
-export const getRelatedId = () => async (dispatch) => {
-  try {
-    
-    const res = await axios.get("/api/movie/genre_id");
-
-    dispatch({
-      type: SET_GENRE_ID,
-      payload: res.data,
-    });
-  } catch (error) {}
-};
 
 export const fetchApi = (key, page) => async (dispatch) => {
   fetch(
@@ -160,9 +160,7 @@ export const nextPage = (page) => async (dispatch) => {
 };
 
 export const prevPage = (page) => async (dispatch) => {
-
-
-  page = page === 1 ? page = 2 : page
+  page = page === 1 ? (page = 2) : page;
 
   dispatch({
     type: PREV_PAGE,

@@ -3,20 +3,20 @@ const router = express.Router();
 
 const Cart = require("../../models/Cart");
 
-// return 5 related movies
-router.post("/", async (req, res) => {
-  try {
-    let movieList = req.body;
+// // return 5 related movies
+// router.post("/", async (req, res) => {
+//   try {
+//     let movieList = req.body;
 
-    let shuffled = movieList.sort(() => 0.5 - Math.random());
+//     let shuffled = movieList.sort(() => 0.5 - Math.random());
 
-    let selected = shuffled.slice(0, 7);
+//     let selected = shuffled.slice(0, 7);
 
-    res.json(selected);
-  } catch (error) {
-    res.status(500).json("Server Error...");
-  }
-});
+//     res.json(selected);
+//   } catch (error) {
+//     res.status(500).json("Server Error...");
+//   }
+// });
 
 // return related movies
 router.get("/genre_id", async (req, res) => {

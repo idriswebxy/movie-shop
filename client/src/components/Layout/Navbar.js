@@ -26,15 +26,10 @@ const Navbar = ({
   logOut,
   cart,
 }) => {
-
   const [collapse, setCollapse] = useState(false);
 
   const navColor = { backgroundColor: "#00CED1" };
   const container = { height: 1300 };
-
-  useEffect(() => {
-    console.log(cart.length)
-  })
 
   const onClick = () => {
     setCollapse(true);
@@ -74,7 +69,7 @@ const Navbar = ({
             <MDBNavLink to="/cart">
               <div className="align-cart">
                 Cart <MDBIcon icon="shopping-cart" />
-                <div className="lblCartCount">{cart.length === undefined ? 0 : cart.length}</div>
+                <div className="lblCartCount">{cart.length}</div>
               </div>
             </MDBNavLink>
           </MDBNavItem>
