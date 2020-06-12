@@ -13,22 +13,20 @@ const RelatedMovies = ({
   page,
   id,
   isLoading,
-  getRelatedMovie
+  getRelatedMovie,
 }) => {
   useEffect(() => {
     setRelatedMovies();
     console.log(relatedMovies);
   }, [page]);
 
-
-
   return (
     <MDBContainer>
       <div style={{ paddingBottom: "40px" }}>
-        <h2 style={{ textAlign: "center", margin: "50px" }}>Recommendations</h2>
+        <h2 style={{ textAlign: "center", margin: "30px" }}>Recommendations</h2>
         <MDBRow>
           {relatedMovies.map((movie, id) => (
-            <div key={id}>
+            <div style={{ margin: "20px" }} key={id}>
               <Link
                 to="/movie_details"
                 onClick={() => getRelatedMovie(movie.id)}
@@ -50,7 +48,9 @@ const RelatedMovies = ({
 const mapStateToProps = (state) => ({
   relatedMovies: state.movie.relatedMovies,
   page: state.movie.page,
-  isLoading: state.movie.isLoading
+  isLoading: state.movie.isLoading,
 });
 
-export default connect(mapStateToProps, { setRelatedMovies, getRelatedMovie })(RelatedMovies);
+export default connect(mapStateToProps, { setRelatedMovies, getRelatedMovie })(
+  RelatedMovies
+);

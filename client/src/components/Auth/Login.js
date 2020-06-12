@@ -9,10 +9,10 @@ import {
   MDBNavLink,
 } from "mdbreact";
 import { connect } from "react-redux";
-import { login } from "../../actions/auth";
+import { login, guestLogin } from "../../actions/auth";
 import PropTypes from "prop-types";
 
-const Login = ({ login, authenticated, page }) => {
+const Login = ({ login, authenticated, page, guestLogin }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -31,6 +31,8 @@ const Login = ({ login, authenticated, page }) => {
   if (authenticated) {
     return <Redirect to={"/movies"} />;
   }
+
+
 
   return (
     <MDBContainer>
@@ -64,6 +66,7 @@ const Login = ({ login, authenticated, page }) => {
               <MDBCol>
                 <MDBBtn type="submit">Login</MDBBtn>
               </MDBCol>
+
             </MDBRow>
           </form>
         </MDBCol>
@@ -82,4 +85,4 @@ const mapStateToProps = (state) => ({
   page: state.movie.page
 });
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { login, guestLogin })(Login);

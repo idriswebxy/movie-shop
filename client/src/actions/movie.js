@@ -124,7 +124,7 @@ export const setRelatedMovies = () => async (dispatch) => {
 
         let shuffled = data.results.sort(() => 0.5 - Math.random());
 
-        let selected = shuffled.slice(0, 6);
+        let selected = shuffled.slice(0, 5);
 
         dispatch({
           type: SET_RELATED_MOVIES,
