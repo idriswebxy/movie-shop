@@ -68,9 +68,9 @@
 
 
 
- /* .movie-list {
-   color: white;
- } */
+ .movie-list {
+   margin-top: 20px;
+ }
 
 
  .movie-details {
@@ -91,8 +91,7 @@
    margin-left: auto;
    margin-right: auto;
    display: flex;
-
-   margin-top: 80px;
+   margin-top: 20px;
    cursor: pointer;
  }
 
