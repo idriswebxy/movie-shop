@@ -12,7 +12,8 @@ const RelatedMovies = ({
   getRelatedId,
   page,
   id,
-  isLoading
+  isLoading,
+  getRelatedMovie
 }) => {
   useEffect(() => {
     setRelatedMovies();
@@ -52,4 +53,4 @@ const mapStateToProps = (state) => ({
   isLoading: state.movie.isLoading
 });
 
-export default connect(mapStateToProps, { setRelatedMovies })(RelatedMovies);
+export default connect(mapStateToProps, { setRelatedMovies, getRelatedMovie })(RelatedMovies);

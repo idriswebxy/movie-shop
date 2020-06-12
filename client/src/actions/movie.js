@@ -35,7 +35,6 @@ export const setSearchedMovies = (movie) => async (dispatch) => {
 };
 
 export const getRelatedMovie = (id) => async (dispatch) => {
-  console.log(id);
 
   dispatch({
     type: GET_RELATED_MOVIE_ID,
