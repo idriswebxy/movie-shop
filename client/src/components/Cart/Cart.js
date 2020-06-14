@@ -3,7 +3,16 @@ import { connect } from "react-redux";
 import Img from "react-image";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBNavLink } from "mdbreact";
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBBtn,
+  MDBNavLink,
+  MDBTable,
+  MDBTableHead,
+  MDBTableBody,
+} from "mdbreact";
 import { deleteItem, loadCart, getPriceTotal } from "../../actions/cart";
 import CartItem from "./CartItem";
 import SpinnerPage from "../Layout/SpinnerPage";
@@ -20,39 +29,47 @@ const Cart = ({ cart, loadCart, getPriceTotal, total, loading }) => {
 
   let cartItems = (
     <div>
-      <h3>Cart: {cart.length} item(s)</h3>
-      <div>
-        {cart.map((movie, key) => {
-          return (
-            <div className="movie-border" key={key}>
-              <MDBContainer>
-                <MDBRow>
-                  <MDBCol>
-                    <CartItem
-                      movieImg={movie.image}
-                      movieDesc={movie.description}
-                      movieName={movie.name}
-                      movieId={movie._id}
-                      price={movie.price}
-                    />
-                  </MDBCol>
-                </MDBRow>
-              </MDBContainer>
-            </div>
-          );
-        })}
-
-        <div style={{ marginLeft: "10px", color: "white" }}>
-          <h2>Total: ${total}</h2>
-          <MDBNavLink to="/checkout">
-            <MDBBtn>Check Out</MDBBtn>
-          </MDBNavLink>
-        </div>
-      </div>
+      {cart.map((movie) => (
+        <MDBTable>
+          <MDBTableHead>
+            <tr>
+              <th>Movies</th>
+              <th>Price</th>
+            </tr>
+          </MDBTableHead>
+          <MDBTableBody>
+            <tr>
+              <div>
+                <td>
+                  <img src={`https://image.tmdb.org/t/p/w92${movie.image}`} />
+                  <h5>{movie.name}</h5>
+                  <div>{movie.price}</div>
+                </td>
+              </div>
+            </tr>
+          </MDBTableBody>
+        </MDBTable>
+      ))}
     </div>
   );
 
-  return <div>{cartItems}</div>;
+  let checkOut = (
+    <div style={{ marginLeft: "10px", color: "white" }}>
+      <h2>Total: ${total}</h2>
+      <MDBNavLink to="/checkout">
+        <MDBBtn>Check Out</MDBBtn>
+      </MDBNavLink>
+    </div>
+  );
+
+  return (
+    <MDBContainer>
+      <div style={{ marginTop: "100px" }}>
+        <h3>Cart: {cart.length} item(s)</h3>
+        <div>{cartItems}</div>
+      </div>
+    </MDBContainer>
+  );
 };
 
 Cart.propTypes = {

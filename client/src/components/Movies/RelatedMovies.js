@@ -17,7 +17,6 @@ const RelatedMovies = ({
 }) => {
   useEffect(() => {
     setRelatedMovies();
-    console.log(relatedMovies);
   }, [page]);
 
   return (

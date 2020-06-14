@@ -85,40 +85,40 @@ const MovieList = ({
   );
 
   const movieList = (
-    <MDBContainer>
-      <MDBAnimation type="zoomIn" duration="1s">
-        <MDBRow>
-          {movies.map((movie, key) => {
-            return (
-              <MDBCol key={key} size="3">
-                <div className="hover-movie">
-                  <Movie
-                    id={movie.id}
-                    addToCart={addToCart}
-                    title={movie.title}
-                    image={movie.poster_path}
-                    overview={movie.overview}
-                    releaseDate={movie.release_date}
-                    price={2.99}
-                    movieObj={movie}
-                  />
-                </div>
-              </MDBCol>
-            );
-          })}
-        </MDBRow>
-      </MDBAnimation>
-    </MDBContainer>
+    <MDBAnimation type="zoomIn" duration="1s">
+      <MDBRow>
+        {movies.map((movie, key) => {
+          return (
+            <MDBCol key={key} size="3">
+              <div className="hover-movie">
+                <Movie
+                  id={movie.id}
+                  addToCart={addToCart}
+                  title={movie.title}
+                  image={movie.poster_path}
+                  overview={movie.overview}
+                  releaseDate={movie.release_date}
+                  price={2.99}
+                  movieObj={movie}
+                />
+              </div>
+            </MDBCol>
+          );
+        })}
+      </MDBRow>
+    </MDBAnimation>
   );
 
   return (
-    <div className="movie-list">
-      <SearchPage />
-      <div className="pagination">{pages}</div>
-      {movieList}
-      <div className="pagination">{pages}</div>
-      <RelatedMovies />
-    </div>
+    <MDBContainer>
+      <div className="movie-list">
+        <SearchPage />
+        <div className="pagination">{pages}</div>
+        {movieList}
+        <div className="pagination">{pages}</div>
+        <RelatedMovies />
+      </div>
+    </MDBContainer>
   );
 };
 

@@ -35,7 +35,6 @@ export const setSearchedMovies = (movie) => async (dispatch) => {
 };
 
 export const getRelatedMovie = (id) => async (dispatch) => {
-
   dispatch({
     type: GET_RELATED_MOVIE_ID,
     payload: id,
@@ -111,17 +110,15 @@ export const loadMovieDetails = () => async (dispatch) => {
   });
 };
 
-
 export const setRelatedMovies = () => async (dispatch) => {
   try {
     const resId = await axios.get("/api/movie/genre_id");
-   
+
     fetch(
       `https://api.themoviedb.org/3/movie/${resId.data}/similar?api_key=${config.API_KEY}&language=en-US&page=1`
     )
       .then((res) => res.json())
       .then((data) => {
-
         let shuffled = data.results.sort(() => 0.5 - Math.random());
 
         let selected = shuffled.slice(0, 5);
@@ -130,25 +127,23 @@ export const setRelatedMovies = () => async (dispatch) => {
           type: SET_RELATED_MOVIES,
           payload: selected,
         });
-
       });
   } catch (error) {
     // console.error(error.response.data.errors);
   }
 };
 
-
 export const fetchApi = (key, page) => async (dispatch) => {
   fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&page=${page}`
   )
     .then((res) => res.json())
-    .then((data) =>
+    .then((data) => {
       dispatch({
         type: SET_MOVIES,
         payload: data.results,
-      })
-    );
+      });
+    });
 };
 
 export const nextPage = (page) => async (dispatch) => {
