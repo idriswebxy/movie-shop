@@ -17,11 +17,11 @@ import { deleteItem, loadCart, getPriceTotal } from "../../actions/cart";
 import CartItem from "./CartItem";
 import SpinnerPage from "../Layout/SpinnerPage";
 
-const Cart = ({ cart, loadCart, getPriceTotal, total, loading }) => {
+const Cart = ({ cart, loadCart, getPriceTotal, total, loading, deleteItem }) => {
   useEffect(() => {
     loadCart();
     getPriceTotal(cart);
-  }, []);
+  }, [loading]);
 
   if (loading) {
     return <SpinnerPage />;
@@ -29,27 +29,28 @@ const Cart = ({ cart, loadCart, getPriceTotal, total, loading }) => {
 
   let cartItems = (
     <div>
-      {cart.map((movie) => (
-        <MDBTable>
-          <MDBTableHead>
+      <MDBTable>
+        <MDBTableHead>
+          <tr>
+            <th>Movie</th>
+            <th>Price</th>
+          </tr>
+        </MDBTableHead>
+        <MDBTableBody>
+          {cart.map((movie) => (
             <tr>
-              <th>Movies</th>
-              <th>Price</th>
+              <td>
+                <img src={`https://image.tmdb.org/t/p/w92${movie.image}`} />
+                <h5>{movie.name}</h5>
+              </td>
+              <td>
+                <div>{movie.price}</div>
+              </td>
+              <td><MDBBtn onClick={() => deleteItem(movie.id)}>Remove</MDBBtn></td>
             </tr>
-          </MDBTableHead>
-          <MDBTableBody>
-            <tr>
-              <div>
-                <td>
-                  <img src={`https://image.tmdb.org/t/p/w92${movie.image}`} />
-                  <h5>{movie.name}</h5>
-                  <div>{movie.price}</div>
-                </td>
-              </div>
-            </tr>
-          </MDBTableBody>
-        </MDBTable>
-      ))}
+          ))}
+        </MDBTableBody>
+      </MDBTable>
     </div>
   );
 
@@ -67,6 +68,7 @@ const Cart = ({ cart, loadCart, getPriceTotal, total, loading }) => {
       <div style={{ marginTop: "100px" }}>
         <h3>Cart: {cart.length} item(s)</h3>
         <div>{cartItems}</div>
+        <div>{checkOut}</div>
       </div>
     </MDBContainer>
   );
