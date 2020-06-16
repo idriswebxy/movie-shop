@@ -17,7 +17,7 @@ import { deleteItem, loadCart, getPriceTotal } from "../../actions/cart";
 import CartItem from "./CartItem";
 import SpinnerPage from "../Layout/SpinnerPage";
 
-const Cart = ({ cart, loadCart, getPriceTotal, total, loading, deleteItem }) => {
+const Cart = ({ cart, loadCart, getPriceTotal, total, loading, deleteItem, price=2.99 }) => {
   useEffect(() => {
     loadCart();
     getPriceTotal(cart);
@@ -46,7 +46,7 @@ const Cart = ({ cart, loadCart, getPriceTotal, total, loading, deleteItem }) => 
               <td>
                 <div>{movie.price}</div>
               </td>
-              <td><MDBBtn onClick={() => deleteItem(movie.id)}>Remove</MDBBtn></td>
+              <td><MDBBtn onClick={() => deleteItem(movie.id, price)}>Remove</MDBBtn></td>
             </tr>
           ))}
         </MDBTableBody>

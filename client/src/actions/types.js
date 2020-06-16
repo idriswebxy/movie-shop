@@ -46,3 +46,5 @@ export const NEXT_PAGE = "NEXT_PAGE";
 export const PREV_PAGE ="PREV_PAGE";
 export const CHANGE_LOAD = "CHANGE_LOAD";  
 export const GET_RELATED_MOVIE_ID = "GET_RELATED_MOVIE_ID";
+export const GET_MOVIE_VIDEO = "GET_MOVIE_VIDEO";
+export const SET_MOVIE_ID = "SET_MOVIE_ID";

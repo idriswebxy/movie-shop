@@ -58,9 +58,7 @@ const TvShows = ({
     <div>
       <SearchPage />
       <MDBContainer>{shows}</MDBContainer>
-      <MDBAnimation type="zoomIn" duration="1s">
-        <RelatedMovies />
-      </MDBAnimation>
+      <RelatedMovies />
     </div>
   );
 };

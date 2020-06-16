@@ -36,7 +36,7 @@ const MovieList = ({
   isLoading,
   movies,
   relatedMovies,
-  getMovieVideo,
+  // getMovieVideo,
   fetchApi,
   page,
   nextPage,
@@ -49,13 +49,6 @@ const MovieList = ({
     loadCart();
   }, [page]);
 
-  // const getVid = async () => {
-  //   await fetch(
-  //     "https://api.themoviedb.org/3/movie/38/videos?api_key=8fb61d9f021e57975ac7a2ef25b640a7&language=en-US"
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => setVids(data.results));
-  // };
 
   if (isLoading) {
     return <SpinnerPage />;
@@ -110,15 +103,15 @@ const MovieList = ({
   );
 
   return (
-    <MDBContainer>
-      <div className="movie-list">
+    <div className="movie-list">
+      <MDBContainer>
         <SearchPage />
         <div className="pagination">{pages}</div>
         {movieList}
         <div className="pagination">{pages}</div>
-        <RelatedMovies />
-      </div>
-    </MDBContainer>
+      </MDBContainer>
+      <RelatedMovies />
+    </div>
   );
 };
 
@@ -141,7 +134,7 @@ export default connect(mapStateToProps, {
   loadCart,
   getCart,
   setMovies,
-  getMovieVideo,
+  // getMovieVideo,
   fetchApi,
   nextPage,
   prevPage,

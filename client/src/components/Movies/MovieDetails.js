@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { getMovie, loadMovieDetail } from "../../actions/movie";
+import { getMovie, loadMovieDetail, getMovieVideo } from "../../actions/movie";
 import { addToCart, loadCart } from "../../actions/cart";
 import { MDBBtn, MDBIcon, MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { loadMovieDetails, setMovie } from "../../actions/movie";
 import SpinnerPage from "../Layout/SpinnerPage";
 import StarRatings from "react-star-ratings";
+import ReactPlayer from "react-player/youtube";
 
 const MovieDetails = ({
   movie,
@@ -16,9 +17,12 @@ const MovieDetails = ({
   loadCart,
   isLoading_app,
   voteAverage,
+  // getMovieVideo,
+  videoKey,
 }) => {
   useEffect(() => {
     loadCart();
+    // getMovieVideo();
   }, []);
 
   if (isLoading) {
@@ -64,6 +68,11 @@ const MovieDetails = ({
               </MDBCol>
             </MDBCol>
           </MDBCol>
+          <MDBCol>
+            <ReactPlayer
+              url={`https://www.youtube.com/watch?v=${videoKey}`}
+            />
+          </MDBCol>
         </MDBRow>
       </MDBContainer>
     </div>
@@ -76,6 +85,7 @@ const mapStateToProps = (state) => ({
   movie: state.movie.searchedMovie,
   isLoading: state.movie.isLoading,
   isLoading_app: state.auth.isLoading,
+  videoKey: state.movie.videoKey,
 });
 
 export default connect(mapStateToProps, {
@@ -83,4 +93,5 @@ export default connect(mapStateToProps, {
   loadMovieDetails,
   getMovie,
   loadCart,
+  // getMovieVideo,
 })(MovieDetails);

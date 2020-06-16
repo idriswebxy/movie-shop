@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getMovie } from "../../actions/movie";
+import { getMovie, getMovieVideo } from "../../actions/movie";
 import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart } from "../../actions/cart";
 import { MDBView, MDBContainer, MDBBtn, MDBIcon } from "mdbreact";
@@ -18,7 +18,8 @@ const Movie = ({
   movieObj,
   price,
   releaseDate,
-  title
+  title,
+
 }) => {
   useEffect(() => {
   }, [])

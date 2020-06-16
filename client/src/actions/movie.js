@@ -18,6 +18,8 @@ import {
   PREV_PAGE,
   CHANGE_LOAD,
   GET_RELATED_MOVIE_ID,
+  GET_MOVIE_VIDEO,
+  SET_MOVIE_ID,
 } from "../actions/types";
 import axios from "axios";
 import config from "../config.json";
@@ -54,6 +56,21 @@ export const getMovie = (id) => async (dispatch) => {
       type: GET_MOVIE,
       payload: id,
     });
+    dispatch({
+      type: SET_MOVIE_ID,
+      payload: id,
+    });
+
+    fetch(
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=8fb61d9f021e57975ac7a2ef25b640a7&language=en-US`
+    )
+      .then((res) => res.json())
+      .then((data) =>
+        dispatch({
+          type: GET_MOVIE_VIDEO,
+          payload: data.results[0].key,
+        })
+      );
   } catch (e) {
     dispatch({
       type: GET_MOVIE_ERR,
@@ -129,7 +146,7 @@ export const setRelatedMovies = () => async (dispatch) => {
         });
       });
   } catch (error) {
-    // console.error(error.response.data.errors);
+    console.error(error.response.data.errors);
   }
 };
 
@@ -162,7 +179,17 @@ export const prevPage = (page) => async (dispatch) => {
   });
 };
 
-export const getMovieVideo = () => async (dispatch) => {
-  try {
-  } catch (error) {}
-};
+// export const getMovieVideo = (id) => async (dispatch) => {
+//   try {
+//     fetch(
+//       `https://api.themoviedb.org/3/movie/${id}/videos?api_key=8fb61d9f021e57975ac7a2ef25b640a7&language=en-US`
+//     )
+//       .then((res) => res.json())
+//       .then((data) =>
+//         dispatch({
+//           type: GET_MOVIE_VIDEO,
+//           payload: data.results[0].key,
+//         })
+//       );
+//   } catch (error) {}
+// };
