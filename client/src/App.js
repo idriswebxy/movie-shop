@@ -25,6 +25,10 @@ import Checkout from "./components/Cart/Checkout";
 import TvShows from "./components/TvShows/TvShows";
 import TvShowDetails from "./components/TvShows/TvShowDetails";
 import { fetchApi } from "./actions/movie";
+import { createBrowserHistory } from "history";
+
+
+const history = createBrowserHistory()
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -40,7 +44,7 @@ const App = ({ isLoading }) => {
   }
 
   return (
-    <Router>
+    <Router history={history}>
       <Alert />
       <div className="app-main">
         <Navbar />

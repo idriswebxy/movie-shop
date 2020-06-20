@@ -16,8 +16,8 @@ import {
   PREV_PAGE,
   NEXT_PAGE,
   GET_RELATED_MOVIE_ID,
-  GET_MOVIE_VIDEO,
-  SET_MOVIE_ID
+  SET_VIDEO_KEY,
+  SET_MOVIE_ID,
 } from "../actions/types";
 
 const initialState = {
@@ -38,16 +38,15 @@ export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case SET_MOVIE_ID:
-      return {
-        ...state,
-        movieId: payload
-      }
     case GET_MOVIE:
       return {
         ...state,
         searchedMovie: state.movies.find((movie) => movie.id === payload),
-        movieId: null
+      };
+    case SET_MOVIE_ID:
+      return {
+        ...state,
+        movieId: payload,
       };
     case GET_SHOW:
       return {
@@ -128,10 +127,10 @@ export default function (state = initialState, action) {
         ...state,
         isLoading: false,
       };
-    case GET_MOVIE_VIDEO:
+    case SET_VIDEO_KEY:
       return {
         ...state,
-        videoKey: payload,
+        videoKey: payload
       };
     default:
       return state;

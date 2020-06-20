@@ -18,7 +18,7 @@ import {
   PREV_PAGE,
   CHANGE_LOAD,
   GET_RELATED_MOVIE_ID,
-  GET_MOVIE_VIDEO,
+  SET_VIDEO_KEY,
   SET_MOVIE_ID,
 } from "../actions/types";
 import axios from "axios";
@@ -51,26 +51,14 @@ export const getSearchedMovie = (id) => async (dispatch) => {
 };
 
 export const getMovie = (id) => async (dispatch) => {
+
+
   try {
     dispatch({
       type: GET_MOVIE,
       payload: id,
     });
-    dispatch({
-      type: SET_MOVIE_ID,
-      payload: id,
-    });
 
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=8fb61d9f021e57975ac7a2ef25b640a7&language=en-US`
-    )
-      .then((res) => res.json())
-      .then((data) =>
-        dispatch({
-          type: GET_MOVIE_VIDEO,
-          payload: data.results[0].key,
-        })
-      );
   } catch (e) {
     dispatch({
       type: GET_MOVIE_ERR,
@@ -131,7 +119,7 @@ export const setRelatedMovies = () => async (dispatch) => {
   try {
     const resId = await axios.get("/api/movie/genre_id");
 
-    fetch(
+    await fetch(
       `https://api.themoviedb.org/3/movie/${resId.data}/similar?api_key=${config.API_KEY}&language=en-US&page=1`
     )
       .then((res) => res.json())
@@ -151,7 +139,7 @@ export const setRelatedMovies = () => async (dispatch) => {
 };
 
 export const fetchApi = (key, page) => async (dispatch) => {
-  fetch(
+  await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&page=${page}`
   )
     .then((res) => res.json())
@@ -179,17 +167,17 @@ export const prevPage = (page) => async (dispatch) => {
   });
 };
 
-// export const getMovieVideo = (id) => async (dispatch) => {
-//   try {
-//     fetch(
-//       `https://api.themoviedb.org/3/movie/${id}/videos?api_key=8fb61d9f021e57975ac7a2ef25b640a7&language=en-US`
-//     )
-//       .then((res) => res.json())
-//       .then((data) =>
-//         dispatch({
-//           type: GET_MOVIE_VIDEO,
-//           payload: data.results[0].key,
-//         })
-//       );
-//   } catch (error) {}
-// };
+export const getMovieVideo = (id) => async (dispatch) => {
+  try {
+    await fetch(
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${config.API_KEY}&language=en-US`
+    )
+      .then((res) => res.json())
+      .then((data) =>
+        dispatch({
+          type: SET_VIDEO_KEY,
+          payload: data.results[0].key,
+        })
+      );
+  } catch (error) {}
+};

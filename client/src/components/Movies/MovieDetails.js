@@ -17,12 +17,12 @@ const MovieDetails = ({
   loadCart,
   isLoading_app,
   voteAverage,
-  // getMovieVideo,
+  getMovieVideo,
   videoKey,
 }) => {
   useEffect(() => {
     loadCart();
-    // getMovieVideo();
+    getMovieVideo(movie.id);
   }, []);
 
   if (isLoading) {
@@ -69,9 +69,7 @@ const MovieDetails = ({
             </MDBCol>
           </MDBCol>
           <MDBCol>
-            <ReactPlayer
-              url={`https://www.youtube.com/watch?v=${videoKey}`}
-            />
+            <ReactPlayer url={`https://www.youtube.com/watch?v=${videoKey}`} />
           </MDBCol>
         </MDBRow>
       </MDBContainer>
@@ -93,5 +91,5 @@ export default connect(mapStateToProps, {
   loadMovieDetails,
   getMovie,
   loadCart,
-  // getMovieVideo,
+  getMovieVideo,
 })(MovieDetails);

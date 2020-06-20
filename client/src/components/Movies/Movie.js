@@ -7,7 +7,6 @@ import { addToCart } from "../../actions/cart";
 import { MDBView, MDBContainer, MDBBtn, MDBIcon } from "mdbreact";
 import moment from "moment";
 
-
 const Movie = ({
   id,
   image,
@@ -19,13 +18,14 @@ const Movie = ({
   price,
   releaseDate,
   title,
-
+  getMovieVideo,
 }) => {
   useEffect(() => {
-  }, [])
+
+  }, []);
 
   return (
-    <div style={{ textAlign: "center", color: 'white' }}>
+    <div style={{ textAlign: "center", color: "white" }}>
       <div>
         <Link to="/movie_details" onClick={() => getMovie(id)}>
           <img
@@ -49,7 +49,8 @@ const Movie = ({
 
 const mapStateToProps = (state) => ({
   isLoading: state.movie.isLoading,
-  
 });
 
-export default connect(mapStateToProps, { getMovie, addToCart })(Movie);
+export default connect(mapStateToProps, { getMovie, addToCart, getMovieVideo })(
+  Movie
+);
