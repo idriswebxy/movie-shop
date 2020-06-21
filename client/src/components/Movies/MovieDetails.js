@@ -7,6 +7,9 @@ import { loadMovieDetails, setMovie } from "../../actions/movie";
 import SpinnerPage from "../Layout/SpinnerPage";
 import StarRatings from "react-star-ratings";
 import ReactPlayer from "react-player/youtube";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router";
+import config from "../../config.json";
 
 const MovieDetails = ({
   movie,
@@ -17,12 +20,17 @@ const MovieDetails = ({
   loadCart,
   isLoading_app,
   voteAverage,
-  getMovieVideo,
-  videoKey,
+  withRouter,
 }) => {
+  const [videoKey, setVideoKey] = useState("");
+
   useEffect(() => {
     loadCart();
-    getMovieVideo(movie.id);
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${config.API_KEY}&language=en-US`
+    )
+      .then((res) => res.json())
+      .then((data) => setVideoKey(data.results[0].key));
   }, []);
 
   if (isLoading) {
@@ -42,34 +50,25 @@ const MovieDetails = ({
     >
       <MDBContainer>
         <MDBRow>
-          <MDBCol size="4">
-            <img src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`} />{" "}
-            <MDBCol className="movie-details-spacing">
-              <MDBBtn onClick={() => addToCart(movie)}>
-                Add To Cart <MDBIcon icon="cart-plus" />
-              </MDBBtn>
-            </MDBCol>
-          </MDBCol>
-          <MDBCol>
-            <MDBCol className="movie-details-spacing">
-              <h3>{movie.title}</h3>
-            </MDBCol>
-            <MDBCol>
-              <StarRatings
-                isSelectable
-                starRatedColor="yellow"
-                starDimension="30px"
-                numberOfStars={5}
-                rating={movie.vote_average / 2}
-              />{" "}
-              ({movie.vote_count}){" "}
-              <MDBCol className="movie-details-spacing">
-                {movie.overview}
-              </MDBCol>
-            </MDBCol>
-          </MDBCol>
-          <MDBCol>
-            <ReactPlayer url={`https://www.youtube.com/watch?v=${videoKey}`} />
+          //// <img src={`https://image.tmdb.org/t/p/w330${movie.poster_path}`} />{" "}
+          <MDBCol size="7">
+            <ReactPlayer
+              playing="true"
+              url={`https://www.youtube.com/watch?v=${videoKey}`}
+            />
+            <MDBCol></MDBCol>
+            <MDBBtn onClick={() => addToCart(movie)}>
+              Add To Cart <MDBIcon icon="cart-plus" />
+            </MDBBtn>{" "}
+            <StarRatings
+              isSelectable
+              starRatedColor="yellow"
+              starDimension="30px"
+              numberOfStars={5}
+              rating={movie.vote_average / 2}
+            />
+            &nbsp; ({movie.vote_count})<h3>{movie.title}</h3>
+            <MDBCol>{movie.overview}</MDBCol>
           </MDBCol>
         </MDBRow>
       </MDBContainer>
@@ -79,17 +78,23 @@ const MovieDetails = ({
   return <div>{movieDetails}</div>;
 };
 
+MovieDetails.propTypes = {
+  match: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   movie: state.movie.searchedMovie,
   isLoading: state.movie.isLoading,
   isLoading_app: state.auth.isLoading,
-  videoKey: state.movie.videoKey,
 });
 
-export default connect(mapStateToProps, {
-  addToCart,
-  loadMovieDetails,
-  getMovie,
-  loadCart,
-  getMovieVideo,
-})(MovieDetails);
+export default withRouter(
+  connect(mapStateToProps, {
+    addToCart,
+    loadMovieDetails,
+    getMovie,
+    loadCart,
+  })(MovieDetails)
+);

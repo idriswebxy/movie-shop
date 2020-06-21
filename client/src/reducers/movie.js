@@ -18,6 +18,7 @@ import {
   GET_RELATED_MOVIE_ID,
   SET_VIDEO_KEY,
   SET_MOVIE_ID,
+  SET_MOVIE_IDS,
 } from "../actions/types";
 
 const initialState = {
@@ -32,6 +33,7 @@ const initialState = {
   videoKey: "",
   movieId: null,
   page: 1,
+  movieIds: []
 };
 
 export default function (state = initialState, action) {
@@ -125,13 +127,18 @@ export default function (state = initialState, action) {
     case CHANGE_LOAD:
       return {
         ...state,
-        isLoading: false,
+        isLoading: true,
       };
     case SET_VIDEO_KEY:
       return {
         ...state,
         videoKey: payload
       };
+    case SET_MOVIE_IDS:
+      return {
+        ...state,
+        movieIds: state.movieIds.push(payload)
+      }
     default:
       return state;
   }

@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getMovie, getMovieVideo } from "../../actions/movie";
+import { getMovie, getMovieIds } from "../../actions/movie";
 import SpinnerPage from "../Layout/SpinnerPage";
-import { addToCart } from "../../actions/cart";
+import { addToCart, loadCart } from "../../actions/cart";
 import { MDBView, MDBContainer, MDBBtn, MDBIcon } from "mdbreact";
 import moment from "moment";
+import MovieDetails from "./MovieDetails";
 
 const Movie = ({
   id,
@@ -18,10 +19,8 @@ const Movie = ({
   price,
   releaseDate,
   title,
-  getMovieVideo,
 }) => {
   useEffect(() => {
-
   }, []);
 
   return (
@@ -51,6 +50,6 @@ const mapStateToProps = (state) => ({
   isLoading: state.movie.isLoading,
 });
 
-export default connect(mapStateToProps, { getMovie, addToCart, getMovieVideo })(
+export default connect(mapStateToProps, { getMovie, addToCart })(
   Movie
 );

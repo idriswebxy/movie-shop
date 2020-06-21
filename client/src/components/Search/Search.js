@@ -8,6 +8,7 @@ import { setSearchedMovies } from "../../actions/movie";
 import config from "../../config.json";
 
 const Search = ({ setSearchedMovies }) => {
+  
   const [results, setResults] = useState([]);
   const [movieResults, showMovieResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

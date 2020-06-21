@@ -16,15 +16,17 @@ import {
   MDBNavbarNav,
 } from "mdbreact";
 import { register } from "../../actions/auth";
-import PropTypes from "prop-types";
+
 import { logOut } from "../../actions/auth";
 import { loadCart } from "../../actions/cart";
 import "../../App.css";
+
 
 const Navbar = ({
   auth: { authenticated, isLoading, userInfo },
   logOut,
   cart,
+
 }) => {
   const [collapse, setCollapse] = useState(false);
 
@@ -106,11 +108,6 @@ const Navbar = ({
   );
 
   return <div>{authenticated ? authLinks : guestLinks}</div>;
-};
-
-Navbar.propTypes = {
-  logOut: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({

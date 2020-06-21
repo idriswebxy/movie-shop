@@ -20,6 +20,7 @@ import {
   GET_RELATED_MOVIE_ID,
   SET_VIDEO_KEY,
   SET_MOVIE_ID,
+  SET_MOVIE_IDS,
 } from "../actions/types";
 import axios from "axios";
 import config from "../config.json";
@@ -51,14 +52,11 @@ export const getSearchedMovie = (id) => async (dispatch) => {
 };
 
 export const getMovie = (id) => async (dispatch) => {
-
-
   try {
     dispatch({
       type: GET_MOVIE,
       payload: id,
     });
-
   } catch (e) {
     dispatch({
       type: GET_MOVIE_ERR,
@@ -67,14 +65,13 @@ export const getMovie = (id) => async (dispatch) => {
 };
 
 export const setMovies = (movies) => async (dispatch) => {
+
   try {
     dispatch({
       type: SET_MOVIES,
       payload: movies,
     });
-    dispatch({
-      type: CHANGE_LOAD,
-    });
+
   } catch (e) {
     dispatch({
       type: SET_MOVIE_ERR,
@@ -134,21 +131,21 @@ export const setRelatedMovies = () => async (dispatch) => {
         });
       });
   } catch (error) {
-    console.error(error.response.data.errors);
+    console.error(error.response);
   }
 };
 
 export const fetchApi = (key, page) => async (dispatch) => {
-  await fetch(
+  let res = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&page=${page}`
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      dispatch({
-        type: SET_MOVIES,
-        payload: data.results,
-      });
-    });
+  );
+
+  let data = await res.json();
+
+  dispatch({
+    type: SET_MOVIES,
+    payload: data.results,
+  });
 };
 
 export const nextPage = (page) => async (dispatch) => {
@@ -167,17 +164,32 @@ export const prevPage = (page) => async (dispatch) => {
   });
 };
 
-export const getMovieVideo = (id) => async (dispatch) => {
-  try {
-    await fetch(
-      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${config.API_KEY}&language=en-US`
-    )
-      .then((res) => res.json())
-      .then((data) =>
-        dispatch({
-          type: SET_VIDEO_KEY,
-          payload: data.results[0].key,
-        })
-      );
-  } catch (error) {}
-};
+// export const getMovieVideo = (movies) => async (dispatch) => {
+
+//   let arr = movies
+
+//   arr.forEach(m => dispatch({
+//     type: SET_VIDEO_KEY,
+  
+//   }))
+
+//   let res = await fetch(
+//     `https://api.themoviedb.org/3/movie/${null}/videos?api_key=${config.API_KEY}&language=en-US`
+//   );
+
+//   let data = await res.json();
+
+//   dispatch({
+//     type: SET_VIDEO_KEY,
+//     payload: data.results[0].key,
+//   });
+// };
+
+// export const changeLoad = () => async (dispatch) => {
+//   try {
+//     dispatch({
+//       type: CHANGE_LOAD,
+//       payload: true,
+//     });
+//   } catch (error) {}
+// };
