@@ -85,6 +85,8 @@ router.post("/tv_show", (req, res) => {
 
 // Delete item
 router.delete("/:id", async (req, res) => {
+
+  console.log(req.params.id)
   try {
     const item = await Cart.findById(req.params.id);
 

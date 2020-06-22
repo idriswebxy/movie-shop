@@ -20,10 +20,9 @@ const Movie = ({
   releaseDate,
   title,
 }) => {
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
 
-  return (
+  let movieLink = (
     <div style={{ textAlign: "center", color: "white" }}>
       <div>
         <Link to="/movie_details" onClick={() => getMovie(id)}>
@@ -44,12 +43,16 @@ const Movie = ({
       </div>
     </div>
   );
+
+  return (
+    <div>
+      <MDBView hover zoom>{movieLink}</MDBView>
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => ({
   isLoading: state.movie.isLoading,
 });
 
-export default connect(mapStateToProps, { getMovie, addToCart })(
-  Movie
-);
+export default connect(mapStateToProps, { getMovie, addToCart })(Movie);

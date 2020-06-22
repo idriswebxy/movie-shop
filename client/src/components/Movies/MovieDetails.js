@@ -23,14 +23,21 @@ const MovieDetails = ({
   withRouter,
 }) => {
   const [videoKey, setVideoKey] = useState("");
+  const [movieID, setMovieID] = useState(null);
 
   useEffect(() => {
-    loadCart();
+    // setMovieID(movie.id)
+    // fetch(
+    //   `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${config.API_KEY}&language=en-US`
+    // )
+    //   .then((res) => res.json())
+    //   .then((data) => getMovie(data.id));
     fetch(
       `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${config.API_KEY}&language=en-US`
     )
       .then((res) => res.json())
       .then((data) => setVideoKey(data.results[0].key));
+    loadCart();
   }, []);
 
   if (isLoading) {
@@ -38,28 +45,22 @@ const MovieDetails = ({
   }
 
   let movieDetails = (
-    <div
-      style={{
-        backgroundImage: `linear-gradient(to right,
-        rgba(19, 38, 47, 0.925) 0%,
-        rgba(9, 28, 37, 0.925) 100%), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        padding: "186px",
-      }}
-    >
-      <MDBContainer>
-        <MDBRow>
-          //// <img src={`https://image.tmdb.org/t/p/w330${movie.poster_path}`} />{" "}
-          <MDBCol size="7">
-            <ReactPlayer
-              playing="true"
-              url={`https://www.youtube.com/watch?v=${videoKey}`}
-            />
-            <MDBCol></MDBCol>
+    <MDBContainer>
+      <MDBRow>
+        <MDBCol md="4">
+          <img src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`} />
+        </MDBCol>
+        <MDBCol>
+          <ReactPlayer
+            controls="true"
+            playing="true"
+            url={`https://www.youtube.com/watch?v=${videoKey}`}
+          />
+          <MDBCol>
             <MDBBtn onClick={() => addToCart(movie)}>
               Add To Cart <MDBIcon icon="cart-plus" />
             </MDBBtn>{" "}
+            <h3>{movie.title}</h3>{" "}
             <StarRatings
               isSelectable
               starRatedColor="yellow"
@@ -67,15 +68,27 @@ const MovieDetails = ({
               numberOfStars={5}
               rating={movie.vote_average / 2}
             />
-            &nbsp; ({movie.vote_count})<h3>{movie.title}</h3>
-            <MDBCol>{movie.overview}</MDBCol>
+            &nbsp; ({movie.vote_count})<MDBCol>{movie.overview}</MDBCol>
           </MDBCol>
-        </MDBRow>
-      </MDBContainer>
-    </div>
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
   );
 
-  return <div>{movieDetails}</div>;
+  return (
+    <div
+      style={{
+        backgroundImage: `linear-gradient(to right,
+          rgba(19, 38, 47, 0.7) 0%,
+          rgba(9, 28, 37, 0.7) 100%), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        padding: "186px",
+      }}
+    >
+      {movieDetails}
+    </div>
+  );
 };
 
 MovieDetails.propTypes = {
