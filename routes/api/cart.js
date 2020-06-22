@@ -86,7 +86,7 @@ router.post("/tv_show", (req, res) => {
 // Delete item
 router.delete("/:id", async (req, res) => {
 
-  console.log(req.params.id)
+
   try {
     const item = await Cart.findById(req.params.id);
 
@@ -96,7 +96,9 @@ router.delete("/:id", async (req, res) => {
 
     await item.remove();
 
-    res.json({ msg: "Item removed" });
+  res.json({ msg: "Item removed" });
+
+
   } catch (error) {
     if (error.kind === "ObjectId") {
       return res.status(404).json({ msg: "Item not found" });

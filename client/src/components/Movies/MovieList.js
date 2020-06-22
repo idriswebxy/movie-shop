@@ -49,10 +49,11 @@ const MovieList = ({
     loadCart();
   }, [page]);
 
-
-  if (isLoading) {
-    return <SpinnerPage />;
-  }
+  let load = (
+    <div>
+      <SpinnerPage />
+    </div>
+  );
 
   // page transition
   let pages = (
@@ -107,7 +108,7 @@ const MovieList = ({
       <MDBContainer>
         <SearchPage />
         <div className="pagination">{pages}</div>
-        {movieList}
+        {isLoading ? load : movieList}
         <div className="pagination">{pages}</div>
       </MDBContainer>
       <RelatedMovies />

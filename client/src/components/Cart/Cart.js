@@ -16,8 +16,17 @@ import {
 import { deleteItem, loadCart, getPriceTotal } from "../../actions/cart";
 import CartItem from "./CartItem";
 import SpinnerPage from "../Layout/SpinnerPage";
+import { Alert } from "reactstrap";
 
-const Cart = ({ cart, loadCart, getPriceTotal, total, loading, deleteItem, price=2.99 }) => {
+const Cart = ({
+  cart,
+  loadCart,
+  getPriceTotal,
+  total,
+  loading,
+  deleteItem,
+  price = 2.99,
+}) => {
   useEffect(() => {
     loadCart();
     getPriceTotal(cart);
@@ -37,16 +46,20 @@ const Cart = ({ cart, loadCart, getPriceTotal, total, loading, deleteItem, price
           </tr>
         </MDBTableHead>
         <MDBTableBody>
-          {cart.map((movie) => (
-            <tr>
+          {cart.map((movie, key) => (
+            <tr key={key}>
               <td>
-                <img src={`https://image.tmdb.org/t/p/w92${movie.image}`} />
+                <Img src={`https://image.tmdb.org/t/p/w92${movie.image}`} />
                 <h5>{movie.name}</h5>
               </td>
               <td>
-                <div>{movie.price}</div>
+                <div>${movie.price}</div>
               </td>
-              <td><MDBBtn onClick={() => deleteItem(movie.id, price)}>Remove</MDBBtn></td>
+              <td>
+                <MDBBtn onClick={() => deleteItem(movie._id, price)}>
+                  Remove
+                </MDBBtn>
+              </td>
             </tr>
           ))}
         </MDBTableBody>
@@ -56,7 +69,7 @@ const Cart = ({ cart, loadCart, getPriceTotal, total, loading, deleteItem, price
 
   let checkOut = (
     <div style={{ marginLeft: "10px", color: "white" }}>
-      <h2>Total: ${total}</h2>
+      <h2>Total: ${total.toFixed(2)}</h2>
       <MDBNavLink to="/checkout">
         <MDBBtn>Check Out</MDBBtn>
       </MDBNavLink>

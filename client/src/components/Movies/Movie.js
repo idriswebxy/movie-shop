@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getMovie, getMovieIds } from "../../actions/movie";
 import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart, loadCart } from "../../actions/cart";
-import { MDBView, MDBContainer, MDBBtn, MDBIcon } from "mdbreact";
+import { MDBView, MDBContainer, MDBBtn, MDBIcon, MDBSpinner } from "mdbreact";
 import moment from "moment";
 import MovieDetails from "./MovieDetails";
 
@@ -21,6 +21,7 @@ const Movie = ({
   title,
 }) => {
   useEffect(() => {}, []);
+
 
   let movieLink = (
     <div style={{ textAlign: "center", color: "white" }}>
@@ -46,7 +47,9 @@ const Movie = ({
 
   return (
     <div>
-      <MDBView hover zoom>{movieLink}</MDBView>
+      <MDBView hover zoom>
+        {movieLink}
+      </MDBView>
     </div>
   );
 };

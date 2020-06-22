@@ -8,8 +8,9 @@
    color: white;
  }
 
+
  .movie-details-spacing {
-   padding: 30px; 
+   padding: 30px;
  }
 
  .remove-btn {
@@ -99,7 +100,9 @@
    display: flex;
  }
 
- .movie-border h5, td, th {
+ .movie-border h5,
+ td,
+ th {
    /* margin: 30px;
    margin-right: 50px;
    padding: 10px; */

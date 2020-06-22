@@ -93,12 +93,11 @@ export const getCart = (id) => async (dispatch) => {
 export const deleteItem = (id, price) => async (dispatch) => {
   try {
 
-    console.log(id, price)
     await axios.delete(`api/cart/${id}`);
 
     dispatch({
       type: DELETE_ITEM,
-      payload: { id, price },
+      payload: { id, price }  
     });
 
     dispatch(setAlert("Item Removed", "success"));

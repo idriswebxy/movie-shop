@@ -20,13 +20,12 @@ import { register } from "../../actions/auth";
 import { logOut } from "../../actions/auth";
 import { loadCart } from "../../actions/cart";
 import "../../App.css";
-
+import { Alert } from "reactstrap";
 
 const Navbar = ({
   auth: { authenticated, isLoading, userInfo },
   logOut,
   cart,
-
 }) => {
   const [collapse, setCollapse] = useState(false);
 
@@ -107,7 +106,11 @@ const Navbar = ({
     </MDBNavbar>
   );
 
-  return <div>{authenticated ? authLinks : guestLinks}</div>;
+  return (
+    <div>
+      {authenticated ? authLinks : guestLinks}
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => ({

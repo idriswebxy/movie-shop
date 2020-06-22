@@ -27,8 +27,7 @@ import TvShowDetails from "./components/TvShows/TvShowDetails";
 import { fetchApi } from "./actions/movie";
 import { createBrowserHistory } from "history";
 
-
-const history = createBrowserHistory()
+const history = createBrowserHistory();
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -39,9 +38,9 @@ const App = ({ isLoading }) => {
     store.dispatch(loadUser());
   }, []);
 
-  if (isLoading) {
-    return <SpinnerPage />;
-  }
+  // if (isLoading) {
+  //   return <SpinnerPage />
+  // }
 
   return (
     <Router history={history}>
