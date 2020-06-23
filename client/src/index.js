@@ -7,15 +7,12 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "tachyons";
 import "./App.css";
-import store from "./store";
+import store from "./store.js";
 import { PersistGate } from "redux-persist/integration/react";
-import { persistStore } from "redux-persist";
-
-let persistor = persistStore(store);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
+  <Provider store={store.store}>
+    <PersistGate persistor={store.persistor}>
       <App />
     </PersistGate>
   </Provider>,

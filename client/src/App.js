@@ -36,7 +36,7 @@ if (localStorage.token) {
 
 const App = ({ isLoading }) => {
   useEffect(() => {
-    store.dispatch(loadUser());
+    store.store.dispatch(loadUser());
   }, []);
 
   // if (isLoading) {
