@@ -53,6 +53,10 @@ export const getSearchedMovie = (id) => async (dispatch) => {
 
 export const getMovie = (id) => async (dispatch) => {
   try {
+
+    // await axios.post("/movies", id);
+
+
     dispatch({
       type: GET_MOVIE,
       payload: id,
@@ -65,13 +69,11 @@ export const getMovie = (id) => async (dispatch) => {
 };
 
 export const setMovies = (movies) => async (dispatch) => {
-
   try {
     dispatch({
       type: SET_MOVIES,
       payload: movies,
     });
-
   } catch (e) {
     dispatch({
       type: SET_MOVIE_ERR,
@@ -146,6 +148,14 @@ export const fetchApi = (key, page) => async (dispatch) => {
     type: SET_MOVIES,
     payload: data.results,
   });
+  dispatch(setMoviesDB(data.results));
+};
+
+export const setMoviesDB = (movies) => async (dispatch) => {
+  try {
+    const res = await axios.post("/api/movie/movies", movies);
+
+  } catch (error) {}
 };
 
 export const nextPage = (page) => async (dispatch) => {
@@ -170,7 +180,7 @@ export const prevPage = (page) => async (dispatch) => {
 
 //   arr.forEach(m => dispatch({
 //     type: SET_VIDEO_KEY,
-  
+
 //   }))
 
 //   let res = await fetch(

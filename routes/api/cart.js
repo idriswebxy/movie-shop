@@ -32,7 +32,7 @@ router.get("/", async (req, res) => {
 });
 
 // Add to cart
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const {
       id,
@@ -65,7 +65,7 @@ router.post("/", (req, res) => {
 
 
 // Add to cart for TvShows
-router.post("/tv_show", (req, res) => {
+router.post("/tv_show", async (req, res) => {
   const { id, name, poster_path, overview, first_air_date } = req.body;
 
   const price = 2.99;

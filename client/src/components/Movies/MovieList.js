@@ -12,6 +12,7 @@ import {
   nextPage,
   prevPage,
   setRelatedMovies,
+  setMoviesDB,
 } from "../../actions/movie";
 import { connect } from "react-redux";
 import Movie from "./Movie";
@@ -47,6 +48,7 @@ const MovieList = ({
   useEffect(() => {
     fetchApi(config.API_KEY, page);
     loadCart();
+    // setMoviesDB();
   }, [page]);
 
   let load = (
@@ -139,4 +141,5 @@ export default connect(mapStateToProps, {
   fetchApi,
   nextPage,
   prevPage,
+  setMoviesDB
 })(MovieList);

@@ -27,6 +27,7 @@ import TvShowDetails from "./components/TvShows/TvShowDetails";
 import { fetchApi } from "./actions/movie";
 import { createBrowserHistory } from "history";
 
+
 const history = createBrowserHistory();
 
 if (localStorage.token) {
@@ -64,7 +65,7 @@ const App = ({ isLoading }) => {
 };
 
 const mapStateToProps = (state) => ({
-  isLoading: state.auth.isLoading,
+  // isLoading: state.auth.isLoading,
 });
 
 export default connect(mapStateToProps)(App);
