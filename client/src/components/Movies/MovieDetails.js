@@ -26,12 +26,6 @@ const MovieDetails = ({
   const [movieID, setMovieID] = useState(null);
 
   useEffect(() => {
-    // setMovieID(movie.id)
-    // fetch(
-    //   `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${config.API_KEY}&language=en-US`
-    // )
-    //   .then((res) => res.json())
-    //   .then((data) => getMovie(data.id));
     fetch(
       `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${config.API_KEY}&language=en-US`
     )
@@ -47,20 +41,18 @@ const MovieDetails = ({
   let movieDetails = (
     <MDBContainer>
       <MDBRow>
-        <MDBCol size="6">
-          <img src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`} />
-        </MDBCol>
         <MDBCol>
+          <img src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`} />
+          <MDBBtn onClick={() => addToCart(movie)}>
+            Add To Cart <MDBIcon icon="cart-plus" />
+          </MDBBtn>{" "}
+        </MDBCol>
+        <MDBCol size="7">
           <ReactPlayer
             controls="true"
             url={`https://www.youtube.com/watch?v=${videoKey}`}
           />
           <MDBCol>
-            <MDBCol>
-              <MDBBtn onClick={() => addToCart(movie)}>
-                Add To Cart <MDBIcon icon="cart-plus" />
-              </MDBBtn>{" "}
-            </MDBCol>
             <MDBCol>
               <h3>{movie.title}</h3>{" "}
               <StarRatings

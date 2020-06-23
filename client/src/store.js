@@ -6,7 +6,6 @@ import logger from "redux-logger";
 
 const middlewares = [thunk, logger];
 
-const initialState = {};
 
 const store = createStore(
   rootReducer,
