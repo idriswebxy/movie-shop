@@ -4,8 +4,6 @@ const router = express.Router();
 const Cart = require("../../models/Cart");
 
 
-
-
 // return related movies
 router.get("/genre_id", async (req, res) => {
   try {

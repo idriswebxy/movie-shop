@@ -12,32 +12,35 @@ import {
   MDBCol,
   MDBBtn,
   MDBInput,
-  MDBNavLink
+  MDBNavLink,
 } from "mdbreact";
 import axios from "axios";
 import { useGoogleLogin } from "react-google-login";
 import { Button } from "reactstrap";
+import { createProfile } from "../../actions/profile";
 
 const Register = ({ setAlert, register, authenticated }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    password2: ""
+    password2: "",
   });
 
-  const onChange = e => {
+  const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const { name, email, password, password2 } = formData;
 
-  const onSubmit = async e => {
+
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
       setAlert("Passwords do not match!", "danger");
     } else {
       register({ name, email, password });
+      createProfile(formData);
     }
   };
 
@@ -49,7 +52,7 @@ const Register = ({ setAlert, register, authenticated }) => {
     <MDBContainer>
       <MDBRow>
         <MDBCol style={{ marginTop: "80px" }} md="6">
-          <form onSubmit={e => onSubmit(e)}>
+          <form onSubmit={(e) => onSubmit(e)}>
             <h4>Sign up</h4>
             <div className="">
               <MDBInput
@@ -62,7 +65,7 @@ const Register = ({ setAlert, register, authenticated }) => {
                 error="wrong"
                 success="right"
                 value={name}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
               />
               <MDBInput
                 label="Your email"
@@ -74,7 +77,7 @@ const Register = ({ setAlert, register, authenticated }) => {
                 error="wrong"
                 success="right"
                 value={email}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
               />
               <MDBInput
                 label="Your password"
@@ -85,7 +88,7 @@ const Register = ({ setAlert, register, authenticated }) => {
                 validate
                 success="right"
                 value={password}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
               />
               <MDBInput
                 label="Confirm your password"
@@ -96,7 +99,7 @@ const Register = ({ setAlert, register, authenticated }) => {
                 validate
                 error="wrong"
                 value={password2}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
               />
             </div>
 
@@ -107,9 +110,7 @@ const Register = ({ setAlert, register, authenticated }) => {
                     Register
                   </MDBBtn>
                 </MDBCol>
-                <MDBCol>
-
-                </MDBCol>
+                <MDBCol></MDBCol>
               </MDBRow>
             </div>
           </form>
@@ -122,11 +123,11 @@ const Register = ({ setAlert, register, authenticated }) => {
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
-  authenticated: PropTypes.bool
+  authenticated: PropTypes.bool,
 };
 
-const mapStateToProps = state => ({
-  authenticated: state.auth.authenticated
+const mapStateToProps = (state) => ({
+  authenticated: state.auth.authenticated,
 });
 
 export default connect(mapStateToProps, { setAlert, register })(Register);

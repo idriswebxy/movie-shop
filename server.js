@@ -5,13 +5,13 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 var passport = require("passport");
 const cors = require("cors");
-var session = require("express-session");
 
 // Routes
 const user = require("./routes/api/user");
 const cart = require("./routes/api/cart");
 const auth = require("./routes/api/auth");
 const movie = require("./routes/api/movie");
+const profile = require("./routes/api/profile");
 
 const app = express();
 
@@ -20,10 +20,10 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-    useFindAndModify: false
+    useFindAndModify: false,
   })
   .then(console.log("Database connected...✅"))
-  .catch(err => console.error(err));
+  .catch((err) => console.error(err));
 
 app.use(cors());
 
@@ -39,6 +39,7 @@ app.use("/api/user", user);
 app.use("/api/cart", cart);
 app.use("/api/auth", auth);
 app.use("/api/movie", movie);
+app.use("/api/profile", profile);
 
 //Serve static assets if in productions
 if (process.env.NODE_ENV === "production") {
