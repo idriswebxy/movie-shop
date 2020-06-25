@@ -31,13 +31,22 @@ router.get("/me", auth, async (req, res) => {
 // @desc     Create or update user profile
 // @access   Private
 router.post("/", [auth], async (req, res) => {
+
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
 
   const { name, email } = req.body;
+  
+  const profileFields = {};
 
+  profileFields.user = req.user.id;
+
+  if (name) profileFields.name = name;
+  if (email) profileFields.email = email;
+  
   try {
     let profile = await Profile.findOne({ user: req.user.id });
 
@@ -62,6 +71,5 @@ router.post("/", [auth], async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-
 
 module.exports = router;

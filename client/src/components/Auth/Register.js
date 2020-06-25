@@ -19,7 +19,7 @@ import { useGoogleLogin } from "react-google-login";
 import { Button } from "reactstrap";
 import { createProfile } from "../../actions/profile";
 
-const Register = ({ setAlert, register, authenticated }) => {
+const Register = ({ setAlert, register, authenticated, createProfile }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -39,8 +39,8 @@ const Register = ({ setAlert, register, authenticated }) => {
     if (password !== password2) {
       setAlert("Passwords do not match!", "danger");
     } else {
+      createProfile({ name, email });
       register({ name, email, password });
-      createProfile(formData);
     }
   };
 
@@ -130,4 +130,4 @@ const mapStateToProps = (state) => ({
   authenticated: state.auth.authenticated,
 });
 
-export default connect(mapStateToProps, { setAlert, register })(Register);
+export default connect(mapStateToProps, { setAlert, register, createProfile })(Register);

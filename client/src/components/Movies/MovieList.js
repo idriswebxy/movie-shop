@@ -31,24 +31,17 @@ import "../../App.css";
 const MovieList = ({
   addToCart,
   loadCart,
-  getCart,
-  userId,
-  setMovies,
   isLoading,
   movies,
-  relatedMovies,
-  // getMovieVideo,
   fetchApi,
   page,
   nextPage,
   prevPage,
-  authenticated,
-  searchedMovie,
+
 }) => {
   useEffect(() => {
     fetchApi(config.API_KEY, page);
     loadCart();
-    // setMoviesDB();
   }, [page]);
 
   let load = (
@@ -137,9 +130,7 @@ export default connect(mapStateToProps, {
   loadCart,
   getCart,
   setMovies,
-  // getMovieVideo,
   fetchApi,
   nextPage,
   prevPage,
-  setMoviesDB
 })(MovieList);

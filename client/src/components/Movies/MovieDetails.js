@@ -40,30 +40,37 @@ const MovieDetails = ({
 
   let movieDetails = (
     <MDBContainer>
-      <MDBRow>
-        <MDBCol>
+      <MDBRow middle="true">
+        <MDBCol size="4">
           <img src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`} />
-          <MDBBtn onClick={() => addToCart(movie)}>
-            Add To Cart <MDBIcon icon="cart-plus" />
-          </MDBBtn>{" "}
+          <MDBCol>
+            <MDBBtn onClick={() => addToCart(movie)}>
+              Add To Cart <MDBIcon icon="cart-plus" />
+            </MDBBtn>
+          </MDBCol>
         </MDBCol>
-        <MDBCol size="7">
+        <MDBCol size="5">
           <ReactPlayer
+            playing="true"
             controls="true"
             url={`https://www.youtube.com/watch?v=${videoKey}`}
           />
-          <MDBCol>
+          &nbsp;
+          <MDBCol center="true">
+            <h2>{movie.title}</h2>
+            &nbsp;
             <MDBCol>
-              <h3>{movie.title}</h3>{" "}
               <StarRatings
                 isSelectable
                 starRatedColor="yellow"
                 starDimension="30px"
                 numberOfStars={5}
                 rating={movie.vote_average / 2}
-              />
-              &nbsp; ({movie.vote_count})<MDBCol>{movie.overview}</MDBCol>
+              />{" "}
+              &nbsp;({movie.vote_count})
             </MDBCol>
+            &nbsp;
+            <MDBCol>{movie.overview}</MDBCol>
           </MDBCol>
         </MDBCol>
       </MDBRow>

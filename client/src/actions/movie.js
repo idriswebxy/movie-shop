@@ -54,9 +54,6 @@ export const getSearchedMovie = (id) => async (dispatch) => {
 export const getMovie = (id) => async (dispatch) => {
   try {
 
-    // await axios.post("/movies", id);
-
-
     dispatch({
       type: GET_MOVIE,
       payload: id,
@@ -148,15 +145,8 @@ export const fetchApi = (key, page) => async (dispatch) => {
     type: SET_MOVIES,
     payload: data.results,
   });
-  dispatch(setMoviesDB(data.results));
 };
 
-export const setMoviesDB = (movies) => async (dispatch) => {
-  try {
-    const res = await axios.post("/api/movie/movies", movies);
-
-  } catch (error) {}
-};
 
 export const nextPage = (page) => async (dispatch) => {
   dispatch({
@@ -173,33 +163,3 @@ export const prevPage = (page) => async (dispatch) => {
     payload: page,
   });
 };
-
-// export const getMovieVideo = (movies) => async (dispatch) => {
-
-//   let arr = movies
-
-//   arr.forEach(m => dispatch({
-//     type: SET_VIDEO_KEY,
-
-//   }))
-
-//   let res = await fetch(
-//     `https://api.themoviedb.org/3/movie/${null}/videos?api_key=${config.API_KEY}&language=en-US`
-//   );
-
-//   let data = await res.json();
-
-//   dispatch({
-//     type: SET_VIDEO_KEY,
-//     payload: data.results[0].key,
-//   });
-// };
-
-// export const changeLoad = () => async (dispatch) => {
-//   try {
-//     dispatch({
-//       type: CHANGE_LOAD,
-//       payload: true,
-//     });
-//   } catch (error) {}
-// };

@@ -43,6 +43,9 @@ export const createProfile = (formData) => async (
       },
     };
 
+    console.log(formData)
+
+
     const res = await axios.post("/api/profile", formData, config);
 
     dispatch({
