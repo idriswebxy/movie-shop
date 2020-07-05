@@ -9,10 +9,10 @@ import {
   MDBNavLink,
 } from "mdbreact";
 import { connect } from "react-redux";
-import { login, guestLogin } from "../../actions/auth";
+import { login } from "../../actions/auth";
 import PropTypes from "prop-types";
 
-const Login = ({ login, authenticated, page, guestLogin }) => {
+const Login = ({ login, authenticated, page }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -85,4 +85,4 @@ const mapStateToProps = (state) => ({
   page: state.movie.page
 });
 
-export default connect(mapStateToProps, { login, guestLogin })(Login);
+export default connect(mapStateToProps, { login })(Login);

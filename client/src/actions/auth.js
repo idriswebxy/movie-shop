@@ -107,44 +107,44 @@ export const login = (email, password) => async dispatch => {
 
 
 
-export const guestLogin = (email, password) => async dispatch => {
+// export const guestLogin = (email, password) => async dispatch => {
 
 
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
+//   const config = {
+//     headers: {
+//       "Content-Type": "application/json"
+//     }
+//   };
 
-  let email = process.env.REACT_APP_GUEST_EMAIL
-  let passwd = process.env.REACT_APP_GUEST_PASSWD
+//   let email = process.env.REACT_APP_GUEST_EMAIL
+//   let passwd = process.env.REACT_APP_GUEST_PASSWD
 
-  const body = JSON.stringify({ email, passwd });
+//   const body = JSON.stringify({ email, passwd });
 
 
-  try {
-    const res = await axios.post("/api/auth", body, config);
+//   try {
+//     const res = await axios.post("/api/auth", body, config);
 
-    dispatch({
-      type: LOGIN_SUCCESS,
-      payload: res.data
-    });
+//     dispatch({
+//       type: LOGIN_SUCCESS,
+//       payload: res.data
+//     });
 
-    dispatch(loadUser());
+//     dispatch(loadUser());
   
     
-  } catch (err) {
-    const errors = err.response.data.errors;
+//   } catch (err) {
+//     const errors = err.response.data.errors;
 
-    if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
-    }
+//     if (errors) {
+//       errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+//     }
 
-    dispatch({
-      type: LOGIN_FAIL
-    });
-  }
-};
+//     dispatch({
+//       type: LOGIN_FAIL
+//     });
+//   }
+// };
 
 
 // Logout
