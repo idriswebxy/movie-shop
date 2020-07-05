@@ -37,7 +37,6 @@ const MovieList = ({
   page,
   nextPage,
   prevPage,
-
 }) => {
   useEffect(() => {
     fetchApi(config.API_KEY, page);
@@ -74,28 +73,26 @@ const MovieList = ({
   );
 
   const movieList = (
-    <MDBAnimation type="zoomIn" duration="1s">
-      <MDBRow>
-        {movies.map((movie, key) => {
-          return (
-            <MDBCol key={key} size="3">
-              <div className="hover-movie">
-                <Movie
-                  id={movie.id}
-                  addToCart={addToCart}
-                  title={movie.title}
-                  image={movie.poster_path}
-                  overview={movie.overview}
-                  releaseDate={movie.release_date}
-                  price={2.99}
-                  movieObj={movie}
-                />
-              </div>
-            </MDBCol>
-          );
-        })}
-      </MDBRow>
-    </MDBAnimation>
+    <MDBRow>
+      {movies.map((movie, key) => {
+        return (
+          <MDBCol size="6" lg="3">
+            <MDBAnimation type="zoomIn" duration="1s">
+              <Movie
+                id={movie.id}
+                addToCart={addToCart}
+                title={movie.title}
+                image={movie.poster_path}
+                overview={movie.overview}
+                releaseDate={movie.release_date}
+                price={2.99}
+                movieObj={movie}
+              />
+            </MDBAnimation>
+          </MDBCol>
+        );
+      })}
+    </MDBRow>
   );
 
   return (

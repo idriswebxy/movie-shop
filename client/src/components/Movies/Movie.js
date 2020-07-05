@@ -22,36 +22,26 @@ const Movie = ({
 }) => {
   useEffect(() => {}, []);
 
-
   let movieLink = (
-    <div style={{ textAlign: "center", color: "white" }}>
-      <div>
+    <div style={{ color: "white" }}>
+      <MDBView hover zoom>
         <Link to="/movie_details" onClick={() => getMovie(id)}>
-          <img
-            className="movie-container"
-            src={`http://image.tmdb.org/t/p/w185${image}`}
-          />
+          <img src={`http://image.tmdb.org/t/p/w185${image}`} />
         </Link>
+      </MDBView>
+      <div>
         <h5>{title}</h5>
         <h6>{moment(releaseDate).format("LL")}</h6>
-      </div>
-
-      <div>
         <h5>${price}</h5>
-        <MDBBtn onClick={() => addToCart(movieObj)}>
-          Add To Cart <MDBIcon icon="cart-plus" />
-        </MDBBtn>
       </div>
+
+      <MDBBtn onClick={() => addToCart(movieObj)}>
+        Add To Cart <MDBIcon icon="cart-plus" />
+      </MDBBtn>
     </div>
   );
 
-  return (
-    <div>
-      <MDBView hover zoom>
-        {movieLink}
-      </MDBView>
-    </div>
-  );
+  return <div>{movieLink}</div>;
 };
 
 const mapStateToProps = (state) => ({
