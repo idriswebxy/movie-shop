@@ -97,7 +97,7 @@ export const deleteItem = (id, price) => async (dispatch) => {
 
     dispatch({
       type: DELETE_ITEM,
-      payload: { id, price }  
+      payload: { id, price }
     });
 
     dispatch(setAlert("Item Removed", "success"));
@@ -117,5 +117,5 @@ export const getPriceTotal = (array) => async (dispatch) => {
       type: PRICE_TOTAL,
       payload: res.data,
     });
-  } catch (error) {}
+  } catch (error) { }
 };

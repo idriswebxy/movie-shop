@@ -10,7 +10,7 @@ const Show = ({
   id,
   image,
   getShow,
-  isLoading,
+  isLoading, 
   tvShowObj,
   price,
   addToCartTvShow,
