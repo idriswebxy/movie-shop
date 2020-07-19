@@ -11,16 +11,9 @@ import {
   GET_SHOW,
   GET_SHOW_ERR,
   SET_RELATED_MOVIES,
-  GET_RELATED_MOVIES,
-  SET_GENRE_ID,
-  CHANGE_PAGE,
   NEXT_PAGE,
   PREV_PAGE,
-  CHANGE_LOAD,
   GET_RELATED_MOVIE_ID,
-  SET_VIDEO_KEY,
-  SET_MOVIE_ID,
-  SET_MOVIE_IDS,
 } from "../actions/types";
 import axios from "axios";
 import config from "../config.json";
