@@ -10,14 +10,23 @@ import "./App.css";
 import store from "./store.js";
 import { PersistGate } from "redux-persist/integration/react";
 import { Auth0Provider } from "@auth0/auth0-react";
+import config from "./config.json";
+
+const onRedirectCallback = (appState) => {
+  history.push(
+    appState && appState.returnTo ? appState.returnTo : window.location.pathname
+  );
+};
 
 ReactDOM.render(
   <Provider store={store.store}>
     <PersistGate persistor={store.persistor}>
       <Auth0Provider
-        domain="square-unit-4148.us.auth0.com"
-        clientId="gapUUawQ7TPSHlULSmROdZ55SUesnuMA"
+        domain={config.domain}
+        clientId={config.clientId}
+        audience={config.audience}
         redirectUri={window.location.origin}
+        onRedirectCallback={onRedirectCallback}
       >
         <App />
       </Auth0Provider>
