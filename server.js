@@ -34,11 +34,12 @@ app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
 // Use Routes
+app.use("/api/movie", movie);
 app.use("/api/user", user);
 app.use("/api/cart", cart);
 app.use("/api/auth", auth);
-app.use("/api/movie", movie);
 app.use("/api/profile", profile);
 
 //Serve static assets if in productions

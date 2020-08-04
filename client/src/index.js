@@ -11,6 +11,9 @@ import store from "./store.js";
 import { PersistGate } from "redux-persist/integration/react";
 import { Auth0Provider } from "@auth0/auth0-react";
 import config from "./config.json";
+import history from "./utils/history"
+
+
 
 const onRedirectCallback = (appState) => {
   history.push(

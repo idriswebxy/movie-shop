@@ -49,7 +49,7 @@ export const register = ({ name, email, password }) => async dispatch => {
   console.log(body)
 
   try {
-    const res = await axios.post("/api/user", body, config);
+    const res  = await axios.post("/api/user", body, config);
 
     dispatch({
       type: REGISTER_SUCCESS,
@@ -111,6 +111,8 @@ export const login = (email, password) => async dispatch => {
     });
   }
 };
+
+
 
 
 

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
+import { NavLink as RouterNavLink } from "react-router-dom";
+import { NavLink, NavItem, Button } from "react-bootstrap";
 import {
   MDBContainer,
   MDBRow,
@@ -12,13 +14,26 @@ import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 import PropTypes from "prop-types";
 
+import { useAuth0 } from "@auth0/auth0-react";
+
 const Login = ({ login, authenticated, page }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+
   const { email, password } = formData;
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => setIsOpen(!isOpen);
+
+  const logoutWithRedirect = () =>
+    logout({
+      returnTo: window.location.origin,
+    });
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -31,8 +46,6 @@ const Login = ({ login, authenticated, page }) => {
   if (authenticated) {
     return <Redirect to={"/movies"} />;
   }
-
-
 
   return (
     <MDBContainer>
@@ -67,6 +80,30 @@ const Login = ({ login, authenticated, page }) => {
                 <MDBBtn type="submit">Login</MDBBtn>
               </MDBCol>
 
+              {isAuthenticated && (
+                <NavItem>
+                  <NavLink
+                    tag={RouterNavLink}
+                    to="/external-api"
+                    exact
+                    activeClassName="router-link-exact-active"
+                  >
+                    External API
+                  </NavLink>
+                </NavItem>
+              )}
+              {!isAuthenticated && (
+                <NavItem>
+                  <Button
+                    id="qsLoginBtn"
+                    color="primary"
+                    className="btn-margin"
+                    onClick={() => loginWithRedirect()}
+                  >
+                    Log in
+                  </Button>
+                </NavItem>
+              )}
             </MDBRow>
           </form>
         </MDBCol>
@@ -82,7 +119,7 @@ Login.propTypes = {
 
 const mapStateToProps = (state) => ({
   authenticated: state.auth.authenticated,
-  page: state.movie.page
+  page: state.movie.page,
 });
 
 export default connect(mapStateToProps, { login })(Login);
