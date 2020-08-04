@@ -21,12 +21,16 @@ import { logOut } from "../../actions/auth";
 import { loadCart } from "../../actions/cart";
 import "../../App.css";
 import { Alert } from "reactstrap";
+import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+import SpinnerPage from "./SpinnerPage";
 
 const Navbar = ({
   auth: { authenticated, isLoading, userInfo },
   logOut,
   cart,
 }) => {
+  const { user, isAuthenticated } = useAuth0();
+
   const [collapse, setCollapse] = useState(false);
 
   const navColor = { backgroundColor: "#00CED1" };
@@ -106,11 +110,7 @@ const Navbar = ({
     </MDBNavbar>
   );
 
-  return (
-    <div>
-      {authenticated ? authLinks : guestLinks}
-    </div>
-  );
+  return <div>{authenticated || isAuthenticated ? authLinks : guestLinks}</div>;
 };
 
 const mapStateToProps = (state) => ({

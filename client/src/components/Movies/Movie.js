@@ -8,6 +8,7 @@ import { MDBView, MDBContainer, MDBBtn, MDBIcon, MDBSpinner } from "mdbreact";
 import moment from "moment";
 import MovieDetails from "./MovieDetails";
 
+
 const Movie = ({
   id,
   image,
@@ -20,7 +21,6 @@ const Movie = ({
   releaseDate,
   title,
 }) => {
-  useEffect(() => {}, []);
 
   let movieLink = (
     <div style={{ color: "white" }}>
