@@ -1,7 +1,3 @@
 {
-    "API_KEY": "8fb61d9f021e57975ac7a2ef25b640a7",
-    "domain": "square-unit-4148.us.auth0.com",
-    "clientId": "gapUUawQ7TPSHlULSmROdZ55SUesnuMA",
-    "audience": "https://square-unit-4148.us.auth0.com/api/v2/",
-    "redirectUri": "http://localhost:3000/movies"
+    "API_KEY": "8fb61d9f021e57975ac7a2ef25b640a7"
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import { NavLink, NavItem, Button } from "react-bootstrap";
+import SpinnerPage from "../Layout/SpinnerPage";
 import {
   MDBContainer,
   MDBRow,
@@ -13,27 +14,26 @@ import {
 import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 import PropTypes from "prop-types";
+import { useAuth0 } from "../../react0-auth-spa";
 
-import { useAuth0 } from "@auth0/auth0-react";
-
-const Login = ({ login, authenticated, page }) => {
+const Login = ({ login, authenticated, loading }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const {
+    user,
+    isAuthenticated,
+    loginWithRedirect,
+    logOutWithRedirect,
+  } = useAuth0();
 
   const { email, password } = formData;
 
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
-
-  const logoutWithRedirect = () =>
-    logout({
-      returnTo: window.location.origin,
-    });
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -43,8 +43,12 @@ const Login = ({ login, authenticated, page }) => {
     login(email, password);
   };
 
-  if (authenticated) {
+  if (authenticated || isAuthenticated) {
     return <Redirect to={"/movies"} />;
+  }
+
+  if (loading) {
+    return <SpinnerPage />;
   }
 
   return (
@@ -80,19 +84,7 @@ const Login = ({ login, authenticated, page }) => {
                 <MDBBtn type="submit">Login</MDBBtn>
               </MDBCol>
 
-              {isAuthenticated && (
-                <NavItem>
-                  <NavLink
-                    tag={RouterNavLink}
-                    to="/external-api"
-                    exact
-                    activeClassName="router-link-exact-active"
-                  >
-                    External API
-                  </NavLink>
-                </NavItem>
-              )}
-              {!isAuthenticated && (
+              {!isAuthenticated ? (
                 <NavItem>
                   <Button
                     id="qsLoginBtn"
@@ -100,9 +92,11 @@ const Login = ({ login, authenticated, page }) => {
                     className="btn-margin"
                     onClick={() => loginWithRedirect()}
                   >
-                    Log in
+                    Sign in Google
                   </Button>
                 </NavItem>
+              ) : (
+                <Button onClick={() => logOutWithRedirect()}>Logout</Button>
               )}
             </MDBRow>
           </form>
@@ -120,6 +114,7 @@ Login.propTypes = {
 const mapStateToProps = (state) => ({
   authenticated: state.auth.authenticated,
   page: state.movie.page,
+  loading: state.auth.loading,
 });
 
 export default connect(mapStateToProps, { login })(Login);

@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component, useEffect, useState, useContext } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -24,7 +24,6 @@ import MovieDetails from "./components/Movies/MovieDetails";
 import Checkout from "./components/Cart/Checkout";
 import TvShows from "./components/TvShows/TvShows";
 import TvShowDetails from "./components/TvShows/TvShowDetails";
-import { fetchApi } from "./actions/movie";
 import { createBrowserHistory } from "history";
 
 
@@ -35,9 +34,12 @@ if (localStorage.token) {
 }
 
 const App = ({ isLoading }) => {
+
   useEffect(() => {
     store.store.dispatch(loadUser());
   }, []);
+
+
 
   // if (isLoading) {
   //   return <SpinnerPage />

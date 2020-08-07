@@ -21,7 +21,7 @@ import { logOut } from "../../actions/auth";
 import { loadCart } from "../../actions/cart";
 import "../../App.css";
 import { Alert } from "reactstrap";
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+import { useAuth0 } from "../../react0-auth-spa";
 import SpinnerPage from "./SpinnerPage";
 
 const Navbar = ({

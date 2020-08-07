@@ -1,0 +1,6 @@
+{
+    "domain": "square-unit-4148.us.auth0.com",
+    "clientId": "gapUUawQ7TPSHlULSmROdZ55SUesnuMA",
+    "audience": "https://square-unit-4148.us.auth0.com/api/v2/",
+    "redirectUri": "http://localhost:3000/"
+}
