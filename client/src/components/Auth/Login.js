@@ -14,7 +14,8 @@ import {
 import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 import PropTypes from "prop-types";
-import { useAuth0 } from "../../react0-auth-spa";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const Login = ({ login, authenticated, loading }) => {
   const [formData, setFormData] = useState({
@@ -26,7 +27,7 @@ const Login = ({ login, authenticated, loading }) => {
     user,
     isAuthenticated,
     loginWithRedirect,
-    logOutWithRedirect,
+    logout
   } = useAuth0();
 
   const { email, password } = formData;
@@ -43,7 +44,7 @@ const Login = ({ login, authenticated, loading }) => {
     login(email, password);
   };
 
-  if (authenticated || isAuthenticated) {
+  if (authenticated) {
     return <Redirect to={"/movies"} />;
   }
 
@@ -96,7 +97,7 @@ const Login = ({ login, authenticated, loading }) => {
                   </Button>
                 </NavItem>
               ) : (
-                <Button onClick={() => logOutWithRedirect()}>Logout</Button>
+                <Button onClick={() => logout()}>Logout</Button>
               )}
             </MDBRow>
           </form>

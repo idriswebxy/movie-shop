@@ -27,6 +27,7 @@ import {
 } from "mdbreact";
 import RelatedMovies from "./RelatedMovies";
 import "../../App.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const MovieList = ({
   addToCart,
@@ -38,6 +39,7 @@ const MovieList = ({
   nextPage,
   prevPage,
 }) => {
+
   useEffect(() => {
     fetchApi(config.API_KEY, page);
     loadCart();

@@ -11,7 +11,7 @@ import store from "./store.js";
 import { PersistGate } from "redux-persist/integration/react";
 import { Auth0Provider } from "@auth0/auth0-react"; 
 import config from "./auth0.config.json";
-import history from "./utils/history"
+import history from "./utils/history";
 
 
 

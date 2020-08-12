@@ -15,14 +15,13 @@ import {
   MDBNavbarToggler,
   MDBNavbarNav,
 } from "mdbreact";
-import { register } from "../../actions/auth";
-
 import { logOut } from "../../actions/auth";
 import { loadCart } from "../../actions/cart";
 import "../../App.css";
 import { Alert } from "reactstrap";
-import { useAuth0 } from "../../react0-auth-spa";
 import SpinnerPage from "./SpinnerPage";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const Navbar = ({
   auth: { authenticated, isLoading, userInfo },
@@ -110,7 +109,7 @@ const Navbar = ({
     </MDBNavbar>
   );
 
-  return <div>{authenticated || isAuthenticated ? authLinks : guestLinks}</div>;
+  return <div>{authenticated == true || isAuthenticated == true ? authLinks : guestLinks}</div>;
 };
 
 const mapStateToProps = (state) => ({
