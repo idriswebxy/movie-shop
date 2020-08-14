@@ -8,8 +8,6 @@ import {
   GET_PROFILE,
 } from "./types";
 
-
-
 //  Get current users profile
 export const getCurrentProfile = () => async (dispatch) => {
   try {
@@ -30,12 +28,8 @@ export const getCurrentProfile = () => async (dispatch) => {
   }
 };
 
-
-
 // Create or update profile
-export const createProfile = (formData) => async (
-  dispatch
-) => {
+export const createProfile = (name, email) => async (dispatch) => {
   try {
     const config = {
       headers: {
@@ -43,8 +37,7 @@ export const createProfile = (formData) => async (
       },
     };
 
-    console.log(formData)
-
+    const formData = JSON.stringify(name, email);
 
     const res = await axios.post("/api/profile", formData, config);
 
@@ -54,7 +47,7 @@ export const createProfile = (formData) => async (
     });
 
     dispatch(setAlert("Profile Created", "success"));
-
+    
   } catch (error) {
     const errors = error.response.data.errors;
 
@@ -71,8 +64,6 @@ export const createProfile = (formData) => async (
     });
   }
 };
-
-
 
 // Delete account
 export const deleteAccount = () => async (dispatch) => {

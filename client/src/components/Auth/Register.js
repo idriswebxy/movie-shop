@@ -5,7 +5,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import setAuthToken from "../../utils/setAuthToken";
 import { setAlert } from "../../actions/alert";
-import { register } from "../../actions/auth";
+import { register, setProfile } from "../../actions/auth";
 import {
   MDBContainer,
   MDBRow,

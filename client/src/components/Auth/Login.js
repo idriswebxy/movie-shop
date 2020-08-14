@@ -15,9 +15,10 @@ import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 import PropTypes from "prop-types";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getCurrentProfile } from "../../actions/profile";
 
 
-const Login = ({ login, authenticated, loading }) => {
+const Login = ({ login, authenticated, loading, getCurrentProfile }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -42,6 +43,7 @@ const Login = ({ login, authenticated, loading }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     login(email, password);
+    getCurrentProfile()
   };
 
   if (authenticated) {
@@ -118,4 +120,4 @@ const mapStateToProps = (state) => ({
   loading: state.auth.loading,
 });
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { login, getCurrentProfile })(Login);

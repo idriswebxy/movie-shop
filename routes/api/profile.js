@@ -11,6 +11,8 @@ const Profile = require("../../models/Profile");
 // @desc     Get current users profile
 // @access   Private
 router.get("/me", auth, async (req, res) => {
+
+
   try {
     const profile = await Profile.findOne({
       user: req.user.id,
@@ -31,6 +33,7 @@ router.get("/me", auth, async (req, res) => {
 // @desc     Create or update user profile
 // @access   Private
 router.post("/", [auth], async (req, res) => {
+
 
   const errors = validationResult(req);
 

@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 const Cart = require("../../models/Cart");
+const Profile = require("../../models/Profile")
 
+// returns total price in cart
 router.post("/total", async (req, res) => {
   try {
     let array = req.body;
@@ -31,6 +33,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+
 // Add to cart
 router.post("/", async (req, res) => {
   try {
@@ -55,6 +58,10 @@ router.post("/", async (req, res) => {
       genreId: genre_ids,
       releaseDate: release_date,
     });
+
+    await Profile.findOneAndUpdate({
+      
+    })
 
     newItem.save().then((product) => res.json(product));
   } catch (error) {
