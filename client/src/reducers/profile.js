@@ -11,7 +11,6 @@ const initialState = {
   loading: true,
   error: {},
   items: []
-
 };
 
 export default function (state = initialState, action) {

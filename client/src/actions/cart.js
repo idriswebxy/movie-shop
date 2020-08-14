@@ -9,6 +9,7 @@ import {
 import axios from "axios";
 import { setAlert } from "./alert";
 
+
 export const addToCart = (movie) => async (dispatch) => {
   const config = {
     headers: {

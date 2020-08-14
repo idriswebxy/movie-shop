@@ -11,6 +11,7 @@ import {
   LOGOUT,
   LOGIN_SUCCESS,
 } from "./types";
+import { useAuth0 } from "@auth0/auth0-react";
 
 // Load user
 export const loadUser = () => async (dispatch) => {
@@ -42,7 +43,6 @@ export const register = ({ name, email, password }) => async (dispatch) => {
 
   const body = JSON.stringify({ name, email, password });
 
-  console.log(body);
 
   try {
     const res = await axios.post("/api/user", body, config);
@@ -76,7 +76,6 @@ export const login = (email, password) => async (dispatch) => {
 
   const body = JSON.stringify({ email, password });
 
-
   try {
     const res = await axios.post("/api/auth", body, config);
 
@@ -98,6 +97,7 @@ export const login = (email, password) => async (dispatch) => {
     });
   }
 };
+
 
 // Logout
 export const logOut = () => (dispatch) => {

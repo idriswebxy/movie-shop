@@ -25,6 +25,7 @@ import Checkout from "./components/Cart/Checkout";
 import TvShows from "./components/TvShows/TvShows";
 import TvShowDetails from "./components/TvShows/TvShowDetails";
 import { createBrowserHistory } from "history";
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const history = createBrowserHistory();
@@ -35,12 +36,13 @@ if (localStorage.token) {
 
 const App = ({ isLoading }) => {
 
+  const { isAuthenticated } = useAuth0();
+
   useEffect(() => {
     store.store.dispatch(loadUser());
   }, []);
 
-
-
+ 
   // if (isLoading) {
   //   return <SpinnerPage />
   // }

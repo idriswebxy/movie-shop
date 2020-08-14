@@ -8,6 +8,8 @@ const config = require("config");
 const auth = require("../../middleware/auth");
 require("dotenv").config();
 
+
+// get user
 router.get("/", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
@@ -17,6 +19,8 @@ router.get("/", auth, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+
 
 // register user
 router.post(
@@ -32,8 +36,6 @@ router.post(
   ],
   async (req, res) => {
     const errors = validationResult(req);
-
-    console.log(req.body)
 
     if (!errors.isEmpty()) {
       return res.status(400).json({

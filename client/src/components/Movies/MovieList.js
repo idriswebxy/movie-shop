@@ -28,6 +28,9 @@ import {
 import RelatedMovies from "./RelatedMovies";
 import "../../App.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getCurrentProfile } from "../../actions/profile";
+
+
 
 const MovieList = ({
   addToCart,
@@ -38,12 +41,19 @@ const MovieList = ({
   page,
   nextPage,
   prevPage,
+  dispatch,
+  getCurrentProfile
 }) => {
+
+  const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
 
   useEffect(() => {
     fetchApi(config.API_KEY, page);
     loadCart();
+    // getAccessTokenSilently().then(token => localStorage.setItem("token", token))
+    // getCurrentProfile()
   }, [page]);
+
 
   let load = (
     <div>
@@ -132,4 +142,5 @@ export default connect(mapStateToProps, {
   fetchApi,
   nextPage,
   prevPage,
+  getCurrentProfile
 })(MovieList);

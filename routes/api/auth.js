@@ -8,6 +8,7 @@ const { check, validationResult } = require("express-validator");
 
 const User = require("../../models/User");
 
+
 // Login
 router.post(
   "/",
@@ -24,8 +25,6 @@ router.post(
     }
 
     const { email, password } = req.body;
-
-    console.log(req.body)
 
     try {
       let user = await User.findOne({ email });
