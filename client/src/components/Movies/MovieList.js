@@ -51,7 +51,8 @@ const MovieList = ({
     fetchApi(config.API_KEY, page);
     loadCart();
     // getAccessTokenSilently().then(token => localStorage.setItem("token", token))
-    // getCurrentProfile()
+    getCurrentProfile()
+
   }, [page]);
 
 

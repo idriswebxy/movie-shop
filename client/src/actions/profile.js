@@ -9,7 +9,7 @@ import {
 } from "./types";
 
 //  Get current users profile
-export const getCurrentProfile = () => async (dispatch) => {
+export const getCurrentProfile = (userId) => async (dispatch) => {
   try {
     const res = await axios.get("/api/profile/me");
 
@@ -47,7 +47,7 @@ export const createProfile = (name, email) => async (dispatch) => {
     });
 
     dispatch(setAlert("Profile Created", "success"));
-    
+
   } catch (error) {
     const errors = error.response.data.errors;
 
