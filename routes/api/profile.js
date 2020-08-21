@@ -10,11 +10,15 @@ const Profile = require("../../models/Profile");
 // @route    GET api/profile/me
 // @desc     Get current users profile
 // @access   Private 
-router.get("/me", auth, async (req, res) => {
+router.get("/me", [auth], async (req, res) => {
+
+  console.log("GET PROFILE!!" + req.body)
+
   try {
     const profile = await Profile.findOne({
       user: req.user.id,
     });
+
 
     if (!profile) {
       return res.status(400).json({ msg: "There is no profile for this user" });
@@ -26,6 +30,10 @@ router.get("/me", auth, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+
+
+
 
 // @route    POST api/profile
 // @desc     Create or update user profile

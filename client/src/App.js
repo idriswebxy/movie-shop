@@ -27,7 +27,6 @@ import TvShowDetails from "./components/TvShows/TvShowDetails";
 import { createBrowserHistory } from "history";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
 const history = createBrowserHistory();
 
 if (localStorage.token) {
@@ -35,14 +34,12 @@ if (localStorage.token) {
 }
 
 const App = ({ isLoading }) => {
-
   const { isAuthenticated } = useAuth0();
 
   useEffect(() => {
     store.store.dispatch(loadUser());
   }, []);
 
- 
   // if (isLoading) {
   //   return <SpinnerPage />
   // }
@@ -56,7 +53,7 @@ const App = ({ isLoading }) => {
           <Route exact path="/" component={Landing} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path={"/movies"} component={MovieList} />
+          <PrivateRoute exact path="/movies/:userId" component={MovieList} />
           <PrivateRoute exact path="/tv_shows" component={TvShows} />
           <PrivateRoute exact path="/movie_details" component={MovieDetails} />
           <PrivateRoute exact path="/show_details" component={TvShowDetails} />
