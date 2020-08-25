@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import { NavLink, NavItem, Button } from "react-bootstrap";
 import SpinnerPage from "../Layout/SpinnerPage";
@@ -17,7 +17,7 @@ import PropTypes from "prop-types";
 import { useAuth0 } from "@auth0/auth0-react";
 
 
-const Login = ({ login, authenticated, loading, getCurrentProfile }) => {
+const Login = ({ login, authenticated, loading, getCurrentProfile, page }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -34,6 +34,8 @@ const Login = ({ login, authenticated, loading, getCurrentProfile }) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const history = useHistory();
+
   const toggle = () => setIsOpen(!isOpen);
 
   const onChange = (e) =>
@@ -45,7 +47,7 @@ const Login = ({ login, authenticated, loading, getCurrentProfile }) => {
   };
 
   if (authenticated) {
-    return <Redirect to={"/movies"} />;
+    return <Redirect to={'/movies/1'} />;
   }
 
   if (loading) {

@@ -128,10 +128,14 @@ export const setRelatedMovies = () => async (dispatch) => {
 };
 
 export const fetchApi = (key, page) => async (dispatch) => {
+
+  let pageInt = parseInt(page)
+
   let res = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&page=${page}`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&page=${pageInt}`
   );
 
+  console.log(res.data)
   let data = await res.json();
 
   dispatch({
@@ -144,7 +148,7 @@ export const fetchApi = (key, page) => async (dispatch) => {
 export const nextPage = (page) => async (dispatch) => {
   dispatch({
     type: NEXT_PAGE,
-    payload: page,
+    payload: parseInt(page),
   });
 };
 
@@ -153,6 +157,6 @@ export const prevPage = (page) => async (dispatch) => {
 
   dispatch({
     type: PREV_PAGE,
-    payload: page,
+    payload: parseInt(page),
   });
 };

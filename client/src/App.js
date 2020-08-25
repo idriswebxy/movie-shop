@@ -33,11 +33,14 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-const App = ({ isLoading }) => {
+const App = ({ history }) => {
+
   const { isAuthenticated } = useAuth0();
 
   useEffect(() => {
     store.store.dispatch(loadUser());
+
+    console.log()
   }, []);
 
   // if (isLoading) {
@@ -53,7 +56,7 @@ const App = ({ isLoading }) => {
           <Route exact path="/" component={Landing} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path="/movies/:userId" component={MovieList} />
+          <PrivateRoute exact path="/movies/:page" component={MovieList} />
           <PrivateRoute exact path="/tv_shows" component={TvShows} />
           <PrivateRoute exact path="/movie_details" component={MovieDetails} />
           <PrivateRoute exact path="/show_details" component={TvShowDetails} />
@@ -66,7 +69,7 @@ const App = ({ isLoading }) => {
 };
 
 const mapStateToProps = (state) => ({
-  // isLoading: state.auth.isLoading,
+  // page: state.movie.page
 });
 
 export default connect(mapStateToProps)(App);

@@ -24,14 +24,13 @@ import {
   MDBView,
   MDBIcon,
   MDBAnimation,
+  MDBNavLink
 } from "mdbreact";
 import RelatedMovies from "./RelatedMovies";
 import "../../App.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getCurrentProfile } from "../../actions/profile";
-import { useParams } from "react-router-dom";
-
-
+import { useParams, useHistory, useRouteMatch, Link } from "react-router-dom";
 
 const MovieList = ({
   addToCart,
@@ -44,23 +43,23 @@ const MovieList = ({
   prevPage,
   dispatch,
   getCurrentProfile,
-  userId
+  userId,
 }) => {
-
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
 
   const params = useParams();
+  const history = useHistory();
+  const match = useRouteMatch();
+
 
   useEffect(() => {
-    fetchApi(config.API_KEY, page);
+    fetchApi(config.API_KEY, match.params.page);
     loadCart();
     // getAccessTokenSilently().then(token => localStorage.setItem("token", token))
-    getCurrentProfile(userId)
+    getCurrentProfile(userId);
 
-
-    
-  }, [page]);
-  console.log("HISTORY===>" + params.name)
+    console.log(history);
+  }, [match.params.page]);
 
 
   let load = (
@@ -73,21 +72,28 @@ const MovieList = ({
   let pages = (
     <nav aria-label="Page navigation example">
       <ul className="pagination">
-        <li onClick={() => prevPage(page)} className="page-item">
+        {/* <li onClick={() => prevPage(match.params.page)} className="page-item">
           <MDBIcon
             className="white-text pr-3"
             size="2x"
             icon="angle-double-left"
           />
-        </li>
+        </li> */}
+        <Link to={}>Prev</Link>
         &nbsp; &nbsp; &nbsp; Page: {page} &nbsp; &nbsp; &nbsp; &nbsp;
-        <li onClick={() => nextPage(page)} className="page-item">
+        {/* <li
+          onClick={() => nextPage(match.params.page)}
+
+          className="page-item"
+        >
           <MDBIcon
             className="white-text pr-3"
             size="2x"
             icon="angle-double-right"
           />
-        </li>
+        </li> */
+        }
+        <Link to={}>Next</Link>
       </ul>
     </nav>
   );
@@ -150,5 +156,5 @@ export default connect(mapStateToProps, {
   fetchApi,
   nextPage,
   prevPage,
-  getCurrentProfile
+  getCurrentProfile,
 })(MovieList);
