@@ -63,7 +63,7 @@ const Navbar = ({
             </MDBNavLink>
           </MDBNavItem>
           <MDBNavItem active>
-            <MDBNavLink to="/movies">
+            <MDBNavLink to="/movies/1">
               Movies <MDBIcon icon="film" />
             </MDBNavLink>
           </MDBNavItem>

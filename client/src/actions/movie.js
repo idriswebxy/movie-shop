@@ -145,6 +145,7 @@ export const fetchApi = (key, page) => async (dispatch) => {
 
 
 export const nextPage = (page) => async (dispatch) => {
+
   dispatch({
     type: NEXT_PAGE,
     payload: page,

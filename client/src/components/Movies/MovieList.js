@@ -31,7 +31,7 @@ import RelatedMovies from "./RelatedMovies";
 import "../../App.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getCurrentProfile } from "../../actions/profile";
-import { useParams, useHistory, useRouteMatch, Link } from "react-router-dom";
+import { useParams, useHistory, useRouteMatch, Link, Redirect } from "react-router-dom";
 
 const MovieList = ({
   addToCart,
@@ -51,20 +51,25 @@ const MovieList = ({
   const history = useHistory();
   const match = useRouteMatch();
   // const loadMoreMovies = false;
-  const loadMoreMovies = movies
+  const loadMoreMovies = movies;
 
-  const [isLoadMore, loadMore] = useState(false)
-  const [page, setPage] = useState(1)
+  const [isLoadMore, loadMore] = useState(false);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     fetchApi(config.API_KEY, page);
     loadCart();
     // getAccessTokenSilently().then(token => localStorage.setItem("token", token))
-    getCurrentProfile(userId);
-    loadMore(true)
-    console.log(match, history.goForward())
+    // getCurrentProfile(userId);
+    // loadMore(true);
+
+    console.log(match);
   }, [page]);
 
+
+  if (true) {
+   return <Redirect to={history.location.pathname} />
+  }
 
   let load = (
     <div>
@@ -72,28 +77,34 @@ const MovieList = ({
     </div>
   );
 
- 
-  
-//   window.onscroll = (ev) => {
-//     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-//         console.log("you're at the bottom of the page");
-//     }
-// };
-
+  //   window.onscroll = (ev) => {
+  //     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+  //         console.log("you're at the bottom of the page");
+  //     }
+  // };
 
   // page transition
   let pages = (
     <nav aria-label="Page navigation example">
       <ul className="pagination">
-        <Link to={`/movies/${page}`} onClick={() => setPage(page-1)} className="page-item">
+        <Link
+          to={`/movies/${page}`}
+          onClick={() => setPage(page - 1)}
+          className="page-item"
+        >-
           <MDBIcon
             className="white-text pr-3"
             size="2x"
             icon="angle-double-left"
           />
         </Link>
-        &nbsp; &nbsp; &nbsp; Page: {match.params.page} &nbsp; &nbsp; &nbsp; &nbsp;
-        <Link to={`/movies/${page}`} onClick={() => setPage(page+1)} className="page-item">
+        &nbsp; &nbsp; &nbsp; Page: {match.params.page} &nbsp; &nbsp; &nbsp;
+        &nbsp;
+        <Link
+          to={`/movies/${page}`}
+          onClick={() => setPage(page + 1)}
+          className="page-item"
+        >+
           <MDBIcon
             className="white-text pr-3"
             size="2x"
@@ -104,12 +115,11 @@ const MovieList = ({
     </nav>
   );
 
-
   let loadButton = (
     <div>
-      <MDBBtn onClick={() => nextPage(page)} >Load More</MDBBtn>
+      <MDBBtn onClick={() => nextPage(page)}>Load More</MDBBtn>
     </div>
-  )
+  );
 
   const movieList = (
     <MDBRow>

@@ -47,7 +47,7 @@ const Login = ({ login, authenticated, loading, getCurrentProfile, page }) => {
   };
 
   if (authenticated) {
-    return <Redirect to="/movies" />;
+    return <Redirect to="/movies/1" />;
   }
 
   if (loading) {
