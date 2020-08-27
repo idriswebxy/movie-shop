@@ -16,31 +16,29 @@ import PrivateRoute from "./components/Routing/PrivateRoute";
 import MovieList from "./components/Movies/MovieList";
 import Landing from "./components/Layout/Landing";
 import { loadUser } from "./actions/auth";
-import { Provider } from "react-redux";
 import store from "./store";
-import SpinnerPage from "./components/Layout/SpinnerPage";
 import Alert from "./components/Layout/Alert";
 import MovieDetails from "./components/Movies/MovieDetails";
 import Checkout from "./components/Cart/Checkout";
 import TvShows from "./components/TvShows/TvShows";
 import TvShowDetails from "./components/TvShows/TvShowDetails";
-import { createBrowserHistory } from "history";
 import { useAuth0 } from "@auth0/auth0-react";
+import { createBrowserHistory } from "history";
+
 
 const history = createBrowserHistory();
+
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-const App = ({ history }) => {
+const App = ({  }) => {
 
   const { isAuthenticated } = useAuth0();
 
   useEffect(() => {
     store.store.dispatch(loadUser());
-
-    console.log()
   }, []);
 
   // if (isLoading) {
@@ -54,13 +52,13 @@ const App = ({ history }) => {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Landing} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
           <PrivateRoute exact path="/movies/:page" component={MovieList} />
-          <PrivateRoute exact path="/tv_shows" component={TvShows} />
-          <PrivateRoute exact path="/movie_details" component={MovieDetails} />
-          <PrivateRoute exact path="/show_details" component={TvShowDetails} />
-          <PrivateRoute exact path="/cart" component={Cart} />
+          <PrivateRoute path="/tv_shows" component={TvShows} />
+          <PrivateRoute path="/movie_details" component={MovieDetails} />
+          <PrivateRoute path="/show_details" component={TvShowDetails} />
+          <PrivateRoute path="/cart" component={Cart} />
           <PrivateRoute path="/checkout" component={Checkout} />
         </Switch>
       </div>

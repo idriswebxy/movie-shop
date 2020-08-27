@@ -4,6 +4,7 @@ import rootReducer from "./reducers";
 import { persistStore } from "redux-persist";
 import logger from "redux-logger";
 
+
 const middlewares = [thunk, logger];
 
 

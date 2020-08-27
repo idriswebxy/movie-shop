@@ -7,10 +7,11 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "tachyons";
 import "./App.css";
-import store from "./store.js";
+import store from "./store";
 import { PersistGate } from "redux-persist/integration/react";
-import { Auth0Provider } from "@auth0/auth0-react"; 
+import { Auth0Provider } from "@auth0/auth0-react";
 import config from "./auth0.config.json";
+// import { ConnectedRouter } from "connected-react-router";
 import history from "./utils/history";
 
 
@@ -20,6 +21,8 @@ const onRedirectCallback = (appState) => {
     appState && appState.returnTo ? appState.returnTo : window.location.pathname
   );
 };
+
+console.log("====>" + store)
 
 ReactDOM.render(
   <Provider store={store.store}>

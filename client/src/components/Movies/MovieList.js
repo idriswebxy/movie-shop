@@ -24,7 +24,8 @@ import {
   MDBView,
   MDBIcon,
   MDBAnimation,
-  MDBNavLink
+  MDBNavLink,
+  MDBBtn,
 } from "mdbreact";
 import RelatedMovies from "./RelatedMovies";
 import "../../App.css";
@@ -38,7 +39,7 @@ const MovieList = ({
   isLoading,
   movies,
   fetchApi,
-  page,
+  // page,
   nextPage,
   prevPage,
   dispatch,
@@ -47,19 +48,22 @@ const MovieList = ({
 }) => {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
 
-  const params = useParams();
   const history = useHistory();
   const match = useRouteMatch();
+  // const loadMoreMovies = false;
+  const loadMoreMovies = movies
 
+  const [isLoadMore, loadMore] = useState(false)
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
-    fetchApi(config.API_KEY, match.params.page);
+    fetchApi(config.API_KEY, page);
     loadCart();
     // getAccessTokenSilently().then(token => localStorage.setItem("token", token))
     getCurrentProfile(userId);
-
-    console.log(history);
-  }, [match.params.page]);
+    loadMore(true)
+    console.log(match, history.goForward())
+  }, [page]);
 
 
   let load = (
@@ -68,35 +72,44 @@ const MovieList = ({
     </div>
   );
 
+ 
+  
+//   window.onscroll = (ev) => {
+//     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+//         console.log("you're at the bottom of the page");
+//     }
+// };
+
+
   // page transition
   let pages = (
     <nav aria-label="Page navigation example">
       <ul className="pagination">
-        {/* <li onClick={() => prevPage(match.params.page)} className="page-item">
+        <Link to={`/movies/${page}`} onClick={() => setPage(page-1)} className="page-item">
           <MDBIcon
             className="white-text pr-3"
             size="2x"
             icon="angle-double-left"
           />
-        </li> */}
-        <Link to={}>Prev</Link>
-        &nbsp; &nbsp; &nbsp; Page: {page} &nbsp; &nbsp; &nbsp; &nbsp;
-        {/* <li
-          onClick={() => nextPage(match.params.page)}
-
-          className="page-item"
-        >
+        </Link>
+        &nbsp; &nbsp; &nbsp; Page: {match.params.page} &nbsp; &nbsp; &nbsp; &nbsp;
+        <Link to={`/movies/${page}`} onClick={() => setPage(page+1)} className="page-item">
           <MDBIcon
             className="white-text pr-3"
             size="2x"
             icon="angle-double-right"
           />
-        </li> */
-        }
-        <Link to={}>Next</Link>
+        </Link>
       </ul>
     </nav>
   );
+
+
+  let loadButton = (
+    <div>
+      <MDBBtn onClick={() => nextPage(page)} >Load More</MDBBtn>
+    </div>
+  )
 
   const movieList = (
     <MDBRow>
@@ -128,6 +141,7 @@ const MovieList = ({
         <div className="pagination">{pages}</div>
         {isLoading ? load : movieList}
         <div className="pagination">{pages}</div>
+        {loadButton}
       </MDBContainer>
       <RelatedMovies />
     </div>
@@ -144,7 +158,7 @@ const mapStateToProps = (state) => ({
   isLoading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
   movies: state.movie.movies,
-  page: state.movie.page,
+  // page: state.movie.page,
   searchedMovie: state.movie.searchedMovie,
 });
 
