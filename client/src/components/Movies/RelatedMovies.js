@@ -27,7 +27,7 @@ const RelatedMovies = ({
           {relatedMovies.map((movie, id) => (
             <div style={{ margin: "20px" }} key={id}>
               <Link
-                to="/movie_details"
+                to={"/movie_details/id=" + movie.id}
                 onClick={() => getRelatedMovie(movie.id)}
               >
                 <img

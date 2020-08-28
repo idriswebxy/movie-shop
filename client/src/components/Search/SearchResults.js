@@ -19,11 +19,8 @@ import {
 } from "mdbreact";
 import { Scrollbars } from "react-custom-scrollbars";
 
-const SearchResults = ({ results, getMovie, isLoading, getSearchedMovie }) => {
-  // useEffect(() => {
-  //   clearCache();
-  // }, []);
-
+const SearchResults = ({ results, getSearchedMovie }) => {
+  
   results = results.slice(0, 10);
 
   let searchResults = (
@@ -35,15 +32,15 @@ const SearchResults = ({ results, getMovie, isLoading, getSearchedMovie }) => {
               <MDBRow>
                 <MDBCol>
                   <Link
-                    to="/movie_details"
+                    to={"/movie_details/" + result.id}
                     onClick={() => getSearchedMovie(result.id)}
                   >
                     <div
                       key={result.id}
                       style={{
+                        borderColor: "black",
                         color: "white",
-                        display: "block",
-                        padding: "20px",
+                        padding: "10px",
                       }}
                     >
                       <img

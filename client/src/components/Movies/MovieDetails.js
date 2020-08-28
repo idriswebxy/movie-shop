@@ -33,6 +33,7 @@ const MovieDetails = ({
       .then((data) => setVideoKey(data.results[0].key));
     loadCart();
     window.scrollTo(0, 0)
+
   }, []);
 
   if (isLoading) {

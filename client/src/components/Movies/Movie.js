@@ -8,7 +8,6 @@ import { MDBView, MDBContainer, MDBBtn, MDBIcon, MDBSpinner } from "mdbreact";
 import moment from "moment";
 import MovieDetails from "./MovieDetails";
 
-
 const Movie = ({
   id,
   image,
@@ -21,15 +20,14 @@ const Movie = ({
   releaseDate,
   title,
 }) => {
-
   let movieLink = (
-    <div style={{ color: "white" }}>
+    <div style={{ color: "white"}}>
       <MDBView hover zoom>
-        <Link to="/movie_details" onClick={() => getMovie(id)}>
+        <Link to={"/movie_details/" + id} onClick={() => getMovie(id)}>
           <img src={`http://image.tmdb.org/t/p/w185${image}`} />
         </Link>
       </MDBView>
-      <div>
+      <div style={{ textAlign: "center" }}>
         <h5>{title}</h5>
         <h6>{moment(releaseDate).format("LL")}</h6>
         <h5>${price}</h5>

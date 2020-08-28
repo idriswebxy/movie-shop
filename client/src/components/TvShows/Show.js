@@ -18,7 +18,7 @@ const Show = ({
   let showList = (
     <div style={{ textAlign: "center" }}>
       <div>
-        <Link to="/show_details" onClick={() => getShow(id)}>
+        <Link to={"/show_details/" + id} onClick={() => getShow(id)}>
           <img
             className="movie-container"
             src={`http://image.tmdb.org/t/p/w185${image}`}
