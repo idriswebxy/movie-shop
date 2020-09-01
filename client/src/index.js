@@ -22,7 +22,6 @@ const onRedirectCallback = (appState) => {
   );
 };
 
-console.log("====>" + store)
 
 ReactDOM.render(
   <Provider store={store.store}>

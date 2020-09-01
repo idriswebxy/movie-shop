@@ -35,6 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
+
 // Use Routes
 app.use("/api/movie", movie);
 app.use("/api/user", user);

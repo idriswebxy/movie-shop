@@ -35,7 +35,11 @@ router.get("/", async (req, res) => {
 
 
 // Add to cart
-router.post("/", async (req, res) => {
+router.post("/:userId", async (req, res) => {
+
+
+  console.log(req.params)
+
   try {
     const {
       id,
@@ -47,6 +51,7 @@ router.post("/", async (req, res) => {
     } = req.body;
 
     const price = 2.99;
+    
 
     // Create new Product
     const newItem = new Cart({
@@ -59,9 +64,9 @@ router.post("/", async (req, res) => {
       releaseDate: release_date,
     });
 
-    await Profile.findOneAndUpdate({
-      
-    })
+    const cart = await Profile.findById(req.params.userId)
+
+    console.log(cart)
 
     newItem.save().then((product) => res.json(product));
   } catch (error) {

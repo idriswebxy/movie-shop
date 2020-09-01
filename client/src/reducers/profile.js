@@ -10,7 +10,6 @@ const initialState = {
   profile: null,
   loading: true,
   error: {},
-  items: []
 };
 
 export default function (state = initialState, action) {
@@ -21,12 +20,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         profile: payload,
-        loading: false,
-      };
-    case GET_PROFILES:
-      return {
-        ...state,
-        profiles: payload,
         loading: false,
       };
     case PROFILE_ERROR:

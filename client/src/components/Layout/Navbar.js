@@ -26,6 +26,7 @@ const Navbar = ({
   auth: { authenticated, isLoading, userInfo },
   logOut,
   cart,
+  page
 }) => {
   const { user, isAuthenticated } = useAuth0();
 
@@ -49,7 +50,7 @@ const Navbar = ({
   const authLinks = (
     <MDBNavbar style={navColor} dark expand="md" scrolling fixed="top">
       <MDBNavbarBrand>
-        <MDBNavLink style={{ color: "white" }} to="/movies">
+        <MDBNavLink style={{ color: "white" }} to={`/movies/${page}`}>
           Movie Shop <MDBIcon icon="home" />
         </MDBNavLink>
       </MDBNavbarBrand>
@@ -120,6 +121,7 @@ const Navbar = ({
 const mapStateToProps = (state) => ({
   auth: state.auth,
   cart: state.cart.cart,
+  page: state.movie.page
 });
 
 export default connect(mapStateToProps, { logOut })(Navbar);

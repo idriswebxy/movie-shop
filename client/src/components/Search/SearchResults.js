@@ -32,13 +32,13 @@ const SearchResults = ({ results, getSearchedMovie }) => {
               <MDBRow>
                 <MDBCol>
                   <Link
-                    to={"/movie_details/" + result.id}
+                    to={"/movieInfo/" + result.id}
                     onClick={() => getSearchedMovie(result.id)}
                   >
                     <div
                       key={result.id}
                       style={{
-                        borderColor: "black",
+                        
                         color: "white",
                         padding: "10px",
                       }}

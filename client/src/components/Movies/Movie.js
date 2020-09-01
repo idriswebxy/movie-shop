@@ -8,6 +8,7 @@ import { MDBView, MDBContainer, MDBBtn, MDBIcon, MDBSpinner } from "mdbreact";
 import moment from "moment";
 import MovieDetails from "./MovieDetails";
 
+
 const Movie = ({
   id,
   image,
@@ -19,21 +20,24 @@ const Movie = ({
   price,
   releaseDate,
   title,
+  userId
 }) => {
+
+
   let movieLink = (
     <div style={{ color: "white"}}>
       <MDBView hover zoom>
-        <Link to={"/movie_details/" + id} onClick={() => getMovie(id)}>
+        <Link to={"/movieInfo/" + id} onClick={() => getMovie(id)}>
           <img src={`http://image.tmdb.org/t/p/w185${image}`} />
         </Link>
       </MDBView>
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "" }}>
         <h5>{title}</h5>
         <h6>{moment(releaseDate).format("LL")}</h6>
         <h5>${price}</h5>
       </div>
 
-      <MDBBtn onClick={() => addToCart(movieObj)}>
+      <MDBBtn onClick={() => addToCart(movieObj, userId)}>
         Add To Cart <MDBIcon icon="cart-plus" />
       </MDBBtn>
     </div>
@@ -44,6 +48,7 @@ const Movie = ({
 
 const mapStateToProps = (state) => ({
   isLoading: state.movie.isLoading,
+  userId: state.profile.profile.user
 });
 
 export default connect(mapStateToProps, { getMovie, addToCart })(Movie);

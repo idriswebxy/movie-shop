@@ -10,26 +10,52 @@ const Profile = require("../../models/Profile");
 // @route    GET api/profile/me
 // @desc     Get current users profile
 // @access   Private 
-router.get("/me", [auth], async (req, res) => {
+// router.get("/me", [auth], async (req, res) => {
 
-  console.log("GET PROFILE!!" + req.body)
+//   // console.log(req.user.id)
+
+//   try {
+//     const profile = await Profile.findOne({
+//       user: req.user.id,
+//     });
+
+
+//     if (!profile) {
+//       return res.status(400).json({ msg: "There is no profile for this user" });
+//     }
+
+//     console.log(profile)
+//     res.json(profile);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// });
+
+
+
+router.get("/:user_id", async (req, res) => {
+
 
   try {
     const profile = await Profile.findOne({
-      user: req.user.id,
-    });
+      user: req.params.user_id
+    })
 
-
-    if (!profile) {
-      return res.status(400).json({ msg: "There is no profile for this user" });
-    }
+    if (!profile) return res.status(400).json({ msg: "Profile not found" });
 
     res.json(profile);
   } catch (err) {
     console.error(err.message);
+    if (err.kind == "ObjectId") {
+      return res.status(400).json({ msg: "Profile not found" });
+    }
     res.status(500).send("Server Error");
   }
 });
+
+
+
 
 
 
@@ -57,24 +83,26 @@ router.post("/", [auth], async (req, res) => {
   if (email) profileFields.email = email;
   
   try {
-    let profile = await Profile.findOne({ user: req.user.id });
+    // let profile = await Profile.findOne({ user: req.user.id });
 
-    if (profile) {
-      // Update
-      profile = await Profile.findOneAndUpdate(
-        { user: req.user.id },
-        { $set: profileFields },
-        { new: true }
-      );
+    // if (profile) {
+    //   // Update
+    //   profile = await Profile.findOneAndUpdate(
+    //     { user: req.user.id },
+    //     { $set: profileFields },
+    //     { new: true }
+    //   );
 
-      return res.json(profile);
-    }
+    //   return res.json(profile);
+    // }
 
     // Create
     profile = new Profile(profileFields);
 
     await profile.save();
+
     res.json(profile);
+
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

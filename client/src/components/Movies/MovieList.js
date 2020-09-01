@@ -30,7 +30,7 @@ import {
 import RelatedMovies from "./RelatedMovies";
 import "../../App.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import { getCurrentProfile } from "../../actions/profile";
+import { getCurrentProfile, getProfileById } from "../../actions/profile";
 import { useParams, useHistory, useRouteMatch, Link, Redirect, useLocation } from "react-router-dom";
 import movie from "../../reducers/movie";
 
@@ -45,6 +45,7 @@ const MovieList = ({
   prevPage,
   dispatch,
   getCurrentProfile,
+  getProfileById,
   userId,
 }) => {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
@@ -56,7 +57,7 @@ const MovieList = ({
     fetchApi(config.API_KEY, page);
     loadCart();
     // getAccessTokenSilently().then(token => localStorage.setItem("token", token))
-    // getCurrentProfile(userId);
+    getProfileById(userId)
     // loadMore(true);
     
     history.push(`${page}`)
@@ -69,16 +70,6 @@ const MovieList = ({
     </div>
   );
 
-
- 
-  // if (!isLoading) {
-  //   return <Redirect to={history.location.state}/>
-  // }
-  // //   window.onscroll = (ev) => {
-  //     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-  //         console.log("you're at the bottom of the page");
-  //     }
-  // };
 
   // page transition
   let pages = (
@@ -155,7 +146,7 @@ MovieList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  userId: state.profile.profile,
+  userId: state.profile.profile.user,
   isLoading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
   movies: state.movie.movies,
@@ -171,5 +162,5 @@ export default connect(mapStateToProps, {
   fetchApi,
   nextPage,
   prevPage,
-  getCurrentProfile,
+  getProfileById
 })(MovieList);

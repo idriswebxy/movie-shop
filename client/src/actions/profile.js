@@ -8,37 +8,14 @@ import {
   GET_PROFILE,
 } from "./types";
 
-//  Get current users profile
-export const getCurrentProfile = (userId) => async (dispatch) => {
-
-
-  try {
-    const res = await axios.get("/api/profile/me", { userId: userId });
-
-
-    console.log(res.data)
-
-    dispatch({
-      type: GET_PROFILE,
-      payload: res.data,
-    });
-  } catch (error) {
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: {
-        msg: error.response.statusText,
-        status: error.response.status,
-      },
-    });
-  }
-};
 
 
 
 // Get profile by ID
 export const getProfileById = userId => async dispatch => {
+
   try {
-    const res = await axios.get(`/api/profile/user/${userId}`);
+    const res = await axios.get(`/api/profile/${userId}`);
 
     dispatch({
       type: GET_PROFILE,

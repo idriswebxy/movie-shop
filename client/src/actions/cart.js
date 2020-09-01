@@ -10,7 +10,7 @@ import axios from "axios";
 import { setAlert } from "./alert";
 
 
-export const addToCart = (movie) => async (dispatch) => {
+export const addToCart = (movie, userId) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -19,8 +19,9 @@ export const addToCart = (movie) => async (dispatch) => {
 
   const body = JSON.stringify(movie);
 
+
   try {
-    const res = await axios.post("/api/cart", body, config);
+    const res = await axios.post(`/api/cart/${userId}`, body, config);
 
     dispatch({
       type: ADD_TO_CART,

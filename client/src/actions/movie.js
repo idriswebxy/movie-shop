@@ -129,8 +129,6 @@ export const setRelatedMovies = () => async (dispatch) => {
 
 export const fetchApi = (key, page) => async (dispatch) => {
 
-  console.log("CHANGE PAGE FETCH ==> ", page)
-
   let res = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&page=${page}`
   );
