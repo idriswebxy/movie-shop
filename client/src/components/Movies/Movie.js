@@ -48,7 +48,7 @@ const Movie = ({
 
 const mapStateToProps = (state) => ({
   isLoading: state.movie.isLoading,
-  userId: state.profile.profile.user
+  userId: state.auth.userInfo._id
 });
 
 export default connect(mapStateToProps, { getMovie, addToCart })(Movie);

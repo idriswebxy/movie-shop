@@ -57,9 +57,9 @@ export const addToCartTvShow = (item) => async (dispatch) => {
   }
 };
 
-export const loadCart = () => async (dispatch) => {
+export const loadCart = (userId) => async (dispatch) => {
   try {
-    const res = await axios.get("/api/cart");
+    const res = await axios.get(`/api/cart/${userId}`);
 
     dispatch({
       type: LOAD_CART,

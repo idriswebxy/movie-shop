@@ -73,7 +73,7 @@ const Navbar = ({
             <MDBNavLink to="/cart">
               <div className="align-cart">
                 Cart <MDBIcon icon="shopping-cart" />
-                <div className="lblCartCount">{cart.length}</div>
+                <div className="lblCartCount">{}</div>
               </div>
             </MDBNavLink>
           </MDBNavItem>

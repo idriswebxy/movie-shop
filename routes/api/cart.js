@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
 const Cart = require("../../models/Cart");
-const Profile = require("../../models/Profile")
+const Profile = require("../../models/Profile");
 
 // returns total price in cart
-router.post("/total", async (req, res) => {
+router.post("/total/:id", auth, async (req, res) => {
   try {
     let array = req.body;
 
@@ -22,10 +23,12 @@ router.post("/total", async (req, res) => {
   }
 });
 
+
+
 // Get all items
-router.get("/", async (req, res) => {
+router.get("/:id", auth, async (req, res) => { //TODO: fix cart fetch
   try {
-    const items = await Cart.find().sort({ date: -1 });
+    const items = await Cart.findById(req.params.userid).sort({ date: -1 });
     res.json(items);
   } catch (err) {
     console.error(err.message);
@@ -34,9 +37,9 @@ router.get("/", async (req, res) => {
 });
 
 
+
 // Add to cart
 router.post("/:userId", async (req, res) => {
-
 
   console.log(req.params)
 
@@ -51,10 +54,10 @@ router.post("/:userId", async (req, res) => {
     } = req.body;
 
     const price = 2.99;
-    
 
     // Create new Product
     const newItem = new Cart({
+      user: req.params.userId,
       id: id,
       name: title,
       image: poster_path,
@@ -64,13 +67,18 @@ router.post("/:userId", async (req, res) => {
       releaseDate: release_date,
     });
 
-    const cart = await Profile.findById(req.params.userId)
+    // Adding cart items to a specific user
+    // const profile = await Profile.findOne({ user: req.params.userId });
 
-    console.log(cart)
+    // profile.items.push(newItem)
+
+    // profile.save();
 
     newItem.save().then((product) => res.json(product));
-  } catch (error) {
-    res.status(500).json()
+
+  } 
+  catch (error) {
+    res.status(500).json();
   }
 });
 
@@ -97,8 +105,6 @@ router.post("/tv_show", async (req, res) => {
 
 // Delete item
 router.delete("/:id", async (req, res) => {
-
-
   try {
     const item = await Cart.findById(req.params.id);
 
@@ -108,9 +114,7 @@ router.delete("/:id", async (req, res) => {
 
     await item.remove();
 
-  res.json({ msg: "Item removed" });
-
-
+    res.json({ msg: "Item removed" });
   } catch (error) {
     if (error.kind === "ObjectId") {
       return res.status(404).json({ msg: "Item not found" });

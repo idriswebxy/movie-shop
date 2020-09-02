@@ -146,7 +146,7 @@ MovieList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  userId: state.profile.profile.user,
+  userId: state.auth.userInfo._id,
   isLoading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
   movies: state.movie.movies,
