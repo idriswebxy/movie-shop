@@ -10,7 +10,10 @@ import axios from "axios";
 import { setAlert } from "./alert";
 
 
+
+
 export const addToCart = (movie, userId) => async (dispatch) => {
+
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -18,7 +21,6 @@ export const addToCart = (movie, userId) => async (dispatch) => {
   };
 
   const body = JSON.stringify(movie);
-
 
   try {
     const res = await axios.post(`/api/cart/${userId}`, body, config);
@@ -33,6 +35,8 @@ export const addToCart = (movie, userId) => async (dispatch) => {
     });
   }
 };
+
+
 
 export const addToCartTvShow = (item) => async (dispatch) => {
   const config = {
@@ -57,9 +61,13 @@ export const addToCartTvShow = (item) => async (dispatch) => {
   }
 };
 
+
+
 export const loadCart = (userId) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/cart/${userId}`);
+
+    console.log(res.data)
 
     dispatch({
       type: LOAD_CART,
@@ -72,6 +80,8 @@ export const loadCart = (userId) => async (dispatch) => {
   }
 };
 
+
+
 export const getCart = (id) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/cart/${id}`);
@@ -80,22 +90,22 @@ export const getCart = (id) => async (dispatch) => {
       type: LOAD_CART,
       payload: res.data,
     });
-    // dispatch({
-    //   type:CHANGE_LOAD,
-    //   payload:
-    // })
+  
   } catch (err) {
     dispatch({
       type: CART_ERROR,
-      // payload: { msg: err.response.statusText, status: err.response.status }
+      payload: { msg: err.response.statusText, status: err.response.status }
     });
   }
 };
 
-export const deleteItem = (id, price) => async (dispatch) => {
+
+
+export const deleteItem = (id, movieId, price) => async (dispatch) => {
+
   try {
 
-    await axios.delete(`api/cart/${id}`);
+    await axios.delete(`api/cart/${id}/${movieId}`);
 
     dispatch({
       type: DELETE_ITEM,
@@ -103,6 +113,7 @@ export const deleteItem = (id, price) => async (dispatch) => {
     });
 
     dispatch(setAlert("Item Removed", "success"));
+    
   } catch (err) {
     dispatch({
       type: CART_ERROR,

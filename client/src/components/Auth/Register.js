@@ -17,9 +17,9 @@ import {
 import axios from "axios";
 import { useGoogleLogin } from "react-google-login";
 import { Button } from "reactstrap";
-import { createProfile } from "../../actions/profile";
 
-const Register = ({ setAlert, register, authenticated, createProfile }) => {
+
+const Register = ({ setAlert, register, authenticated }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -39,7 +39,6 @@ const Register = ({ setAlert, register, authenticated, createProfile }) => {
     if (password !== password2) {
       setAlert("Passwords do not match!", "danger");
     } else {
-      createProfile({ name, email });
       register({ name, email, password });
     }
   };
@@ -130,4 +129,4 @@ const mapStateToProps = (state) => ({
   authenticated: state.auth.authenticated,
 });
 
-export default connect(mapStateToProps, { setAlert, register, createProfile })(Register);
+export default connect(mapStateToProps, { setAlert, register })(Register);

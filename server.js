@@ -11,7 +11,6 @@ const user = require("./routes/api/user");
 const cart = require("./routes/api/cart");
 const auth = require("./routes/api/auth");
 const movie = require("./routes/api/movie");
-const profile = require("./routes/api/profile");
 
 const app = express();
 
@@ -41,7 +40,6 @@ app.use("/api/movie", movie);
 app.use("/api/user", user);
 app.use("/api/cart", cart);
 app.use("/api/auth", auth);
-app.use("/api/profile", profile);
 
 //Serve static assets if in productions
 if (process.env.NODE_ENV === "production") {

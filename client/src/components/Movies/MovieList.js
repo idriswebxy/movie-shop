@@ -30,9 +30,8 @@ import {
 import RelatedMovies from "./RelatedMovies";
 import "../../App.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import { getCurrentProfile, getProfileById } from "../../actions/profile";
 import { useParams, useHistory, useRouteMatch, Link, Redirect, useLocation } from "react-router-dom";
-import movie from "../../reducers/movie";
+
 
 const MovieList = ({
   addToCart,
@@ -43,9 +42,6 @@ const MovieList = ({
   page,
   nextPage,
   prevPage,
-  dispatch,
-  getCurrentProfile,
-  getProfileById,
   userId,
 }) => {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
@@ -55,9 +51,9 @@ const MovieList = ({
   
   useEffect(() => {
     fetchApi(config.API_KEY, page);
-    loadCart();
+    loadCart(userId);
     // getAccessTokenSilently().then(token => localStorage.setItem("token", token))
-    getProfileById(userId)
+    // getProfileById(userId)
     // loadMore(true);
     
     history.push(`${page}`)
@@ -162,5 +158,4 @@ export default connect(mapStateToProps, {
   fetchApi,
   nextPage,
   prevPage,
-  getProfileById
 })(MovieList);

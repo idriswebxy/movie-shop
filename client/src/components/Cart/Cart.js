@@ -18,6 +18,7 @@ import CartItem from "./CartItem";
 import SpinnerPage from "../Layout/SpinnerPage";
 import { Alert } from "reactstrap";
 
+
 const Cart = ({
   cart,
   loadCart,
@@ -26,15 +27,18 @@ const Cart = ({
   loading,
   deleteItem,
   price = 2.99,
+  userId
 }) => {
   useEffect(() => {
     loadCart();
     getPriceTotal(cart);
   }, [loading]);
 
+
   if (loading) {
     return <SpinnerPage />;
   }
+
 
   let cartItems = (
     <div>
@@ -56,7 +60,7 @@ const Cart = ({
                 <div>${movie.price}</div>
               </td>
               <td>
-                <MDBBtn onClick={() => deleteItem(movie._id, price)}>
+                <MDBBtn onClick={() => deleteItem(userId, movie.id, price)}>
                   Remove
                 </MDBBtn>
               </td>
@@ -95,6 +99,7 @@ const mapStateToProps = (state) => ({
   cart: state.cart.cart,
   total: state.cart.totalPrice,
   loading: state.cart.loading,
+  userId: state.auth.userInfo._id
 });
 
 export default connect(mapStateToProps, {

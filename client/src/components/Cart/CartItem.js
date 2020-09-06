@@ -24,7 +24,7 @@ const CartItem = ({
       <MDBTableHead>
         <tr>
           <th>Movies</th>
-          <th>Price</th>
+          <th>Price</th> 
         </tr>
       </MDBTableHead>
       <MDBTableBody>

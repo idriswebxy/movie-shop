@@ -5,13 +5,13 @@ import alert from "./alert";
 import auth from "./auth";
 import cart from "./cart";
 import movie from "./movie";
-import profile from "./profile";
+
 
 
 const persistConfig = {
   key: "root",
   storage,
-  whiteList: [alert, auth, cart, movie, profile]
+  whiteList: [alert, auth, cart, movie]
 }
 
 const rootReducer = combineReducers({
@@ -19,7 +19,6 @@ const rootReducer = combineReducers({
   auth,
   cart,
   movie,
-  profile
 });
 
 export default persistReducer(persistConfig, rootReducer);
