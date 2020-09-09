@@ -67,8 +67,6 @@ export const loadCart = (userId) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/cart/${userId}`);
 
-    console.log(res.data)
-
     dispatch({
       type: LOAD_CART,
       payload: res.data,
@@ -113,6 +111,7 @@ export const deleteItem = (id, movieId, price) => async (dispatch) => {
     });
 
     dispatch(setAlert("Item Removed", "success"));
+    
     
   } catch (err) {
     dispatch({

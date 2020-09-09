@@ -28,12 +28,14 @@ router.post("/total/:id", auth, async (req, res) => {
 
 
 
-// Get all items
+
+// Get users cart
 router.get("/:id", async (req, res) => { 
 
   try {
-    const items = await Cart.find({ userId: req.params.id }).sort({ date: -1 });
+    const items = await Cart.find({ user: req.params.id }).sort({ date: -1 });
     res.json(items);
+    console.log(items)
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -47,16 +49,14 @@ router.post("/:id", async (req, res) => {
 
   
   try {
-    console.log(req.user.id)
-
-    // const user = await Cart.find({ userId: req.params.id });
+    const user = await Cart.find({ userId: req.params.id });
 
     // Create new Product
     const newCart = new Cart({
       user: req.params.id,
       cartItem: req.body
     });
-
+  
     
     const userCart = await newCart.save();
 
@@ -66,7 +66,7 @@ router.post("/:id", async (req, res) => {
   } 
   catch (err) {
     console.error(err.message)
-    res.status(500).send("Server Error!");
+    res.status(500).send("Server Error!"); 
   }
 });
 

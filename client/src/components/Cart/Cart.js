@@ -31,7 +31,8 @@ const Cart = ({
 }) => {
   useEffect(() => {
     loadCart();
-    getPriceTotal(cart);
+    // getPriceTotal(cart);
+    console.log(cart.map(m => m.cartItem))
   }, [loading]);
 
 
@@ -53,14 +54,14 @@ const Cart = ({
           {cart.map((movie, key) => (
             <tr key={key}>
               <td>
-                <Img src={`https://image.tmdb.org/t/p/w92${movie.image}`} />
-                <h5>{movie.name}</h5>
+                <Img src={`https://image.tmdb.org/t/p/w92${movie.cartItem.image}`} />
+                <h5>{movie.cartItem.name}</h5>
               </td>
               <td>
-                <div>${movie.price}</div>
+                <div>${movie.cartItem.price}</div>
               </td>
               <td>
-                <MDBBtn onClick={() => deleteItem(userId, movie.id, price)}>
+                <MDBBtn onClick={() => deleteItem(userId, movie.cartItem.id, price)}>
                   Remove
                 </MDBBtn>
               </td>

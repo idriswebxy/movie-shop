@@ -1,18 +1,13 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import config from "../../config.json";
 import PropTypes from "prop-types";
 import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart, loadCart, getCart } from "../../actions/cart";
 import {
-  getMovie,
   setMovies,
-  clearCache,
-  getMovieVideo,
   fetchApi,
   nextPage,
   prevPage,
-  setRelatedMovies,
-  setMoviesDB,
 } from "../../actions/movie";
 import { connect } from "react-redux";
 import Movie from "./Movie";
@@ -24,13 +19,12 @@ import {
   MDBView,
   MDBIcon,
   MDBAnimation,
-  MDBNavLink,
   MDBBtn,
 } from "mdbreact";
 import RelatedMovies from "./RelatedMovies";
 import "../../App.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useParams, useHistory, useRouteMatch, Link, Redirect, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 
 const MovieList = ({
