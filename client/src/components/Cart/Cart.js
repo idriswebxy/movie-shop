@@ -1,12 +1,9 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Img from "react-image";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   MDBContainer,
-  MDBRow,
-  MDBCol,
   MDBBtn,
   MDBNavLink,
   MDBTable,
@@ -14,9 +11,7 @@ import {
   MDBTableBody,
 } from "mdbreact";
 import { deleteItem, loadCart, getPriceTotal } from "../../actions/cart";
-import CartItem from "./CartItem";
 import SpinnerPage from "../Layout/SpinnerPage";
-import { Alert } from "reactstrap";
 
 
 const Cart = ({
@@ -31,8 +26,8 @@ const Cart = ({
 }) => {
   useEffect(() => {
     loadCart();
-    // getPriceTotal(cart);
-    console.log(cart.map(m => m.cartItem))
+    getPriceTotal(cart);
+    console.log(cart)
   }, [loading]);
 
 
@@ -46,7 +41,7 @@ const Cart = ({
       <MDBTable>
         <MDBTableHead>
           <tr>
-            <th>Movie</th>
+             <th>Movie</th>
             <th>Price</th>
           </tr>
         </MDBTableHead>
@@ -54,14 +49,14 @@ const Cart = ({
           {cart.map((movie, key) => (
             <tr key={key}>
               <td>
-                <Img src={`https://image.tmdb.org/t/p/w92${movie.cartItem.image}`} />
-                <h5>{movie.cartItem.name}</h5>
+                <Img src={`https://image.tmdb.org/t/p/w92${movie.poster_path}`} />
+                <h5>{movie.original_title}</h5>
               </td>
               <td>
-                <div>${movie.cartItem.price}</div>
+                <div>${price = 2.99}</div>
               </td>
-              <td>
-                <MDBBtn onClick={() => deleteItem(userId, movie.cartItem.id, price)}>
+              <td> 
+                <MDBBtn onClick={() => deleteItem(movie.id, price)}>
                   Remove
                 </MDBBtn>
               </td>

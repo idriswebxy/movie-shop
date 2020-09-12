@@ -5,11 +5,17 @@ const Schema = mongoose.Schema;
 const CartSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: "users",
+    ref: "user",
   },
-  cartItem: {
+  movieId: {
+    type: Number
+  },
+  movie: {
     type: Object
   },
+  price: {
+    type: Number
+  }
 });
 
 module.exports = Cart = mongoose.model("cart", CartSchema);

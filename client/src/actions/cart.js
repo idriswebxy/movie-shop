@@ -23,7 +23,7 @@ export const addToCart = (movie, userId) => async (dispatch) => {
   const body = JSON.stringify(movie);
 
   try {
-    const res = await axios.post(`/api/cart/${userId}`, body, config);
+    const res = await axios.post(`/api/cart`, body, config);
 
     dispatch({
       type: ADD_TO_CART,
@@ -63,9 +63,9 @@ export const addToCartTvShow = (item) => async (dispatch) => {
 
 
 
-export const loadCart = (userId) => async (dispatch) => {
+export const loadCart = () => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/cart/${userId}`);
+    const res = await axios.get("/api/cart");
 
     dispatch({
       type: LOAD_CART,
@@ -80,30 +80,12 @@ export const loadCart = (userId) => async (dispatch) => {
 
 
 
-export const getCart = (id) => async (dispatch) => {
-  try {
-    const res = await axios.get(`/api/cart/${id}`);
 
-    dispatch({
-      type: LOAD_CART,
-      payload: res.data,
-    });
-  
-  } catch (err) {
-    dispatch({
-      type: CART_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
-  }
-};
-
-
-
-export const deleteItem = (id, movieId, price) => async (dispatch) => {
+export const deleteItem = (id, price) => async (dispatch) => {
 
   try {
 
-    await axios.delete(`api/cart/${id}/${movieId}`);
+    await axios.delete(`api/cart/${id}`, price);
 
     dispatch({
       type: DELETE_ITEM,
@@ -121,9 +103,11 @@ export const deleteItem = (id, movieId, price) => async (dispatch) => {
   }
 };
 
-export const getPriceTotal = (array) => async (dispatch) => {
+
+
+export const getPriceTotal = (cart) => async (dispatch) => {
   try {
-    const res = await axios.post("/api/cart/total", array);
+    const res = await axios.post("/api/cart/total", cart);
 
     dispatch({
       type: PRICE_TOTAL,

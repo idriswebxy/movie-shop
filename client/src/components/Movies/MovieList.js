@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import config from "../../config.json";
 import PropTypes from "prop-types";
 import SpinnerPage from "../Layout/SpinnerPage";
-import { addToCart, loadCart, getCart } from "../../actions/cart";
+import { addToCart, loadCart } from "../../actions/cart";
 import {
   setMovies,
   fetchApi,
@@ -45,7 +45,7 @@ const MovieList = ({
   
   useEffect(() => {
     fetchApi(config.API_KEY, page);
-    loadCart(userId);
+    loadCart();
     // getAccessTokenSilently().then(token => localStorage.setItem("token", token))
     // getProfileById(userId)
     // loadMore(true);
@@ -147,7 +147,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   addToCart,
   loadCart,
-  getCart,
   setMovies,
   fetchApi,
   nextPage,

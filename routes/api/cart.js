@@ -2,11 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const Cart = require("../../models/Cart");
-const User = require("../../models/User")
+const User = require("../../models/User");
 const auth = require("../../middleware/auth");
-
-
-
 
 // returns total price in cart
 router.post("/total/:id", auth, async (req, res) => {
@@ -28,14 +25,11 @@ router.post("/total/:id", auth, async (req, res) => {
 
 
 
-
 // Get users cart
-router.get("/:id", async (req, res) => { 
-
+router.get("/", auth, async (req, res) => {
   try {
-    const items = await Cart.find({ user: req.params.id }).sort({ date: -1 });
-    res.json(items);
-    console.log(items)
+    const items = await Cart.find({ user: req.user.id });
+    res.json(items.map((item) => item.movie));
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -45,68 +39,35 @@ router.get("/:id", async (req, res) => {
 
 
 // Create a cart
-router.post("/:id", async (req, res) => {
-
+router.post("/", auth, async (req, res) => {
   
+
   try {
-    const user = await Cart.find({ userId: req.params.id });
+    const user = await User.findById(req.user.id);
 
-    // Create new Product
     const newCart = new Cart({
-      user: req.params.id,
-      cartItem: req.body
+      user: user.id,
+      movieId: req.body.id,
+      movie: req.body,
+      price: 2.99,
     });
-  
-    
-    const userCart = await newCart.save();
 
-    res.json(userCart)
-    
+    await newCart.save();
 
-  } 
-  catch (err) {
-    console.error(err.message)
-    res.status(500).send("Server Error!"); 
+    res.json(newCart);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error!");
   }
 });
 
-
-
-router.put("/:id", async (req, res) => {
-
-  try {
-    
-    const user = await Cart.findOne({ userId: req.params.id });
-
-
-
-
-
-    res.send(user)
-
-
-
-
-  } catch (err) {
-    
-  }
-
-
-
-})
-
-
-
-
 // Add to cart for TvShows
 router.post("/tv_show", async (req, res) => {
-
   const { id, name, poster_path, overview, first_air_date } = req.body;
 
   const price = 2.99;
 
   // Create new Product
-  
 
   newItem.save().then((product) => res.json(product));
 });
@@ -114,23 +75,17 @@ router.post("/tv_show", async (req, res) => {
 
 
 
-// Delete item
-router.delete("/:id/:movieId", auth, async (req, res) => {
+// Delete movie in cart
+router.delete("/:id", auth, async (req, res) => {  
+
+  console.log(price)
 
   try {
-    const usersItem = await Cart.find({ user: req.params.id });
+    const cart = await Cart.findOneAndDelete({ movieId: req.params.id }).then(res => console.log(res))
 
-    usersItem.filter(movie => movie.cartItems === req.params.movieId)
-
-    console.log(usersItem)
-
-    if (!item) {
-      return res.status(404).json({ msg: "Item not found" });
-    }
-
-    await item.remove();
 
     res.json({ msg: "Item removed" });
+
   } catch (error) {
     if (error.kind === "ObjectId") {
       return res.status(404).json({ msg: "Item not found" });

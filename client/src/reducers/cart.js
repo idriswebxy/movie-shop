@@ -38,8 +38,8 @@ export default function(state = initialState, action) {
     case DELETE_ITEM:
       return {
         ...state,
-        cart: state.cart.filter(item => item.user !== payload.userId),
-        totalPrice: state.totalPrice - payload.price
+        cart: state.cart.filter(item => item.id !== payload.id),
+        // totalPrice: state.totalPrice - payload.price
         
       };
     case CART_ERROR:
