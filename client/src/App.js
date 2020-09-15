@@ -25,16 +25,13 @@ import TvShowDetails from "./components/TvShows/TvShowDetails";
 import { useAuth0 } from "@auth0/auth0-react";
 import { createBrowserHistory } from "history";
 
-
 const history = createBrowserHistory();
-
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-const App = ({  }) => {
-
+const App = ({}) => {
   const { isAuthenticated } = useAuth0();
 
   useEffect(() => {
@@ -47,9 +44,9 @@ const App = ({  }) => {
 
   return (
     <Router history={history}>
-      <Alert />
       <div className="app-main">
         <Navbar />
+        <Alert />
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route path="/register" component={Register} />

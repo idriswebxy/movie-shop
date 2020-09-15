@@ -46,10 +46,7 @@ const MovieList = ({
   useEffect(() => {
     fetchApi(config.API_KEY, page);
     loadCart();
-    // getAccessTokenSilently().then(token => localStorage.setItem("token", token))
-    // getProfileById(userId)
-    // loadMore(true);
-    
+
     history.push(`${page}`)
   }, [page]);
 

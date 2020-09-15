@@ -26,8 +26,7 @@ const Cart = ({
 }) => {
   useEffect(() => {
     loadCart();
-    getPriceTotal(cart);
-    console.log(cart)
+    getPriceTotal(userId);
   }, [loading]);
 
 
@@ -53,7 +52,7 @@ const Cart = ({
                 <h5>{movie.original_title}</h5>
               </td>
               <td>
-                <div>${price = 2.99}</div>
+                <div>${price}</div>
               </td>
               <td> 
                 <MDBBtn onClick={() => deleteItem(movie.id, price)}>

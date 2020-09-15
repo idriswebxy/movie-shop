@@ -37,7 +37,7 @@ const Movie = ({
         <h5>${price}</h5>
       </div>
 
-      <MDBBtn onClick={() => addToCart(movieObj, userId)}>
+      <MDBBtn onClick={() => addToCart(movieObj)}>
         Add To Cart <MDBIcon icon="cart-plus" />
       </MDBBtn>
     </div>

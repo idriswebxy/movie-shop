@@ -12,13 +12,16 @@ import { setAlert } from "./alert";
 
 
 
-export const addToCart = (movie, userId) => async (dispatch) => {
+export const addToCart = (movie) => async (dispatch) => {
 
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
+
+  movie.price = 2.99;
+
 
   const body = JSON.stringify(movie);
 
@@ -101,17 +104,20 @@ export const deleteItem = (id, price) => async (dispatch) => {
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
-};
+};  
 
 
 
-export const getPriceTotal = (cart) => async (dispatch) => {
+export const getPriceTotal = (id) => async (dispatch) => {
+
   try {
-    const res = await axios.post("/api/cart/total", cart);
+    const res = await axios.get(`/api/cart/total/${id}`);
 
     dispatch({
       type: PRICE_TOTAL,
       payload: res.data,
     });
-  } catch (error) { }
+  } catch (error) {
+      console.error(error)
+   }
 };

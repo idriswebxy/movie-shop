@@ -3,26 +3,23 @@ import {
   LOAD_CART,
   CART_ERROR,
   DELETE_ITEM,
-  PRICE_TOTAL
+  PRICE_TOTAL,
 } from "../actions/types";
-
 
 const initialState = {
   cart: [],
-  totalPrice: 0.00,
-  loading: true
-  
+  totalPrice: 0.0,
+  loading: true,
 };
 
-export default function(state = initialState, action) {
-  
+export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
     case ADD_TO_CART:
       return {
         ...state,
-        cart: [payload, ...state.cart]
+        cart: [payload, ...state.cart],
       };
     case LOAD_CART:
       return {
@@ -33,20 +30,19 @@ export default function(state = initialState, action) {
     case PRICE_TOTAL:
       return {
         ...state,
-        totalPrice: payload
-      }  
+        totalPrice: payload,
+      };
     case DELETE_ITEM:
       return {
         ...state,
-        cart: state.cart.filter(item => item.id !== payload.id),
-        // totalPrice: state.totalPrice - payload.price
-        
+        cart: state.cart.filter((item) => item.id === payload.id),
+        totalPrice: state.totalPrice - payload.price,
       };
     case CART_ERROR:
-      // return {
-      //   ...state,
-      //   cart: state.cart
-      // }
+    // return {
+    //   ...state,
+    //   cart: state.cart
+    // }
 
     default:
       return state;

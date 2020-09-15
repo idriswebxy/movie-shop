@@ -32,9 +32,6 @@ const CartItem = ({
           className="movie-container"
           src={`https://image.tmdb.org/t/p/w154${movieImg}`}
         />
-        {/* <MDBBtn onClick={() => deleteItem(movieId, price)} color="red">
-          Remove
-        </MDBBtn> */}
         <h3>{movieName}</h3>
         <div>${price}</div>
       </MDBTableBody>
