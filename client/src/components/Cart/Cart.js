@@ -13,7 +13,6 @@ import {
 import { deleteItem, loadCart, getPriceTotal } from "../../actions/cart";
 import SpinnerPage from "../Layout/SpinnerPage";
 
-
 const Cart = ({
   cart,
   loadCart,
@@ -22,42 +21,40 @@ const Cart = ({
   loading,
   deleteItem,
   price = 2.99,
-  userId
+  userId,
 }) => {
   useEffect(() => {
     loadCart();
     getPriceTotal(userId);
-  }, [loading]);
-
+  }, [loading, total]);
 
   if (loading) {
     return <SpinnerPage />;
   }
-
 
   let cartItems = (
     <div>
       <MDBTable>
         <MDBTableHead>
           <tr>
-             <th>Movie</th>
+            <th>Movie</th>
             <th>Price</th>
           </tr>
         </MDBTableHead>
         <MDBTableBody>
-          {cart.map((movie, key) => (
-            <tr key={key}>
+          {cart.map((movie, index) => (
+            <tr key={index}>
               <td>
-                <Img src={`https://image.tmdb.org/t/p/w92${movie.poster_path}`} />
+                <Img
+                  src={`https://image.tmdb.org/t/p/w92${movie.poster_path}`}
+                />
                 <h5>{movie.original_title}</h5>
               </td>
               <td>
                 <div>${price}</div>
               </td>
-              <td> 
-                <MDBBtn onClick={() => deleteItem(movie.id, price)}>
-                  Remove
-                </MDBBtn>
+              <td>
+                <MDBBtn onClick={() => deleteItem(movie.id, index, price)}>Remove</MDBBtn>
               </td>
             </tr>
           ))}
@@ -94,7 +91,7 @@ const mapStateToProps = (state) => ({
   cart: state.cart.cart,
   total: state.cart.totalPrice,
   loading: state.cart.loading,
-  userId: state.auth.userInfo._id
+  userId: state.auth.userInfo._id,
 });
 
 export default connect(mapStateToProps, {

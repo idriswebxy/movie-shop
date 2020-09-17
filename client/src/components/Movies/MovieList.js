@@ -41,8 +41,8 @@ const MovieList = ({
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
 
   const history = useHistory();
-  
-  
+
+
   useEffect(() => {
     fetchApi(config.API_KEY, page);
     loadCart();
@@ -93,11 +93,12 @@ const MovieList = ({
 
   const movieList = (
     <MDBRow>
-      {movies.map((movie, key) => {
+      {movies.map((movie, index) => {
         return (
-          <MDBCol size="6" lg="3">
+          <MDBCol size="3">
             <MDBAnimation type="zoomIn" duration="1s">
               <Movie
+                index={index}
                 id={movie.id}
                 addToCart={addToCart}
                 title={movie.title}

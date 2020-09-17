@@ -20,12 +20,13 @@ const Movie = ({
   price,
   releaseDate,
   title,
-  userId
+  userId,
+  index
 }) => {
 
 
   let movieLink = (
-    <div style={{ color: "white"}}>
+    <div style={{ color: "white" }}>
       <MDBView hover zoom>
         <Link to={"/movieInfo/" + id} onClick={() => getMovie(id)}>
           <img src={`http://image.tmdb.org/t/p/w185${image}`} />
@@ -37,7 +38,7 @@ const Movie = ({
         <h5>${price}</h5>
       </div>
 
-      <MDBBtn onClick={() => addToCart(movieObj)}>
+      <MDBBtn onClick={() => addToCart(movieObj, index)}>
         Add To Cart <MDBIcon icon="cart-plus" />
       </MDBBtn>
     </div>

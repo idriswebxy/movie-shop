@@ -31,7 +31,7 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-const App = ({}) => {
+const App = ({ }) => {
   const { isAuthenticated } = useAuth0();
 
   useEffect(() => {

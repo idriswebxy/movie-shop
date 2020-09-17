@@ -12,7 +12,8 @@ import { setAlert } from "./alert";
 
 
 
-export const addToCart = (movie) => async (dispatch) => {
+export const addToCart = (movie, index) => async (dispatch) => {
+
 
   const config = {
     headers: {
@@ -20,8 +21,8 @@ export const addToCart = (movie) => async (dispatch) => {
     },
   };
 
-  movie.price = 2.99;
-
+  // movie.price = 2.99;
+  movie.index = index
 
   const body = JSON.stringify(movie);
 
@@ -70,6 +71,7 @@ export const loadCart = () => async (dispatch) => {
   try {
     const res = await axios.get("/api/cart");
 
+
     dispatch({
       type: LOAD_CART,
       payload: res.data,
@@ -84,27 +86,27 @@ export const loadCart = () => async (dispatch) => {
 
 
 
-export const deleteItem = (id, price) => async (dispatch) => {
+export const deleteItem = (id, index, price) => async (dispatch) => {
 
   try {
 
-    await axios.delete(`api/cart/${id}`, price);
+    await axios.delete(`api/cart/${id}`);
 
     dispatch({
       type: DELETE_ITEM,
-      payload: { id, price }
+      payload: { index, price }
     });
 
     dispatch(setAlert("Item Removed", "success"));
-    
-    
+
+
   } catch (err) {
     dispatch({
       type: CART_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
-};  
+};
 
 
 
@@ -118,6 +120,6 @@ export const getPriceTotal = (id) => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
-      console.error(error)
-   }
+    console.error(error)
+  }
 };
