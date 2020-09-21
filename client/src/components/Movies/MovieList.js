@@ -46,7 +46,6 @@ const MovieList = ({
   useEffect(() => {
     fetchApi(config.API_KEY, page);
     loadCart();
-
     history.push(`${page}`)
   }, [page]);
 

@@ -32,7 +32,8 @@ const initialState = {
   relatedId: null,
   videoKey: "",
   movieId: null,
-  page: 1,
+  moviePage: 1,
+  tvShowPage: 1,
   movieIds: [],
   error: null
 };
