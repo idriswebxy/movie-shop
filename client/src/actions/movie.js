@@ -19,6 +19,8 @@ import axios from "axios";
 import config from "../config.json";
 import { LOCATION_CHANGE } from "connected-react-router";
 
+
+
 export const setSearchedMovies = (movie) => async (dispatch) => {
   try {
     dispatch({
@@ -30,6 +32,8 @@ export const setSearchedMovies = (movie) => async (dispatch) => {
   }
 };
 
+
+
 export const getRelatedMovie = (id) => async (dispatch) => {
   dispatch({
     type: GET_RELATED_MOVIE_ID,
@@ -37,12 +41,17 @@ export const getRelatedMovie = (id) => async (dispatch) => {
   });
 };
 
+
+
+
 export const getSearchedMovie = (id) => async (dispatch) => {
   dispatch({
     type: GET_SEARCHED_MOVIE,
     payload: id,
   });
 };
+
+
 
 export const getMovie = (id) => async (dispatch) => {
   try {
@@ -58,6 +67,9 @@ export const getMovie = (id) => async (dispatch) => {
   }
 };
 
+
+
+
 export const setMovies = (movies) => async (dispatch) => {
   try {
     dispatch({
@@ -72,18 +84,25 @@ export const setMovies = (movies) => async (dispatch) => {
   }
 };
 
+
+
+
 export const setTvShowsReducer = (tvShows) => async (dispatch) => {
   try {
     dispatch({
       type: SET_TVSHOWS,
       payload: tvShows,
     });
-  } catch (e) {
+  } catch (err) {
     dispatch({
       type: SET_TVSHOWS_ERR,
+      payload: err
     });
   }
 };
+
+
+
 
 export const getShow = (id) => async (dispatch) => {
   dispatch({
@@ -98,11 +117,17 @@ export const getShow = (id) => async (dispatch) => {
   }
 };
 
+
+
+
 export const loadMovieDetails = () => async (dispatch) => {
   dispatch({
     type: LOAD_MOVIE_DETAILS,
   });
 };
+
+
+
 
 export const setRelatedMovies = () => async (dispatch) => {
   try {
@@ -127,6 +152,10 @@ export const setRelatedMovies = () => async (dispatch) => {
   }
 };
 
+
+
+
+
 export const fetchApi = (key, page) => async (dispatch) => {
 
   let res = await fetch(
@@ -142,6 +171,8 @@ export const fetchApi = (key, page) => async (dispatch) => {
 };
 
 
+
+
 export const nextPage = (page) => async (dispatch) => {
 
   dispatch({
@@ -149,6 +180,8 @@ export const nextPage = (page) => async (dispatch) => {
     payload: page,
   });
 };
+
+
 
 export const prevPage = (page) => async (dispatch) => {
   page = page === 1 ? (page = 2) : page;

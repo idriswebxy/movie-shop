@@ -33,7 +33,8 @@ const initialState = {
   videoKey: "",
   movieId: null,
   page: 1,
-  movieIds: []
+  movieIds: [],
+  error: null
 };
 
 export default function (state = initialState, action) {
@@ -81,6 +82,9 @@ export default function (state = initialState, action) {
         relatedMovies: payload,
       };
     case SET_TVSHOWS_ERR:
+      return {
+        error: payload
+      }
     case GET_MOVIE_ERR:
       return;
     case SET_SEARCHED_MOVIE:
