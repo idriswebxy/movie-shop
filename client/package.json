@@ -11,7 +11,6 @@
     "connected-react-router": "^6.8.0",
     "history": "^5.0.0",
     "jwt-decode": "^2.2.0",
-    "mdbootstrap": "^4.19.1",
     "mdbreact": "^4.27.0",
     "moment": "^2.27.0",
     "node-sass": "^4.14.1",

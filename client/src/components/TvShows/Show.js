@@ -10,13 +10,13 @@ const Show = ({
   id,
   image,
   getShow,
-  isLoading, 
+  isLoading,
   tvShowObj,
   price,
   addToCartTvShow,
 }) => {
   let showList = (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign: "center", marginBottom: "50px" }}>
       <div>
         <Link to={"/show_details/" + id} onClick={() => getShow(id)}>
           <img
@@ -24,6 +24,7 @@ const Show = ({
             src={`http://image.tmdb.org/t/p/w185${image}`}
           />
         </Link>
+
         <h5>{tvShowObj.name}</h5>
         <h6>({tvShowObj.first_air_date.slice(0, 4)})</h6>
       </div>

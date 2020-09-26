@@ -59,7 +59,7 @@
    display: flex;
    justify-content: space-between;
    flex-wrap: wrap
- }
+ } 
 
  .movie-container {
    margin: 20px;
@@ -68,9 +68,9 @@
 
 
 
- .movie-list {
+ /* .movie-list {
    margin-top: 20px;
- }
+ } */
 
 
  .movie-details {

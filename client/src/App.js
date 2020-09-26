@@ -1,10 +1,5 @@
 import React, { Component, useEffect, useState, useContext } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
@@ -25,13 +20,14 @@ import TvShowDetails from "./components/TvShows/TvShowDetails";
 import { useAuth0 } from "@auth0/auth0-react";
 import { createBrowserHistory } from "history";
 
+
 const history = createBrowserHistory();
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-const App = ({ }) => {
+const App = ({}) => {
   const { isAuthenticated } = useAuth0();
 
   useEffect(() => {

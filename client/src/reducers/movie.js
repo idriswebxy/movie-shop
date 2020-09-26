@@ -122,12 +122,12 @@ export default function (state = initialState, action) {
     case NEXT_PAGE:
       return {
         ...state,
-        page: payload + 1,
+        moviePage: payload + 1,
       };
     case PREV_PAGE:
       return {
         ...state,
-        page: payload - 1,
+        moviePage: payload - 1,
       };
     case CHANGE_LOAD:
       return {

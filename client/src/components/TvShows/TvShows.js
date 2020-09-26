@@ -25,10 +25,12 @@ const TvShows = ({
   isLoading,
   getRelatedMovies,
   tvShows,
-  page,
+  // page,
   nextPage,
   prevPage,
 }) => {
+  let [page, setPage] = useState(1);
+
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/discover/tv?api_key=${config.API_KEY}&language=en-US&page=${page}`
@@ -49,8 +51,7 @@ const TvShows = ({
     <nav aria-label="Page navigation example">
       <ul className="pagination">
         <MDBBtn
-          // to={`/movies/${page}`}
-          onClick={() => prevPage(page)}
+          onClick={() => setPage(page === 1 ? (page = 1) : page - 1)}
           className="page-item"
         >
           <MDBIcon
@@ -60,7 +61,7 @@ const TvShows = ({
           />
         </MDBBtn>
         &nbsp; &nbsp; &nbsp; Page: {page} &nbsp; &nbsp; &nbsp; &nbsp;
-        <MDBBtn onClick={() => nextPage(page)} className="page-item">
+        <MDBBtn onClick={() => setPage(page + 1)} className="page-item">
           <MDBIcon
             className="white-text pr-3"
             size="2x"
@@ -77,24 +78,20 @@ const TvShows = ({
         {tvShows.map((tvShow, key) => {
           return (
             <MDBCol key={key} size="3">
-              <div className="hover-movie">
-                <Show
-                  id={tvShow.id}
-                  title={tvShow.name}
-                  image={tvShow.poster_path}
-                  overview={tvShow.overview}
-                  tvShowObj={tvShow}
-                  price={2.99}
-                />
-              </div>
+              <Show
+                id={tvShow.id}
+                title={tvShow.name}
+                image={tvShow.poster_path}
+                overview={tvShow.overview}
+                tvShowObj={tvShow}
+                price={2.99}
+              />
             </MDBCol>
           );
         })}
       </MDBRow>
     </MDBAnimation>
   );
-
-
 
   return (
     <div>
@@ -112,7 +109,7 @@ const mapStateToProps = (state) => ({
   isLoading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
   tvShows: state.movie.tvShows,
-  page: state.movie.page,
+  // page: state.movie.page,
 });
 
 export default connect(mapStateToProps, {
