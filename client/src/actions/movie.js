@@ -14,6 +14,7 @@ import {
   NEXT_PAGE,
   PREV_PAGE,
   GET_RELATED_MOVIE_ID,
+  LOAD_MORE
 } from "../actions/types";
 import axios from "axios";
 import config from "../config.json";
@@ -156,7 +157,26 @@ export const setRelatedMovies = () => async (dispatch) => {
 
 
 
-export const fetchApi = (key, page) => async (dispatch) => {
+export const fetchApi = (key) => async (dispatch) => {
+
+  let res = await fetch(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&page=${1}`
+  );
+
+  let data = await res.json();
+
+  return data.results
+  // dispatch({
+  //   type: SET_MOVIES,
+  //   payload: data.results,
+  // });
+};
+
+
+
+export const loadMore = (movies, key, page) => async (dispatch) => {
+ 
+  let movies = fetchApi(key)
 
   let res = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&page=${page}`
@@ -164,17 +184,28 @@ export const fetchApi = (key, page) => async (dispatch) => {
 
   let data = await res.json();
 
+  // dispatch({
+  //   type: SET_MOVIES,
+  //   payload: data.results
+  // })
+
+  console.log(data.results.concat(movies))
+
   dispatch({
-    type: SET_MOVIES,
-    payload: data.results,
-  });
+    type: LOAD_MORE,
+    payload: data.results.concat(movies)
+  })
+
+  dispatch({
+    type: NEXT_PAGE,
+    payload: ++page
+  })
+
 };
 
 
 
-
 export const nextPage = (page) => async (dispatch) => {
-
   dispatch({
     type: NEXT_PAGE,
     payload: page,
@@ -185,7 +216,6 @@ export const nextPage = (page) => async (dispatch) => {
 
 export const prevPage = (page) => async (dispatch) => {
   page = page === 1 ? (page = 2) : page;
-
   dispatch({
     type: PREV_PAGE,
     payload: page,

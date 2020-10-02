@@ -49,3 +49,4 @@ export const SET_MOVIE_ID = "SET_MOVIE_ID";
 export const SET_MOVIE_IDS = "SET_MOVIE_IDS";
 export const CHANGE_LOAD = "CHANGE_LOAD";
 export const GET_PROFILE = "GET_PROFILE";
+export const LOAD_MORE = "LOAD_MORE";

@@ -19,6 +19,7 @@ import {
   SET_VIDEO_KEY,
   SET_MOVIE_ID,
   SET_MOVIE_IDS,
+  LOAD_MORE
 } from "../actions/types";
 
 const initialState = {
@@ -122,7 +123,7 @@ export default function (state = initialState, action) {
     case NEXT_PAGE:
       return {
         ...state,
-        moviePage: payload + 1,
+        moviePage: payload,
       };
     case PREV_PAGE:
       return {
@@ -143,6 +144,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         movieIds: state.movieIds.push(payload)
+      }
+    case LOAD_MORE:
+      return {
+        ...state,
+        movies: state.movies.concat(payload)
       }
     default:
       return state;

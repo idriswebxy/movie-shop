@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getMovie, getMovieIds } from "../../actions/movie";
 import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart, loadCart } from "../../actions/cart";
-import { MDBView, MDBContainer, MDBBtn, MDBIcon, MDBSpinner } from "mdbreact";
+import { MDBView, MDBContainer, MDBBtn, MDBIcon, MDBSpinner, MDBAnimation } from "mdbreact";
 import moment from "moment";
 import MovieDetails from "./MovieDetails";
 
@@ -39,7 +39,13 @@ const Movie = ({
     </div>
   );
 
-  return <div>{movieLink}</div>;
+  return (
+    <div>
+      <MDBAnimation type="zoomIn" duration="1s">
+        {movieLink}
+      </MDBAnimation>
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => ({

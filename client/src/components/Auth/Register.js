@@ -44,7 +44,7 @@ const Register = ({ setAlert, register, authenticated }) => {
   };
 
   if (authenticated) {
-    return <Redirect to="/movies/1" />;
+    return <Redirect to="/movies" />;
   }
 
   return (
