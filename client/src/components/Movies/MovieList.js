@@ -45,7 +45,7 @@ const MovieList = ({
 
   useEffect(() => {
     // fetchApi(config.API_KEY);
-    loadMore(movies, config.API_KEY, page)
+    loadMore(null, config.API_KEY, page)
     loadCart(movies, config.API_KEY, page);
   }, []);
 
