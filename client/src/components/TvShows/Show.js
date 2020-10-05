@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getShow } from "../../actions/movie";
 import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCartTvShow } from "../../actions/cart";
-import { MDBView, MDBContainer, MDBBtn, MDBIcon } from "mdbreact";
+import { MDBView, MDBContainer, MDBBtn, MDBIcon, MDBAnimation } from "mdbreact";
 
 const Show = ({
   id,
@@ -38,7 +38,13 @@ const Show = ({
     </div>
   );
 
-  return <div>{showList}</div>;
+  return (
+    <div>
+      <MDBAnimation type="zoomIn" duration="1s">
+        {showList}
+      </MDBAnimation>
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => ({

@@ -21,6 +21,7 @@ const Movie = ({
   title,
   userId,
   index,
+  scrollById
 }) => {
   let movieLink = (
     <div style={{ color: "white", textAlign: "center", marginBottom: "50px" }}>

@@ -21,7 +21,7 @@ const Search = ({ setSearchedMovies }) => {
 
   const searchMovies = async (query) => {
     try {
-      if (!query || query.length <= 1) return;
+      if (!query || query.length <= 0) return;
 
       const url = `https://api.themoviedb.org/3/search/movie?api_key=${config.API_KEY}&query=${query}`;
 

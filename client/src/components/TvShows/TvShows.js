@@ -73,32 +73,28 @@ const TvShows = ({
   );
 
   let shows = (
-    <MDBAnimation type="zoomIn" duration="1s">
-      <MDBRow>
-        {tvShows.map((tvShow, key) => {
-          return (
-            <MDBCol key={key} size="3">
-              <Show
-                id={tvShow.id}
-                title={tvShow.name}
-                image={tvShow.poster_path}
-                overview={tvShow.overview}
-                tvShowObj={tvShow}
-                price={2.99}
-              />
-            </MDBCol>
-          );
-        })}
-      </MDBRow>
-    </MDBAnimation>
+    <MDBRow>
+      {tvShows.map((tvShow, key) => {
+        return (
+          <MDBCol key={key} size="3">
+            <Show
+              id={tvShow.id}
+              title={tvShow.name}
+              image={tvShow.poster_path}
+              overview={tvShow.overview}
+              tvShowObj={tvShow}
+              price={2.99}
+            />
+          </MDBCol>
+        );
+      })}
+    </MDBRow>
   );
 
   return (
     <div>
       <SearchPage />
-      <div className="pagination">{pages}</div>
       <MDBContainer>{shows}</MDBContainer>
-      <div className="pagination">{pages}</div>
       <RelatedMovies />
     </div>
   );

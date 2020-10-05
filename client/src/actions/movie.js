@@ -14,13 +14,20 @@ import {
   NEXT_PAGE,
   PREV_PAGE,
   GET_RELATED_MOVIE_ID,
-  LOAD_MORE
+  LOAD_MORE,
+  LOAD_MOVIES,
 } from "../actions/types";
 import axios from "axios";
 import config from "../config.json";
-import { LOCATION_CHANGE } from "connected-react-router";
+import store from "../store";
+import { API_URL, API_KEY } from "../config.js"
 
 
+
+
+let movieStore = store.store.getState().movie;
+
+let apiKey = config.API_KEY;
 
 export const setSearchedMovies = (movie) => async (dispatch) => {
   try {
@@ -33,8 +40,6 @@ export const setSearchedMovies = (movie) => async (dispatch) => {
   }
 };
 
-
-
 export const getRelatedMovie = (id) => async (dispatch) => {
   dispatch({
     type: GET_RELATED_MOVIE_ID,
@@ -42,8 +47,11 @@ export const getRelatedMovie = (id) => async (dispatch) => {
   });
 };
 
-
-
+export const loadMovies = () => async (dispatch) => {
+  dispatch({
+    type: LOAD_MOVIES,
+  });
+};
 
 export const getSearchedMovie = (id) => async (dispatch) => {
   dispatch({
@@ -52,11 +60,8 @@ export const getSearchedMovie = (id) => async (dispatch) => {
   });
 };
 
-
-
 export const getMovie = (id) => async (dispatch) => {
   try {
-
     dispatch({
       type: GET_MOVIE,
       payload: id,
@@ -68,14 +73,25 @@ export const getMovie = (id) => async (dispatch) => {
   }
 };
 
+// export const fetchMovies = () => async (dispatch) => {
 
+//   let res = await fetch(
+//     `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&page=${movieStore.page}`
+//   );
 
+//   let data = await res.json();
 
-export const setMovies = (movies) => async (dispatch) => {
+// }
+
+export const fetchItems = (endpoint) => async (dispatch) => {
+  let res = await fetch(endpoint);
+
+  let data = await res.json();
+
   try {
     dispatch({
       type: SET_MOVIES,
-      payload: movies,
+      payload: data.results,
     });
   } catch (e) {
     dispatch({
@@ -84,9 +100,6 @@ export const setMovies = (movies) => async (dispatch) => {
     });
   }
 };
-
-
-
 
 export const setTvShowsReducer = (tvShows) => async (dispatch) => {
   try {
@@ -97,13 +110,10 @@ export const setTvShowsReducer = (tvShows) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: SET_TVSHOWS_ERR,
-      payload: err
+      payload: err,
     });
   }
 };
-
-
-
 
 export const getShow = (id) => async (dispatch) => {
   dispatch({
@@ -118,17 +128,11 @@ export const getShow = (id) => async (dispatch) => {
   }
 };
 
-
-
-
 export const loadMovieDetails = () => async (dispatch) => {
   dispatch({
     type: LOAD_MOVIE_DETAILS,
   });
 };
-
-
-
 
 export const setRelatedMovies = () => async (dispatch) => {
   try {
@@ -153,57 +157,23 @@ export const setRelatedMovies = () => async (dispatch) => {
   }
 };
 
-
-
-
-
-export const fetchApi = (key) => async (dispatch) => {
-
+export const loadMore = () => async (dispatch) => {
   let res = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&page=${1}`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&page=${++movieStore.moviePage}`
   );
 
   let data = await res.json();
-
-  return data.results
-  // dispatch({
-  //   type: SET_MOVIES,
-  //   payload: data.results,
-  // });
-};
-
-
-
-export const loadMore = (movies, key, page) => async (dispatch) => {
- 
-  let movies = fetchApi(key)
-
-  let res = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&page=${page}`
-  );
-
-  let data = await res.json();
-
-  // dispatch({
-  //   type: SET_MOVIES,
-  //   payload: data.results
-  // })
-
-  console.log(data.results.concat(movies))
 
   dispatch({
     type: LOAD_MORE,
-    payload: data.results.concat(movies)
-  })
+    payload: data.results,
+  });
 
-  dispatch({
-    type: NEXT_PAGE,
-    payload: ++page
-  })
-
+  // dispatch({
+  //   type: NEXT_PAGE,
+  //   payload: ++page
+  // })
 };
-
-
 
 export const nextPage = (page) => async (dispatch) => {
   dispatch({
@@ -212,8 +182,6 @@ export const nextPage = (page) => async (dispatch) => {
   });
 };
 
-
-
 export const prevPage = (page) => async (dispatch) => {
   page = page === 1 ? (page = 2) : page;
   dispatch({
@@ -221,3 +189,5 @@ export const prevPage = (page) => async (dispatch) => {
     payload: page,
   });
 };
+
+

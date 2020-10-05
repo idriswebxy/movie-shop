@@ -19,7 +19,8 @@ import {
   SET_VIDEO_KEY,
   SET_MOVIE_ID,
   SET_MOVIE_IDS,
-  LOAD_MORE
+  LOAD_MORE,
+  LOAD_MOVIES
 } from "../actions/types";
 
 const initialState = {
@@ -149,7 +150,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         movies: state.movies.concat(payload)
-      }
+      };
+    case LOAD_MOVIES:
+      return {
+        ...state,
+        movies: state.movies.map(m => m),
+      }  
     default:
       return state;
   }

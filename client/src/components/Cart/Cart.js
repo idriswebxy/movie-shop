@@ -54,7 +54,9 @@ const Cart = ({
                 <div>${price}</div>
               </td>
               <td>
-                <MDBBtn onClick={() => deleteItem(movie.id, index, price)}>Remove</MDBBtn>
+                <MDBBtn onClick={() => deleteItem(movie.id, index, price)}>
+                  Remove
+                </MDBBtn>
               </td>
             </tr>
           ))}
