@@ -1,7 +1,7 @@
 import React from "react";
-import "./HeroImage.css";
+import "./MainImage.css";
 
-const HeroImage = (props) => {
+const MainImage = (props) => {
   return (
     <div
       className="rmdb-heroimage"
@@ -22,4 +22,4 @@ const HeroImage = (props) => {
   );
 };
 
-export default HeroImage;
+export default MainImage;

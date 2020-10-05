@@ -1,13 +1,13 @@
-.rmdb-heroimage {
+.rmdb-mainimage {
      background-size: 100%, cover !important;
      background-position: center, center !important;
      width: 100%;
      height: 600px;
      position: relative;
-     animation: animateHeroimage 1s;
+     animation: animateMainimage 1s;
 }
 
-@keyframes animateHeroimage {
+@keyframes animateMainimage {
      from {
           opacity: 0;
      }
@@ -17,13 +17,13 @@
      }
 }
 
-.rmdb-heroimage-content {
+.rmdb-mainimage-content {
      max-width: 1280px;
      padding: 20px;
      margin: 0 auto;
 }
 
-.rmdb-heroimage-text {
+.rmdb-mainimage-text {
      z-index: 100;
      max-width: 700px;
      position: absolute;
@@ -34,13 +34,13 @@
      color: #fff;
 }
 
-.rmdb-heroimage-text h1 {
+.rmdb-mainimage-text h1 {
      font-family: 'Abel', sans-serif;
      font-size: 48px;
      color: #fff;
 }
 
-.rmdb-heroimage-text p {
+.rmdb-mainimage-text p {
      font-family: 'Abel', sans-serif;
      font-size: 22px;
      line-height: 26px;
@@ -48,16 +48,16 @@
 }
 
 @media screen and (max-width: 720px) {
-     .rmdb-heroimage-text {
+     .rmdb-mainimage-text {
           max-width: 100%;
      }
 
-     .rmdb-heroimage-text h1 {
+     .rmdb-mainimage-text h1 {
           font-size: 38px;
           color: #fff;
      }
 
-     .rmdb-heroimage-text p {
+     .rmdb-mainimage-text p {
           font-size: 16px;
           line-height: 20px;
           color: #fff;

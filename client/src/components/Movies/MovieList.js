@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import SpinnerPage from "../Layout/SpinnerPage";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import MainImage from "../MainImage/MainImage";
+import FourColGrid from "../FourColGrid/FourColGrid";
+import MovieThumb from "../MovieThumb/MovieThumb";
 import { addToCart, loadCart } from "../../actions/cart";
 import {
   fetchItems,
@@ -30,7 +33,7 @@ const MovieList = ({
   addToCart,
   loadCart,
   isLoading,
-  movies,
+  // movies,
   loadMore,
   fetchItems,
 }) => {
@@ -39,7 +42,8 @@ const MovieList = ({
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [mainImage, setMainImage] = useState(null);
-  
+  const [totalPages, setTotalPages] = useState(0);
+
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
 
   const history = useHistory();
@@ -132,7 +136,7 @@ const MovieList = ({
             title={mainImage.original_title}
             text={mainImage.overview}
           />
-          <SearchBar callback={() => searchItems()} />
+          <SearchPage callback={() => searchItems()} />
         </div>
       ) : null}
       <div className="rmdb-home-grid">
@@ -156,7 +160,7 @@ const MovieList = ({
             );
           })}
         </FourColGrid>
-        {loading ? <Spinner /> : null}
+        {loading ? <SpinnerPage /> : null}
         {currentPage <= totalPages && !loading ? (
           <LoadMoreBtn text="Load More" onClick={() => loadMoreItems()} />
         ) : null}
