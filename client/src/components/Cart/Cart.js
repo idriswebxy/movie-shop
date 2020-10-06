@@ -11,7 +11,7 @@ import {
   MDBTableBody,
 } from "mdbreact";
 import { deleteItem, loadCart, getPriceTotal } from "../../actions/cart";
-import SpinnerPage from "../Layout/SpinnerPage";
+import Spinner from "../Spinner/Spinner";
 
 const Cart = ({
   cart,
@@ -29,7 +29,7 @@ const Cart = ({
   }, [loading, total]);
 
   if (loading) {
-    return <SpinnerPage />;
+    return <Spinner />;
   }
 
   let cartItems = (

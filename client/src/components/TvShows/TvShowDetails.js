@@ -4,7 +4,7 @@ import { getMovie, loadMovieDetail } from "../../actions/movie";
 import { addToCart, loadCart } from "../../actions/cart";
 import { MDBBtn, MDBIcon, MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { loadMovieDetails, setMovie } from "../../actions/movie";
-import SpinnerPage from "../Layout/SpinnerPage";
+import Spinner from "../Spinner/Spinner";
 import StarRatings from "react-star-ratings";
 
 const TvShowDetails = ({
@@ -21,7 +21,7 @@ const TvShowDetails = ({
   }, []);
 
   if (isLoading) {
-    return <SpinnerPage />;
+    return <Spinner />;
   }
 
   let tvShowDetails = (

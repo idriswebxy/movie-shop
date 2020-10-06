@@ -20,11 +20,12 @@ import {
   SET_MOVIE_ID,
   SET_MOVIE_IDS,
   LOAD_MORE,
-  LOAD_MOVIES
+  LOAD_MOVIES,
+  LOAD_CHANGE,
 } from "../actions/types";
 
 const initialState = {
-  isLoading: true,
+  isLoading: false,
   movies: [],
   tvShows: [],
   searchedMovie: null,
@@ -37,13 +38,18 @@ const initialState = {
   moviePage: 1,
   tvShowPage: 1,
   movieIds: [],
-  error: null
+  error: null,
 };
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    case LOAD_CHANGE:
+      return {
+        ...state,
+        isLoading: true,
+      };
     case GET_MOVIE:
       return {
         ...state,
@@ -86,8 +92,8 @@ export default function (state = initialState, action) {
       };
     case SET_TVSHOWS_ERR:
       return {
-        error: payload
-      }
+        error: payload,
+      };
     case GET_MOVIE_ERR:
       return;
     case SET_SEARCHED_MOVIE:
@@ -139,23 +145,23 @@ export default function (state = initialState, action) {
     case SET_VIDEO_KEY:
       return {
         ...state,
-        videoKey: payload
+        videoKey: payload,
       };
     case SET_MOVIE_IDS:
       return {
         ...state,
-        movieIds: state.movieIds.push(payload)
-      }
+        movieIds: state.movieIds.push(payload),
+      };
     case LOAD_MORE:
       return {
         ...state,
-        movies: state.movies.concat(payload)
+        movies: state.movies.concat(payload),
       };
     case LOAD_MOVIES:
       return {
         ...state,
-        movies: state.movies.map(m => m),
-      }  
+        movies: state.movies.map((m) => m),
+      };
     default:
       return state;
   }

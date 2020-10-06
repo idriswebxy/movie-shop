@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./MovieThumb.css";
 
 const MovieThumb = (props) => {
+
+  useEffect(() => {
+
+  console.log(props)
+  }, [])
+
+
+
   return (
     <div className="rmdb-moviethumb">
       {props.clickable ? (
@@ -27,5 +35,8 @@ MovieThumb.propTypes = {
   movieId: PropTypes.number,
   movieName: PropTypes.string,
 };
+
+
+
 
 export default MovieThumb;

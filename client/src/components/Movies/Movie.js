@@ -2,11 +2,19 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getMovie, getMovieIds } from "../../actions/movie";
-import SpinnerPage from "../Layout/SpinnerPage";
+import Spinner from "../Spinner/Spinner";
 import { addToCart, loadCart } from "../../actions/cart";
-import { MDBView, MDBContainer, MDBBtn, MDBIcon, MDBSpinner, MDBAnimation } from "mdbreact";
+import {
+  MDBView,
+  MDBContainer,
+  MDBBtn,
+  MDBIcon,
+  MDBSpinner,
+  MDBAnimation,
+} from "mdbreact";
 import moment from "moment";
 import MovieDetails from "./MovieDetails";
+import "../MovieThumb/MovieThumb.css";
 
 const Movie = ({
   id,
@@ -14,29 +22,30 @@ const Movie = ({
   getMovie,
   isLoading,
   addToCart,
-  movie,
   movieObj,
   price,
   releaseDate,
   title,
-  userId,
   index,
-  scrollById
 }) => {
   let movieLink = (
-    <div style={{ color: "white", textAlign: "center", marginBottom: "50px" }}>
-      <Link to={"/movieInfo/" + id} onClick={() => getMovie(id)}>
-        <img src={`http://image.tmdb.org/t/p/w185${image}`} />
-      </Link>
-      <div>
-        <h5>{title}</h5>
+    <div className="rmdb-moviethumb">
+      <div
+      // style={{ color: "white", textAlign: "center", marginBottom: "50px" }}
+      >
+        <Link to={"/movieInfo/" + id} onClick={() => getMovie(id)}>
+          <img src={`http://image.tmdb.org/t/p/w500${image}`} />
+        </Link>
+
+        {/* <h5>{title}</h5>
         <h6>{moment(releaseDate).format("LL")}</h6>
         <h5>${price}</h5>
-      </div>
 
-      <MDBBtn onClick={() => addToCart(movieObj, index)}>
-        Add To Cart <MDBIcon icon="cart-plus" />
-      </MDBBtn>
+        <MDBBtn onClick={() => addToCart(movieObj, index)}>
+          Add To Cart <MDBIcon icon="cart-plus" />
+        </MDBBtn> */}
+      </div>
+      
     </div>
   );
 

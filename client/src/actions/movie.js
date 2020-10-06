@@ -16,18 +16,18 @@ import {
   GET_RELATED_MOVIE_ID,
   LOAD_MORE,
   LOAD_MOVIES,
+  LOAD_CHANGE
 } from "../actions/types";
 import axios from "axios";
-import config from "../config.json";
 import store from "../store";
 import { API_URL, API_KEY } from "../config.js"
 
 
 
 
-let movieStore = store.store.getState().movie;
+// let movieStore = store.store.getState().movie;
 
-let apiKey = config.API_KEY;
+// let apiKey = config.API_KEY;
 
 export const setSearchedMovies = (movie) => async (dispatch) => {
   try {
@@ -73,6 +73,13 @@ export const getMovie = (id) => async (dispatch) => {
   }
 };
 
+export const loadChange = (loadStatus) => async (dispatch) => {
+  dispatch({
+    type: LOAD_CHANGE,
+    payload: loadStatus
+  })
+}
+
 // export const fetchMovies = () => async (dispatch) => {
 
 //   let res = await fetch(
@@ -84,6 +91,7 @@ export const getMovie = (id) => async (dispatch) => {
 // }
 
 export const fetchItems = (endpoint) => async (dispatch) => {
+
   let res = await fetch(endpoint);
 
   let data = await res.json();
@@ -139,7 +147,7 @@ export const setRelatedMovies = () => async (dispatch) => {
     const resId = await axios.get("/api/movie/genre_id");
 
     await fetch(
-      `https://api.themoviedb.org/3/movie/${resId.data}/similar?api_key=${config.API_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/movie/${resId.data}/similar?api_key=${API_KEY}&language=en-US&page=1`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -157,23 +165,23 @@ export const setRelatedMovies = () => async (dispatch) => {
   }
 };
 
-export const loadMore = () => async (dispatch) => {
-  let res = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&page=${++movieStore.moviePage}`
-  );
+// export const loadMore = () => async (dispatch) => {
+//   let res = await fetch(
+//     `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&page=${++movieStore.moviePage}`
+//   );
 
-  let data = await res.json();
+//   let data = await res.json();
 
-  dispatch({
-    type: LOAD_MORE,
-    payload: data.results,
-  });
+//   dispatch({
+//     type: LOAD_MORE,
+//     payload: data.results,
+//   });
 
-  // dispatch({
-  //   type: NEXT_PAGE,
-  //   payload: ++page
-  // })
-};
+//   // dispatch({
+//   //   type: NEXT_PAGE,
+//   //   payload: ++page
+//   // })
+// };
 
 export const nextPage = (page) => async (dispatch) => {
   dispatch({

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import { NavLink, NavItem, Button } from "react-bootstrap";
-import SpinnerPage from "../Layout/SpinnerPage";
+import Spinner from "../Spinner/Spinner";
 import {
   MDBContainer,
   MDBRow,
@@ -16,19 +16,13 @@ import { login } from "../../actions/auth";
 import PropTypes from "prop-types";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
 const Login = ({ login, authenticated, loading, getCurrentProfile, page }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  const {
-    user,
-    isAuthenticated,
-    loginWithRedirect,
-    logout
-  } = useAuth0();
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   const { email, password } = formData;
 
@@ -51,7 +45,7 @@ const Login = ({ login, authenticated, loading, getCurrentProfile, page }) => {
   }
 
   if (loading) {
-    return <SpinnerPage />;
+    return <Spinner />;
   }
 
   return (

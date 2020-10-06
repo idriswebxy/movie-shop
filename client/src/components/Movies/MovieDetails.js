@@ -4,12 +4,12 @@ import { getMovie, loadMovieDetail, getMovieVideo } from "../../actions/movie";
 import { addToCart, loadCart } from "../../actions/cart";
 import { MDBBtn, MDBIcon, MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { loadMovieDetails, setMovie } from "../../actions/movie";
-import SpinnerPage from "../Layout/SpinnerPage";
+// import SpinnerPage from "../Layout/SpinnerPage";
 import StarRatings from "react-star-ratings";
 import ReactPlayer from "react-player/youtube";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
-import config from "../../config.json";
+import { API_KEY } from "../../config";
 
 const MovieDetails = ({
   movie,
@@ -27,7 +27,7 @@ const MovieDetails = ({
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${config.API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${API_KEY}&language=en-US`
     )
       .then((res) => res.json())
       .then((data) => setVideoKey(data.results[0].key));
@@ -35,9 +35,9 @@ const MovieDetails = ({
     window.scrollTo(0, 0);
   }, []);
 
-  if (isLoading) {
-    return <SpinnerPage />;
-  }
+  // if (isLoading) {
+  //   return <SpinnerPage />;
+  // }
 
   let movieDetails = (
     <MDBContainer>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import config from "../../config.json";
+// import config from "../../config.json";
 import { connect } from "react-redux";
 import { setRelatedMovies, getRelatedMovie } from "../../actions/movie";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";

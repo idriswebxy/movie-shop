@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import config from "../../config.json";
+// import config from "../../config.json";
+import { API_KEY } from "../../config";
 import { setTvShowsReducer } from "../../actions/movie";
 import { connect } from "react-redux";
-import SpinnerPage from "../Layout/SpinnerPage";
+// import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart, loadCart, getCart } from "../../actions/cart";
 import { nextPage, prevPage } from "../../actions/movie";
 import SearchPage from "../Search/Search";
@@ -33,7 +34,7 @@ const TvShows = ({
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/discover/tv?api_key=${config.API_KEY}&language=en-US&page=${page}`
+      `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&language=en-US&page=${page}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -42,9 +43,9 @@ const TvShows = ({
       });
   }, [page]);
 
-  if (isLoading) {
-    return <SpinnerPage />;
-  }
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
 
   // page transition
   let pages = (

@@ -18,7 +18,7 @@ import {
 import { logOut } from "../../actions/auth";
 import { loadCart } from "../../actions/cart";
 import "../../App.css";
-import SpinnerPage from "./SpinnerPage";
+import Spinner from "../Spinner/Spinner";
 import { useAuth0 } from "@auth0/auth0-react";
 import SearchPage from "../Search/Search";
 

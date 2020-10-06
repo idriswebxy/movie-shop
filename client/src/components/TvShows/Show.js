@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getShow } from "../../actions/movie";
-import SpinnerPage from "../Layout/SpinnerPage";
+// import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCartTvShow } from "../../actions/cart";
 import { MDBView, MDBContainer, MDBBtn, MDBIcon, MDBAnimation } from "mdbreact";
 
