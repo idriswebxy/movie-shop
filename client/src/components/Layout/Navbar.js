@@ -121,7 +121,7 @@ const Navbar = ({
 const mapStateToProps = (state) => ({
   auth: state.auth,
   cart: state.cart.cart,
-  page: state.movie.page
+  // page: state.movie.page
 });
 
 export default connect(mapStateToProps, { logOut })(Navbar);

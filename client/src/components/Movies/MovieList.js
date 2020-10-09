@@ -36,13 +36,16 @@ const MovieList = ({
   movies,
   loadMore,
   fetchItems,
+  page,
+  totalPages,
+  loadChange,
 }) => {
   // const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(0);
+  // const [currentPage, setCurrentPage] = useState(1);
   const [mainImage, setMainImage] = useState(null);
-  const [totalPages, setTotalPages] = useState(0);
+  // const [totalPages, setTotalPages] = useState(0);
 
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
 
@@ -56,102 +59,46 @@ const MovieList = ({
   }, []);
 
   const loadMoreItems = () => {
-    let endpoint = "";
-    setLoading(true);
-
-    if (searchTerm === "") {
-      endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${
-        currentPage + 1
-      }`;
-    } else {
-      endpoint = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query${searchTerm}$page=${
-        currentPage + 1
-      }`;
+    try {
+      nextPage();
+      let endpoint = "";
+      loadChange(true);
+      endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
+      fetchItems(endpoint);
+    } catch (error) {
+      console.error(error);
     }
-    fetchItems(endpoint);
+
+    // } else {
+    //   endpoint = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query${searchTerm}$page=${page}`;
+    // }
   };
-
-  // const searchItems = (searchTerm) => {
-  //   console.log(searchTerm);
-  //   let endpoint = "";
-
-  //   // setMovies([]);
-  //   setLoading(true);
-  //   setSearchTerm(searchTerm);
-
-  //   if (searchTerm === "") {
-  //     endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
-  //   } else {
-  //     endpoint = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchTerm}`;
-  //   }
-  //   this.fetchItems(endpoint);
-  // };
-
-  // let loadMoreBtn = (
-  //   <div>
-  //     <MDBBtn onClick={() => loadMore()}>Load More</MDBBtn>
-  //   </div>
-  // );
-
-  const movieList = (
-    <MDBRow>
-      {movies.map((movie, index) => {
-        return (
-          <MDBCol middle="true" size="3">
-            <Movie
-              index={index}
-              id={movie.id}
-              addToCart={addToCart}
-              title={movie.title}
-              image={movie.poster_path}
-              overview={movie.overview}
-              releaseDate={movie.release_date}
-              price={2.99}
-              movieObj={movie}
-            />
-          </MDBCol>
-        );
-      })}
-    </MDBRow>
-  );
 
   return (
     <div className="rmdb-home">
-      {/* {mainImage ? (
-        <div>
-          <MainImage
-            image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${mainImage.backdrop_path}`}
-            title={mainImage.original_title}
-            text={mainImage.overview}
-          />
-          <SearchPage callback={() => searchItems()} />
-        </div>
-      ) : null} */}
       <div className="rmdb-home-grid">
         <FourColGrid
-          header={searchTerm ? "Search Result" : "Popular Movies"}
-          loading={loading}
+          // header={searchTerm ? "Search Result" : "Popular Movies"}
+          loading={isLoading}
         >
           {movies.map((movie, index) => {
             return (
-             
-                <Movie
-                  index={index}
-                  id={movie.id}
-                  addToCart={addToCart}
-                  title={movie.title}
-                  image={movie.poster_path}
-                  overview={movie.overview}
-                  releaseDate={movie.release_date}
-                  price={2.99}
-                  movieObj={movie}
-                />
-
+              <Movie
+                index={index}
+                id={movie.id}
+                addToCart={addToCart}
+                title={movie.title}
+                image={movie.poster_path}
+                overview={movie.overview}
+                releaseDate={movie.release_date}
+                price={2.99}
+                movieObj={movie}
+              />
             );
           })}
         </FourColGrid>
         {isLoading ? <Spinner /> : null}
-        {currentPage <= totalPages && !loading ? (
+        {page <= totalPages && !isLoading ? (
           <LoadMoreBtn text="Load More" onClick={() => loadMoreItems()} />
         ) : null}
       </div>
@@ -166,6 +113,7 @@ const mapStateToProps = (state) => ({
   movies: state.movie.movies,
   page: state.movie.moviePage,
   searchedMovie: state.movie.searchedMovie,
+  totalPages: state.movie.totalPages,
 });
 
 export default connect(mapStateToProps, {

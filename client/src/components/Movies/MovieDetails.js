@@ -40,7 +40,7 @@ const MovieDetails = ({
   // }
 
   let movieDetails = (
-    <MDBContainer>
+    <div className="rmdb-home-grid">
       <MDBRow middle="true">
         <MDBCol size="4">
           <img src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`} />
@@ -75,7 +75,7 @@ const MovieDetails = ({
           </MDBCol>
         </MDBCol>
       </MDBRow>
-    </MDBContainer>
+    </div>
   );
 
   return (

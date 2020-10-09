@@ -16,14 +16,11 @@ import {
   GET_RELATED_MOVIE_ID,
   LOAD_MORE,
   LOAD_MOVIES,
-  LOAD_CHANGE
+  LOAD_CHANGE,
 } from "../actions/types";
 import axios from "axios";
 import store from "../store";
-import { API_URL, API_KEY } from "../config.js"
-
-
-
+import { API_URL, API_KEY } from "../config.js";
 
 // let movieStore = store.store.getState().movie;
 
@@ -76,30 +73,20 @@ export const getMovie = (id) => async (dispatch) => {
 export const loadChange = (loadStatus) => async (dispatch) => {
   dispatch({
     type: LOAD_CHANGE,
-    payload: loadStatus
-  })
-}
-
-// export const fetchMovies = () => async (dispatch) => {
-
-//   let res = await fetch(
-//     `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&page=${movieStore.page}`
-//   );
-
-//   let data = await res.json();
-
-// }
+    payload: loadStatus,
+  });
+};
 
 export const fetchItems = (endpoint) => async (dispatch) => {
-
   let res = await fetch(endpoint);
 
   let data = await res.json();
 
   try {
+    // set total_pages
     dispatch({
       type: SET_MOVIES,
-      payload: data.results,
+      payload: data,
     });
   } catch (e) {
     dispatch({
@@ -165,28 +152,11 @@ export const setRelatedMovies = () => async (dispatch) => {
   }
 };
 
-// export const loadMore = () => async (dispatch) => {
-//   let res = await fetch(
-//     `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&page=${++movieStore.moviePage}`
-//   );
+export const nextPage = () => async (dispatch) => {
 
-//   let data = await res.json();
-
-//   dispatch({
-//     type: LOAD_MORE,
-//     payload: data.results,
-//   });
-
-//   // dispatch({
-//   //   type: NEXT_PAGE,
-//   //   payload: ++page
-//   // })
-// };
-
-export const nextPage = (page) => async (dispatch) => {
+  console.log("PAGEEEE")
   dispatch({
     type: NEXT_PAGE,
-    payload: page,
   });
 };
 
@@ -197,5 +167,3 @@ export const prevPage = (page) => async (dispatch) => {
     payload: page,
   });
 };
-
-

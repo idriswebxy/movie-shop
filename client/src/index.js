@@ -25,15 +25,15 @@ const onRedirectCallback = (appState) => {
 ReactDOM.render(
   <Provider store={store.store}>
     <PersistGate persistor={store.persistor}>
-      <Auth0Provider
+      {/* <Auth0Provider
         domain={config.domain}
         clientId={config.clientId}
         audience={config.audience}
         redirectUri={config.redirectUri}
         onRedirectCallback={onRedirectCallback}
-      >
+      > */}
         <App />
-      </Auth0Provider>
+      {/* </Auth0Provider> */}
     </PersistGate>
   </Provider>,
   document.getElementById("root")

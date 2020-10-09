@@ -1,22 +1,42 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import {
-  MDBNav,
-  MDBNavItem,
-  MDBNavLink,
   MDBView,
-  MDBMask,
-  MDBContainer,
+  MDBCarousel,
+  MDBCarouselInner,
+  MDBCarouselItem,
 } from "mdbreact";
-import { Redirect } from "react-router-dom";
+import "react-slideshow-image/dist/styles.css";
+import "./Landing.css";
+import "../MainImage/MainImage.css";
+import { slides } from "../../utils/movie_slides";
 
-const Landing = () => {
+const Landing = ({}) => {
+  let [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    slideTimer();
+  }, []);
+
+  const slideTimer = () => {
+    setInterval(() => {
+      setIndex(++index);
+      if (index === 19) {
+        index = 0;
+      } else {
+        return;
+      }
+    }, 5000);
+  };
+
   return (
-    <div className="">
-      <MDBView src="https://mdbootstrap.com/img/Photos/Others/img%20(51).jpg"></MDBView>
-      <main>
-        <MDBContainer className="text-center my-5"></MDBContainer>
-      </main>
+    <div style={{ display: 'grid'}}>
+      <MDBView>
+        <img
+          className="d-block w-100"
+          src={`http://image.tmdb.org/t/p/w1280${slides[index].backdrop_path}`}
+          alt="first slide"
+        />
+      </MDBView>
     </div>
   );
 };

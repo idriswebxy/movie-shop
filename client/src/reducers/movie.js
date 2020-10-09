@@ -36,6 +36,7 @@ const initialState = {
   videoKey: "",
   movieId: null,
   moviePage: 1,
+  totalPages: 0,
   tvShowPage: 1,
   movieIds: [],
   error: null,
@@ -115,8 +116,9 @@ export default function (state = initialState, action) {
     case SET_MOVIES:
       return {
         ...state,
-        movies: payload,
+        movies: [...state.movies, ...payload.results],
         isLoading: false,
+        totalPages: payload.total_pages
       };
     case SET_MOVIE_ERR:
       return null;
@@ -130,7 +132,7 @@ export default function (state = initialState, action) {
     case NEXT_PAGE:
       return {
         ...state,
-        moviePage: payload,
+        moviePage: state.moviePage + 1,
       };
     case PREV_PAGE:
       return {
