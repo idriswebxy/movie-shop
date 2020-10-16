@@ -14,7 +14,8 @@ import {
 } from "mdbreact";
 import moment from "moment";
 import MovieDetails from "./MovieDetails";
-import "../MovieThumb/MovieThumb.css";
+
+
 
 const Movie = ({
   id,
@@ -29,7 +30,7 @@ const Movie = ({
   index,
 }) => {
   let movieLink = (
-    <div className="rmdb-moviethumb">
+    <div className="">
       <div
       // style={{ color: "white", textAlign: "center", marginBottom: "50px" }}
       >
@@ -37,23 +38,22 @@ const Movie = ({
           <img src={`http://image.tmdb.org/t/p/w500${image}`} />
         </Link>
 
-        {/* <h5>{title}</h5>
+        <h5>{title}</h5>
         <h6>{moment(releaseDate).format("LL")}</h6>
         <h5>${price}</h5>
 
         <MDBBtn onClick={() => addToCart(movieObj, index)}>
           Add To Cart <MDBIcon icon="cart-plus" />
-        </MDBBtn> */}
+        </MDBBtn>
       </div>
-      
     </div>
   );
 
   return (
     <div>
-      <MDBAnimation type="zoomIn" duration="1s">
+      {/* <MDBAnimation type="zoomIn" duration="1s"> */}
         {movieLink}
-      </MDBAnimation>
+      {/* </MDBAnimation> */}
     </div>
   );
 };

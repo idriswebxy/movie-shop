@@ -1,7 +1,7 @@
 import {
   GET_MOVIE,
   GET_MOVIE_ERR,
-  SET_MOVIES,
+  FETCH_MOVIES,
   CHANGE_LOAD,
   SET_MOVIE_ERR,
   SET_SEARCHED_MOVIE,
@@ -113,12 +113,13 @@ export default function (state = initialState, action) {
         ...state,
         relatedId: payload,
       };
-    case SET_MOVIES:
+    case FETCH_MOVIES:
       return {
         ...state,
         movies: [...state.movies, ...payload.results],
         isLoading: false,
-        totalPages: payload.total_pages
+        totalPages: payload.total_pages,
+        moviePage: payload.page
       };
     case SET_MOVIE_ERR:
       return null;
@@ -132,7 +133,7 @@ export default function (state = initialState, action) {
     case NEXT_PAGE:
       return {
         ...state,
-        moviePage: state.moviePage + 1,
+        moviePage: payload,
       };
     case PREV_PAGE:
       return {

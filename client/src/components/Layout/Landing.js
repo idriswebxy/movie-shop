@@ -5,7 +5,6 @@ import {
   MDBCarouselInner,
   MDBCarouselItem,
 } from "mdbreact";
-import "react-slideshow-image/dist/styles.css";
 import "./Landing.css";
 import "../MainImage/MainImage.css";
 import { slides } from "../../utils/movie_slides";

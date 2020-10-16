@@ -12,6 +12,7 @@ import {
   // loadMore,
   loadMovies,
   loadChange,
+  loadMoreItems,
 } from "../../actions/movie";
 import {
   API_URL,
@@ -39,40 +40,29 @@ const MovieList = ({
   page,
   totalPages,
   loadChange,
+  nextPage,
+  loadMovies,
+  loadMoreItems,
 }) => {
-  // const [movies, setMovies] = useState([]);
-  // const [loading, setLoading] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  // const [currentPage, setCurrentPage] = useState(1);
-  const [mainImage, setMainImage] = useState(null);
-  // const [totalPages, setTotalPages] = useState(0);
+  // let [currentPage, setCurrentPage] = useState(1);
 
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
 
   const history = useHistory();
 
+  let endpoint = ""
+
   useEffect(() => {
-    loadChange(true);
-    let endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
-    fetchItems(endpoint);
-    loadCart();
+    if (movies.length <= 20) {
+      endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+      fetchItems(endpoint);
+      loadCart();
+    } else {
+      loadCart()
+    }
   }, []);
 
-  const loadMoreItems = () => {
-    try {
-      nextPage();
-      let endpoint = "";
-      loadChange(true);
-      endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
-      fetchItems(endpoint);
-    } catch (error) {
-      console.error(error);
-    }
 
-    // } else {
-    //   endpoint = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query${searchTerm}$page=${page}`;
-    // }
-  };
 
   return (
     <div className="rmdb-home">
@@ -99,7 +89,10 @@ const MovieList = ({
         </FourColGrid>
         {isLoading ? <Spinner /> : null}
         {page <= totalPages && !isLoading ? (
-          <LoadMoreBtn text="Load More" onClick={() => loadMoreItems()} />
+          <LoadMoreBtn
+            text="Load More"
+            onClick={() => loadMoreItems(endpoint, page)}
+          />
         ) : null}
       </div>
     </div>
@@ -125,4 +118,5 @@ export default connect(mapStateToProps, {
   loadMovies,
   fetchItems,
   loadChange,
+  loadMoreItems,
 })(MovieList);

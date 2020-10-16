@@ -1,7 +1,7 @@
 import {
   GET_MOVIE,
   GET_MOVIE_ERR,
-  SET_MOVIES,
+  FETCH_MOVIES,
   SET_MOVIE_ERR,
   SET_SEARCHED_MOVIE,
   GET_SEARCHED_MOVIE,
@@ -77,15 +77,25 @@ export const loadChange = (loadStatus) => async (dispatch) => {
   });
 };
 
-export const fetchItems = (endpoint) => async (dispatch) => {
-  let res = await fetch(endpoint);
+export const loadMoreItems = (endpoint, page) => async (dispatch) => {
 
+  endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${
+    page + 1
+  }`;
+
+  dispatch(fetchItems(endpoint))
+
+}
+
+export const fetchItems = (endpoint) => async (dispatch) => {
+  
+  let res = await fetch(endpoint);
   let data = await res.json();
 
   try {
     // set total_pages
     dispatch({
-      type: SET_MOVIES,
+      type: FETCH_MOVIES,
       payload: data,
     });
   } catch (e) {
@@ -152,11 +162,10 @@ export const setRelatedMovies = () => async (dispatch) => {
   }
 };
 
-export const nextPage = () => async (dispatch) => {
-
-  console.log("PAGEEEE")
+export const nextPage = (page) => async (dispatch) => {
   dispatch({
     type: NEXT_PAGE,
+    payload: page,
   });
 };
 
