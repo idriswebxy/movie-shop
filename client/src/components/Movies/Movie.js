@@ -11,6 +11,7 @@ import {
   MDBIcon,
   MDBSpinner,
   MDBAnimation,
+  MDBRow,
 } from "mdbreact";
 import moment from "moment";
 import MovieDetails from "./MovieDetails";
@@ -30,7 +31,7 @@ const Movie = ({
   index,
 }) => {
   let movieLink = (
-    <div className="">
+    <MDBRow>
       <div
       // style={{ color: "white", textAlign: "center", marginBottom: "50px" }}
       >
@@ -46,7 +47,7 @@ const Movie = ({
           Add To Cart <MDBIcon icon="cart-plus" />
         </MDBBtn>
       </div>
-    </div>
+    </MDBRow>
   );
 
   return (

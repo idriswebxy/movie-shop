@@ -3,11 +3,17 @@
  }
 
  .app-main {
-   /* box-sizing: border-box; */
    background-color: rgb(9, 28, 37);
    color: white;
+
  }
 
+ .landing-page {
+   width: auto;
+   max-width: 100%;
+   height: auto;
+
+ }
 
  .movie-details-spacing {
    padding: 30px;
@@ -59,7 +65,7 @@
    display: flex;
    justify-content: space-between;
    flex-wrap: wrap
- } 
+ }
 
  .movie-container {
    margin: 20px;
@@ -134,3 +140,7 @@
    background-color: red;
    cursor: pointer;
  }
+
+
+
+ @media (min-width: 576px) {} 

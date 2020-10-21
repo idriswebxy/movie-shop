@@ -8,6 +8,7 @@ import {
 import "./Landing.css";
 import "../MainImage/MainImage.css";
 import { slides } from "../../utils/movie_slides";
+import "../../App.css";
 
 const Landing = ({}) => {
   let [index, setIndex] = useState(0);
@@ -28,10 +29,10 @@ const Landing = ({}) => {
   };
 
   return (
-    <div style={{ display: 'grid'}}>
+    <div>
       <MDBView>
         <img
-          className="d-block w-100"
+          className="landing-page"
           src={`http://image.tmdb.org/t/p/w1280${slides[index].backdrop_path}`}
           alt="first slide"
         />

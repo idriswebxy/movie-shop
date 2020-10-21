@@ -65,6 +65,7 @@ const MovieList = ({
 
 
   return (
+
     <div className="rmdb-home">
       <div className="rmdb-home-grid">
         <FourColGrid
