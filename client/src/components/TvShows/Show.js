@@ -4,7 +4,15 @@ import { connect } from "react-redux";
 import { getShow } from "../../actions/movie";
 // import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCartTvShow } from "../../actions/cart";
-import { MDBView, MDBContainer, MDBBtn, MDBIcon, MDBAnimation } from "mdbreact";
+import {
+  MDBView,
+  MDBContainer,
+  MDBBtn,
+  MDBIcon,
+  MDBAnimation,
+  MDBRow,
+  MDBCol,
+} from "mdbreact";
 
 const Show = ({
   id,
@@ -16,26 +24,31 @@ const Show = ({
   addToCartTvShow,
 }) => {
   let showList = (
-    <div style={{ textAlign: "center", marginBottom: "50px" }}>
-      <div>
-        <Link to={"/show_details/" + id} onClick={() => getShow(id)}>
-          <img
-            className="movie-container"
-            src={`http://image.tmdb.org/t/p/w185${image}`}
-          />
-        </Link>
+    <MDBContainer>
+      <MDBRow>
+        <MDBCol>
+          <div style={{ textAlign: "center", margin: "20px" }}>
+            <MDBView hover zoom>
+              <Link to={"/show_details/" + id} onClick={() => getShow(id)}>
+                <img
+                  className="movie-container"
+                  src={`http://image.tmdb.org/t/p/w185${image}`}
+                />
+              </Link>
+            </MDBView>
 
-        <h5>{tvShowObj.name}</h5>
-        <h6>({tvShowObj.first_air_date.slice(0, 4)})</h6>
-      </div>
+            <h5>{tvShowObj.name}</h5>
+            <h6>({tvShowObj.first_air_date.slice(0, 4)})</h6>
+          </div>
 
-      <div>
-        <h5>${price}</h5>
-        <MDBBtn onClick={() => addToCartTvShow(tvShowObj)}>
-          Add To Cart <MDBIcon icon="cart-plus" />
-        </MDBBtn>
-      </div>
-    </div>
+          <h5>${price}</h5>
+          <MDBBtn onClick={() => addToCartTvShow(tvShowObj)}>
+            Add To Cart <MDBIcon icon="cart-plus" />
+          </MDBBtn>
+          <div></div>
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
   );
 
   return (

@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Spinner from "../Spinner/Spinner";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
-import MainImage from "../MainImage/MainImage";
-import FourColGrid from "../FourColGrid/FourColGrid";
-import MovieThumb from "../MovieThumb/MovieThumb";
 import { addToCart, loadCart } from "../../actions/cart";
 import {
   fetchItems,
   nextPage,
   prevPage,
-  // loadMore,
   loadMovies,
   loadChange,
   loadMoreItems,
@@ -17,14 +13,11 @@ import {
 import {
   API_URL,
   API_KEY,
-  IMAGE_BASE_URL,
-  POSTER_SIZE,
-  BACKDROP_SIZE,
 } from "../../config";
 import "./MovieList.css";
 import { connect } from "react-redux";
 import Movie from "./Movie";
-import SearchPage from "../Search/Search";
+import SearchBar from "../Search/Search";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdbreact";
 import "../../App.css";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -44,13 +37,11 @@ const MovieList = ({
   loadMovies,
   loadMoreItems,
 }) => {
-  // let [currentPage, setCurrentPage] = useState(1);
 
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
 
-  const history = useHistory();
 
-  let endpoint = ""
+  let endpoint = "";
 
   useEffect(() => {
     if (movies.length <= 20) {
@@ -58,46 +49,53 @@ const MovieList = ({
       fetchItems(endpoint);
       loadCart();
     } else {
-      loadCart()
+      loadCart();
     }
   }, []);
 
+  const movieList = (
+    <MDBContainer>
+      <div className="rmdb-home">
+        <div className="rmdb-home-grid">
+          <MDBRow>
+            {movies.map((movie, index) => {
+              return (
+                <MDBCol md='3'>
+                  <Movie
+                    index={index}
+                    id={movie.id}
+                    addToCart={addToCart}
+                    title={movie.title}
+                    image={movie.poster_path}
+                    overview={movie.overview}
+                    releaseDate={movie.release_date}
+                    price={2.99}
+                    movieObj={movie}
+                  />
+                </MDBCol>
+              );
+            })}
+          {isLoading ? <Spinner /> : null}
+          {page <= totalPages && !isLoading ? (
+            <LoadMoreBtn
+              text="Load More"
+              onClick={() => loadMoreItems(endpoint, page)}
+            />
+          ) : null}
+          </MDBRow>
+        </div>
+      </div>
+    </MDBContainer>
+  );
 
 
   return (
-
-    <div className="rmdb-home">
-      <div className="rmdb-home-grid">
-        <FourColGrid
-          // header={searchTerm ? "Search Result" : "Popular Movies"}
-          loading={isLoading}
-        >
-          {movies.map((movie, index) => {
-            return (
-              <Movie
-                index={index}
-                id={movie.id}
-                addToCart={addToCart}
-                title={movie.title}
-                image={movie.poster_path}
-                overview={movie.overview}
-                releaseDate={movie.release_date}
-                price={2.99}
-                movieObj={movie}
-              />
-            );
-          })}
-        </FourColGrid>
-        {isLoading ? <Spinner /> : null}
-        {page <= totalPages && !isLoading ? (
-          <LoadMoreBtn
-            text="Load More"
-            onClick={() => loadMoreItems(endpoint, page)}
-          />
-        ) : null}
-      </div>
+    <div>
+      <SearchBar />
+      {movieList}
     </div>
-  );
+  )
+
 };
 
 const mapStateToProps = (state) => ({

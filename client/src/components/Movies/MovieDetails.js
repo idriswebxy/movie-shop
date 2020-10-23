@@ -86,7 +86,7 @@ const MovieDetails = ({
           <p className="rmdb-score">{movie.vote_average}</p>
         </MDBCol>
         <ReactPlayer
-          playing="true"
+          playing=""
           controls="true"
           url={`https://www.youtube.com/watch?v=${videoKey}`}
         />

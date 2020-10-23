@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 // import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart, loadCart, getCart } from "../../actions/cart";
 import { nextPage, prevPage } from "../../actions/movie";
-import SearchPage from "../Search/Search";
+import SearchBar from "../Search/Search";
 import Show from "./Show";
 import RelatedMovies from "../Movies/RelatedMovies";
 import {
@@ -18,7 +18,7 @@ import {
   MDBBtn,
   MDBIcon,
 } from "mdbreact";
-import { set } from "mongoose";
+import "../Movies/MovieList.css";
 
 const TvShows = ({
   setTvShowsReducer,
@@ -43,60 +43,35 @@ const TvShows = ({
       });
   }, [page]);
 
-  // if (isLoading) {
-  //   return <Spinner />;
-  // }
-
-  // page transition
-  let pages = (
-    <nav aria-label="Page navigation example">
-      <ul className="pagination">
-        <MDBBtn
-          onClick={() => setPage(page === 1 ? (page = 1) : page - 1)}
-          className="page-item"
-        >
-          <MDBIcon
-            className="white-text pr-3"
-            size="2x"
-            icon="angle-double-left"
-          />
-        </MDBBtn>
-        &nbsp; &nbsp; &nbsp; Page: {page} &nbsp; &nbsp; &nbsp; &nbsp;
-        <MDBBtn onClick={() => setPage(page + 1)} className="page-item">
-          <MDBIcon
-            className="white-text pr-3"
-            size="2x"
-            icon="angle-double-right"
-          />
-        </MDBBtn>
-      </ul>
-    </nav>
-  );
-
   let shows = (
-    <MDBRow>
-      {tvShows.map((tvShow, key) => {
-        return (
-          <MDBCol key={key} size="3">
-            <Show
-              id={tvShow.id}
-              title={tvShow.name}
-              image={tvShow.poster_path}
-              overview={tvShow.overview}
-              tvShowObj={tvShow}
-              price={2.99}
-            />
-          </MDBCol>
-        );
-      })}
-    </MDBRow>
+    <MDBContainer>
+      <div className="rmdb-home">
+        <div className="rmdb-home-grid">
+          <MDBRow>
+            {tvShows.map((tvShow, key) => {
+              return (
+                <MDBCol key={key} md="3">
+                  <Show
+                    id={tvShow.id}
+                    title={tvShow.name}
+                    image={tvShow.poster_path}
+                    overview={tvShow.overview}
+                    tvShowObj={tvShow}
+                    price={2.99}
+                  />
+                </MDBCol>
+              );
+            })}
+          </MDBRow>
+        </div>
+      </div>
+    </MDBContainer>
   );
 
   return (
     <div>
-      <SearchPage />
-      <MDBContainer>{shows}</MDBContainer>
-      <RelatedMovies />
+      <SearchBar />
+      {shows}
     </div>
   );
 };
