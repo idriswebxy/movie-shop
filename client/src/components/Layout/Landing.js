@@ -4,6 +4,7 @@ import {
   MDBCarousel,
   MDBCarouselInner,
   MDBCarouselItem,
+  MDBAnimation,
 } from "mdbreact";
 import "./Landing.css";
 import "../MainImage/MainImage.css";
@@ -31,11 +32,13 @@ const Landing = ({}) => {
   return (
     <div>
       <MDBView>
-        <img
-          className="landing-page"
-          src={`http://image.tmdb.org/t/p/w1280${slides[index].backdrop_path}`}
-          alt="first slide"
-        />
+        <MDBAnimation type="zoomIn" duration="1s">
+          <img
+            className="landing-page"
+            src={`http://image.tmdb.org/t/p/w1280${slides[index].backdrop_path}`}
+            alt="first slide"
+          />
+        </MDBAnimation>
       </MDBView>
     </div>
   );

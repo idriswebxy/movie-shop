@@ -5,7 +5,6 @@ import { addToCart, loadCart } from "../../actions/cart";
 import { MDBBtn, MDBIcon, MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { loadMovieDetails, setMovie } from "../../actions/movie";
 // import SpinnerPage from "../Layout/SpinnerPage";
-import StarRatings from "react-star-ratings";
 import ReactPlayer from "react-player/youtube";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
@@ -16,8 +15,8 @@ import {
   POSTER_SIZE,
 } from "../../config";
 import "./MovieDetails.css";
-import MovieThumb from "./MovieThumb";
-import FontAwesome from "react-fontawesome";
+import Movie from "../MovieThumb/MovieThumb";
+import MovieThumb from "../MovieThumb/MovieThumb";
 
 const MovieDetails = ({
   movie,
@@ -48,16 +47,16 @@ const MovieDetails = ({
   // }
 
   let movieDetails = (
-    <MDBContainer fluid size="lg">
-      <MDBRow center="true">
-        <div
-          className="movie-details-container"
-          style={{
-            background: movie.backdrop_path
-              ? `url('${IMAGE_BASE_URL}${BACKDROP_SIZE}${movie.backdrop_path}')`
-              : "#000",
-          }}
-        >
+    <MDBContainer>
+      <div
+        style={{
+          // background: movie.backdrop_path
+          //   ? `url('${IMAGE_BASE_URL}${BACKDROP_SIZE}${movie.backdrop_path}')`
+          //   : "#000",
+          marginTop: "72px",
+        }}
+      >
+        <MDBRow>
           <MovieThumb
             image={
               movie.poster_path
@@ -66,10 +65,6 @@ const MovieDetails = ({
             }
             clickable={false}
           />
-        </div>
-      </MDBRow>
-      <MDBRow>
-        <MDBCol>
           <h1>{movie.title}</h1>
           <h3>PLOT</h3>
           <p>{movie.overview}</p>
@@ -84,26 +79,26 @@ const MovieDetails = ({
             value={movie.vote_average * 10}
           />
           <p className="rmdb-score">{movie.vote_average}</p>
-        </MDBCol>
-        <ReactPlayer
-          playing=""
-          controls="true"
-          url={`https://www.youtube.com/watch?v=${videoKey}`}
-        />
-      </MDBRow>
+          <ReactPlayer
+            playing=""
+            controls="true"
+            url={`https://www.youtube.com/watch?v=${videoKey}`}
+          />
+        </MDBRow>
+      </div>
     </MDBContainer>
   );
 
   return (
     <div
-    // style={{
-    //   backgroundImage: `linear-gradient(to right,
-    //     rgba(19, 38, 47, 0.7) 0%,
-    //     rgba(9, 28, 37, 0.7) 100%), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
-    //   backgroundRepeat: "no-repeat",
-    //   backgroundSize: "cover",
-    //   padding: "186px",
-    // }}
+      style={{
+        backgroundImage: `linear-gradient(to right,
+        rgba(19, 38, 47, 0.7) 0%,
+        rgba(9, 28, 37, 0.7) 100%), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
+
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
     >
       {movieDetails}
     </div>

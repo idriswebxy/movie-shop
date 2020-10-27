@@ -39,7 +39,7 @@ const Movie = ({
             </Link>
           </MDBView>
 
-          <div style={{ textAlign: "center", margin: "20px" }}>
+          <div style={{ textAlign: "center", paddingBottom: "50px" }}>
             <h5>{title}</h5>
             <h6>{moment(releaseDate).format("LL")}</h6>
             <h5>${price}</h5>

@@ -39,7 +39,7 @@ const TvShows = ({
       .then((res) => res.json())
       .then((data) => {
         setTvShowsReducer(data.results);
-        loadCart();
+        loadCart();  
       });
   }, [page]);
 
@@ -48,10 +48,11 @@ const TvShows = ({
       <div className="rmdb-home">
         <div className="rmdb-home-grid">
           <MDBRow>
-            {tvShows.map((tvShow, key) => {
+            {tvShows.map((tvShow, index) => {
               return (
-                <MDBCol key={key} md="3">
+                <MDBCol md="3">
                   <Show
+                    index={index}
                     id={tvShow.id}
                     title={tvShow.name}
                     image={tvShow.poster_path}

@@ -5,7 +5,13 @@ import { addToCart, loadCart } from "../../actions/cart";
 import { MDBBtn, MDBIcon, MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { loadMovieDetails, setMovie } from "../../actions/movie";
 import Spinner from "../Spinner/Spinner";
-import StarRatings from "react-star-ratings";
+import MovieThumb from "../MovieThumb/MovieThumb";
+import {
+  API_KEY,
+  IMAGE_BASE_URL,
+  BACKDROP_SIZE,
+  POSTER_SIZE,
+} from "../../config";
 
 const TvShowDetails = ({
   movie,
@@ -25,52 +31,59 @@ const TvShowDetails = ({
   }
 
   let tvShowDetails = (
+    <MDBContainer>
+      <MDBRow>
+        <div
+          className="movie-details-container"
+          style={{
+            // background: tvShow.backdrop_path
+            //   ? `url('${IMAGE_BASE_URL}${BACKDROP_SIZE}${tvShow.backdrop_path}')`
+            //   : "#000",
+            marginTop: "50px",
+          }}
+        >
+          <MovieThumb
+            image={
+              tvShow.poster_path
+                ? `${IMAGE_BASE_URL}${POSTER_SIZE}${tvShow.poster_path}`
+                : "./images/no_image.jpg"
+            }
+            clickable={false}
+          />
+        </div>
+        <MDBCol>
+          <h1>{tvShow.title}</h1>
+          <h3>PLOT</h3>
+          <p>{tvShow.overview}</p>
+          <h3>IMDB RATING</h3>
+
+          <meter
+            min="0"
+            max="100"
+            optimum="100"
+            low="40"
+            high="70"
+            value={tvShow.vote_average * 10}
+          />
+          <p className="rmdb-score">{tvShow.vote_average}</p>
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
+  );
+
+  return (
     <div
       style={{
         backgroundImage: `linear-gradient(to right,
-        rgba(19, 38, 47, 0.925) 0%,
-        rgba(9, 28, 37, 0.925) 100%), url(https://image.tmdb.org/t/p/w1280${tvShow.backdrop_path})`,
+    rgba(19, 38, 47, 0.925) 0%,
+    rgba(9, 28, 37, 0.925) 100%), url(https://image.tmdb.org/t/p/w1280${tvShow.backdrop_path})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        padding: "186px",
       }}
     >
-      <MDBContainer>
-        <MDBRow>
-          <MDBCol size="4">
-            <img src={`https://image.tmdb.org/t/p/w342${tvShow.poster_path}`} />
-            <MDBCol className="movie-details-spacing">
-              <MDBBtn onClick={() => addToCart(tvShow)}>
-                Add To Cart <MDBIcon icon="cart-plus" />
-              </MDBBtn>
-            </MDBCol>
-          </MDBCol>
-          <MDBCol>
-            <MDBCol className="movie-details-spacing">
-              <h3>{tvShow.name}</h3>
-            </MDBCol>
-            <MDBCol>
-              <MDBCol>
-                <StarRatings
-                  isSelectable
-                  starRatedColor="yellow"
-                  starDimension="30px"
-                  numberOfStars={5}
-                  rating={tvShow.vote_average / 2}
-                />{" "}
-                ({tvShow.vote_count}){" "}
-              </MDBCol>
-              <MDBCol className="movie-details-spacing">
-                <h6>{tvShow.overview}</h6>
-              </MDBCol>
-            </MDBCol>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
+      {tvShowDetails}
     </div>
   );
-
-  return <div>{tvShowDetails}</div>;
 };
 
 const mapStateToProps = (state) => ({

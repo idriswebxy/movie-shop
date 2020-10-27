@@ -20,7 +20,10 @@ import {
 } from "../actions/types";
 import axios from "axios";
 import store from "../store";
-import { API_URL, API_KEY } from "../config.js";
+import {
+  API_URL,
+  API_KEY
+} from "../config.js";
 
 // let movieStore = store.store.getState().movie;
 
@@ -88,7 +91,7 @@ export const loadMoreItems = (endpoint, page) => async (dispatch) => {
 }
 
 export const fetchItems = (endpoint) => async (dispatch) => {
-  
+
   let res = await fetch(endpoint);
   let data = await res.json();
 
@@ -125,8 +128,7 @@ export const getShow = (id) => async (dispatch) => {
     type: GET_SHOW,
     payload: id,
   });
-  try {
-  } catch (e) {
+  try {} catch (e) {
     dispatch({
       type: GET_SHOW_ERR,
     });
@@ -144,8 +146,8 @@ export const setRelatedMovies = () => async (dispatch) => {
     const resId = await axios.get("/api/movie/genre_id");
 
     await fetch(
-      `https://api.themoviedb.org/3/movie/${resId.data}/similar?api_key=${API_KEY}&language=en-US&page=1`
-    )
+        `https://api.themoviedb.org/3/movie/${resId.data}/similar?api_key=${API_KEY}&language=en-US&page=1`
+      )
       .then((res) => res.json())
       .then((data) => {
         let shuffled = data.results.sort(() => 0.5 - Math.random());

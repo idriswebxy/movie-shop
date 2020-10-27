@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getShow } from "../../actions/movie";
 // import SpinnerPage from "../Layout/SpinnerPage";
-import { addToCartTvShow } from "../../actions/cart";
+import { addToCart, addToCartTvShow } from "../../actions/cart";
+import moment from "moment";
 import {
   MDBView,
   MDBContainer,
@@ -21,31 +22,28 @@ const Show = ({
   isLoading,
   tvShowObj,
   price,
-  addToCartTvShow,
+  index,
+  addToCart,
 }) => {
   let showList = (
     <MDBContainer>
       <MDBRow>
         <MDBCol>
-          <div style={{ textAlign: "center", margin: "20px" }}>
-            <MDBView hover zoom>
-              <Link to={"/show_details/" + id} onClick={() => getShow(id)}>
-                <img
-                  className="movie-container"
-                  src={`http://image.tmdb.org/t/p/w185${image}`}
-                />
-              </Link>
-            </MDBView>
+          <MDBView hover zoom>
+            <Link to={"/show_details/" + id} onClick={() => getShow(id)}>
+              <img src={`http://image.tmdb.org/t/p/w500${image}`} />
+            </Link>
+          </MDBView>
 
+          <div style={{ textAlign: "center", paddingBottom: "50px" }}>
             <h5>{tvShowObj.name}</h5>
-            <h6>({tvShowObj.first_air_date.slice(0, 4)})</h6>
-          </div>
+            <h6>{moment(tvShowObj.releaseDate).format("LL")}</h6>
+            <h5>${price}</h5>
 
-          <h5>${price}</h5>
-          <MDBBtn onClick={() => addToCartTvShow(tvShowObj)}>
-            Add To Cart <MDBIcon icon="cart-plus" />
-          </MDBBtn>
-          <div></div>
+            <MDBBtn onClick={() => addToCart(tvShowObj, index)}>
+              Add To Cart <MDBIcon icon="cart-plus" />
+            </MDBBtn>
+          </div>
         </MDBCol>
       </MDBRow>
     </MDBContainer>
@@ -64,4 +62,4 @@ const mapStateToProps = (state) => ({
   isLoading: state.movie.isLoading,
 });
 
-export default connect(mapStateToProps, { getShow, addToCartTvShow })(Show);
+export default connect(mapStateToProps, { getShow, addToCart })(Show);

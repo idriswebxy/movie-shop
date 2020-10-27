@@ -70,13 +70,26 @@ router.post("/", auth, async (req, res) => {
 
 
 // Add to cart for TvShows
-router.post("/tv_show", async (req, res) => {
-  const { id, name, poster_path, overview, first_air_date } = req.body;
+// router.post("/tv_show", async (req, res) => {
 
-  const price = 2.99;
+//   try {
+//     const user = await User.findById(req.user.id);
 
-  newItem.save().then((product) => res.json(product));
-});
+//     const newCart = new Cart({
+//       user: user.id,
+//       movieId: req.body.id,
+//       movie: req.body,
+//       price: 2.99
+//     });
+
+//     await newCart.save();
+
+//     res.json(newCart);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error!");
+//   }
+// });
 
 
 
