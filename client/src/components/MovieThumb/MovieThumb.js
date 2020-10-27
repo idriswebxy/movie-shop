@@ -4,13 +4,9 @@ import PropTypes from "prop-types";
 import "./MovieThumb.css";
 
 const MovieThumb = (props) => {
-
   useEffect(() => {
-
-  console.log(props)
-  }, [])
-
-
+    console.log(props);
+  }, []);
 
   return (
     <div className="rmdb-moviethumb">
@@ -35,8 +31,5 @@ MovieThumb.propTypes = {
   movieId: PropTypes.number,
   movieName: PropTypes.string,
 };
-
-
-
 
 export default MovieThumb;
