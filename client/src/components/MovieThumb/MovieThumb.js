@@ -6,11 +6,11 @@ import { MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow } from "mdbreact";
 import { addToCart } from "../../actions/cart";
 import { connect } from "react-redux";
 
-<<<<<<< HEAD
-const MovieThumb = (props) => {
-=======
+
+
+
 const MovieThumb = (props, { addToCart, movieObj }) => {
->>>>>>> 0742dc0da72473c4e3695a9281eeccbfda5da22a
+
   useEffect(() => {
     console.log(props);
   }, []);
@@ -43,12 +43,9 @@ MovieThumb.propTypes = {
   movieName: PropTypes.string,
 };
 
-<<<<<<< HEAD
-export default MovieThumb;
-=======
+
 const mapStateToProps = (state) => ({
   movieObj: state.movie.searchedMovie,
 });
 
 export default connect(mapStateToProps, { addToCart })(MovieThumb);
->>>>>>> 0742dc0da72473c4e3695a9281eeccbfda5da22a
