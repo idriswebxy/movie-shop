@@ -12,6 +12,7 @@ import {
   BACKDROP_SIZE,
   POSTER_SIZE,
 } from "../../config";
+import Show from "./Show";
 
 const TvShowDetails = ({
   movie,
@@ -24,6 +25,7 @@ const TvShowDetails = ({
 }) => {
   useEffect(() => {
     loadCart();
+    console.log("❌", tvShow);
   }, []);
 
   if (isLoading) {
@@ -34,7 +36,7 @@ const TvShowDetails = ({
     <MDBContainer>
       <MDBRow>
         <div
-          className="movie-details-container"
+          // className="movie-details-container"
           style={{
             // background: tvShow.backdrop_path
             //   ? `url('${IMAGE_BASE_URL}${BACKDROP_SIZE}${tvShow.backdrop_path}')`
@@ -51,23 +53,28 @@ const TvShowDetails = ({
             clickable={false}
           />
         </div>
-        <MDBCol>
-          <h1>{tvShow.title}</h1>
-          <h3>PLOT</h3>
-          <p>{tvShow.overview}</p>
-          <h3>IMDB RATING</h3>
-
-          <meter
-            min="0"
-            max="100"
-            optimum="100"
-            low="40"
-            high="70"
-            value={tvShow.vote_average * 10}
-          />
-          <p className="rmdb-score">{tvShow.vote_average}</p>
-        </MDBCol>
       </MDBRow>
+      <MDBCol>
+        <div style={{ margin: "20px"}}>
+          <h1>{tvShow.name}</h1>
+          <MDBBtn onClick={() => addToCart(tvShow)}>
+            Add To Cart <MDBIcon icon="cart-plus" />
+          </MDBBtn>
+        </div>
+        <h3>PLOT</h3>
+        <p>{tvShow.overview}</p>
+        <h3>IMDB RATING</h3>
+
+        <meter
+          min="0"
+          max="100"
+          optimum="100"
+          low="40"
+          high="70"
+          value={tvShow.vote_average * 10}
+        />
+        <p className="rmdb-score">{tvShow.vote_average}</p>
+      </MDBCol>
     </MDBContainer>
   );
 

@@ -75,7 +75,10 @@ const TvShows = ({
       {shows}
     </div>
   );
+
 };
+
+
 
 const mapStateToProps = (state) => ({
   userId: state.auth.userInfo._id,

@@ -12,7 +12,7 @@ import { setAlert } from "./alert";
 
 
 
-export const addToCart = (movie, index) => async (dispatch) => {
+export const addToCart = (movie) => async (dispatch) => {
 
 
   const config = {
@@ -22,7 +22,7 @@ export const addToCart = (movie, index) => async (dispatch) => {
   };
 
   // movie.price = 2.99;
-  movie.index = index
+  // movie.index = index
 
   const body = JSON.stringify(movie);
 

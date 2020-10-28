@@ -47,15 +47,15 @@ const MovieDetails = ({
   // }
 
   let movieDetails = (
-    <MDBContainer>
-      <div
-        style={{
-          // background: movie.backdrop_path
-          //   ? `url('${IMAGE_BASE_URL}${BACKDROP_SIZE}${movie.backdrop_path}')`
-          //   : "#000",
-          marginTop: "72px",
-        }}
-      >
+    <div
+      style={{
+        // background: movie.backdrop_path
+        //   ? `url('${IMAGE_BASE_URL}${BACKDROP_SIZE}${movie.backdrop_path}')`
+        //   : "#000",
+        marginTop: "72px",
+      }}
+    >
+      <MDBContainer>
         <MDBRow>
           <MovieThumb
             image={
@@ -65,28 +65,39 @@ const MovieDetails = ({
             }
             clickable={false}
           />
-          <h1>{movie.title}</h1>
-          <h3>PLOT</h3>
-          <p>{movie.overview}</p>
-          <h3>IMDB RATING</h3>
+          <div>
+            <div style={{ margin: "20px"}}>
+              <h1>{movie.title}</h1>
 
-          <meter
-            min="0"
-            max="100"
-            optimum="100"
-            low="40"
-            high="70"
-            value={movie.vote_average * 10}
-          />
-          <p className="rmdb-score">{movie.vote_average}</p>
+              <MDBBtn onClick={() => addToCart(movie)}>
+                Add To Cart <MDBIcon icon="cart-plus" />
+              </MDBBtn>
+            </div>
+
+            <h3>PLOT</h3>
+            <p>{movie.overview}</p>
+            <h3>IMDB RATING</h3>
+
+            <meter
+              min="0"
+              max="100"
+              optimum="100"
+              low="40"
+              high="70"
+              value={movie.vote_average * 10}
+            />
+            <p className="rmdb-score">{movie.vote_average}</p>
+          </div>
+        </MDBRow>
+        <MDBRow>
           <ReactPlayer
             playing=""
             controls="true"
             url={`https://www.youtube.com/watch?v=${videoKey}`}
           />
         </MDBRow>
-      </div>
-    </MDBContainer>
+      </MDBContainer>
+    </div>
   );
 
   return (
