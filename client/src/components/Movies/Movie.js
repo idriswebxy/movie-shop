@@ -44,7 +44,7 @@ const Movie = ({
             <h6>{moment(releaseDate).format("LL")}</h6>
             <h5>${price}</h5>
 
-            <MDBBtn onClick={() => addToCart(movieObj, index)}>
+            <MDBBtn onClick={() => addToCart(movieObj)}>
               Add To Cart <MDBIcon icon="cart-plus" />
             </MDBBtn>
           </div>
@@ -65,6 +65,7 @@ const Movie = ({
 const mapStateToProps = (state) => ({
   isLoading: state.movie.isLoading,
   userId: state.auth.userInfo._id,
+
 });
 
 export default connect(mapStateToProps, { getMovie, addToCart })(Movie);

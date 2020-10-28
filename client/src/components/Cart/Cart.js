@@ -45,10 +45,12 @@ const Cart = ({
           {cart.map((movie, index) => (
             <tr key={index}>
               <td>
-                <Img
-                  src={`https://image.tmdb.org/t/p/w92${movie.poster_path}`}
+                <Img 
+                  src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
                 />
-                <h5>{movie.original_title}</h5>
+                <h5 style={{ margin: "10px"}}>
+                  {!movie.original_title ? movie.name : movie.original_title}
+                </h5>
               </td>
               <td>
                 <div>${price}</div>

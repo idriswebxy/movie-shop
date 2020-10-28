@@ -24,7 +24,14 @@ const Show = ({
   price,
   index,
   addToCart,
+  title,
+  releaseDate
 }) => {
+
+  useEffect(() => {
+  }, [])
+
+
   let showList = (
     <MDBContainer>
       <MDBRow>
@@ -36,11 +43,11 @@ const Show = ({
           </MDBView>
 
           <div style={{ textAlign: "center", paddingBottom: "50px" }}>
-            <h5>{tvShowObj.name}</h5>
-            <h6>{moment(tvShowObj.releaseDate).format("LL")}</h6>
+            <h5>{title}</h5>
+            <h6>{moment(releaseDate).format("LL")}</h6>
             <h5>${price}</h5>
 
-            <MDBBtn onClick={() => addToCart(tvShowObj, index)}>
+            <MDBBtn onClick={() => addToCart(tvShowObj)}>
               Add To Cart <MDBIcon icon="cart-plus" />
             </MDBBtn>
           </div>
