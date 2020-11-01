@@ -1,4 +1,4 @@
-/config/config.js
-/.env
-/node_modules
-/config/*
+# /config/config.js
+# /.env
+# /node_modules
+# /config/*
