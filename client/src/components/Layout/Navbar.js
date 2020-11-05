@@ -28,8 +28,12 @@ const Navbar = ({
   cart,
   page
 }) => {
+  
+  useEffect(() => {
+    console.log(user)  
+  }, [])
+  
   const { user, isAuthenticated } = useAuth0();
-
   const [collapse, setCollapse] = useState(false);
 
   const navColor = { backgroundColor: "#00CED1" };

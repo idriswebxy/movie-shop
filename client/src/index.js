@@ -13,27 +13,24 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import config from "./auth0.config.json";
 import history from "./utils/history";
 
-
-
 const onRedirectCallback = (appState) => {
   history.push(
     appState && appState.returnTo ? appState.returnTo : window.location.pathname
   );
 };
 
-
 ReactDOM.render(
   <Provider store={store.store}>
     <PersistGate persistor={store.persistor}>
-      {/* <Auth0Provider
+      <Auth0Provider
         domain={config.domain}
         clientId={config.clientId}
         audience={config.audience}
         redirectUri={config.redirectUri}
         onRedirectCallback={onRedirectCallback}
-      > */}
-        <App />
-      {/* </Auth0Provider> */}
+      >
+      <App />
+      </Auth0Provider>
     </PersistGate>
   </Provider>,
   document.getElementById("root")

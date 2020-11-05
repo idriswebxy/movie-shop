@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GoogleLogin from "react-google-login";
 import PropTypes from "prop-types";
 import { Link, Redirect } from "react-router-dom";
@@ -14,12 +14,19 @@ import {
   MDBInput,
   MDBNavLink,
 } from "mdbreact";
-import axios from "axios";
-import { useGoogleLogin } from "react-google-login";
-import { Button } from "reactstrap";
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const Register = ({ setAlert, register, authenticated }) => {
+
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+
+  useEffect(() => {
+    console.log(user);
+  }, []);
+
+
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",

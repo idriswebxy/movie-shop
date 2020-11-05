@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import { NavLink, NavItem, Button } from "react-bootstrap";
@@ -17,21 +17,23 @@ import PropTypes from "prop-types";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Login = ({ login, authenticated, loading, getCurrentProfile, page }) => {
+
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+
+  useEffect(() => {
+    console.log(user, isAuthenticated);
+  }, []);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
-
   const { email, password } = formData;
-
   const [isOpen, setIsOpen] = useState(false);
-
   const history = useHistory();
-
   const toggle = () => setIsOpen(!isOpen);
-
+  
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 

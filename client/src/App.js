@@ -20,7 +20,6 @@ import TvShowDetails from "./components/TvShows/TvShowDetails";
 import { useAuth0 } from "@auth0/auth0-react";
 import { createBrowserHistory } from "history";
 
-
 const history = createBrowserHistory();
 
 if (localStorage.token) {
@@ -28,10 +27,11 @@ if (localStorage.token) {
 }
 
 const App = ({}) => {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
 
   useEffect(() => {
     store.store.dispatch(loadUser());
+    console.log(user)
   }, []);
 
   // if (isLoading) {
@@ -39,23 +39,28 @@ const App = ({}) => {
   // }
 
   return (
-    <Router history={history}>
-      <div className="app-main">
+    <div className="app-main">
+      <Router history={history}>
         <Navbar />
         <Alert />
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <PrivateRoute exact path="/movies" store={store} component={MovieList} />
+          <PrivateRoute
+            exact
+            path="/movies"
+            store={store}
+            component={MovieList}
+          />
           <PrivateRoute path="/tv_shows" component={TvShows} />
           <PrivateRoute path="/movieInfo/:id" component={MovieDetails} />
           <PrivateRoute path="/show_details" component={TvShowDetails} />
           <PrivateRoute path="/cart" component={Cart} />
           <PrivateRoute path="/checkout" component={Checkout} />
         </Switch>
-      </div>
-    </Router>
+      </Router>
+    </div>
   );
 };
 

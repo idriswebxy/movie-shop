@@ -10,18 +10,14 @@ import {
   loadChange,
   loadMoreItems,
 } from "../../actions/movie";
-import {
-  API_URL,
-  API_KEY,
-} from "../../config";
+import { API_URL, API_KEY } from "../../config";
 import "./MovieList.css";
 import { connect } from "react-redux";
 import Movie from "./Movie";
 import SearchBar from "../Search/Search";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdbreact";
 import "../../App.css";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useHistory } from "react-router-dom";
+import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
 const MovieList = ({
   addToCart,
@@ -37,9 +33,7 @@ const MovieList = ({
   loadMovies,
   loadMoreItems,
 }) => {
-
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
-
 
   let endpoint = "";
 
@@ -53,6 +47,10 @@ const MovieList = ({
     }
   }, []);
 
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   const movieList = (
     <MDBContainer>
       <div className="rmdb-home">
@@ -60,7 +58,7 @@ const MovieList = ({
           <MDBRow>
             {movies.map((movie, index) => {
               return (
-                <MDBCol md='3'>
+                <MDBCol md="3">
                   <Movie
                     index={index}
                     id={movie.id}
@@ -75,6 +73,7 @@ const MovieList = ({
                 </MDBCol>
               );
             })}
+          </MDBRow>
           {isLoading ? <Spinner /> : null}
           {page <= totalPages && !isLoading ? (
             <LoadMoreBtn
@@ -82,20 +81,17 @@ const MovieList = ({
               onClick={() => loadMoreItems(endpoint, page)}
             />
           ) : null}
-          </MDBRow>
         </div>
       </div>
     </MDBContainer>
   );
-
 
   return (
     <div>
       <SearchBar />
       {movieList}
     </div>
-  )
-
+  );
 };
 
 const mapStateToProps = (state) => ({

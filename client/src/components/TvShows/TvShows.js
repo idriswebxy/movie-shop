@@ -9,6 +9,8 @@ import { nextPage, prevPage } from "../../actions/movie";
 import SearchBar from "../Search/Search";
 import Show from "./Show";
 import RelatedMovies from "../Movies/RelatedMovies";
+import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+import Spinner from "../Spinner/Spinner";
 import {
   MDBContainer,
   MDBRow,
