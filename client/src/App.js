@@ -27,11 +27,11 @@ if (localStorage.token) {
 }
 
 const App = ({}) => {
-  const { isAuthenticated, user } = useAuth0();
+  // const { isAuthenticated, user } = useAuth0();
 
   useEffect(() => {
     store.store.dispatch(loadUser());
-    console.log(user)
+    
   }, []);
 
   // if (isLoading) {
@@ -47,7 +47,7 @@ const App = ({}) => {
           <Route exact path="/" component={Landing} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <PrivateRoute
+          <Route
             exact
             path="/movies"
             store={store}

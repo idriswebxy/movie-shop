@@ -36,8 +36,13 @@ const MovieList = ({
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
 
   let endpoint = "";
+  
 
+   
+
+  
   useEffect(() => {
+     
     if (movies.length <= 20) {
       endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
       fetchItems(endpoint);
@@ -45,6 +50,7 @@ const MovieList = ({
     } else {
       loadCart();
     }
+    console.log(getAccessTokenSilently().then())
   }, []);
 
   if (isLoading) {

@@ -16,13 +16,21 @@ import { login } from "../../actions/auth";
 import PropTypes from "prop-types";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const Login = ({ login, authenticated, loading, getCurrentProfile, page }) => {
+const Login = ({
+  login,
+  authenticated,
+  loading,
+  getCurrentProfile,
+  page,
+}) => {
+  const {
+    user,
+    isAuthenticated,
+    loginWithRedirect,
+    logout,
+    getAccessTokenSilently,
+  } = useAuth0();
 
-  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
-
-  useEffect(() => {
-    console.log(user, isAuthenticated);
-  }, []);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -33,7 +41,7 @@ const Login = ({ login, authenticated, loading, getCurrentProfile, page }) => {
   const [isOpen, setIsOpen] = useState(false);
   const history = useHistory();
   const toggle = () => setIsOpen(!isOpen);
-  
+
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 

@@ -11,7 +11,8 @@ import {
   LOGOUT,
   LOGIN_SUCCESS,
 } from "./types";
-import { useAuth0 } from "@auth0/auth0-react";
+
+
 
 // Load user
 export const loadUser = () => async (dispatch) => {
@@ -60,7 +61,7 @@ export const register = ({ name, email, password }) => async (dispatch) => {
     if (errors) {
       errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
     }
-
+    
     dispatch({
       type: REGISTER_FAIL,
     });
@@ -104,6 +105,13 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 
+export const googleAuth = (user, token) => async (dispatch) => {
+
+  console.log(user, token)
+
+
+}
+ 
 
 // Logout
 export const logOut = () => (dispatch) => {

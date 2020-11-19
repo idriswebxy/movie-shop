@@ -11,6 +11,8 @@ import {
  
 
 const initialState = {
+  googleAuth: false,
+  googleUser: {},
   token: localStorage.getItem("token"),
   authenticated: null,
   isLoading: true,

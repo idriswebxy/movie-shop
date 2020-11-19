@@ -67,4 +67,11 @@ router.post(
 
 
 
+
+router.post("/googleAuth", (req, res) => {
+  res.send("googleAuth api")
+})
+
+
+
 module.exports = router;

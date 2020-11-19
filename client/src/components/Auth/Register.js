@@ -19,10 +19,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const Register = ({ setAlert, register, authenticated }) => {
 
-  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  // const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   useEffect(() => {
-    console.log(user);
+
   }, []);
 
 
