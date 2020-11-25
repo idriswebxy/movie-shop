@@ -5,11 +5,9 @@ import {
   MDBNav,
   MDBNavItem,
   MDBNavLink,
-  MDBView,
-  MDBMask,
   MDBContainer,
-  MDBIcon,
   MDBNavbar,
+  MDBIcon,
   MDBNavbarBrand,
   MDBCollapse,
   MDBNavbarToggler,
@@ -28,22 +26,25 @@ const Navbar = ({
   logOut,
   cart,
   page,
-  googleAuth
+  googleAuth,
 }) => {
   
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
 
-  useEffect(() => {
-   
-    // console.log(getAccessTokenSilently().then())
-    // googleAuth(user, token)
-  }, [])
+  let name = null;
+
+  if (isAuthenticated) {
+    name = user.name
+  } else {
+    name = userInfo.name
+  }
   
   const [collapse, setCollapse] = useState(false);
-
   const navColor = { backgroundColor: "#00CED1" };
   const container = { height: 1300 };
+  
+
 
   const onClick = () => {
     setCollapse(true);
@@ -66,7 +67,7 @@ const Navbar = ({
       </MDBNavbarBrand>
       <MDBNavbarToggler onClick={onClick} />
       <MDBCollapse isOpen={collapse} navbar>
-        <MDBIcon icon="user-alt" /> Welcome {userInfo.name + "!"}
+        <MDBIcon icon="user-alt" /> Welcome {name + "!"}
         <MDBNavbarNav right>
           <MDBNavItem active>
             <MDBNavLink to="/tv_shows">

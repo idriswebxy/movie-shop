@@ -5,7 +5,7 @@ import "../MainImage/MainImage.css";
 import { slides } from "../../utils/movie_slides";
 import "../../App.css";
 import { connect } from "react-redux";
-import { useAuth0 } from "@auth0/auth0-react";
+
 
 
 const Landing = ({ movies }) => {

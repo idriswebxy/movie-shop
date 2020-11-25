@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react";
+
 import { Spinner } from "react-bootstrap";
 
 const PrivateRoute = ({

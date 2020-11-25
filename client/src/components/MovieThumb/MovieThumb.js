@@ -12,7 +12,6 @@ import { connect } from "react-redux";
 const MovieThumb = (props, { addToCart, movieObj }) => {
 
   useEffect(() => {
-    console.log(props);
   }, []);
 
   return (

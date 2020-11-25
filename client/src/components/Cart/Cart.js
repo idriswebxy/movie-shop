@@ -23,6 +23,8 @@ const Cart = ({
   price = 2.99,
   userId,
 }) => {
+
+  
   useEffect(() => {
     loadCart();
     getPriceTotal(userId);
@@ -75,6 +77,7 @@ const Cart = ({
       </MDBNavLink>
     </div>
   );
+
 
   return (
     <MDBContainer>

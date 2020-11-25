@@ -17,7 +17,7 @@ import MovieDetails from "./components/Movies/MovieDetails";
 import Checkout from "./components/Cart/Checkout";
 import TvShows from "./components/TvShows/TvShows";
 import TvShowDetails from "./components/TvShows/TvShowDetails";
-import { useAuth0 } from "@auth0/auth0-react";
+
 import { createBrowserHistory } from "history";
 
 const history = createBrowserHistory();

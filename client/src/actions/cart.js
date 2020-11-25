@@ -71,7 +71,6 @@ export const loadCart = () => async (dispatch) => {
   try {
     const res = await axios.get("/api/cart");
 
-
     dispatch({
       type: LOAD_CART,
       payload: res.data,

@@ -17,6 +17,9 @@ import {
 import "./MovieDetails.css";
 import Movie from "../MovieThumb/MovieThumb";
 import MovieThumb from "../MovieThumb/MovieThumb";
+import moment from "moment";
+
+
 
 const MovieDetails = ({
   movie,
@@ -40,6 +43,8 @@ const MovieDetails = ({
       .then((data) => setVideoKey(data.results[0].key));
     loadCart();
     window.scrollTo(0, 0);
+
+    
   }, []);
 
   // if (isLoading) {
@@ -68,7 +73,7 @@ const MovieDetails = ({
           <div>
             <div style={{ margin: "20px"}}>
               <h1>{movie.title}</h1>
-
+              <h6>{moment(movie.release_date).format("LL")}</h6>
               <MDBBtn onClick={() => addToCart(movie)}>
                 Add To Cart <MDBIcon icon="cart-plus" />
               </MDBBtn>

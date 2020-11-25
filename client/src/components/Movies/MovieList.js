@@ -17,7 +17,9 @@ import Movie from "./Movie";
 import SearchBar from "../Search/Search";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdbreact";
 import "../../App.css";
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
+
+
 
 const MovieList = ({
   addToCart,
@@ -37,12 +39,7 @@ const MovieList = ({
 
   let endpoint = "";
   
-
-   
-
-  
   useEffect(() => {
-     
     if (movies.length <= 20) {
       endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
       fetchItems(endpoint);
@@ -50,7 +47,6 @@ const MovieList = ({
     } else {
       loadCart();
     }
-    console.log(getAccessTokenSilently().then())
   }, []);
 
   if (isLoading) {
@@ -101,7 +97,6 @@ const MovieList = ({
 };
 
 const mapStateToProps = (state) => ({
-  userId: state.auth.userInfo._id,
   isLoading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
   movies: state.movie.movies,

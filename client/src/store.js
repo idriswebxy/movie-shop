@@ -15,3 +15,4 @@ const store = createStore(
 const persistor = persistStore(store);
 
 export default { store, persistor };
+persistor.purge();

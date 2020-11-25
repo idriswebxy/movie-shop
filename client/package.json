@@ -4,8 +4,7 @@
   "private": true,
   "dependencies": {
     "-": "0.0.1",
-    "@auth0/auth0-react": "^1.0.0",
-    "@auth0/auth0-spa-js": "^1.11.0",
+    "@auth0/auth0-react": "^1.2.0",
     "axios": "^0.19.2",
     "bootstrap": "^3.4.1",
     "bootstrap-less": "^3.3.8",
@@ -62,6 +61,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000/",
-  "devDependencies": {}
+  "proxy": "http://localhost:5000/"
 }

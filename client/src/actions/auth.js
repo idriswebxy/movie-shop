@@ -13,7 +13,6 @@ import {
 } from "./types";
 
 
-
 // Load user
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
@@ -97,7 +96,7 @@ export const login = (email, password) => async (dispatch) => {
     // if (errors) {
     //   errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
     // }
-
+     
     dispatch({
       type: LOGIN_FAIL,
     });
@@ -109,12 +108,14 @@ export const googleAuth = (user, token) => async (dispatch) => {
 
   console.log(user, token)
 
-
+  
+  
 }
- 
+
+
+
 
 // Logout
 export const logOut = () => (dispatch) => {
-  dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });
 };

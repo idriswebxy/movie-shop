@@ -6,9 +6,11 @@ import {
   AUTH_ERROR,
   LOGOUT,
   ACCOUNT_DELETED,
-  LOGIN_FAIL
+  LOGIN_FAIL,
+  CLEAR_PROFILE
 } from "../actions/types";
- 
+
+
 
 const initialState = {
   googleAuth: false,
@@ -54,7 +56,6 @@ export default function(state = initialState, action) {
         authenticated: false,
         isLoading: false
       };
-
     default:
       return state;
   }
