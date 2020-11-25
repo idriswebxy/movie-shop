@@ -40,10 +40,10 @@ const MovieList = ({
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
 
   let endpoint = "";
-  const token = getAccessTokenSilently().then((t) => console.log(t))
+  const token = getAccessTokenSilently()
   
   useEffect(() => {
-    googleAuth(user, token )
+    googleAuth(user, token)
     if (movies.length <= 20) {
       endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
       fetchItems(endpoint);
