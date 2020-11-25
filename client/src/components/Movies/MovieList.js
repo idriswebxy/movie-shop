@@ -18,6 +18,7 @@ import SearchBar from "../Search/Search";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdbreact";
 import "../../App.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import { googleAuth } from "../../actions/auth";
 
 
 
@@ -34,12 +35,15 @@ const MovieList = ({
   nextPage,
   loadMovies,
   loadMoreItems,
+  googleAuth
 }) => {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
 
   let endpoint = "";
+  const token = getAccessTokenSilently().then((t) => console.log(t))
   
   useEffect(() => {
+    googleAuth(user, token )
     if (movies.length <= 20) {
       endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
       fetchItems(endpoint);
@@ -115,4 +119,5 @@ export default connect(mapStateToProps, {
   fetchItems,
   loadChange,
   loadMoreItems,
+  googleAuth
 })(MovieList);
