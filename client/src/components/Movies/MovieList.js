@@ -20,8 +20,6 @@ import "../../App.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { googleAuth } from "../../actions/auth";
 
-
-
 const MovieList = ({
   addToCart,
   loadCart,
@@ -34,16 +32,13 @@ const MovieList = ({
   loadChange,
   nextPage,
   loadMovies,
-  loadMoreItems,
-  googleAuth
+  googleAuth,
 }) => {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
 
   let endpoint = "";
-  const token = getAccessTokenSilently()
-  
+
   useEffect(() => {
-    googleAuth(user, token)
     if (movies.length <= 20) {
       endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
       fetchItems(endpoint);
@@ -56,6 +51,9 @@ const MovieList = ({
   if (isLoading) {
     return <Spinner />;
   }
+
+  getAccessTokenSilently().then(t => googleAuth(user, t));
+
 
   const movieList = (
     <MDBContainer>
@@ -114,10 +112,9 @@ export default connect(mapStateToProps, {
   loadCart,
   nextPage,
   prevPage,
-  // loadMore,
   loadMovies,
   fetchItems,
   loadChange,
   loadMoreItems,
-  googleAuth
+  googleAuth,
 })(MovieList);

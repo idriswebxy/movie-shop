@@ -10,6 +10,7 @@ import {
   CLEAR_PROFILE,
   LOGOUT,
   LOGIN_SUCCESS,
+  GOOGLE_AUTH
 } from "./types";
 
 
@@ -106,9 +107,19 @@ export const login = (email, password) => async (dispatch) => {
 
 export const googleAuth = (user, token) => async (dispatch) => {
 
-  console.log(user, token)
+  try {
+    dispatch({
+      type: GOOGLE_AUTH,
+      payload: { user, token }
+    })
+    
+  } catch (error) {
+    dispatch({
+      type: AUTH_ERROR,
+    });
+  }
 
-  
+  dispatch(loadUser())
   
 }
 

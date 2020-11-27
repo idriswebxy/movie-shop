@@ -7,10 +7,9 @@ import {
   LOGOUT,
   ACCOUNT_DELETED,
   LOGIN_FAIL,
-  CLEAR_PROFILE
+  CLEAR_PROFILE,
+  GOOGLE_AUTH
 } from "../actions/types";
-
-
 
 const initialState = {
   googleAuth: false,
@@ -21,8 +20,7 @@ const initialState = {
   userInfo: {},
 };
 
-export default function(state = initialState, action) {
-  
+export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
@@ -33,7 +31,6 @@ export default function(state = initialState, action) {
         isLoading: false,
         userInfo: payload,
       };
-
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       localStorage.setItem("token", payload.token);
@@ -41,9 +38,8 @@ export default function(state = initialState, action) {
         ...state,
         ...payload,
         authenticated: true,
-        isLoading: false
+        isLoading: false,
       };
-
     case REGISTER_FAIL:
     case AUTH_ERROR:
     case LOGIN_FAIL:
@@ -54,6 +50,14 @@ export default function(state = initialState, action) {
         ...state,
         token: null,
         authenticated: false,
+        isLoading: false,
+      };
+    case GOOGLE_AUTH:
+      localStorage.setItem("gtoken", payload.token)
+      return {
+        ...state,
+        userInfo: payload.user,
+        authenticated: true,
         isLoading: false
       };
     default:

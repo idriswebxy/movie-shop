@@ -52,3 +52,4 @@ export const GET_PROFILE = "GET_PROFILE";
 export const LOAD_MORE = "LOAD_MORE";
 export const LOAD_MOVIES = "LOAD_MOVIES";
 export const LOAD_CHANGE = "LOAD_CHANGE";
+export const GOOGLE_AUTH = "GOOGLE_AUTH";

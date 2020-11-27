@@ -19,17 +19,14 @@ import "../../App.css";
 import Spinner from "../Spinner/Spinner";
 import { useAuth0 } from "@auth0/auth0-react";
 import SearchPage from "../Search/Search";
-import { googleAuth } from "../../actions/auth";
 
 const Navbar = ({
   auth: { authenticated, isLoading, userInfo },
   logOut,
   cart,
-  page,
-  googleAuth,
 }) => {
   
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
 
 
   let name = null;
@@ -39,6 +36,8 @@ const Navbar = ({
   } else {
     name = userInfo.name
   }
+
+
   
   const [collapse, setCollapse] = useState(false);
   const navColor = { backgroundColor: "#00CED1" };
@@ -135,4 +134,4 @@ const mapStateToProps = (state) => ({
   // page: state.movie.page
 });
 
-export default connect(mapStateToProps, { logOut, googleAuth })(Navbar);
+export default connect(mapStateToProps, { logOut })(Navbar);
