@@ -74,6 +74,7 @@ export const getMovie = (id) => async (dispatch) => {
 };
 
 export const loadChange = (loadStatus) => async (dispatch) => {
+
   dispatch({
     type: LOAD_CHANGE,
     payload: loadStatus,
@@ -81,6 +82,8 @@ export const loadChange = (loadStatus) => async (dispatch) => {
 };
 
 export const loadMoreItems = (endpoint, page) => async (dispatch) => {
+
+  console.log("LOAD MORE!")
 
   endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${
     page + 1

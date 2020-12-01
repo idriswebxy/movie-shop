@@ -12,17 +12,11 @@ import {
   MDBNavLink,
 } from "mdbreact";
 import { connect } from "react-redux";
-import { login } from "../../actions/auth";
+import { login, signInGoogle } from "../../actions/auth";
 import PropTypes from "prop-types";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const Login = ({
-  login,
-  authenticated,
-  loading,
-  getCurrentProfile,
-  page,
-}) => {
+const Login = ({ login, authenticated, loading, getCurrentProfile, page, signInGoogle }) => {
   const {
     user,
     isAuthenticated,
@@ -30,7 +24,6 @@ const Login = ({
     logout,
     getAccessTokenSilently,
   } = useAuth0();
-
 
   const [formData, setFormData] = useState({
     email: "",
@@ -90,18 +83,16 @@ const Login = ({
               <MDBCol>
                 <MDBBtn type="submit">Login</MDBBtn>
               </MDBCol>
-
               {!isAuthenticated ? (
-                <NavItem>
-                  <Button
-                    id="qsLoginBtn"
-                    color="primary"
-                    className="btn-margin"
-                    onClick={() => loginWithRedirect()}
-                  >
-                    Sign in Google
-                  </Button>
-                </NavItem>
+                <Button
+                  id="qsLoginBtn"
+                  color="primary"
+                  className="btn-margin"
+                  onClick={() => signInGoogle()}
+                >
+                  Sign in Google
+                </Button>
+
               ) : (
                 <Button onClick={() => logout()}>Logout</Button>
               )}
@@ -124,4 +115,4 @@ const mapStateToProps = (state) => ({
   loading: state.auth.loading,
 });
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { login, signInGoogle })(Login);

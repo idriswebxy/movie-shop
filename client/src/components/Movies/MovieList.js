@@ -25,16 +25,12 @@ const MovieList = ({
   loadCart,
   isLoading,
   movies,
-  loadMore,
   fetchItems,
   page,
   totalPages,
-  loadChange,
-  nextPage,
-  loadMovies,
-  googleAuth,
+  loadMoreItems
 }) => {
-  const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
+  // const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
 
   let endpoint = "";
 
@@ -52,7 +48,7 @@ const MovieList = ({
     return <Spinner />;
   }
 
-  getAccessTokenSilently().then(t => googleAuth(user, t));
+  
 
 
   const movieList = (

@@ -92,11 +92,11 @@ export const login = (email, password) => async (dispatch) => {
     dispatch(loadUser());
   } 
   catch (err) {
-    // const errors = err.response.data.errors;
+    const errors = err.response.data.errors;
 
-    // if (errors) {
-    //   errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-    // }
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+    }
      
     dispatch({
       type: LOGIN_FAIL,
@@ -106,6 +106,8 @@ export const login = (email, password) => async (dispatch) => {
 
 
 export const googleAuth = (user, token) => async (dispatch) => {
+
+  console.log("google auth called!")
 
   try {
     dispatch({
@@ -123,6 +125,14 @@ export const googleAuth = (user, token) => async (dispatch) => {
   
 }
 
+
+export const signInGoogle = () => async () => {
+
+  const res = await axios.get('/login')
+
+  console.log(res)
+
+}
 
 
 

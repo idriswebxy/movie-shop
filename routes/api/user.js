@@ -7,6 +7,20 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const auth = require("../../middleware/auth");
 require("dotenv").config();
+var secured = require("../../middleware/secured");
+
+
+
+router.get('/userAuth0', secured(), function (req, res, next) {
+  const { _raw, _json, ...userProfile } = req.user;
+  res.render('user', {
+    userProfile: JSON.stringify(userProfile, null, 2),
+    title: 'Profile page'
+  });
+});
+
+
+
 
 
 // get user
