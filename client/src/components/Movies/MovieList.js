@@ -18,7 +18,7 @@ import SearchBar from "../Search/Search";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdbreact";
 import "../../App.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import { googleAuth } from "../../actions/auth";
+import { signInGoogle } from "../../actions/auth";
 
 const MovieList = ({
   addToCart,
@@ -28,9 +28,11 @@ const MovieList = ({
   fetchItems,
   page,
   totalPages,
-  loadMoreItems
+  loadMoreItems,
+  signInGoogle,
 }) => {
-  // const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
+  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+
 
   let endpoint = "";
 
@@ -42,14 +44,16 @@ const MovieList = ({
     } else {
       loadCart();
     }
+    signInGoogle()
   }, []);
 
   if (isLoading) {
     return <Spinner />;
   }
 
-  
-
+  // if (isAuthenticated) {
+  //   getAccessTokenSilently().then((token) => signInGoogle(user, token));
+  // }
 
   const movieList = (
     <MDBContainer>
@@ -112,5 +116,5 @@ export default connect(mapStateToProps, {
   fetchItems,
   loadChange,
   loadMoreItems,
-  googleAuth,
+  signInGoogle,
 })(MovieList);

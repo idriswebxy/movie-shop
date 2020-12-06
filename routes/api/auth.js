@@ -1,30 +1,29 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 var passport = require("passport");
+const jwtExpress = require("express-jwt");
+const jwksRsa = require("jwks-rsa");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 require("dotenv").config();
 const { check, validationResult } = require("express-validator");
 
-
 const User = require("../../models/User");
 
-
+// Perform the login, after login Auth0 will redirect to callback
 router.get(
-  "/login",
+  "/auth0",
   passport.authenticate("auth0", {
     scope: "openid email profile",
   }),
   function (req, res) {
+    red.send("/auth0 check**");
     res.redirect("/");
   }
 );
 
-
+// Perform the final stage of authentication and redirect to previously requested URL or '/user'
 router.get("/movies", function (req, res, next) {
-
-  console.log('auth0 /movies route')
-
   passport.authenticate("auth0", function (err, user, info) {
     if (err) {
       return next(err);
@@ -32,6 +31,7 @@ router.get("/movies", function (req, res, next) {
     if (!user) {
       return res.redirect("/login");
     }
+
     req.logIn(user, function (err) {
       if (err) {
         return next(err);
@@ -43,6 +43,30 @@ router.get("/movies", function (req, res, next) {
   })(req, res, next);
 });
 
+// Perform session logout and redirect to homepage
+router.get("/logout", (req, res) => {
+  req.logout();
+
+  var returnTo = req.protocol + "://" + req.hostname;
+  var port = req.connection.localPort;
+  if (port !== undefined && port !== 80 && port !== 443) {
+    returnTo += ":" + port;
+  }
+  var logoutURL = new url.URL(
+    util.format("https://%s/v2/logout", process.env.AUTH0_DOMAIN)
+  );
+  var searchString = querystring.stringify({
+    client_id: process.env.AUTH0_CLIENT_ID,
+    returnTo: returnTo,
+  });
+  logoutURL.search = searchString;
+
+  res.redirect(logoutURL);
+});
+
+router.get("/test", (req, res) => {
+  res.send("works here");
+});
 
 // Login
 router.post(
@@ -52,7 +76,6 @@ router.post(
     check("password", "Password is required").exists(),
   ],
   async (req, res) => {
-
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -99,17 +122,5 @@ router.post(
     }
   }
 );
-
-
-
-
-
-// app.get('/api/private', checkJwt, function(req, res) {
-//   res.json({
-//     message: 'Hello from a private endpoint! You need to be authenticated to see this.'
-//   });
-// });
-
-
 
 module.exports = router;

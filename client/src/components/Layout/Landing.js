@@ -11,24 +11,6 @@ import { connect } from "react-redux";
 const Landing = ({ movies }) => {
   let [index, setIndex] = useState(0);
 
-  // const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
-
-
-  useEffect(() => {
-    slideTimer();
-
-  }, []);
-
-  const slideTimer = () => {
-    // setInterval(() => {
-    //   setIndex(++index);
-    //   if (index === 19) {
-    //     index = 0;
-    //   } else {
-    //     return;
-    //   }
-    // }, 4000);
-  };
 
   return (
     <div className="app-main">

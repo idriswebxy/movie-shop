@@ -16,6 +16,7 @@ import {
 
 // Load user
 export const loadUser = () => async (dispatch) => {
+
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
@@ -105,32 +106,32 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 
-export const googleAuth = (user, token) => async (dispatch) => {
+// export const googleAuth = (user, token) => async (dispatch) => {
 
-  console.log("google auth called!")
+//   console.log("google auth called!")
 
-  try {
-    dispatch({
-      type: GOOGLE_AUTH,
-      payload: { user, token }
-    })
+//   try {
+//     dispatch({
+//       type: GOOGLE_AUTH,
+//       payload: { user, token }
+//     })
     
-  } catch (error) {
-    dispatch({
-      type: AUTH_ERROR,
-    });
-  }
+//   } catch (error) {
+//     dispatch({
+//       type: AUTH_ERROR,
+//     });
+//   }
 
-  dispatch(loadUser())
+//   dispatch(loadUser())
   
-}
+// }
 
 
 export const signInGoogle = () => async () => {
 
-  const res = await axios.get('/login')
+  await axios.get("/api/auth/auth0")
+  
 
-  console.log(res)
 
 }
 

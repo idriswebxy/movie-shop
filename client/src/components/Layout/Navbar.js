@@ -13,7 +13,7 @@ import {
   MDBNavbarToggler,
   MDBNavbarNav,
 } from "mdbreact";
-import { logOut } from "../../actions/auth";
+import { logOut, signInGoogle } from "../../actions/auth";
 import { loadCart } from "../../actions/cart";
 import "../../App.css";
 import Spinner from "../Spinner/Spinner";
@@ -24,13 +24,20 @@ const Navbar = ({
   auth: { authenticated, isLoading, userInfo },
   logOut,
   cart,
+
 }) => {
   
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated, getAccessTokenSilently} = useAuth0();
+
+  // getAccessTokenSilently().then(token => signInGoogle(user, token));
 
 
+  // useEffect(() => {
+  //   console.log(user, getAccessTokenSilently().then(t => (t)))
+  // }, [])
+  
   let name = null;
-
+  
   if (isAuthenticated) {
     name = user.name
   } else {

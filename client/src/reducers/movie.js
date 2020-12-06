@@ -25,7 +25,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  isLoading: false,
+  isLoading: true,
   movies: [],
   tvShows: [],
   searchedMovie: null,
@@ -117,9 +117,9 @@ export default function (state = initialState, action) {
       return {
         ...state,
         movies: [...state.movies, ...payload.results],
-        isLoading: false,
         totalPages: payload.total_pages,
-        moviePage: payload.page
+        moviePage: payload.page,
+        isLoading: false,
       };
     case SET_MOVIE_ERR:
       return null;

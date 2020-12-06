@@ -19,6 +19,8 @@ const onRedirectCallback = (appState) => {
   );
 };
 
+
+
 ReactDOM.render(
   <Provider store={store.store}>
     <PersistGate persistor={store.persistor}>
