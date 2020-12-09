@@ -111,19 +111,19 @@ export const googleAuth = () => async (dispatch) => {
   const res = await axios.get("/api/auth/auth0")
   console.log(res)
 
-  try {
-    dispatch({
-      type: GOOGLE_AUTH,
-      payload: { user, token }
-    })
+  // try {
+  //   dispatch({
+  //     type: GOOGLE_AUTH,
+  //     payload: { user, token }
+  //   })
     
-  } catch (error) {
-    dispatch({
-      type: AUTH_ERROR,
-    });
-  }
+  // } catch (error) {
+  //   dispatch({
+  //     type: AUTH_ERROR,
+  //   });
+  // }
 
-  dispatch(loadUser())
+  // dispatch(loadUser())
   
 }
 
