@@ -92,7 +92,7 @@ const Login = ({
                   id="qsLoginBtn"
                   color="primary"
                   className="btn-margin"
-                  onClick={() => googleAuth()}
+                  onClick={() => loginWithRedirect()}
                 >
                   Sign in Google
                 </Button>

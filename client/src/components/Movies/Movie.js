@@ -64,7 +64,7 @@ const Movie = ({
 
 const mapStateToProps = (state) => ({
   isLoading: state.movie.isLoading,
-  userId: state.auth.userInfo._id,
+  // userId: state.auth.userInfo._id,
 
 });
 

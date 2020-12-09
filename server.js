@@ -27,41 +27,6 @@ mongoose
   .then(console.log("Database connected...✅"))
   .catch((err) => console.error(err));
 
-// Configure Passport to use Auth0
-var strategy = new Auth0Strategy(
-  {
-    domain: process.env.AUTH0_DOMAIN,
-    clientID: process.env.AUTH0_CLIENT_ID,
-    clientSecret: process.env.AUTH0_CLIENT_SECRET,
-    callbackURL:
-      process.env.AUTH0_CALLBACK_URL || "http://localhost:3000/movies",
-  },
-  function (accessToken, refreshToken, extraParams, profile, done) {
-    // accessToken is the token to call Auth0 API (not needed in the most cases)
-    // extraParams.id_token has the JSON Web Token
-    // profile has all the information from the user
-    return done(null, profile);
-  }
-);
-
-const config = {
-  authRequired: false,
-  auth0Logout: true,
-  baseURL: "http://localhost:3000",
-  clientID: "6MQst1aSZZxAgMIviU6f9qy33WikJCoV",
-  issuerBaseURL: "https://dev-lhxohglr.auth0.com",
-  secret: "soupandotherstuff",
-};
-
-passport.use(strategy);
-
-passport.serializeUser(function (user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function (user, done) {
-  done(null, user);
-});
 
 const app = express();
 
@@ -79,8 +44,29 @@ app.use("/api/user", user);
 app.use("/api/cart", cart);
 app.use("/api/auth", auth1);
 
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  baseURL: 'http://localhost:3000',
+  clientID: 'Z1GHe0STO0EOcJ6Bsaj590A9rhCbuOpx',
+  issuerBaseURL: 'https://twilight-bonus-1388.us.auth0.com',
+  secret: 'some long string'
+};
+
 // auth router attaches /login, /logout, and /callback routes to the baseURL
-app.use(auth(config));
+// app.use(auth(config));
+
+// Middleware to make the `user` object available for all views
+// app.use(function (req, res, next) {
+//   res.locals.user = req.oidc.user;
+//   next();
+// });
+
+// app.get('/test0', (req, res) => {
+//   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
+
+// });
+
 
 //Serve static assets if in productions
 if (process.env.NODE_ENV === "production") {

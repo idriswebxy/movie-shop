@@ -37,8 +37,6 @@ const Navbar = ({
     name = userInfo.name
   }
 
-
-  
   const [collapse, setCollapse] = useState(false);
   const navColor = { backgroundColor: "#00CED1" };
   const container = { height: 1300 };

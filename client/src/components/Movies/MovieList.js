@@ -35,6 +35,9 @@ const MovieList = ({
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
 
+
+  
+
   let endpoint = "";
 
   useEffect(() => {
@@ -47,13 +50,13 @@ const MovieList = ({
     }
   }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const token = await getAccessTokenSilently();
-  //     googleAuth(token)
-  //     setAuthToken(token)
-  //   })()
-  // }, [])
+  useEffect(() => {
+    (async () => {
+      const token = await getAccessTokenSilently();
+      googleAuth(user, token)
+      setAuthToken(token)
+    })()
+  }, [getAccessTokenSilently])
 
 
   if (isLoading) {

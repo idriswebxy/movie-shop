@@ -30,7 +30,6 @@ if (localStorage.token) {
 const App = ({}) => {
   const { user, getAccessTokenSilently } = useAuth0();
 
-  // getAccessTokenSilently().then(t => googleAuth(user, t));
 
   useEffect(() => {
     store.store.dispatch(loadUser());
