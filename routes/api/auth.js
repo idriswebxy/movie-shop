@@ -7,20 +7,31 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
 const { check, validationResult } = require("express-validator");
-
 const User = require("../../models/User");
 
+
+
+
+// req.isAuthenticated is provided from the auth router
+router.get('/auth0', (req, res) => {
+  console.log(res)
+});
+
+
+
+
+
 // Perform the login, after login Auth0 will redirect to callback
-router.get(
-  "/auth0",
-  passport.authenticate("auth0", {
-    scope: "openid email profile",
-  }),
-  function (req, res) {
-    red.send("/auth0 check**");
-    res.redirect("/");
-  }
-);
+// router.get(
+//   "/auth0",
+//   passport.authenticate("auth0", {
+//     scope: "openid email profile",
+//   }),
+//   function (req, res) {
+//     res.send("/auth0 check**");
+//     res.redirect("/");
+//   }
+// );
 
 // Perform the final stage of authentication and redirect to previously requested URL or '/user'
 router.get("/movies", function (req, res, next) {

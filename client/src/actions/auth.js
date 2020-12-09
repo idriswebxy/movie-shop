@@ -106,36 +106,28 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 
-// export const googleAuth = (user, token) => async (dispatch) => {
+export const googleAuth = () => async (dispatch) => {
+  
+  const res = await axios.get("/api/auth/auth0")
+  console.log(res)
 
-//   console.log("google auth called!")
-
-//   try {
-//     dispatch({
-//       type: GOOGLE_AUTH,
-//       payload: { user, token }
-//     })
+  // try {
+  //   dispatch({
+  //     type: GOOGLE_AUTH,
+  //     payload: { user, token }
+  //   })
     
-//   } catch (error) {
-//     dispatch({
-//       type: AUTH_ERROR,
-//     });
-//   }
+  // } catch (error) {
+  //   dispatch({
+  //     type: AUTH_ERROR,
+  //   });
+  // }
 
-//   dispatch(loadUser())
+  // dispatch(loadUser())
   
-// }
-
-
-export const signInGoogle = () => async () => {
-
-  await axios.get("/api/auth/auth0")
-  
-
-
 }
 
-
+ 
 
 // Logout
 export const logOut = () => (dispatch) => {

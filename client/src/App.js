@@ -18,7 +18,7 @@ import TvShows from "./components/TvShows/TvShows";
 import TvShowDetails from "./components/TvShows/TvShowDetails";
 import { googleAuth } from "./actions/auth";
 import { useAuth0 } from "@auth0/auth0-react";
- 
+
 import { createBrowserHistory } from "history";
 
 const history = createBrowserHistory();
@@ -27,16 +27,13 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-
 const App = ({}) => {
+  const { user, getAccessTokenSilently } = useAuth0();
 
-  // const { user, getAccessTokenSilently } = useAuth0();
-  
   // getAccessTokenSilently().then(t => googleAuth(user, t));
 
   useEffect(() => {
     store.store.dispatch(loadUser());
-    
   }, []);
 
   // if (isLoading) {
@@ -52,12 +49,7 @@ const App = ({}) => {
           <Route exact path="/" component={Landing} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <Route
-            exact
-            path="/movies"
-            store={store}
-            component={MovieList}
-          />
+          <Route exact path="/movies" store={store} component={MovieList} />
           <PrivateRoute path="/tv_shows" component={TvShows} />
           <PrivateRoute path="/movieInfo/:id" component={MovieDetails} />
           <PrivateRoute path="/show_details" component={TvShowDetails} />
@@ -69,8 +61,6 @@ const App = ({}) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-
-});
+const mapStateToProps = (state) => ({});
 
 export default connect(mapStateToProps)(App);
