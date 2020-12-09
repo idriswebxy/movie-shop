@@ -13,7 +13,7 @@ import {
   MDBNavbarToggler,
   MDBNavbarNav,
 } from "mdbreact";
-import { logOut, signInGoogle } from "../../actions/auth";
+import { logOut, googleAuth } from "../../actions/auth";
 import { loadCart } from "../../actions/cart";
 import "../../App.css";
 import Spinner from "../Spinner/Spinner";
@@ -24,17 +24,10 @@ const Navbar = ({
   auth: { authenticated, isLoading, userInfo },
   logOut,
   cart,
-
+  googleAuth
 }) => {
   
-  const { user, isAuthenticated, getAccessTokenSilently} = useAuth0();
-
-  // getAccessTokenSilently().then(token => signInGoogle(user, token));
-
-
-  // useEffect(() => {
-  //   console.log(user, getAccessTokenSilently().then(t => (t)))
-  // }, [])
+  const { user, isAuthenticated } = useAuth0();
   
   let name = null;
   
@@ -141,4 +134,4 @@ const mapStateToProps = (state) => ({
   // page: state.movie.page
 });
 
-export default connect(mapStateToProps, { logOut })(Navbar);
+export default connect(mapStateToProps, { logOut, googleAuth })(Navbar);

@@ -12,17 +12,21 @@ import {
   MDBNavLink,
 } from "mdbreact";
 import { connect } from "react-redux";
-import { login, signInGoogle } from "../../actions/auth";
+import { login, googleAuth } from "../../actions/auth";
 import PropTypes from "prop-types";
 import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
 
-const Login = ({ login, authenticated, loading, getCurrentProfile, page, signInGoogle }) => {
+const Login = ({
+  login,
+  authenticated,
+  loading,
+  googleAuth
+}) => {
   const {
-    user,
     isAuthenticated,
-    loginWithRedirect,
     logout,
-    getAccessTokenSilently,
+    loginWithRedirect
   } = useAuth0();
 
   const [formData, setFormData] = useState({
@@ -88,11 +92,10 @@ const Login = ({ login, authenticated, loading, getCurrentProfile, page, signInG
                   id="qsLoginBtn"
                   color="primary"
                   className="btn-margin"
-                  onClick={() => signInGoogle()}
+                  onClick={() => googleAuth()}
                 >
                   Sign in Google
                 </Button>
-
               ) : (
                 <Button onClick={() => logout()}>Logout</Button>
               )}
@@ -115,4 +118,4 @@ const mapStateToProps = (state) => ({
   loading: state.auth.loading,
 });
 
-export default connect(mapStateToProps, { login, signInGoogle })(Login);
+export default connect(mapStateToProps, { login, googleAuth })(Login);
