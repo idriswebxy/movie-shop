@@ -8,17 +8,14 @@ const bcrypt = require("bcryptjs");
 require("dotenv").config();
 const { check, validationResult } = require("express-validator");
 const User = require("../../models/User");
-const { requiresAuth, auth } = require("express-openid-connect");
+const checkJwt = require("../../middleware/check-jwt");
 
 
 
-// router.get("/movies", requiresAuth(), function (req, res, next) {
-//   res.send(JSON.stringify(req.oidc.user));
-// });
 
-// router.get("/test", (req, res) => {
-//   res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
-// });
+router.get("/moviesList", checkJwt, (req, res) => {
+  res.send("API movies works!")
+});
 
 
 

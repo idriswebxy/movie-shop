@@ -34,29 +34,42 @@ const MovieList = ({
 }) => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
-
-
-  
-
   let endpoint = "";
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+
 
   useEffect(() => {
     if (movies.length <= 20) {
       endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
       fetchItems(endpoint);
       loadCart();
+      callSecureApi()
     } else {
       loadCart();
     }
   }, []);
 
-  useEffect(() => {
-    (async () => {
+  
+  const callSecureApi = async () => {
+    try {
       const token = await getAccessTokenSilently();
-      googleAuth(user, token)
-      setAuthToken(token)
-    })()
-  }, [getAccessTokenSilently])
+
+      const response = await fetch(
+        `${serverUrl}/api/messages/protected-message`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const responseData = await response.json();
+
+    } catch (error) {
+     console.error(error.message);
+    }
+  };
+
 
 
   if (isLoading) {
