@@ -5,11 +5,11 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 var passport = require("passport");
 const cors = require("cors");
+const helmet = require("helmet");
 var session = require("express-session");
 var Auth0Strategy = require("passport-auth0");
 var dotenv = require("dotenv");
-const jwt = require("express-jwt");
-const jwksRsa = require("jwks-rsa");
+const { clientOrigins } = require("./config/env.dev");
 
 // Routes
 const user = require("./routes/api/user");
@@ -29,10 +29,10 @@ mongoose
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: clientOrigins }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(express.json());
+app.use(helmet());
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));

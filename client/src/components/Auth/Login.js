@@ -32,7 +32,7 @@ const Login = ({
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-  });
+  }); 
 
   const { email, password } = formData;
   const [isOpen, setIsOpen] = useState(false);
@@ -75,7 +75,7 @@ const Login = ({
               />
               <MDBInput
                 label="Type your password"
-                icon="lock"
+                icon="lock" 
                 group
                 type="password"
                 validate

@@ -10,6 +10,7 @@ import {
   loadChange,
   loadMoreItems,
 } from "../../actions/movie";
+import axios from "axios"
 import { API_URL, API_KEY } from "../../config";
 import "./MovieList.css";
 import { connect } from "react-redux";
@@ -20,6 +21,7 @@ import "../../App.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { googleAuth } from "../../actions/auth";
 import setAuthToken from '../../utils/setAuthToken'
+import { REACT_APP_SERVER_URL } from "../../config";
 
 const MovieList = ({
   addToCart,
@@ -35,7 +37,7 @@ const MovieList = ({
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
   let endpoint = "";
-  const serverUrl = process.env.REACT_APP_SERVER_URL;
+  const serverUrl = REACT_APP_SERVER_URL;
 
 
   useEffect(() => {
@@ -43,7 +45,8 @@ const MovieList = ({
       endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
       fetchItems(endpoint);
       loadCart();
-      callSecureApi()
+      // callSecureApi();
+      // googleAuth()
     } else {
       loadCart();
     }
@@ -54,8 +57,8 @@ const MovieList = ({
     try {
       const token = await getAccessTokenSilently();
 
-      const response = await fetch(
-        `${serverUrl}/api/messages/protected-message`,
+      const res = await axios.get(
+        `${serverUrl}/api/auth/movies`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -63,7 +66,8 @@ const MovieList = ({
         }
       );
 
-      const responseData = await response.json();
+      const responseData = await res.json();
+      console.log(responseData)
 
     } catch (error) {
      console.error(error.message);
@@ -111,11 +115,12 @@ const MovieList = ({
       </div>
     </MDBContainer>
   );
-
+  
   return (
     <div>
       <SearchBar />
       {movieList}
+    <MDBBtn onClick={() => callSecureApi()}>TEST</MDBBtn>
     </div>
   );
 };

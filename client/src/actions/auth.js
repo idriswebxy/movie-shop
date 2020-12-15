@@ -106,21 +106,22 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 
-export const googleAuth = (user, token) => async (dispatch) => {
+export const googleAuth = () => async (dispatch) => {
   
-  console.log(user, token)
+  const res = await axios.get("/api/auth/movies")
 
-  try {
-    dispatch({
-      type: GOOGLE_AUTH,
-      payload: { user, token }
-    })
+  console.log(res.data);
+  // try {
+  //   dispatch({
+  //     type: GOOGLE_AUTH,
+  //     payload: { user, token }
+  //   })
     
-  } catch (error) {
-    dispatch({
-      type: AUTH_ERROR,
-    });
-  }
+  // } catch (error) {
+  //   dispatch({
+  //     type: AUTH_ERROR,
+  //   });
+  // }
 
   dispatch(loadUser())
   

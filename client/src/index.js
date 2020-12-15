@@ -10,8 +10,19 @@ import "./App.css";
 import store from "./store";
 import { PersistGate } from "redux-persist/integration/react";
 import { Auth0Provider } from "@auth0/auth0-react";
-import config from "./auth0.config.json";
 import history from "./utils/history";
+import {
+  REACT_APP_AUTH0_DOMAIN,
+  REACT_APP_AUTH0_CLIENT_ID,
+  REACT_APP_AUTH0_AUDIENCE,
+  REACT_APP_AUTH0_CALLBACK_URI
+} from "./config";
+
+const domain = REACT_APP_AUTH0_DOMAIN;
+const clientId = REACT_APP_AUTH0_CLIENT_ID;
+const audience = REACT_APP_AUTH0_AUDIENCE;
+const callbackUri = REACT_APP_AUTH0_CALLBACK_URI;
+
 
 const onRedirectCallback = (appState) => {
   history.push(
@@ -19,19 +30,17 @@ const onRedirectCallback = (appState) => {
   );
 };
 
-
-
 ReactDOM.render(
   <Provider store={store.store}>
     <PersistGate persistor={store.persistor}>
       <Auth0Provider
-        domain={config.domain}
-        clientId={config.clientId}
-        audience={config.audience}
-        redirectUri={config.redirectUri}
-        // onRedirectCallback={onRedirectCallback}
+        domain={domain}
+        clientId={clientId}
+        audience={audience}
+        redirectUri={callbackUri}
+        onRedirectCallback={onRedirectCallback}
       >
-      <App />
+        <App />
       </Auth0Provider>
     </PersistGate>
   </Provider>,

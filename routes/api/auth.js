@@ -8,15 +8,17 @@ const bcrypt = require("bcryptjs");
 require("dotenv").config();
 const { check, validationResult } = require("express-validator");
 const User = require("../../models/User");
-const checkJwt = require("../../middleware/check-jwt");
+const { checkJwt } = require("../../middleware/check-jwt");
 
 
 
-
-router.get("/moviesList", checkJwt, (req, res) => {
-  res.send("API movies works!")
+router.get("/movies", checkJwt, async (req, res) => {
+  try {
+    res.json({ data: "API movies works!" });
+  } catch (err) {
+    console.error(err);
+  }
 });
-
 
 
 // Login
