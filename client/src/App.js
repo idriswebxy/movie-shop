@@ -18,6 +18,7 @@ import TvShows from "./components/TvShows/TvShows";
 import TvShowDetails from "./components/TvShows/TvShowDetails";
 import { googleAuth } from "./actions/auth";
 import { useAuth0 } from "@auth0/auth0-react";
+import Spinner from "./components/Spinner/Spinner";
 
 import { createBrowserHistory } from "history";
 
@@ -28,16 +29,16 @@ if (localStorage.token) {
 }
 
 const App = ({}) => {
-  const { user, getAccessTokenSilently } = useAuth0();
+  const { user, isLoading, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
 
   useEffect(() => {
-    store.store.dispatch(loadUser());
+    store.store.dispatch(loadUser(isAuthenticated));
   }, []);
 
-  // if (isLoading) {
-  //   return <SpinnerPage />
-  // }
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="app-main">
@@ -48,7 +49,7 @@ const App = ({}) => {
           <Route exact path="/" component={Landing} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <Route exact path="/movies" store={store} component={MovieList} />
+          <PrivateRoute exact path="/movies" store={store} component={MovieList} />
           <PrivateRoute path="/tv_shows" component={TvShows} />
           <PrivateRoute path="/movieInfo/:id" component={MovieDetails} />
           <PrivateRoute path="/show_details" component={TvShowDetails} />

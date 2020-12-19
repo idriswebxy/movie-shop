@@ -10,24 +10,27 @@ import {
   CLEAR_PROFILE,
   LOGOUT,
   LOGIN_SUCCESS,
-  GOOGLE_AUTH
+  GOOGLE_AUTH,
 } from "./types";
 
-
 // Load user
-export const loadUser = () => async (dispatch) => {
-
+export const loadUser = (isAuthenticated) => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
 
   try {
-    const res = await axios.get("/api/user");
-
-    dispatch({
-      type: USER_LOADED,
-      payload: res.data,
-    });
+    if (isAuthenticated) {
+      dispatch({
+        type: USER_LOADED,
+      });
+    } else {
+      const res = await axios.get("/api/user");
+      dispatch({
+        type: USER_LOADED,
+        payload: res.data,
+      });
+    }
   } catch (error) {
     dispatch({
       type: AUTH_ERROR,
@@ -45,7 +48,6 @@ export const register = ({ name, email, password }) => async (dispatch) => {
 
   const body = JSON.stringify({ name, email, password });
 
-
   try {
     const res = await axios.post("/api/user", body, config);
 
@@ -55,25 +57,21 @@ export const register = ({ name, email, password }) => async (dispatch) => {
     });
 
     dispatch(loadUser());
-    
   } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
       errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
     }
-    
+
     dispatch({
       type: REGISTER_FAIL,
     });
   }
 };
 
-
-
 // Login User
 export const login = (email, password) => async (dispatch) => {
-
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -91,43 +89,33 @@ export const login = (email, password) => async (dispatch) => {
     });
 
     dispatch(loadUser());
-  } 
-  catch (err) {
+  } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
       errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
     }
-     
+
     dispatch({
       type: LOGIN_FAIL,
     });
   }
 };
 
+export const googleAuth = (token) => async (dispatch) => {
+  try {
+    dispatch({
+      type: GOOGLE_AUTH,
+      payload: token,
+    });
+  } catch (error) {
+    dispatch({
+      type: AUTH_ERROR,
+    });
+  }
 
-export const googleAuth = () => async (dispatch) => {
-  
-  const res = await axios.get("/api/auth/movies")
-
-  console.log(res.data);
-  // try {
-  //   dispatch({
-  //     type: GOOGLE_AUTH,
-  //     payload: { user, token }
-  //   })
-    
-  // } catch (error) {
-  //   dispatch({
-  //     type: AUTH_ERROR,
-  //   });
-  // }
-
-  dispatch(loadUser())
-  
-}
-
- 
+  dispatch(loadUser());
+};
 
 // Logout
 export const logOut = () => (dispatch) => {

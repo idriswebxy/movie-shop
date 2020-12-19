@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Spinner from "../Spinner/Spinner";
-import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import LoadMoreBtn from "../../LoadMoreBtn/LoadMoreBtn";
 import { addToCart, loadCart } from "../../actions/cart";
 import {
   fetchItems,
@@ -10,7 +10,7 @@ import {
   loadChange,
   loadMoreItems,
 } from "../../actions/movie";
-import axios from "axios"
+import axios from "axios";
 import { API_URL, API_KEY } from "../../config";
 import "./MovieList.css";
 import { connect } from "react-redux";
@@ -20,25 +20,24 @@ import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdbreact";
 import "../../App.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { googleAuth } from "../../actions/auth";
-import setAuthToken from '../../utils/setAuthToken'
+import setAuthToken from "../../utils/setAuthToken";
 import { REACT_APP_SERVER_URL } from "../../config";
 
 const MovieList = ({
   addToCart,
   loadCart,
-  isLoading,
+  loading,
   movies,
   fetchItems,
   page,
   totalPages,
   loadMoreItems,
-  googleAuth
+  googleAuth,
 }) => {
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 
   let endpoint = "";
   const serverUrl = REACT_APP_SERVER_URL;
-
 
   useEffect(() => {
     if (movies.length <= 20) {
@@ -52,35 +51,28 @@ const MovieList = ({
     }
   }, []);
 
-  
   const callSecureApi = async () => {
     try {
       const token = await getAccessTokenSilently();
+      console.log("TOKEN ==> " + token);
 
-      const res = await axios.get(
-        `${serverUrl}/api/auth/movies`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await fetch(`${serverUrl}/api/auth/movies`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const responseData = await res.json();
-      console.log(responseData)
-
+      console.log("RES ==> " + responseData);
     } catch (error) {
-     console.error(error.message);
+      console.error(error.message);
     }
   };
 
-
-
-  if (isLoading) {
+  if (isLoading || loading) {
     return <Spinner />;
   }
 
- 
   const movieList = (
     <MDBContainer>
       <div className="rmdb-home">
@@ -104,8 +96,8 @@ const MovieList = ({
               );
             })}
           </MDBRow>
-          {isLoading ? <Spinner /> : null}
-          {page <= totalPages && !isLoading ? (
+          {loading || isLoading ? <Spinner /> : null}
+          {page <= totalPages && (!isLoading || loading) ? (
             <LoadMoreBtn
               text="Load More"
               onClick={() => loadMoreItems(endpoint, page)}
@@ -115,18 +107,17 @@ const MovieList = ({
       </div>
     </MDBContainer>
   );
-  
+
   return (
     <div>
       <SearchBar />
       {movieList}
-    <MDBBtn onClick={() => callSecureApi()}>TEST</MDBBtn>
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-  isLoading: state.movie.isLoading,
+  loading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
   movies: state.movie.movies,
   page: state.movie.moviePage,
@@ -143,5 +134,5 @@ export default connect(mapStateToProps, {
   fetchItems,
   loadChange,
   loadMoreItems,
-  googleAuth
+  googleAuth,
 })(MovieList);

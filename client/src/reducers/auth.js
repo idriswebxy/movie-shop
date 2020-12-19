@@ -53,7 +53,7 @@ export default function (state = initialState, action) {
         isLoading: true,  //TODO: temp test state
       };
     case GOOGLE_AUTH:
-      localStorage.setItem("gtoken", payload.token)
+      localStorage.setItem("auth0_token", payload.token)
       return {
         ...state,
         userInfo: payload.user,

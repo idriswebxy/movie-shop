@@ -1,14 +1,51 @@
 const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
-const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const auth = require("../../middleware/auth");
 require("dotenv").config();
 var secured = require("../../middleware/secured");
+const { checkJwt } = require("../../middleware/check-jwt");
 
+const User = require("../../models/User");
+
+
+
+router.post("/movies", checkJwt, async (req, res) => {
+  try {
+
+    const { name, email } = req.body;
+
+    let user = await User.findOne({
+      email,
+    });
+
+    if (user) {
+      res.status(400).json({
+        errors: [
+          {
+            msg: "User already exits!",
+          },
+        ],
+      });
+    }
+
+    user = new User({
+      name,
+      email,
+    });
+
+    await user.save();
+
+
+    
+    res.status(200).send('ALL good');
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 
 

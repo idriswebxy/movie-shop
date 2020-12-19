@@ -11,33 +11,27 @@ import {
   MDBBtn,
   MDBNavLink,
 } from "mdbreact";
+import GoogleButton from "react-google-button";
 import { connect } from "react-redux";
 import { login, googleAuth } from "../../actions/auth";
 import PropTypes from "prop-types";
 import { useAuth0 } from "@auth0/auth0-react";
-import axios from "axios";
 
-const Login = ({
-  login,
-  authenticated,
-  loading,
-  googleAuth
-}) => {
+const Login = ({ login, authenticated, loading, googleAuth }) => {
   const {
     isAuthenticated,
     logout,
-    loginWithRedirect
+    loginWithRedirect,
+    isLoading,
+    getAccessTokenSilently,
   } = useAuth0();
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-  }); 
+  });
 
   const { email, password } = formData;
-  const [isOpen, setIsOpen] = useState(false);
-  const history = useHistory();
-  const toggle = () => setIsOpen(!isOpen);
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -47,11 +41,11 @@ const Login = ({
     login(email, password);
   };
 
-  if (authenticated) {
+  if (authenticated || isAuthenticated) {
     return <Redirect to="/movies" />;
   }
 
-  if (loading) {
+  if (loading || isLoading) {
     return <Spinner />;
   }
 
@@ -75,7 +69,7 @@ const Login = ({
               />
               <MDBInput
                 label="Type your password"
-                icon="lock" 
+                icon="lock"
                 group
                 type="password"
                 validate
@@ -88,14 +82,7 @@ const Login = ({
                 <MDBBtn type="submit">Login</MDBBtn>
               </MDBCol>
               {!isAuthenticated ? (
-                <Button
-                  id="qsLoginBtn"
-                  color="primary"
-                  className="btn-margin"
-                  onClick={() => loginWithRedirect()}
-                >
-                  Sign in Google
-                </Button>
+                <GoogleButton onClick={() => loginWithRedirect()} />
               ) : (
                 <Button onClick={() => logout()}>Logout</Button>
               )}
