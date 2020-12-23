@@ -82,7 +82,7 @@ const TvShows = ({
 
 
 const mapStateToProps = (state) => ({
-  userId: state.auth.userInfo._id,
+  // userId: state.auth.userInfo._id,
   isLoading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
   tvShows: state.movie.tvShows,

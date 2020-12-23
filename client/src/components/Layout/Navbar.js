@@ -14,56 +14,55 @@ import {
   MDBNavbarNav,
   MDBBtn,
 } from "mdbreact";
-import { logOut, googleAuth } from "../../actions/auth";
+import { logOut, loadUser, googleAuth } from "../../actions/auth";
 import { loadCart } from "../../actions/cart";
 import "../../App.css";
 import Spinner from "../Spinner/Spinner";
 import { useAuth0 } from "@auth0/auth0-react";
 import SearchPage from "../Search/Search";
 import { REACT_APP_SERVER_URL } from "../../config";
-import { GOOGLE_AUTH } from "../../actions/types";
+import { LOGIN_SUCCESS, USER_LOADED } from "../../actions/types";
 import store from "../../store";
+import axios from "axios";
 
 const Navbar = ({
   auth: { authenticated, isLoading, userInfo },
   logOut,
   cart,
-  googleAuth,
   dispatch
 }) => {
+
+  const [authUser, setAuthUser] = useState(null);
+
+  
+
   const { user, logout, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
-  let name = null;
+
+  let accountName = null;
   let serverUrl = REACT_APP_SERVER_URL;
 
+
   if (isAuthenticated) {
-    name = user.name;
+    accountName = user.name;
   } else {
-    name = userInfo.name;
+    accountName = userInfo.name;
   }
   
-  const callSecureApi = async (user) => {
+  const googleAuth = async (user) => {
     try {
       const token = await getAccessTokenSilently();
-      console.log("TOKEN ==> " + token);
-      console.log(user);
-      
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      
-      store.store.dispatch({ type: GOOGLE_AUTH, payload: { user, token } });
-      // const res = await axios.post(`${serverUrl}/api/user/movies`, user, config);
-      // console.log("RES ==> " + res.data);
+  
+      localStorage.setItem("auth0_token", token)
+      setAuthUser(user)
+
     } catch (error) {
       console.error(error.message);
     }
   };
 
   useEffect(() => {
-    callSecureApi(user)
+    googleAuth(user)
   }, [])
 
   
@@ -92,7 +91,7 @@ const Navbar = ({
       </MDBNavbarBrand>
       <MDBNavbarToggler onClick={onClick} />
       <MDBCollapse isOpen={collapse} navbar>
-        <MDBIcon icon="user-alt" /> Welcome {name + "!"}
+        <MDBIcon icon="user-alt" /> Welcome {accountName + "!"}
         <MDBNavbarNav right>
           <MDBNavItem active>
             <MDBNavLink to="/tv_shows">

@@ -69,6 +69,7 @@ export const addToCartTvShow = (item) => async (dispatch) => {
 
 export const loadCart = () => async (dispatch) => {
   try {
+
     const res = await axios.get("/api/cart");
 
     dispatch({
@@ -120,5 +121,35 @@ export const getPriceTotal = (id) => async (dispatch) => {
     });
   } catch (error) {
     console.error(error)
+  }
+};
+
+
+
+export const auth0_addToCart = (movie) => async (dispatch) => {
+
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  // movie.price = 2.99;
+  // movie.index = index
+
+  const body = JSON.stringify(movie);
+
+  try {
+    const res = await axios.post(`/api/cart`, body, config);
+
+    dispatch({
+      type: AUTH0_ADD_TO_CART,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: CART_ERROR,
+    });
   }
 };

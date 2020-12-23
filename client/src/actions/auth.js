@@ -13,24 +13,20 @@ import {
   GOOGLE_AUTH,
 } from "./types";
 
+
 // Load user
-export const loadUser = (isAuthenticated) => async (dispatch) => {
+export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
 
+  const res = await axios.get("/api/user");
+
   try {
-    if (isAuthenticated) {
-      dispatch({
-        type: USER_LOADED,
-      });
-    } else {
-      const res = await axios.get("/api/user");
-      dispatch({
-        type: USER_LOADED,
-        payload: res.data,
-      });
-    }
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data,
+    });
   } catch (error) {
     dispatch({
       type: AUTH_ERROR,
@@ -121,3 +117,25 @@ export const googleAuth = (token) => async (dispatch) => {
 export const logOut = () => (dispatch) => {
   dispatch({ type: LOGOUT });
 };
+
+
+
+
+// Load user
+export const auth0_loadUser = (user) => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+
+  try {
+    dispatch({
+      type: AUTH0_USER_LOADED,
+      payload: user,
+    });
+  } catch (error) {
+    dispatch({
+      type: AUTH_ERROR,
+    });
+  }
+};
+

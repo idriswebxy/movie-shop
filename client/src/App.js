@@ -29,11 +29,19 @@ if (localStorage.token) {
 }
 
 const App = ({}) => {
-  const { user, isLoading, isAuthenticated, getAccessTokenSilently } = useAuth0();
-
+  const {
+    user,
+    isLoading,
+    isAuthenticated,
+    getAccessTokenSilently,
+  } = useAuth0();
 
   useEffect(() => {
-    store.store.dispatch(loadUser(isAuthenticated));
+    if (isAuthenticated) {
+      store.store.dispatch(auth0_loadUser());
+    } else {
+      store.store.dispatch(loadUser());
+    }
   }, []);
 
   if (isLoading) {
@@ -49,7 +57,12 @@ const App = ({}) => {
           <Route exact path="/" component={Landing} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <PrivateRoute exact path="/movies" store={store} component={MovieList} />
+          <PrivateRoute
+            exact
+            path="/movies"
+            store={store}
+            component={MovieList}
+          />
           <PrivateRoute path="/tv_shows" component={TvShows} />
           <PrivateRoute path="/movieInfo/:id" component={MovieDetails} />
           <PrivateRoute path="/show_details" component={TvShowDetails} />

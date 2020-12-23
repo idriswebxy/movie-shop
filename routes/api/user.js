@@ -10,42 +10,90 @@ var secured = require("../../middleware/secured");
 const { checkJwt } = require("../../middleware/check-jwt");
 
 const User = require("../../models/User");
+const Auth0_User = require("../../models/Auth0.User");
 
 
+// // create auth0 user
+// router.post("/auth0", checkJwt, async (req, res) => {
 
-router.post("/movies", checkJwt, async (req, res) => {
-  try {
+//   try {
 
-    const { name, email } = req.body;
+//     const errors = validationResult(req);
 
-    let user = await User.findOne({
-      email,
-    });
 
-    if (user) {
-      res.status(400).json({
-        errors: [
-          {
-            msg: "User already exits!",
-          },
-        ],
-      });
-    }
+//     if (!errors.isEmpty()) {
+//       return res.status(400).json({
+//         errors: errors.array(),
+//       });
+//     }
 
-    user = new User({
-      name,
-      email,
-    });
+//     const { name, email } = req.body;
 
-    await user.save();
+//     let user = await Auth0_User.findOne({
+//       email,
+//     });
 
+//     console.log(user)
+
+//     if (user) {
+//       res.status(400).json({
+//         errors: [
+//           {
+//             msg: "User already exits!",
+//           },
+//         ],
+//       });
+//     }
+
+//     auth0_user = new Auth0_User({
+//       name,
+//       email,
+//     });
+
+//     await auth0_user.save();
+
+//     const payload = {
+//       user: {
+//         id: user.id,
+//       },
+//     };
+
+//     jwt.sign(
+//       payload,
+//       process.env.JWT_SECRET,
+//       {
+//         expiresIn: 360000,
+//       },
+//       (err, token) => {
+//         if (err) throw err;
+//         res.json({
+//           token,
+//         });
+//       }
+//     );
 
     
-    res.status(200).send('ALL good');
-  } catch (err) {
-    console.error(err);
-  }
-});
+//   } catch (err) {
+//     console.error(err);
+//   }
+// });
+
+
+
+// router.get('/auth0-get', async (req, res) => {
+
+//   try {
+
+//     console.log("GET auth0==> " + req.user)
+//     const user = await Auth0_User.findById(req.user.id).select("-email");
+//     res.json(user);
+
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+
+// })
 
 
 

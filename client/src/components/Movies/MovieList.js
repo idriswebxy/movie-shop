@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Spinner from "../Spinner/Spinner";
-import LoadMoreBtn from "../../LoadMoreBtn/LoadMoreBtn";
+import LoadMoreBtn from "../../components/LoadMoreBtn/LoadMoreBtn";
 import { addToCart, loadCart } from "../../actions/cart";
 import {
   fetchItems,
@@ -44,31 +44,12 @@ const MovieList = ({
       endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
       fetchItems(endpoint);
       loadCart();
-      // callSecureApi();
-      // googleAuth()
     } else {
       loadCart();
     }
   }, []);
 
-  const callSecureApi = async () => {
-    try {
-      const token = await getAccessTokenSilently();
-      console.log("TOKEN ==> " + token);
-
-      const res = await fetch(`${serverUrl}/api/auth/movies`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const responseData = await res.json();
-      console.log("RES ==> " + responseData);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-
+ 
   if (isLoading || loading) {
     return <Spinner />;
   }

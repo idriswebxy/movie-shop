@@ -41,7 +41,6 @@ const Landing = ({ login, authenticated }) => {
     return <Spinner />;
   }
 
-  console.log(authenticated)
 
   return (
     <div className="app-main">

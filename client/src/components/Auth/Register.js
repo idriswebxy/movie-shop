@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import GoogleLogin from "react-google-login";
+// import GoogleLogin from "react-google-login";
 import PropTypes from "prop-types";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";

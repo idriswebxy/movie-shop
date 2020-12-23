@@ -98,7 +98,7 @@ const mapStateToProps = (state) => ({
   cart: state.cart.cart,
   total: state.cart.totalPrice,
   loading: state.cart.loading,
-  userId: state.auth.userInfo._id,
+  // userId: state.auth.userInfo._id,
 });
 
 export default connect(mapStateToProps, {

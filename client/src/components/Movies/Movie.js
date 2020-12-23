@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getMovie, getMovieIds } from "../../actions/movie";
@@ -16,6 +16,9 @@ import {
 } from "mdbreact";
 import moment from "moment";
 import MovieDetails from "./MovieDetails";
+import auth from "../../reducers/auth";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const Movie = ({
   id,
@@ -29,6 +32,10 @@ const Movie = ({
   title,
   index,
 }) => {
+
+  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+
+
   let movieLink = (
     <MDBContainer>
       <MDBRow>
@@ -44,7 +51,7 @@ const Movie = ({
             <h6>{moment(releaseDate).format("LL")}</h6>
             <h5>${price}</h5>
 
-            <MDBBtn onClick={() => addToCart(movieObj)}>
+            <MDBBtn onClick={isAuthenticated ? () => auth0_addToCart(movieObj) : () => addToCart(movieObj)}>
               Add To Cart <MDBIcon icon="cart-plus" />
             </MDBBtn>
           </div>
