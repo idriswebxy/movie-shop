@@ -21,51 +21,43 @@ import Spinner from "../Spinner/Spinner";
 import { useAuth0 } from "@auth0/auth0-react";
 import SearchPage from "../Search/Search";
 import { REACT_APP_SERVER_URL } from "../../config";
-import { LOGIN_SUCCESS, USER_LOADED } from "../../actions/types";
+import { LOGIN_SUCCESS, USER_LOADED, GOOGLE_AUTH } from "../../actions/types";
 import store from "../../store";
 import axios from "axios";
 
 const Navbar = ({
-  auth: { authenticated, isLoading, userInfo },
+  auth: { authenticated, userInfo },
   logOut,
   cart,
-  dispatch
+  dispatch,
+  // googleAuth
 }) => {
-
   const [authUser, setAuthUser] = useState(null);
 
-  
-
-  const { user, logout, isAuthenticated, getAccessTokenSilently } = useAuth0();
-
+  const {
+    user,
+    logout,
+    isLoading,
+    isAuthenticated,
+    getAccessTokenSilently,
+  } = useAuth0();
 
   let accountName = null;
   let serverUrl = REACT_APP_SERVER_URL;
 
-
-  if (isAuthenticated) {
-    accountName = user.name;
-  } else {
-    accountName = userInfo.name;
-  }
-  
   const googleAuth = async (user) => {
     try {
       const token = await getAccessTokenSilently();
-  
-      localStorage.setItem("auth0_token", token)
-      setAuthUser(user)
-
+      store.store.dispatch({ type: GOOGLE_AUTH, payload: { user, token } });
     } catch (error) {
       console.error(error.message);
     }
   };
 
   useEffect(() => {
-    googleAuth(user)
-  }, [])
+    googleAuth(user);
+  }, [isAuthenticated]);
 
-  
   const [collapse, setCollapse] = useState(false);
   const navColor = { backgroundColor: "#00CED1" };
   const container = { height: 1300 };
@@ -91,7 +83,10 @@ const Navbar = ({
       </MDBNavbarBrand>
       <MDBNavbarToggler onClick={onClick} />
       <MDBCollapse isOpen={collapse} navbar>
-        <MDBIcon icon="user-alt" /> Welcome {accountName + "!"}
+        <MDBIcon icon="user-alt" /> Welcome{" "}
+        {isAuthenticated
+          ? (accountName = user.name)
+          : (accountName = userInfo.name + "!")}
         <MDBNavbarNav right>
           <MDBNavItem active>
             <MDBNavLink to="/tv_shows">
@@ -153,23 +148,16 @@ const Navbar = ({
     </MDBNavbar>
   );
 
-  return (
-    <div>
-      {authenticated == true || isAuthenticated == true
-        ? authLinks
-        : guestLinks}
-    </div>
-  );
+  return <div>{authenticated || isAuthenticated ? authLinks : guestLinks}</div>;
 };
 
 // const mapDispatchToProps = (dispatch) => {
 //   callSecureApi: dispatch({ type: GOOGLE_AUTH })
 // }
 
-
 const mapStateToProps = (state) => ({
   auth: state.auth,
   cart: state.cart.cart,
 });
 
-export default connect(mapStateToProps, { logOut, googleAuth })(Navbar);
+export default connect(mapStateToProps, { logOut })(Navbar);

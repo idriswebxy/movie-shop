@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getMovie, getMovieIds } from "../../actions/movie";
 import Spinner from "../Spinner/Spinner";
-import { addToCart, loadCart } from "../../actions/cart";
+import { addToCart, loadCart, auth0_addToCart } from "../../actions/cart";
 import {
   MDBView,
   MDBContainer,
@@ -19,7 +19,6 @@ import MovieDetails from "./MovieDetails";
 import auth from "../../reducers/auth";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
 const Movie = ({
   id,
   image,
@@ -31,10 +30,9 @@ const Movie = ({
   releaseDate,
   title,
   index,
+  auth0_addToCart,
 }) => {
-
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
-
+  const { isAuthenticated } = useAuth0();
 
   let movieLink = (
     <MDBContainer>
@@ -51,7 +49,13 @@ const Movie = ({
             <h6>{moment(releaseDate).format("LL")}</h6>
             <h5>${price}</h5>
 
-            <MDBBtn onClick={isAuthenticated ? () => auth0_addToCart(movieObj) : () => addToCart(movieObj)}>
+            <MDBBtn
+              onClick={
+                isAuthenticated
+                  ? () => auth0_addToCart(movieObj)
+                  : () => addToCart(movieObj)
+              }
+            >
               Add To Cart <MDBIcon icon="cart-plus" />
             </MDBBtn>
           </div>
@@ -72,7 +76,10 @@ const Movie = ({
 const mapStateToProps = (state) => ({
   isLoading: state.movie.isLoading,
   // userId: state.auth.userInfo._id,
-
 });
 
-export default connect(mapStateToProps, { getMovie, addToCart })(Movie);
+export default connect(mapStateToProps, {
+  getMovie,
+  addToCart,
+  auth0_addToCart,
+})(Movie);

@@ -12,6 +12,9 @@ import {
 } from "mdbreact";
 import { deleteItem, loadCart, getPriceTotal } from "../../actions/cart";
 import Spinner from "../Spinner/Spinner";
+import { useAuth0 } from "@auth0/auth0-react";
+import store from "../../store";
+import { LOAD_CART, PRICE_TOTAL } from "../../actions/types";
 
 const Cart = ({
   cart,
@@ -23,14 +26,19 @@ const Cart = ({
   price = 2.99,
   userId,
 }) => {
+  const { isAuthenticated, isLoading } = useAuth0();
 
-  
   useEffect(() => {
-    loadCart();
-    getPriceTotal(userId);
+    if (isAuthenticated) {
+      store.store.dispatch({ type: LOAD_CART, payload: cart });
+      store.store.dispatch({ type: PRICE_TOTAL })
+    } else {
+      loadCart();
+      getPriceTotal(userId);
+    }
   }, [loading, total]);
 
-  if (loading) {
+  if (loading || isLoading) {
     return <Spinner />;
   }
 
@@ -47,10 +55,10 @@ const Cart = ({
           {cart.map((movie, index) => (
             <tr key={index}>
               <td>
-                <Img 
+                <Img
                   src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
                 />
-                <h5 style={{ margin: "10px"}}>
+                <h5 style={{ margin: "10px" }}>
                   {!movie.original_title ? movie.name : movie.original_title}
                 </h5>
               </td>
@@ -77,7 +85,6 @@ const Cart = ({
       </MDBNavLink>
     </div>
   );
-
 
   return (
     <MDBContainer>

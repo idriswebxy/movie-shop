@@ -79,6 +79,7 @@ export const login = (email, password) => async (dispatch) => {
   try {
     const res = await axios.post("/api/auth", body, config);
 
+    // token dispatch 
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
@@ -98,11 +99,11 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-export const googleAuth = (token) => async (dispatch) => {
+export const googleAuth = (user) => async (dispatch) => {
   try {
     dispatch({
       type: GOOGLE_AUTH,
-      payload: token,
+      payload: user,
     });
   } catch (error) {
     dispatch({
@@ -110,7 +111,7 @@ export const googleAuth = (token) => async (dispatch) => {
     });
   }
 
-  dispatch(loadUser());
+  // dispatch(loadUser());
 };
 
 // Logout
@@ -121,21 +122,21 @@ export const logOut = () => (dispatch) => {
 
 
 
-// Load user
-export const auth0_loadUser = (user) => async (dispatch) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
-  }
+// // Load user
+// export const auth0_loadUser = (user) => async (dispatch) => {
+//   if (localStorage.token) {
+//     setAuthToken(localStorage.token);
+//   }
 
-  try {
-    dispatch({
-      type: AUTH0_USER_LOADED,
-      payload: user,
-    });
-  } catch (error) {
-    dispatch({
-      type: AUTH_ERROR,
-    });
-  }
-};
+//   try {
+//     dispatch({
+//       type: AUTH0_USER_LOADED,
+//       payload: user,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: AUTH_ERROR,
+//     });
+//   }
+// };
 

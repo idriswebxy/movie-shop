@@ -39,6 +39,7 @@ const MovieList = ({
   let endpoint = "";
   const serverUrl = REACT_APP_SERVER_URL;
 
+  
   useEffect(() => {
     if (movies.length <= 20) {
       endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
@@ -49,21 +50,24 @@ const MovieList = ({
     }
   }, []);
 
+  
+
  
   if (isLoading || loading) {
     return <Spinner />;
   }
+
+
 
   const movieList = (
     <MDBContainer>
       <div className="rmdb-home">
         <div className="rmdb-home-grid">
           <MDBRow>
-            {movies.map((movie, index) => {
+            {movies.map((movie, key) => {
               return (
-                <MDBCol md="3">
+                <MDBCol key={key} md="3">
                   <Movie
-                    index={index}
                     id={movie.id}
                     addToCart={addToCart}
                     title={movie.title}

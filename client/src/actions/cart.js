@@ -129,23 +129,11 @@ export const getPriceTotal = (id) => async (dispatch) => {
 export const auth0_addToCart = (movie) => async (dispatch) => {
 
 
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
-  // movie.price = 2.99;
-  // movie.index = index
-
-  const body = JSON.stringify(movie);
-
   try {
-    const res = await axios.post(`/api/cart`, body, config);
 
     dispatch({
-      type: AUTH0_ADD_TO_CART,
-      payload: res.data,
+      type: ADD_TO_CART,
+      payload: movie,
     });
   } catch (err) {
     dispatch({

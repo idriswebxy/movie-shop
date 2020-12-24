@@ -39,10 +39,10 @@ export default function (state = initialState, action) {
         totalPrice: state.totalPrice - payload.price,
       };
     case CART_ERROR:
-    // return {
-    //   ...state,
-    //   cart: state.cart
-    // }
+    return {
+      ...state,
+      cart: state.cart
+    }
 
     default:
       return state;
