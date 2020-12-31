@@ -28,12 +28,12 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-const App = ({}) => {
+const App = ({ authenticated }) => {
   const { user, isLoading, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
 
   useEffect(() => {
-    store.store.dispatch(loadUser());
+    store.store.dispatch(loadUser(isAuthenticated || authenticated));
   }, []);
 
   if (isLoading) {
@@ -61,6 +61,8 @@ const App = ({}) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  authenticated: state.auth.authenticated
+});
 
 export default connect(mapStateToProps)(App);

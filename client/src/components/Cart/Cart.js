@@ -13,8 +13,6 @@ import {
 import { deleteItem, loadCart, getPriceTotal } from "../../actions/cart";
 import Spinner from "../Spinner/Spinner";
 import { useAuth0 } from "@auth0/auth0-react";
-import store from "../../store";
-import { LOAD_CART, PRICE_TOTAL } from "../../actions/types";
 
 const Cart = ({
   cart,
@@ -26,16 +24,11 @@ const Cart = ({
   price = 2.99,
   userId,
 }) => {
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { isLoading } = useAuth0();
 
   useEffect(() => {
-    if (isAuthenticated) {
-      store.store.dispatch({ type: LOAD_CART, payload: cart });
-      store.store.dispatch({ type: PRICE_TOTAL })
-    } else {
-      loadCart();
-      getPriceTotal(userId);
-    }
+    loadCart();
+    getPriceTotal(userId);
   }, [loading, total]);
 
   if (loading || isLoading) {

@@ -48,7 +48,19 @@ const Navbar = ({
   const googleAuth = async (user) => {
     try {
       const token = await getAccessTokenSilently();
-      store.store.dispatch({ type: GOOGLE_AUTH, payload: { user, token } });
+
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+
+      let res = await axios.post("/api/auth/auth0", user, config);
+
+      console.log(res);
+
+      store.store.dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+
+
+      console.log(res);
     } catch (error) {
       console.error(error.message);
     }
@@ -57,6 +69,10 @@ const Navbar = ({
   useEffect(() => {
     googleAuth(user);
   }, [isAuthenticated]);
+
+  // if (isAuthenticated) {
+  //   googleAuth(user);
+  // }
 
   const [collapse, setCollapse] = useState(false);
   const navColor = { backgroundColor: "#00CED1" };
@@ -160,4 +176,4 @@ const mapStateToProps = (state) => ({
   cart: state.cart.cart,
 });
 
-export default connect(mapStateToProps, { logOut })(Navbar);
+export default connect(mapStateToProps, { logOut, googleAuth })(Navbar);

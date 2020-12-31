@@ -10,6 +10,7 @@ import {
   loadChange,
   loadMoreItems,
 } from "../../actions/movie";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 import { API_URL, API_KEY } from "../../config";
 import "./MovieList.css";
@@ -33,13 +34,18 @@ const MovieList = ({
   totalPages,
   loadMoreItems,
   googleAuth,
+  authenticated
 }) => {
-  const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+  const {
+    user,
+    isAuthenticated,
+    isLoading,
+    getAccessTokenSilently,
+  } = useAuth0();
 
   let endpoint = "";
   const serverUrl = REACT_APP_SERVER_URL;
 
-  
   useEffect(() => {
     if (movies.length <= 20) {
       endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
@@ -50,9 +56,6 @@ const MovieList = ({
     }
   }, []);
 
-  
-
- 
   if (isLoading || loading) {
     return <Spinner />;
   }

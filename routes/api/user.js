@@ -13,87 +13,22 @@ const User = require("../../models/User");
 const Auth0_User = require("../../models/Auth0.User");
 
 
-// // create auth0 user
-// router.post("/auth0", checkJwt, async (req, res) => {
-
-//   try {
-
-//     const errors = validationResult(req);
 
 
-//     if (!errors.isEmpty()) {
-//       return res.status(400).json({
-//         errors: errors.array(),
-//       });
-//     }
+router.get('/auth0', async (req, res) => {
 
-//     const { name, email } = req.body;
+  try {
 
-//     let user = await Auth0_User.findOne({
-//       email,
-//     });
+    console.log("GET auth0==> " + req.user)
+    const user = await Auth0_User.findById(req.user.id).select("-email");
+    res.json(user);
 
-//     console.log(user)
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
 
-//     if (user) {
-//       res.status(400).json({
-//         errors: [
-//           {
-//             msg: "User already exits!",
-//           },
-//         ],
-//       });
-//     }
-
-//     auth0_user = new Auth0_User({
-//       name,
-//       email,
-//     });
-
-//     await auth0_user.save();
-
-//     const payload = {
-//       user: {
-//         id: user.id,
-//       },
-//     };
-
-//     jwt.sign(
-//       payload,
-//       process.env.JWT_SECRET,
-//       {
-//         expiresIn: 360000,
-//       },
-//       (err, token) => {
-//         if (err) throw err;
-//         res.json({
-//           token,
-//         });
-//       }
-//     );
-
-    
-//   } catch (err) {
-//     console.error(err);
-//   }
-// });
-
-
-
-// router.get('/auth0-get', async (req, res) => {
-
-//   try {
-
-//     console.log("GET auth0==> " + req.user)
-//     const user = await Auth0_User.findById(req.user.id).select("-email");
-//     res.json(user);
-
-//   } catch (err) {
-//     console.error(err.message);
-//     res.status(500).send("Server Error");
-//   }
-
-// })
+})
 
 
 
