@@ -43,28 +43,15 @@ router.post("/", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
 
-    if (user) {
-      
-      const newCart = new Cart({
-        user: user.id,
-        movieId: req.body.id,
-        movie: req.body,
-        price: 2.99,
-      });
+    const newCart = new Cart({
+      user: user.id,
+      movieId: req.body.id,
+      movie: req.body,
+      price: 2.99,
+    });
 
-      await newCart.save();
-
-    } else {
-      const user_auth0 = await Auth0_User.findById(req.user.id);
-
-      const newCart = new Cart({
-        user: user.id,
-        movieId: req.body.id,
-        movie: req.body,
-        price: 2.99,
-      });
-    }
-
+    console.log(newCart);
+    await newCart.save();
     res.json(newCart);
   } catch (err) {
     console.error(err.message);

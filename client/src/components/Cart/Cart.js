@@ -29,7 +29,7 @@ const Cart = ({
   useEffect(() => {
     loadCart();
     getPriceTotal(userId);
-  }, [loading, total]);
+  }, [total]);
 
   if (loading || isLoading) {
     return <Spinner />;

@@ -22,7 +22,6 @@ import "../../App.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { googleAuth } from "../../actions/auth";
 import setAuthToken from "../../utils/setAuthToken";
-import { REACT_APP_SERVER_URL } from "../../config";
 
 const MovieList = ({
   addToCart,
@@ -44,7 +43,6 @@ const MovieList = ({
   } = useAuth0();
 
   let endpoint = "";
-  const serverUrl = REACT_APP_SERVER_URL;
 
   useEffect(() => {
     if (movies.length <= 20) {

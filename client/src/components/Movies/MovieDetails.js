@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { getMovie, loadMovieDetail, getMovieVideo } from "../../actions/movie";
 import { addToCart, loadCart } from "../../actions/cart";
 import { MDBBtn, MDBIcon, MDBContainer, MDBRow, MDBCol } from "mdbreact";
-import { loadMovieDetails, setMovie } from "../../actions/movie";
-// import SpinnerPage from "../Layout/SpinnerPage";
+import { loadMovieDetails, setMovie, getMovie } from "../../actions/movie";
+import SpinnerPage from "../Spinner/Spinner";
 import ReactPlayer from "react-player/youtube";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
@@ -33,23 +32,24 @@ const MovieDetails = ({
   withRouter,
 }) => {
   const [videoKey, setVideoKey] = useState("");
-  const [movieID, setMovieID] = useState(null);
+  // const [movieID, setMovieID] = useState(null);
+  let movieID = null;
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/movie/${movie.id ? movie.id : movieID}/videos?api_key=${API_KEY}&language=en-US`
     )
       .then((res) => res.json())
       .then((data) => setVideoKey(data.results[0].key));
     loadCart();
+    movieID = movie.id;
     window.scrollTo(0, 0);
 
-    
   }, []);
 
-  // if (isLoading) {
-  //   return <SpinnerPage />;
-  // }
+  if (isLoading) {
+    return <SpinnerPage />;
+  }
 
   let movieDetails = (
     <div
