@@ -32,6 +32,7 @@ const MovieList = ({
   page,
   totalPages,
   loadMoreItems,
+  authenticated
 }) => {
 
 
@@ -54,6 +55,10 @@ const MovieList = ({
       loadCart();
     }
   }, []);
+
+  if (!authenticated) {
+    return <Redirect to="/login" />
+  }
 
 
   if (isLoading || loading) {

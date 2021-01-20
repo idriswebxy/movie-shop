@@ -11,10 +11,10 @@ router.get("/total/:id", auth, async (req, res) => {
   try {
     let sum = 0.0;
 
-    const cartTotal = await Cart.find({ user: req.params.id });
+    const usersCart = await Cart.find({ user: req.params.id });
 
-    cartTotal.map((m) => {
-      sum = m.price + sum;
+    usersCart.map((movie) => {
+      sum = movie.price + sum;
     });
 
     res.json(sum);

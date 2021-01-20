@@ -112,6 +112,7 @@ export const deleteItem = (id, index, price) => async (dispatch) => {
 
 export const getPriceTotal = (id) => async (dispatch) => {
 
+  console.log(id)
   try {
     const res = await axios.get(`/api/cart/total/${id}`);
 

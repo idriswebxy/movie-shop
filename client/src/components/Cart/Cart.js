@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Img from "react-image";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 import {
   MDBContainer,
   MDBBtn,
@@ -23,6 +24,7 @@ const Cart = ({
   deleteItem,
   price = 2.99,
   userId,
+  authenticated
 }) => {
   const { isLoading } = useAuth0();
 
@@ -31,9 +33,15 @@ const Cart = ({
     getPriceTotal(userId);
   }, [total]);
 
+  if (!authenticated) {
+    return <Redirect to="/login" />
+  }
+
+  
   if (loading || isLoading) {
     return <Spinner />;
   }
+
 
   let cartItems = (
     <div>
@@ -98,7 +106,8 @@ const mapStateToProps = (state) => ({
   cart: state.cart.cart,
   total: state.cart.totalPrice,
   loading: state.cart.loading,
-  // userId: state.auth.userInfo._id,
+  userId: state.auth.userInfo._id,
+  authenticated: state.auth.authenticated
 });
 
 export default connect(mapStateToProps, {
