@@ -13,17 +13,16 @@ import {
 } from "mdbreact";
 import GoogleButton from "react-google-button";
 import { connect } from "react-redux";
-import { login, googleAuth } from "../../actions/auth";
+import { login } from "../../actions/auth";
 import PropTypes from "prop-types";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const Login = ({ login, authenticated, loading, googleAuth }) => {
+const Login = ({ login, authenticated, loading }) => {
   const {
     isAuthenticated,
     logout,
     loginWithRedirect,
     isLoading,
-    getAccessTokenSilently,
   } = useAuth0();
 
   const [formData, setFormData] = useState({
@@ -105,4 +104,4 @@ const mapStateToProps = (state) => ({
   loading: state.auth.loading,
 });
 
-export default connect(mapStateToProps, { login, googleAuth })(Login);
+export default connect(mapStateToProps, { login })(Login);

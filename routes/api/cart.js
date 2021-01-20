@@ -3,8 +3,8 @@ const router = express.Router();
 
 const Cart = require("../../models/Cart");
 const User = require("../../models/User");
-const Auth0_User = require("../../models/Auth0.User");
 const auth = require("../../middleware/auth");
+const Auth0_User = require("../../models/Auth0.User");
 
 // returns total price in cart
 router.get("/total/:id", auth, async (req, res) => {
@@ -24,17 +24,20 @@ router.get("/total/:id", auth, async (req, res) => {
   }
 });
 
+
 // Get users cart
 router.get("/", auth, async (req, res) => {
   try {
     const items = await Cart.find({ user: req.user.id });
 
-    res.json(items.map((item) => item.movie));
+    res.json(items.map((item) => item.movie).reverse());
+
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
 });
+
 
 
 

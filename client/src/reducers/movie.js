@@ -38,6 +38,7 @@ const initialState = {
   moviePage: 1,
   totalPages: 0,
   tvShowPage: 1,
+  totalShowPages: 0,
   movieIds: [],
   error: null,
 };
@@ -105,7 +106,9 @@ export default function (state = initialState, action) {
     case SET_TVSHOWS:
       return {
         ...state,
-        tvShows: payload,
+        tvShows: [...state.tvShows, ...payload.results],
+        totalShowPages: payload.total_pages, 
+        tvShowPage: payload.page,
         isLoading: false,
       };
     case SET_GENRE_ID:

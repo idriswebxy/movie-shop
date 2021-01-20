@@ -49,13 +49,7 @@ const Movie = ({
             <h6>{moment(releaseDate).format("LL")}</h6>
             <h5>${price}</h5>
 
-            <MDBBtn
-              onClick={
-                isAuthenticated
-                  ? () => auth0_addToCart(movieObj)
-                  : () => addToCart(movieObj)
-              }
-            >
+            <MDBBtn onClick={() => addToCart(movieObj)}>
               Add To Cart <MDBIcon icon="cart-plus" />
             </MDBBtn>
           </div>

@@ -14,28 +14,20 @@ import {
 } from "./types";
 
 // Load user
-export const loadUser = (authStatus) => async (dispatch) => {
+export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
 
-  // check for in-app login
-  const res = await axios.get("/api/user");
-
+  
   try {
-    if (!authStatus) {
-      dispatch({
-        type: USER_LOADED,
-        payload: res.data,
-      });
-    } else {
-      // auth0 login
-      const res = await axios.get("/api/user/auth0");
-      dispatch({
-        type: USER_LOADED,
-        payload: res.data,
-      });
-    }
+    const res = await axios.get("/api/user");
+
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data
+    })
+
   } catch (error) {
     dispatch({
       type: AUTH_ERROR,
@@ -61,7 +53,7 @@ export const register = ({ name, email, password }) => async (dispatch) => {
       payload: res.data,
     });
 
-    dispatch(loadUser(false));
+    dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -96,7 +88,7 @@ export const login = (email, password) => async (dispatch) => {
       payload: res.data,
     });
 
-    dispatch(loadUser(false));
+    dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -110,40 +102,9 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-export const googleAuth = (user) => async (dispatch) => {
-  try {
-    dispatch({
-      type: GOOGLE_AUTH,
-      payload: user,
-    });
-  } catch (error) {
-    dispatch({
-      type: AUTH_ERROR,
-    });
-  }
-
-  // dispatch(loadUser());
-};
 
 // Logout
 export const logOut = () => (dispatch) => {
   dispatch({ type: LOGOUT });
 };
 
-// // Load user
-// export const auth0_loadUser = (user) => async (dispatch) => {
-//   if (localStorage.token) {
-//     setAuthToken(localStorage.token);
-//   }
-
-//   try {
-//     dispatch({
-//       type: AUTH0_USER_LOADED,
-//       payload: user,
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: AUTH_ERROR,
-//     });
-//   }
-// };

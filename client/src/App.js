@@ -29,12 +29,41 @@ if (localStorage.token) {
 }
 
 const App = ({ authenticated }) => {
-  const { user, isLoading, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const {
+    user,
+    isAuthenticated,
+    isLoading,
+    getAccessTokenSilently,
+  } = useAuth0();
 
+  // const loadAuthData = async () => {
+  //   try {
+  //     const token = await getAccessTokenSilently().then((t) => console.log(t));
+  //     console.log(token);
+  //     setAuthToken(token);
+  //     return token;
+  //   } catch (error) {
+  //     console.error("GoogleAuthFunc => " + error.message);
+  //   }
+  // };
 
   useEffect(() => {
-    store.store.dispatch(loadUser(isAuthenticated || authenticated));
+    store.store.dispatch(loadUser());
+    // loadAuthData()
   }, []);
+
+
+  // useEffect(() => {
+  //   try {
+  //     (async () => {
+  //       const token = await getAccessTokenSilently();
+  //       console.log(token);
+  //     })();
+      
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }, [getAccessTokenSilently]);
 
   if (isLoading) {
     return <Spinner />;
@@ -49,7 +78,7 @@ const App = ({ authenticated }) => {
           <Route exact path="/" component={Landing} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <PrivateRoute exact path="/movies" store={store} component={MovieList} />
+          <PrivateRoute exact path="/movies" component={MovieList} />
           <PrivateRoute path="/tv_shows" component={TvShows} />
           <PrivateRoute path="/movieInfo/:id" component={MovieDetails} />
           <PrivateRoute path="/show_details" component={TvShowDetails} />
@@ -62,7 +91,7 @@ const App = ({ authenticated }) => {
 };
 
 const mapStateToProps = (state) => ({
-  authenticated: state.auth.authenticated
+  authenticated: state.auth.authenticated,
 });
 
 export default connect(mapStateToProps)(App);

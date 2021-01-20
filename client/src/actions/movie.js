@@ -20,10 +20,7 @@ import {
 } from "../actions/types";
 import axios from "axios";
 import store from "../store";
-import {
-  API_URL,
-  API_KEY
-} from "../config.js";
+import { API_URL, API_KEY } from "../config.js";
 
 // let movieStore = store.store.getState().movie;
 
@@ -74,7 +71,6 @@ export const getMovie = (id) => async (dispatch) => {
 };
 
 export const loadChange = (loadStatus) => async (dispatch) => {
-
   dispatch({
     type: LOAD_CHANGE,
     payload: loadStatus,
@@ -82,19 +78,22 @@ export const loadChange = (loadStatus) => async (dispatch) => {
 };
 
 export const loadMoreItems = (endpoint, page) => async (dispatch) => {
-
-  console.log("LOAD MORE!")
-
   endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${
     page + 1
   }`;
 
-  dispatch(fetchItems(endpoint))
+  dispatch(fetchItems(endpoint));
+};
 
-}
+export const loadMoreTvShows = (endpoint, page) => async (dispatch) => {
+  endpoint = `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=en-US&page=${
+    page + 1
+  }`;
+
+  dispatch(setTvShows(endpoint));
+};
 
 export const fetchItems = (endpoint) => async (dispatch) => {
-
   let res = await fetch(endpoint);
   let data = await res.json();
 
@@ -112,11 +111,14 @@ export const fetchItems = (endpoint) => async (dispatch) => {
   }
 };
 
-export const setTvShowsReducer = (tvShows) => async (dispatch) => {
+export const setTvShows = (endpoint) => async (dispatch) => {
+  let res = await fetch(endpoint);
+  let data = await res.json();
+
   try {
     dispatch({
       type: SET_TVSHOWS,
-      payload: tvShows,
+      payload: data,
     });
   } catch (err) {
     dispatch({
@@ -131,7 +133,8 @@ export const getShow = (id) => async (dispatch) => {
     type: GET_SHOW,
     payload: id,
   });
-  try {} catch (e) {
+  try {
+  } catch (e) {
     dispatch({
       type: GET_SHOW_ERR,
     });
@@ -149,8 +152,8 @@ export const setRelatedMovies = () => async (dispatch) => {
     const resId = await axios.get("/api/movie/genre_id");
 
     await fetch(
-        `https://api.themoviedb.org/3/movie/${resId.data}/similar?api_key=${API_KEY}&language=en-US&page=1`
-      )
+      `https://api.themoviedb.org/3/movie/${resId.data}/similar?api_key=${API_KEY}&language=en-US&page=1`
+    )
       .then((res) => res.json())
       .then((data) => {
         let shuffled = data.results.sort(() => 0.5 - Math.random());

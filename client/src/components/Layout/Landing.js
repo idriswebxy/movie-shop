@@ -18,7 +18,6 @@ const Landing = ({ login, authenticated }) => {
   });
 
   const {
-    isAuthenticated,
     isLoading
   } = useAuth0();
 

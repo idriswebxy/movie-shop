@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 // import config from "../../config.json";
 import { API_KEY } from "../../config";
-import { setTvShowsReducer } from "../../actions/movie";
+import { setTvShows } from "../../actions/movie";
 import { connect } from "react-redux";
 // import SpinnerPage from "../Layout/SpinnerPage";
 import { addToCart, loadCart, getCart } from "../../actions/cart";
-import { nextPage, prevPage } from "../../actions/movie";
+import { loadMoreTvShows } from "../../actions/movie";
 import SearchBar from "../Search/Search";
 import Show from "./Show";
 import RelatedMovies from "../Movies/RelatedMovies";
 import Spinner from "../Spinner/Spinner";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import { useAuth0 } from "@auth0/auth0-react";
 import {
   MDBContainer,
   MDBRow,
@@ -22,27 +24,27 @@ import {
 import "../Movies/MovieList.css";
 
 const TvShows = ({
-  setTvShowsReducer,
+  setTvShows,
   loadCart,
-  isLoading,
-  getRelatedMovies,
+  loading,
   tvShows,
-  // page,
-  nextPage,
-  prevPage,
+  page,
+  loadMoreTvShows,
+  totalPages
 }) => {
-  let [page, setPage] = useState(1);
+  const { isLoading } = useAuth0();
+
+  let endpoint = "";
 
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&language=en-US&page=${page}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setTvShowsReducer(data.results);
-        loadCart();  
-      });
-  }, [page]);
+    if (tvShows.length <= 20) {
+      endpoint = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&language=en-US&page=1`;
+      setTvShows(endpoint);
+      loadCart();
+    } else {
+      loadCart();
+    }
+  }, []);
 
   let shows = (
     <MDBContainer>
@@ -65,6 +67,13 @@ const TvShows = ({
               );
             })}
           </MDBRow>
+          {loading || isLoading ? <Spinner /> : null}
+          {page <= totalPages && (!isLoading || loading) ? (
+            <LoadMoreBtn
+              text="Load More"
+              onClick={() => loadMoreTvShows(endpoint, page)}
+            />
+          ) : null}
         </div>
       </div>
     </MDBContainer>
@@ -76,22 +85,19 @@ const TvShows = ({
       {shows}
     </div>
   );
-
 };
-
-
 
 const mapStateToProps = (state) => ({
   // userId: state.auth.userInfo._id,
-  isLoading: state.movie.isLoading,
+  loading: state.movie.isLoading,
   authenticated: state.auth.authenticated,
   tvShows: state.movie.tvShows,
-  // page: state.movie.page,
+  page: state.movie.tvShowPage,
+  totalPages: state.movie.totalShowPages,
 });
 
 export default connect(mapStateToProps, {
-  setTvShowsReducer,
+  setTvShows,
   loadCart,
-  nextPage,
-  prevPage,
+  loadMoreTvShows,
 })(TvShows);

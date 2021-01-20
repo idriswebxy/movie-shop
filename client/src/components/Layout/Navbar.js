@@ -24,16 +24,15 @@ import { REACT_APP_SERVER_URL } from "../../config";
 import { LOGIN_SUCCESS, USER_LOADED, GOOGLE_AUTH } from "../../actions/types";
 import store from "../../store";
 import axios from "axios";
+import setAuthToken from "../../utils/setAuthToken";
 
 const Navbar = ({
   auth: { authenticated, userInfo },
   logOut,
   cart,
-  dispatch,
+  auth0User
   // googleAuth
 }) => {
-  const [authUser, setAuthUser] = useState(null);
-
   const {
     user,
     logout,
@@ -45,30 +44,19 @@ const Navbar = ({
   let accountName = null;
   let serverUrl = REACT_APP_SERVER_URL;
 
-  const googleAuth = async (user) => {
-    try {
-      const token = await getAccessTokenSilently();
-
-      const config = {
-        headers: { Authorization: `Bearer ${token}` },
-      };
-
-      let res = await axios.post("/api/auth/auth0", user, config);
-
-      console.log(res);
-
-      store.store.dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+  // const googleAuth = async () => {
+  //   try {
+  //     const token = await getAccessTokenSilently();
+  //     console.log(token)
+  //     console.log(auth0User)
+  //     setAuthToken(token);
+  //   } catch (error) {
+  //     console.error(error.message);
+  //   }
+  // };
+  
 
 
-      console.log(res);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-
-  useEffect(() => {
-    googleAuth(user);
-  }, [isAuthenticated]);
 
   // if (isAuthenticated) {
   //   googleAuth(user);
@@ -176,4 +164,4 @@ const mapStateToProps = (state) => ({
   cart: state.cart.cart,
 });
 
-export default connect(mapStateToProps, { logOut, googleAuth })(Navbar);
+export default connect(mapStateToProps, { logOut })(Navbar);

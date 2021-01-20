@@ -20,7 +20,7 @@ import SearchBar from "../Search/Search";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdbreact";
 import "../../App.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import { googleAuth } from "../../actions/auth";
+// import { googleAuth } from "../../actions/auth";
 import setAuthToken from "../../utils/setAuthToken";
 
 const MovieList = ({
@@ -32,15 +32,16 @@ const MovieList = ({
   page,
   totalPages,
   loadMoreItems,
-  googleAuth,
-  authenticated
 }) => {
+
+
   const {
     user,
     isAuthenticated,
     isLoading,
     getAccessTokenSilently,
   } = useAuth0();
+
 
   let endpoint = "";
 
@@ -54,11 +55,10 @@ const MovieList = ({
     }
   }, []);
 
+
   if (isLoading || loading) {
     return <Spinner />;
   }
-
-
 
   const movieList = (
     <MDBContainer>
@@ -120,5 +120,4 @@ export default connect(mapStateToProps, {
   fetchItems,
   loadChange,
   loadMoreItems,
-  googleAuth,
 })(MovieList);
