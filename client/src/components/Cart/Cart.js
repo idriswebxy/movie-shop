@@ -37,7 +37,6 @@ const Cart = ({
     return <Redirect to="/login" />
   }
 
-  
   if (loading || isLoading) {
     return <Spinner />;
   }

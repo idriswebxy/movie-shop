@@ -9,18 +9,13 @@ import { login } from "../../actions/auth";
 import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "../../components/Spinner/Spinner";
 
-
-
-const Landing = ({ login, authenticated }) => {
+const Landing = ({ login, authenticated, loading }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  const {
-    isLoading
-  } = useAuth0();
-
+  const { isLoading, isAuthenticated } = useAuth0();
 
   const { email, password } = formData;
 
@@ -32,14 +27,13 @@ const Landing = ({ login, authenticated }) => {
     login(email, password);
   };
 
-  if (authenticated) {
+  if (authenticated || isAuthenticated) {
     return <Redirect to="/movies" />;
   }
-  
-  if (isLoading || authenticated) {
+
+  if (loading || isLoading) {
     return <Spinner />;
   }
-
 
   return (
     <div className="app-main">
@@ -89,7 +83,8 @@ const Landing = ({ login, authenticated }) => {
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth.authenticated
+  auth: state.auth.authenticated,
+  loading: state.auth.loading,
 });
 
 export default connect(mapStateToProps, { login })(Landing);
