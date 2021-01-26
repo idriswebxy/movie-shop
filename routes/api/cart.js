@@ -16,7 +16,6 @@ router.get("/total/:id", auth, async (req, res) => {
     usersCart.map((movie) => {
       sum = movie.price + sum;
     });
-
     res.json(sum);
   } catch (error) {
     console.error(error.message);
@@ -52,8 +51,6 @@ router.post("/", auth, async (req, res) => {
       movie: req.body,
       price: 2.99,
     });
-
-    console.log(newCart);
     await newCart.save();
     res.json(newCart);
   } catch (err) {

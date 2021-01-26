@@ -80,8 +80,7 @@ const Cart = ({
   let checkOut = (
     <div style={{ marginLeft: "10px", color: "white" }}>
       <h2>Total: ${total.toFixed(2)}</h2>
-      <MDBNavLink to="/checkout">
-        <MDBBtn>Check Out</MDBBtn>
+      <MDBNavLink to="/checkout">c
       </MDBNavLink>
     </div>
   );

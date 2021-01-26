@@ -18,8 +18,6 @@ import Movie from "../MovieThumb/MovieThumb";
 import MovieThumb from "../MovieThumb/MovieThumb";
 import moment from "moment";
 
-
-
 const MovieDetails = ({
   movie,
   addToCart,
@@ -31,20 +29,20 @@ const MovieDetails = ({
   voteAverage,
   withRouter,
 }) => {
-  const [videoKey, setVideoKey] = useState("");
-  // const [movieID, setMovieID] = useState(null);
-  let movieID = null;
+  const [videoKey, setVideoKey] = useState(null);
+  const [movieID, setMovieID] = useState(null);
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${movie.id ? movie.id : movieID}/videos?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/movie/${
+        movie.id ? movie.id || movieID : movieID
+      }/videos?api_key=${API_KEY}&language=en-US`
     )
       .then((res) => res.json())
       .then((data) => setVideoKey(data.results[0].key));
-    loadCart();
-    movieID = movie.id;
-    window.scrollTo(0, 0);
 
+    loadCart();
+    window.scrollTo(0, 0);
   }, []);
 
   if (isLoading) {
@@ -71,11 +69,13 @@ const MovieDetails = ({
             clickable={false}
           />
           <div>
-            <div style={{ margin: "20px"}}>
+            <div style={{ margin: "20px" }}>
+              <h4>Rent HD $2.99</h4>
+              <h4>Buy HD $5.99</h4>
               <h1>{movie.title}</h1>
               <h6>{moment(movie.release_date).format("LL")}</h6>
               <MDBBtn onClick={() => addToCart(movie)}>
-                Add To Cart <MDBIcon icon="cart-plus" />
+                <MDBIcon icon="cart-plus" /> Add To Cart
               </MDBBtn>
             </div>
 

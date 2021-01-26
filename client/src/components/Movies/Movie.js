@@ -13,6 +13,15 @@ import {
   MDBAnimation,
   MDBRow,
   MDBCol,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBCardTitle,
+  MDBCardText,
+  MDBModal,
+  MDBModalBody,
+  MDBModalHeader,
+  MDBModalFooter,
 } from "mdbreact";
 import moment from "moment";
 import MovieDetails from "./MovieDetails";
@@ -34,11 +43,26 @@ const Movie = ({
 }) => {
   const { isAuthenticated } = useAuth0();
 
+  const [moviePrev, setMoviePrev] = useState(false);
+
+  const [modal, setModal] = useState(false)
+  
+
+  const toggle = () => {
+    setModal(!modal);
+  }
+
+
   let movieLink = (
     <MDBContainer>
       <MDBRow>
         <MDBCol>
-          <MDBView hover zoom>
+          <MDBView
+            hover
+            zoom
+            onMouseEnter={() => setMoviePrev(true)}
+            onMouseLeave={() => setMoviePrev(false)}
+          >
             <Link to={"/movieInfo/" + id} onClick={() => getMovie(id)}>
               <img src={`http://image.tmdb.org/t/p/w500${image}`} />
             </Link>
@@ -47,10 +71,9 @@ const Movie = ({
           <div style={{ textAlign: "center", paddingBottom: "50px" }}>
             <h5>{title}</h5>
             <h6>{moment(releaseDate).format("LL")}</h6>
-            <h5>${price}</h5>
 
             <MDBBtn onClick={() => addToCart(movieObj)}>
-              Add To Cart <MDBIcon icon="cart-plus" />
+              <MDBIcon icon="cart-plus" /> Add To Cart
             </MDBBtn>
           </div>
         </MDBCol>
@@ -61,7 +84,7 @@ const Movie = ({
   return (
     <div>
       <MDBAnimation type="zoomIn" duration="1s">
-        {movieLink}
+        <div>{movieLink}</div>
       </MDBAnimation>
     </div>
   );

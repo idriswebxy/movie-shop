@@ -25,7 +25,6 @@ const TvShowDetails = ({
 }) => {
   useEffect(() => {
     loadCart();
-    console.log("❌", tvShow);
   }, []);
 
   if (isLoading) {

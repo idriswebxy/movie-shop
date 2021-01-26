@@ -44,7 +44,8 @@ export const getRelatedMovie = (id) => async (dispatch) => {
   });
 };
 
-export const loadMovies = () => async (dispatch) => {
+export const loadMovies = (endpoint) => async (dispatch) => {
+
   dispatch({
     type: LOAD_MOVIES,
   });

@@ -19,6 +19,8 @@ import TvShowDetails from "./components/TvShows/TvShowDetails";
 import { googleAuth } from "./actions/auth";
 import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "./components/Spinner/Spinner";
+import { fetchItems } from "./actions/movie"
+
 
 import { createBrowserHistory } from "history";
 
@@ -36,20 +38,9 @@ const App = ({ authenticated }) => {
     getAccessTokenSilently,
   } = useAuth0();
 
-  // const loadAuthData = async () => {
-  //   try {
-  //     const token = await getAccessTokenSilently().then((t) => console.log(t));
-  //     console.log(token);
-  //     setAuthToken(token);
-  //     return token;
-  //   } catch (error) {
-  //     console.error("GoogleAuthFunc => " + error.message);
-  //   }
-  // };
-
+  
   useEffect(() => {
     store.store.dispatch(loadUser());
-    // loadAuthData()
   }, []);
 
 
@@ -70,7 +61,7 @@ const App = ({ authenticated }) => {
   }
 
   return (
-    <div className="app-main">
+    <div className="app-main"> 
       <Router history={history}>
         <Navbar />
         <Alert />
@@ -83,7 +74,7 @@ const App = ({ authenticated }) => {
           <PrivateRoute path="/movieInfo/:id" component={MovieDetails} />
           <PrivateRoute path="/show_details" component={TvShowDetails} />
           <PrivateRoute path="/cart" component={Cart} />
-          <PrivateRoute path="/checkout" component={Checkout} />
+          <PrivateRoute path="/checkout" component={Checkout} /> 
         </Switch>
       </Router>
     </div>
